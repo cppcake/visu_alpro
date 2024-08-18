@@ -1,0 +1,224 @@
+[gd_scene load_steps=14 format=3 uid="uid://dvogahh8sitx"]
+
+[ext_resource type="Script" path="res://scripts/control/exit.gd" id="1_7moob"]
+[ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="1_g52vd"]
+[ext_resource type="Script" path="res://scripts/control/clear.gd" id="2_h4ido"]
+[ext_resource type="Script" path="res://scripts/controller.gd" id="4_emc72"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://theme.tres" id="5_3mibj"]
+[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://fonts/ProggyVector-Regular.otf" id="5_cnn2h"]
+[ext_resource type="Script" path="res://scripts/algorithms.gd" id="5_hhmca"]
+[ext_resource type="Script" path="res://scripts/linepainter.gd" id="5_kgjw7"]
+[ext_resource type="Script" path="res://scripts/graph_manager.gd" id="6_3dfej"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdtve"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
+radius = 1.0
+
+[node name="root" type="Node" node_paths=PackedStringArray("display", "button_knoten")]
+script = ExtResource("4_emc72")
+display = NodePath("algorithms/meta_data_setion/VBoxContainer/display")
+button_knoten = NodePath("algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_knoten")
+
+[node name="graph_manager" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("6_3dfej")
+
+[node name="algorithms" type="Node" parent="." node_paths=PackedStringArray("controller")]
+script = ExtResource("5_hhmca")
+controller = NodePath("..")
+
+[node name="meta_data_setion" type="ColorRect" parent="algorithms"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/meta_data_setion"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label_sequence" type="Label" parent="algorithms/meta_data_setion/VBoxContainer"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="algorithms/meta_data_setion/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="label_queue" type="Label" parent="algorithms/meta_data_setion/VBoxContainer"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="display" type="RichTextLabel" parent="algorithms/meta_data_setion/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("5_cnn2h")
+bbcode_enabled = true
+script = ExtResource("5_kgjw7")
+
+[node name="buttons_section" type="ColorRect" parent="algorithms"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="buttons" type="HBoxContainer" parent="algorithms/buttons_section" node_paths=PackedStringArray("controller")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("1_g52vd")
+controller = NodePath("../../..")
+
+[node name="buttons_graphenmanager" type="MarginContainer" parent="algorithms/buttons_section/buttons"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_3mibj")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="algorithms/buttons_section/buttons/buttons_graphenmanager"]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+alignment = 1
+
+[node name="button_knoten" type="Button" parent="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Switch to VERTICES mode"
+theme = ExtResource("5_3mibj")
+text = "VERTICES"
+
+[node name="button_kanten" type="Button" parent="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Switch to EDGES mode"
+theme = ExtResource("5_3mibj")
+text = "EDGES"
+
+[node name="button_move" type="Button" parent="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Switch to MOVE mode"
+theme = ExtResource("5_3mibj")
+text = "MOVE"
+
+[node name="button_clear" type="Button" parent="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Clear the whole graph"
+theme = ExtResource("5_3mibj")
+text = "CLEAR"
+script = ExtResource("2_h4ido")
+controller = NodePath("../../../../../..")
+
+[node name="buttons_algorithms" type="MarginContainer" parent="algorithms/buttons_section/buttons"]
+layout_mode = 2
+theme = ExtResource("5_3mibj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="algorithms/buttons_section/buttons/buttons_algorithms"]
+layout_mode = 2
+alignment = 1
+
+[node name="button_breitensuche" type="Button" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Switch to BFS mode"
+theme = ExtResource("5_3mibj")
+text = "BFS"
+
+[node name="button_tiefensuche" type="Button" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "Switch to DFS mode"
+theme = ExtResource("5_3mibj")
+text = "DFS"
+
+[node name="VSeparator" type="VSeparator" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer"]
+layout_mode = 2
+
+[node name="button_stop" type="Button" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "Stop currently running algorithm"
+mouse_filter = 2
+theme = ExtResource("5_3mibj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
+disabled = true
+text = "STOP"
+
+[node name="button_backward" type="Button" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "Go step backwards"
+mouse_filter = 2
+theme = ExtResource("5_3mibj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "<---"
+
+[node name="button_forward" type="Button" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "Go step forward"
+mouse_filter = 2
+theme = ExtResource("5_3mibj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "--->"
+
+[node name="state_counter" type="Label" parent="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_3mibj")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="buttons_misc" type="MarginContainer" parent="algorithms/buttons_section/buttons"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("5_3mibj")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="algorithms/buttons_section/buttons/buttons_misc"]
+layout_mode = 2
+alignment = 2
+
+[node name="button_exit" type="Button" parent="algorithms/buttons_section/buttons/buttons_misc/HBoxContainer3"]
+layout_mode = 2
+tooltip_text = "Close the program"
+theme = ExtResource("5_3mibj")
+text = "EXIT
+"
+script = ExtResource("1_7moob")
+
+[node name="sweeper" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource("CircleShape2D_fdtve")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="sweeper_klein" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource("CircleShape2D_uforu")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_knoten" to="algorithms/buttons_section/buttons" method="_on_button_knoten_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_kanten" to="algorithms/buttons_section/buttons" method="_on_button_kanten_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_move" to="algorithms/buttons_section/buttons" method="_on_button_auswahl_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_clear" to="algorithms/buttons_section/buttons/buttons_graphenmanager/HBoxContainer2/button_clear" method="_on_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer/button_breitensuche" to="algorithms/buttons_section/buttons" method="_on_button_breitensuche_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer/button_tiefensuche" to="algorithms/buttons_section/buttons" method="_on_button_tiefensuche_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer/button_stop" to="algorithms" method="_on_button_stop_pressed"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer/button_backward" to="algorithms" method="backward"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_algorithms/HBoxContainer/button_forward" to="algorithms" method="proceeds"]
+[connection signal="pressed" from="algorithms/buttons_section/buttons/buttons_misc/HBoxContainer3/button_exit" to="algorithms/buttons_section/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwlgqfos6kle8"]
+
+[ext_resource type="Script" path="res://scripts/kante.gd" id="1_f4ask"]
+
+[node name="kante" type="Node2D"]
+script = ExtResource("1_f4ask")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+round_precision = 16
+antialiased = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+rotation = 1.309
+scale = Vector2(0.96035, 0.758169)
+antialiased = true
+polygon = PackedVector2Array(30, 0, 0, 20, 0, -20)
