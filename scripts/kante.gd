@@ -35,6 +35,9 @@ func _ready():
 	linie = get_node("./Line2D")
 	kopf = get_node("./Polygon2D")
 
+func _process(delta):
+	draw()
+
 func draw():
 	if start_knoten != ziel_knoten:
 		var start_punkt = start_knoten.position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvogahh8sitx"]
+[gd_scene load_steps=13 format=3 uid="uid://dvogahh8sitx"]
 
 [ext_resource type="Script" path="res://scripts/control/exit.gd" id="1_7moob"]
 [ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="1_g52vd"]
@@ -13,9 +13,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fdtve"]
-radius = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -199,13 +196,6 @@ text = "EXIT
 script = ExtResource("1_7moob")
 
 [node name="sweeper" type="ShapeCast2D" parent="."]
-enabled = false
-shape = SubResource("CircleShape2D_fdtve")
-target_position = Vector2(0, 0)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="sweeper_klein" type="ShapeCast2D" parent="."]
 enabled = false
 shape = SubResource("CircleShape2D_uforu")
 target_position = Vector2(0, 0)
