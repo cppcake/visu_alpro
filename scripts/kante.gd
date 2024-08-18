@@ -35,7 +35,7 @@ func _ready():
 	linie = get_node("./Line2D")
 	kopf = get_node("./Polygon2D")
 
-func _process(delta):
+func _process(_delta):
 	draw()
 
 func draw():

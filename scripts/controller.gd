@@ -12,7 +12,8 @@ enum modes
 	# Mode BFS - Start BFS Demonstrator
 	bfs,
 	# Mode DFS - Start DFS Demonstrator
-	dfs
+	dfs,
+	stop
 }
 var mode: modes = modes.vertices
 
@@ -84,6 +85,8 @@ func _process(_delta):
 				if selected_to_move != null:
 					print("Forbidding node ", selected_to_move.id_, " to move")
 					selected_to_move.set_move(false)
+					if try_select_node() == null:
+						selected_to_move.set_sprite(knoten_klasse.sprites.unselected)
 					selected_to_move = null
 		modes.bfs:
 			if left_click:
@@ -91,6 +94,8 @@ func _process(_delta):
 				if collider != null:
 					get_tree().call_group("buttons_active", "release_focus")
 					algorithms.breitensuche(collider)
+					# needs a more elegant solution, but i am too tired.
+					mode = modes.stop
 
 # Tries to select a node at the position of the mouse. Returns the selected node or null in case of failure
 func try_select_node() -> Node:
@@ -120,7 +125,7 @@ func update_selected():
 		if selected == null:
 			print("New Selected ", collider.id_)
 			selected = collider
-			collider.set_sprite(2)
+			collider.set_sprite(knoten_klasse.sprites.selected)
 			return
 		
 		print("New Selected_2 ", collider.id_)
@@ -130,9 +135,9 @@ func update_selected():
 # Reset selected nodes and their sprites
 func reset_selected():
 	if selected != null:
-		selected.set_sprite(1)
+		selected.set_sprite(knoten_klasse.sprites.unselected)
 	if selected_2 != null:
-		selected_2.set_sprite(1)
+		selected_2.set_sprite(knoten_klasse.sprites.unselected)
 	selected = null
 	selected_2 = null
 

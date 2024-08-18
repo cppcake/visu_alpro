@@ -45,7 +45,7 @@ func breitensuche(start_knoten: Node2D):
 	navigation_mode()
 	states.clear()
 	start_knoten.label.set_text(str(start_knoten.id_) + " (s)")
-	start_knoten.set_sprite(1)
+	start_knoten.set_sprite(knoten_klasse.sprites.unselected)
 	s = start_knoten
 	
 	$meta_data_setion/VBoxContainer/display.set_text(" 1. Erstelle leere Folge F und eine leere Warteschlange (Queue) Q\n 2. Markiere s als erkundet und füge s in Q und F ein\n 3. [b]while[/b] Q ist nicht leer [b]do[/b]\n 4.  |  Sei v = Q.pop() \n 5.  |  [b]for[/b] alle Kanten (v, w) [b]do[/b] \n 6.  |   |  [b]if[/b] w ist noch unerkundet [b]then[/b] \n 7.  |   |   |  Markiere w als erkundet und füge w am Ende von Q und F ein \n 8. [b]return[/b] F") 
@@ -104,12 +104,12 @@ func update_count_label():
 	
 func update_visited_nodes():
 	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
-		knoten.set_sprite(1)
+		knoten.set_sprite(knoten_klasse.sprites.unselected)
 	for knoten: knoten_klasse in states[state][3]:
-		knoten.set_sprite(5)
+		knoten.set_sprite(knoten_klasse.sprites.besucht)
 		
 	if states[state][4] != null:
-		states[state][4].set_sprite(4)
+		states[state][4].set_sprite(knoten_klasse.sprites.current)
 		
 func update_visited_edges():
 	for i in range(knoten_klasse.node_count):
@@ -121,7 +121,7 @@ func update_visited_edges():
 func _on_button_stop_pressed():
 	s.label.set_text(str(s.id_))
 	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
-		knoten.set_sprite(1)
+		knoten.set_sprite(knoten_klasse.sprites.unselected)
 	for i in range(knoten_klasse.node_count):
 		get_tree().call_group("kanten_menge" + str(i), "reset_color")
 	active_mode()
@@ -139,6 +139,7 @@ func active_mode():
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
+	knoten_klasse.toggle_hover_allowed()
 
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
@@ -149,3 +150,4 @@ func navigation_mode():
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = false
 		button.mouse_filter = button.MOUSE_FILTER_STOP	
+	knoten_klasse.toggle_hover_allowed()
