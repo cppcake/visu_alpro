@@ -4,8 +4,6 @@ class_name knoten_klasse extends Area2D
 static var node_count: int = 0
 static var lerp_speed: int = 15;
 static var hover_allowed: bool = true
-static func toggle_hover_allowed():
-	hover_allowed = !hover_allowed
 	
 # Sprites
 enum sprites {unselected, selected, hovered, current, besucht}
@@ -31,7 +29,6 @@ func _ready():
 	# Set id and update node_count
 	id_ = node_count
 	node_count += 1
-	
 	# Init visuals
 	sprite = get_node("Sprite2D")
 	sprite.texture = sprite_unselected
@@ -63,6 +60,10 @@ func _physics_process(delta):
 		global_position = lerp(global_position, get_global_mouse_position(), lerp_speed * delta)
 
 func set_move(state: bool):
+	if state:
+		modulate = constants.hovered
+	else:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
 	move = state
 
 func reset_besucht():
@@ -82,9 +83,8 @@ func set_sprite(selection: sprites):
 			sprite.texture = sprite_besucht
 
 func _on_mouse_entered():
-	if sprite.texture != sprite_selected && hover_allowed:
-		set_sprite(sprites.hovered)
+	modulate = constants.hovered
 
 func _on_mouse_exited():
-	if sprite.texture != sprite_selected && !move && hover_allowed:
-		set_sprite(sprites.unselected)
+	if not move:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)

@@ -128,7 +128,7 @@ func _on_button_stop_pressed():
 	$buttons_section/buttons/buttons_algorithms/HBoxContainer/state_counter.text = ""
 	$meta_data_setion/VBoxContainer/label_queue.visible = false
 	$meta_data_setion/VBoxContainer/label_sequence.visible = false
-	controller.set_mode(0)
+	controller.set_mode(controller.modes.vertices)
 
 # Unblock active buttons, block navigation buttons
 func active_mode():
@@ -139,7 +139,6 @@ func active_mode():
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
-	knoten_klasse.toggle_hover_allowed()
 
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
@@ -149,5 +148,4 @@ func navigation_mode():
 		
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = false
-		button.mouse_filter = button.MOUSE_FILTER_STOP	
-	knoten_klasse.toggle_hover_allowed()
+		button.mouse_filter = button.MOUSE_FILTER_STOP

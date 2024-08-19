@@ -17,3 +17,5 @@ static var uni_gelb_c = Color(0.988, 0.729, 0)
 
 static var uni_grau = "#909085"
 static var uni_grau_c = Color(0.565, 0.565, 0.522)
+
+static var hovered = Color(0.8, 0.8, 0.8, 1.0)

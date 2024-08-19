@@ -12,8 +12,7 @@ enum modes
 	# Mode BFS - Start BFS Demonstrator
 	bfs,
 	# Mode DFS - Start DFS Demonstrator
-	dfs,
-	stop
+	dfs
 }
 var mode: modes = modes.vertices
 
@@ -48,7 +47,7 @@ func _process(_delta):
 	var left_click_released: bool = Input.is_action_just_released("M1")
 	var right_click: bool = Input.is_action_just_pressed("M2")
 	
-	# Check for certain inputs based on current mode and user input
+	# Change state based on current mode and user input
 	match mode:
 		modes.vertices:
 			if(left_click):
@@ -56,7 +55,7 @@ func _process(_delta):
 				if(mouse_pos.y > 40):
 					graph_manager.add_knoten(mouse_pos)
 				else:
-					print("Das hinzufügen eines Knotens ist fehlgeschlagen")
+					print("Upper UI getroffen, Knoten wird nicht platziert")
 			if(right_click):
 				var collider = try_select_node()
 				if collider != null:
@@ -85,8 +84,6 @@ func _process(_delta):
 				if selected_to_move != null:
 					print("Forbidding node ", selected_to_move.id_, " to move")
 					selected_to_move.set_move(false)
-					if try_select_node() == null:
-						selected_to_move.set_sprite(knoten_klasse.sprites.unselected)
 					selected_to_move = null
 		modes.bfs:
 			if left_click:
@@ -94,8 +91,7 @@ func _process(_delta):
 				if collider != null:
 					get_tree().call_group("buttons_active", "release_focus")
 					algorithms.breitensuche(collider)
-					# needs a more elegant solution, but i am too tired.
-					mode = modes.stop
+					mode = modes.move
 
 # Tries to select a node at the position of the mouse. Returns the selected node or null in case of failure
 func try_select_node() -> Node:
