@@ -7,14 +7,13 @@ var state: int = 0
 # Der Startknoten
 var s: Node
 
-func proceeds():
+func forward():
 	if states.size() == 0:
 		return
 	if state == states.size() - 1:
 		return
 	
 	state += 1
-	update_count_label()
 	update_visited_nodes()
 	update_visited_edges()
 	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][2])
@@ -28,7 +27,7 @@ func backward():
 	if state == 0:
 		return
 	state -= 1
-	update_count_label()
+
 	update_visited_nodes()
 	update_visited_edges()
 	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][2])
@@ -39,10 +38,18 @@ func backward():
 		$meta_data_setion/VBoxContainer/label_queue.visible = false
 		$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
+func stop():
+	s.label.set_text(str(s.id_))
+	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
+		knoten.set_sprite(knoten_klasse.sprites.unselected)
+	for i in range(knoten_klasse.node_count):
+		get_tree().call_group("kanten_menge" + str(i), "reset_color")
+	$meta_data_setion/VBoxContainer/label_queue.visible = false
+	$meta_data_setion/VBoxContainer/label_sequence.visible = false
+
 # Breitensuche, aber: Der Zustand aller relevanten Variablen der Breitensuche werden jeden Schritt gesichert
 func breitensuche(start_knoten: Node2D):
 	# Init
-	navigation_mode()
 	states.clear()
 	start_knoten.label.set_text(str(start_knoten.id_) + " (s)")
 	start_knoten.set_sprite(knoten_klasse.sprites.unselected)
@@ -83,9 +90,11 @@ func breitensuche(start_knoten: Node2D):
 	get_tree().call_group("knoten_menge", "reset_besucht")
 
 	state = 0
-	update_count_label()
+
 	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + int_array_to_string(states[state][2])
 	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + int_array_to_string(states[state][3])
+	
+	return states.size()
 	
 func int_array_to_string(array: Array) -> String:
 	if array.is_empty():
@@ -99,9 +108,6 @@ func int_array_to_string(array: Array) -> String:
 	string += "]"
 	return string
 
-func update_count_label():
-	$buttons_section/buttons/buttons_algorithms/HBoxContainer/state_counter.text = str(state + 1) + "/" + str(states.size())
-	
 func update_visited_nodes():
 	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
 		knoten.set_sprite(knoten_klasse.sprites.unselected)
@@ -117,35 +123,3 @@ func update_visited_edges():
 	for kante: kanten_klasse in states[state][0]:
 		kante.mark_visited()
 
-@export var controller: Node
-func _on_button_stop_pressed():
-	s.label.set_text(str(s.id_))
-	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
-		knoten.set_sprite(knoten_klasse.sprites.unselected)
-	for i in range(knoten_klasse.node_count):
-		get_tree().call_group("kanten_menge" + str(i), "reset_color")
-	active_mode()
-	$buttons_section/buttons/buttons_algorithms/HBoxContainer/state_counter.text = ""
-	$meta_data_setion/VBoxContainer/label_queue.visible = false
-	$meta_data_setion/VBoxContainer/label_sequence.visible = false
-	controller.set_mode(controller.modes.vertices)
-
-# Unblock active buttons, block navigation buttons
-func active_mode():
-	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
-		button.disabled = false
-		button.mouse_filter = button.MOUSE_FILTER_STOP
-		
-	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
-		button.disabled = true
-		button.mouse_filter = button.MOUSE_FILTER_IGNORE
-
-# Unblock navigation buttons, unblock active button
-func navigation_mode():
-	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
-		button.disabled = true
-		button.mouse_filter = button.MOUSE_FILTER_IGNORE
-		
-	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
-		button.disabled = false
-		button.mouse_filter = button.MOUSE_FILTER_STOP
