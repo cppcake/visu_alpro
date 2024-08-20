@@ -1,7 +1,5 @@
 extends Node
 
-var graph_manager: Node
-
 var states: Array = []
 var state: int = 0
 # Der Startknoten

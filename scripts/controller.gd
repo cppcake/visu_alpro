@@ -17,10 +17,11 @@ enum modes
 var mode: modes = modes.vertices
 
 # Preloard needed scenes
+@export var graph_manager: Node
 @onready var knoten_scene = preload("res://scenes/knoten.tscn")
 @onready var kante_scene = preload("res://scenes/kante.tscn")
 
-@export var graph_manager: Node
+var algorithm_running: bool = false
 @export var bfs: Node
 
 # Needed to display progress in algorithm
@@ -85,8 +86,9 @@ func _process(_delta):
 					print("Forbidding node ", selected_to_move.id_, " to move")
 					selected_to_move.set_move(false)
 					selected_to_move = null
+		
 		modes.bfs:
-			if left_click:
+			if left_click and not algorithm_running:
 				var collider = try_select_node()
 				if collider != null:
 					get_tree().call_group("buttons_active", "release_focus")
@@ -131,6 +133,7 @@ func stop():
 
 # Unblock active buttons, block navigation buttons
 func active_mode():
+	algorithm_running = false
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
 		button.disabled = false
 		button.mouse_filter = button.MOUSE_FILTER_STOP
@@ -141,6 +144,7 @@ func active_mode():
 
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
+	algorithm_running = true
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/controller.gd" id="4_emc72"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://theme.tres" id="5_3mibj"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://fonts/ProggyVector-Regular.otf" id="5_cnn2h"]
-[ext_resource type="Script" path="res://scripts/algorithms.gd" id="5_hhmca"]
+[ext_resource type="Script" path="res://scripts/control/bfs.gd" id="5_hhmca"]
 [ext_resource type="Script" path="res://scripts/linepainter.gd" id="5_kgjw7"]
 [ext_resource type="Script" path="res://scripts/graph_manager.gd" id="6_3dfej"]
 
