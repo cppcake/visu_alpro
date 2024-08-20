@@ -110,7 +110,7 @@ func update_visited_nodes():
 		
 	if states[state][4] != null:
 		states[state][4].set_sprite(knoten_klasse.sprites.current)
-		
+
 func update_visited_edges():
 	for i in range(knoten_klasse.node_count):
 		get_tree().call_group("kanten_menge" + str(i), "reset_color")
