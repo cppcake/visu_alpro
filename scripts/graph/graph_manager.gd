@@ -12,7 +12,7 @@ var selected: Node = null
 var selected_2: Node = null
 var selected_to_move: Node = null
 
-func add_knoten(pos: Vector2) -> void:
+func add_vertex(pos: Vector2) -> void:
 		print("Ein Knoten wird hinzugefügt an ", pos)
 		var knoten_instanz = knoten_scene.instantiate()
 		knoten_instanz.set_global_position(pos)
@@ -22,11 +22,11 @@ func add_knoten(pos: Vector2) -> void:
 func add_vertex_at_mouse_pos() -> void:
 	mouse_pos = get_viewport().get_mouse_position()
 	if(mouse_pos.y > constants.upper_ui_margin - 60):
-		add_knoten(mouse_pos)
+		add_vertex(mouse_pos)
 	else:
 		print("Upper UI getroffen, Knoten wird nicht platziert")
 
-func rm_knoten(knoten: Node) -> void:
+func rm_vertex(knoten: Node) -> void:
 	print("Knoten ", knoten.id_, " wird entfernt")
 	for i in range(knoten_klasse.node_count):
 		for kante in get_tree().get_nodes_in_group("kanten_menge" + str(i)):
@@ -37,15 +37,15 @@ func rm_knoten(knoten: Node) -> void:
 func remove_vertex_at_mouse_pos() -> void:
 	var collider = try_select_node()
 	if collider != null:
-		rm_knoten(collider)
+		rm_vertex(collider)
 
-func get_knoten_by_id(id_knoten):
+func get_node_by_id(id_knoten):
 	for knoten in get_tree().get_nodes_in_group("knoten_menge"):
 		if knoten.id_ == id_knoten:
 			return knoten
 	return null
 
-func add_kante(start, ziel) -> void:
+func add_edge(start, ziel) -> void:
 	for kante in get_tree().get_nodes_in_group("kanten_menge" + str(start.id_)):
 		if kante.ziel_knoten.id_ == ziel.id_:
 			print("Die Kante ", start.id_, " zu ", ziel.id_, " existiert bereits!")
@@ -71,10 +71,10 @@ func add_kante(start, ziel) -> void:
 func add_edge_between_selected() -> void:
 	update_selected()
 	if selected != null && selected_2 != null:
-		add_kante(selected, selected_2) 
+		add_edge(selected, selected_2) 
 		reset_selected()
 
-func rm_kante(start, ziel) -> void:
+func rm_edge(start, ziel) -> void:
 	# Die Laufzeit ist trotzdem in O(n), also alles gut :P
 	for kante in get_tree().get_nodes_in_group("kanten_menge" + str(start.id_)):
 		if kante.ziel_knoten == ziel:
@@ -94,7 +94,7 @@ func rm_kante(start, ziel) -> void:
 func rm_edge_between_selected() -> void:
 	update_selected()
 	if selected != null && selected_2 != null:
-		rm_kante(selected, selected_2) 
+		rm_edge(selected, selected_2) 
 		reset_selected()
 
 func allow_node_at_mouse_pos_to_move() -> void:

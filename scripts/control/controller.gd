@@ -55,13 +55,12 @@ func _process(_delta):
 				graph_manager.rm_edge_between_selected()
 				
 		modes.move:
-			if left_click:
-				graph_manager.allow_node_at_mouse_pos_to_move()
-			# Forbid node from moving
-			if left_click_released:
-				graph_manager.forbid_node_at_mouse_pos_to_move()
+			control_movement(left_click, left_click_released)
 		
 		modes.bfs:
+			if algorithm_running:
+				control_movement(left_click, left_click_released)
+				
 			if left_click and not algorithm_running:
 				var collider = graph_manager.try_select_node()
 				if collider != null:
@@ -70,6 +69,13 @@ func _process(_delta):
 					steps = bfs.breitensuche(collider) - 1
 					state_counter.text = str(current_step) + "/" + str(steps)
 					navigation_mode()
+
+func control_movement(left_click: bool, left_click_released: bool):
+	if left_click:
+		graph_manager.allow_node_at_mouse_pos_to_move()
+	# Forbid node from moving
+	if left_click_released:
+		graph_manager.forbid_node_at_mouse_pos_to_move()
 
 # ALGORITHM NAVIGATION
 func forward():

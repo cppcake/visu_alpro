@@ -5,6 +5,17 @@ var state: int = 0
 # Der Startknoten
 var s: Node
 
+enum bfs_indices
+{
+	# [Momentan besuchte Kanten, Momentane Kante, Momentante Queue, Momentane Folge, Momentaner Current Knoten, Zeile im Pseudocode)
+	currently_visited_edges,
+	current_edge,
+	current_queue,
+	current_sequence,
+	curernt_node,
+	line_in_pseudo_code
+}
+
 func forward():
 	if states.size() == 0:
 		return
@@ -28,9 +39,9 @@ func backward():
 
 	update_visited_nodes()
 	update_visited_edges()
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][2])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + int_array_to_string(states[state][3])
-	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][5])
+	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][bfs_indices.current_queue])
+	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + int_array_to_string(states[state][bfs_indices.current_sequence])
+	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][bfs_indices.line_in_pseudo_code])
 
 	if(states[state][5] == []):
 		$meta_data_setion/VBoxContainer/label_queue.visible = false
@@ -89,8 +100,8 @@ func breitensuche(start_knoten: Node2D):
 
 	state = 0
 
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + int_array_to_string(states[state][2])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + int_array_to_string(states[state][3])
+	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + int_array_to_string(states[state][bfs_indices.current_queue])
+	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + int_array_to_string(states[state][bfs_indices.current_sequence])
 	
 	return states.size()
 	
@@ -109,15 +120,15 @@ func int_array_to_string(array: Array) -> String:
 func update_visited_nodes():
 	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
 		knoten.set_sprite(knoten_klasse.sprites.unselected)
-	for knoten: knoten_klasse in states[state][3]:
+	for knoten: knoten_klasse in states[state][bfs_indices.current_sequence]:
 		knoten.set_sprite(knoten_klasse.sprites.besucht)
 		
-	if states[state][4] != null:
-		states[state][4].set_sprite(knoten_klasse.sprites.current)
+	if states[state][bfs_indices.curernt_node] != null:
+		states[state][bfs_indices.curernt_node].set_sprite(knoten_klasse.sprites.current)
 
 func update_visited_edges():
 	for i in range(knoten_klasse.node_count):
 		get_tree().call_group("kanten_menge" + str(i), "reset_color")
-	for kante: kanten_klasse in states[state][0]:
+	for kante: kanten_klasse in states[state][bfs_indices.currently_visited_edges]:
 		kante.mark_visited()
 
