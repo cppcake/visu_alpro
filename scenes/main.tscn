@@ -10,25 +10,32 @@
 [ext_resource type="Script" path="res://scripts/linepainter.gd" id="5_kgjw7"]
 [ext_resource type="Script" path="res://scripts/graph_manager.gd" id="6_3dfej"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
+radius = 1.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
-radius = 1.0
-
-[node name="root" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "sweeper", "display", "button_knoten")]
+[node name="root" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten")]
 script = ExtResource("4_emc72")
 graph_manager = NodePath("graph_manager")
 bfs = NodePath("algorithms/bfs")
 state_counter = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/state_counter")
-sweeper = NodePath("sweeper")
 display = NodePath("algorithms/bfs/meta_data_setion/VBoxContainer/display")
 button_knoten = NodePath("navigation_ui/buttons/buttons_graphenmanager/HBoxContainer2/button_knoten")
 
-[node name="graph_manager" type="Node" parent="."]
+[node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("sweeper")]
 process_mode = 1
 script = ExtResource("6_3dfej")
+sweeper = NodePath("sweeper")
+
+[node name="sweeper" type="ShapeCast2D" parent="graph_manager"]
+enabled = false
+shape = SubResource("CircleShape2D_uforu")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="algorithms" type="Node" parent="."]
 
@@ -199,13 +206,6 @@ theme = ExtResource("5_3mibj")
 text = "EXIT
 "
 script = ExtResource("1_7moob")
-
-[node name="sweeper" type="ShapeCast2D" parent="."]
-enabled = false
-shape = SubResource("CircleShape2D_uforu")
-target_position = Vector2(0, 0)
-collide_with_areas = true
-collide_with_bodies = false
 
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphenmanager/HBoxContainer2/button_knoten" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphenmanager/HBoxContainer2/button_kanten" to="navigation_ui/buttons" method="_on_button_kanten_pressed"]

@@ -1,5 +1,6 @@
 class_name constants
 
+# UI Margin for Nodes, includes the width of a node (thats bad)
 static var upper_ui_margin: int = 100
 static var lower_ui_margin: int = 60
 static var left_ui_margin: int = 60
