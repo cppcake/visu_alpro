@@ -1,6 +1,4 @@
-extends Node2D
-
-class_name edge_class
+class_name edge_class extends Node2D
 
 var start_vertex: Node2D
 var target_vertex: Node2D

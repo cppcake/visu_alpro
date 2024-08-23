@@ -87,7 +87,7 @@ func forward():
 	
 	current_step += 1
 	state_counter.text = str(current_step) + "/" + str(steps)
-	
+
 func backward():
 	# Return, because we are at the first step
 	if(current_step <= 0):
