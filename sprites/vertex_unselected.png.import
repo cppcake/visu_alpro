@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e4y0fyio8suv"
-path="res://.godot/imported/node_current.png-b87a42f7128f4f913db5a2571e1f86bf.ctex"
+uid="uid://cvstya0mkgsf5"
+path="res://.godot/imported/vertex_unselected.png-4f11343d7419a539b54661ec3f159ff2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/node_current.png"
-dest_files=["res://.godot/imported/node_current.png-b87a42f7128f4f913db5a2571e1f86bf.ctex"]
+source_file="res://sprites/vertex_unselected.png"
+dest_files=["res://.godot/imported/vertex_unselected.png-4f11343d7419a539b54661ec3f159ff2.ctex"]
 
 [params]
 

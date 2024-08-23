@@ -4,14 +4,14 @@ class_name vertex_class extends Area2D
 static var node_count: int = 0
 static var lerp_speed: int = 15;
 static var hover_allowed: bool = true
-	
+
 # Sprites
 enum sprites {unselected, selected, hovered, current, besucht}
 @export var sprite_unselected: CompressedTexture2D
 @export var sprite_selected: CompressedTexture2D
 @export var sprite_hovered: CompressedTexture2D
 @export var sprite_current: CompressedTexture2D
-@export var sprite_besucht: CompressedTexture2D
+@export var sprite_visited: CompressedTexture2D
 
 # Node specific data
 var id_: int
@@ -68,7 +68,7 @@ func set_move(state: bool):
 
 func reset_besucht():
 	besucht = false
-	
+
 func set_sprite(selection: sprites):
 	match selection:
 		sprites.unselected: 
@@ -80,7 +80,7 @@ func set_sprite(selection: sprites):
 		sprites.current:
 			sprite.texture = sprite_current
 		sprites.besucht:
-			sprite.texture = sprite_besucht
+			sprite.texture = sprite_visited
 
 func _on_mouse_entered():
 	modulate = constants.hovered

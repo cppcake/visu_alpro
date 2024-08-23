@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name kanten_klasse
+class_name edge_class
 
 var start_knoten: Node2D
 var ziel_knoten: Node2D

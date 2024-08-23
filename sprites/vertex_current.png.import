@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://twjw2dsyqrds"
-path="res://.godot/imported/node_hovered.png-a8563a1aefd056fae6e0b38a9df8529f.ctex"
+uid="uid://e4y0fyio8suv"
+path="res://.godot/imported/vertex_current.png-a6a392d7f12e0f044c6230aa8b1aab39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/node_hovered.png"
-dest_files=["res://.godot/imported/node_hovered.png-a8563a1aefd056fae6e0b38a9df8529f.ctex"]
+source_file="res://sprites/vertex_current.png"
+dest_files=["res://.godot/imported/vertex_current.png-a6a392d7f12e0f044c6230aa8b1aab39.ctex"]
 
 [params]
 

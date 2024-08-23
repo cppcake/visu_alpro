@@ -129,6 +129,6 @@ func update_visited_nodes():
 func update_visited_edges():
 	for i in range(vertex_class.node_count):
 		get_tree().call_group("edge_group" + str(i), "reset_color")
-	for kante: kanten_klasse in states[state][bfs_indices.currently_visited_edges]:
+	for kante: edge_class in states[state][bfs_indices.currently_visited_edges]:
 		kante.mark_visited()
 
