@@ -16,7 +16,7 @@ func add_vertex(pos: Vector2) -> void:
 		print("Vertex will be added at ", pos)
 		var vertex_instance = vertex_scene.instantiate()
 		vertex_instance.set_global_position(pos)
-		vertex_instance.add_to_group("knoten_menge")
+		vertex_instance.add_to_group("vertex_group")
 		add_child(vertex_instance)
 
 func add_vertex_at_mouse_pos() -> void:
@@ -29,7 +29,7 @@ func add_vertex_at_mouse_pos() -> void:
 func rm_vertex(vertex: Node) -> void:
 	print("Removing Vertex ", vertex.id_)
 	for i in range(knoten_klasse.node_count):
-		for edge in get_tree().get_nodes_in_group("kanten_menge" + str(i)):
+		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
 			if edge.ziel_knoten.id_ == vertex.id_ or edge.start_knoten.id_ == vertex.id_:
 				edge.queue_free()
 	vertex.queue_free()
@@ -40,13 +40,13 @@ func remove_vertex_at_mouse_pos() -> void:
 		rm_vertex(collider)
 
 func get_vertex_by_id(vertex_id):
-	for vertex in get_tree().get_nodes_in_group("knoten_menge"):
+	for vertex in get_tree().get_nodes_in_group("vertex_group"):
 		if vertex.id_ == vertex_id:
 			return vertex
 	return null
 
 func add_edge(start, target) -> void:
-	for edge in get_tree().get_nodes_in_group("kanten_menge" + str(start.id_)):
+	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
 		if edge.ziel_knoten.id_ == target.id_:
 			print("Edge from vertex ", start.id_, " to vertex ", target.id_, " already exists")
 			return
@@ -56,14 +56,14 @@ func add_edge(start, target) -> void:
 	edge_instance.start_knoten = start
 	edge_instance.ziel_knoten = target
 	
-	for edge in get_tree().get_nodes_in_group("kanten_menge" + str(target.id_)):
+	for edge in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
 		if edge.ziel_knoten.id_ == start.id_:
 			# Counteredge exists, displace both edges affected and redraw  the already existing one
 			edge_instance.displacement = true
 			edge.displacement = true
 			break
 			
-	edge_instance.add_to_group("kanten_menge" + str(start.id_))
+	edge_instance.add_to_group("edge_group" + str(start.id_))
 	add_child(edge_instance)
 
 func add_edge_between_selected() -> void:
@@ -74,10 +74,10 @@ func add_edge_between_selected() -> void:
 
 func rm_edge(start, target) -> void:
 	# Die Laufzeit ist trotzdem in O(n), also alles gut :P
-	for edge in get_tree().get_nodes_in_group("kanten_menge" + str(start.id_)):
+	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
 		if edge.ziel_knoten == target:
 			# Displacement der Gegenkante ggf. entfernen
-			for edge_ in get_tree().get_nodes_in_group("kanten_menge" + str(target.id_)):
+			for edge_ in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
 				if edge_.ziel_knoten.id_ == start.id_:
 					# Counter edge existed. Undo displacement and redraw it.
 					edge_.displacement = false
@@ -123,7 +123,7 @@ func try_select_vertex() -> Node:
 		return null
 	
 	var collider = sweeper.get_collider(0)
-	if collider.is_in_group("knoten_menge"):
+	if collider.is_in_group("vertex_group"):
 		return collider
 	
 	print("Sweeper did collide with a non-vertex, break")

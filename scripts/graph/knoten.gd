@@ -52,7 +52,7 @@ func _physics_process(delta):
 		global_position = lerp(global_position, Vector2(screen_size.x - constants.right_ui_margin, global_position.y), lerp_speed * delta)
 		
 	# Make sure every node desnt collide with any other node
-	for knoten in get_tree().get_nodes_in_group("knoten_menge"):
+	for knoten in get_tree().get_nodes_in_group("vertex_group"):
 		if knoten != self && global_position.distance_to(knoten.global_position) <  constants.node_margin:
 			knoten.global_position = lerp(knoten.global_position, global_position + (knoten.global_position - global_position).normalized() *  constants.node_margin, lerp_speed * delta)
 	

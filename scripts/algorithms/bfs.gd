@@ -49,10 +49,10 @@ func backward():
 
 func stop():
 	s.label.set_text(str(s.id_))
-	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
+	for knoten: knoten_klasse in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(knoten_klasse.sprites.unselected)
 	for i in range(knoten_klasse.node_count):
-		get_tree().call_group("kanten_menge" + str(i), "reset_color")
+		get_tree().call_group("edge_group" + str(i), "reset_color")
 	$meta_data_setion/VBoxContainer/label_queue.visible = false
 	$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
@@ -85,7 +85,7 @@ func breitensuche(start_knoten: Node2D):
 	while !queue.is_empty():
 		var current: Node = queue.pop_front()
 		states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), current, [4]])
-		for kante in get_tree().get_nodes_in_group("kanten_menge" + str(current.id_)):
+		for kante in get_tree().get_nodes_in_group("edge_group" + str(current.id_)):
 			besuchte_kanten.push_back(kante)
 			states.push_back([besuchte_kanten.duplicate(), kante, queue.duplicate(), erg.duplicate(), current, [5]])	
 			if !kante.ziel_knoten.besucht:
@@ -96,7 +96,7 @@ func breitensuche(start_knoten: Node2D):
 	states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [8]])
 	
 	# Markiere alle Knoten wieder als unbesucht
-	get_tree().call_group("knoten_menge", "reset_besucht")
+	get_tree().call_group("vertex_group", "reset_besucht")
 
 	state = 0
 
@@ -118,7 +118,7 @@ func int_array_to_string(array: Array) -> String:
 	return string
 
 func update_visited_nodes():
-	for knoten: knoten_klasse in get_tree().get_nodes_in_group("knoten_menge"):
+	for knoten: knoten_klasse in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(knoten_klasse.sprites.unselected)
 	for knoten: knoten_klasse in states[state][bfs_indices.current_sequence]:
 		knoten.set_sprite(knoten_klasse.sprites.besucht)
@@ -128,7 +128,7 @@ func update_visited_nodes():
 
 func update_visited_edges():
 	for i in range(knoten_klasse.node_count):
-		get_tree().call_group("kanten_menge" + str(i), "reset_color")
+		get_tree().call_group("edge_group" + str(i), "reset_color")
 	for kante: kanten_klasse in states[state][bfs_indices.currently_visited_edges]:
 		kante.mark_visited()
 
