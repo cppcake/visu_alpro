@@ -10,7 +10,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
 
-[node name="knoten" type="Area2D"]
+[node name="vertex" type="Area2D"]
 z_index = 3
 script = ExtResource("1_gur3q")
 sprite_unselected = ExtResource("2_6dpir")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/graph/kante.gd" id="1_lfca4"]
 
-[node name="kante" type="Node2D"]
+[node name="edge" type="Node2D"]
 script = ExtResource("1_lfca4")
 
 [node name="Line2D" type="Line2D" parent="."]
