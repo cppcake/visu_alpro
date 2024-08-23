@@ -3,10 +3,10 @@ extends Node2D
 class_name edge_class
 
 var start_knoten: Node2D
-var ziel_knoten: Node2D
+var target_vertex: Node2D
 var line: Line2D
 var head: Polygon2D
-static var margin: float = 85
+static var distance_head_node: float = 85
 
 static var color_def: Color = Color.WHITE
 static var color_visited: Color = constants.uni_hellblau_c
@@ -39,9 +39,9 @@ func _process(_delta):
 	draw()
 
 func draw():
-	if start_knoten != ziel_knoten:
+	if start_knoten != target_vertex:
 		var start_punkt = start_knoten.position
-		var ziel_punkt = ziel_knoten.position
+		var ziel_punkt = target_vertex.position
 		
 		var distance: float = start_punkt.distance_to(ziel_punkt)
 		var direction: Vector2 = (ziel_punkt - start_punkt).normalized()
@@ -50,7 +50,7 @@ func draw():
 		if displacement == true:
 			start_punkt += (direction.orthogonal().normalized() * displacement_factor)
 			
-		ziel_punkt = start_punkt + direction * (distance - margin)
+		ziel_punkt = start_punkt + direction * (distance - distance_head_node)
 		
 		line.set_point_position(0, start_punkt)
 		line.set_point_position(1, ziel_punkt)
@@ -58,7 +58,7 @@ func draw():
 		head.rotation = start_punkt.angle_to_point(ziel_punkt)
 		return
 
-	if start_knoten == ziel_knoten:
+	if start_knoten == target_vertex:
 		line.clear_points()
 			
 		var points = []

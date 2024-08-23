@@ -88,10 +88,10 @@ func breitensuche(start_knoten: Node2D):
 		for kante in get_tree().get_nodes_in_group("edge_group" + str(current.id_)):
 			besuchte_kanten.push_back(kante)
 			states.push_back([besuchte_kanten.duplicate(), kante, queue.duplicate(), erg.duplicate(), current, [5]])	
-			if !kante.ziel_knoten.besucht:
-				kante.ziel_knoten.besucht = true
-				queue.push_back(kante.ziel_knoten)
-				erg.push_back(kante.ziel_knoten)
+			if !kante.target_vertex.besucht:
+				kante.target_vertex.besucht = true
+				queue.push_back(kante.target_vertex)
+				erg.push_back(kante.target_vertex)
 				states.push_back([besuchte_kanten.duplicate(), kante, queue.duplicate(), erg.duplicate(), current, [6, 7]])	
 	states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [8]])
 	

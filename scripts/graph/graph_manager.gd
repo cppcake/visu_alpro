@@ -30,7 +30,7 @@ func rm_vertex(vertex: Node) -> void:
 	print("Removing Vertex ", vertex.id_)
 	for i in range(vertex_class.node_count):
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
-			if edge.ziel_knoten.id_ == vertex.id_ or edge.start_knoten.id_ == vertex.id_:
+			if edge.target_vertex.id_ == vertex.id_ or edge.start_knoten.id_ == vertex.id_:
 				edge.queue_free()
 	vertex.queue_free()
 
@@ -47,17 +47,17 @@ func get_vertex_by_id(vertex_id):
 
 func add_edge(start, target) -> void:
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
-		if edge.ziel_knoten.id_ == target.id_:
+		if edge.target_vertex.id_ == target.id_:
 			print("Edge from vertex ", start.id_, " to vertex ", target.id_, " already exists")
 			return
 			
 	print("Adding edge between vertex ", start.id_, " and vertex ", target.id_)
 	var edge_instance = edge_scene.instantiate()
 	edge_instance.start_knoten = start
-	edge_instance.ziel_knoten = target
+	edge_instance.target_vertex = target
 	
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
-		if edge.ziel_knoten.id_ == start.id_:
+		if edge.target_vertex.id_ == start.id_:
 			# Counteredge exists, displace both edges affected and redraw  the already existing one
 			edge_instance.displacement = true
 			edge.displacement = true
@@ -75,10 +75,10 @@ func add_edge_between_selected() -> void:
 func rm_edge(start, target) -> void:
 	# Die Laufzeit ist trotzdem in O(n), also alles gut :P
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
-		if edge.ziel_knoten == target:
+		if edge.target_vertex == target:
 			# Displacement der Gegenkante ggf. entfernen
 			for edge_ in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
-				if edge_.ziel_knoten.id_ == start.id_:
+				if edge_.target_vertex.id_ == start.id_:
 					# Counter edge existed. Undo displacement and redraw it.
 					edge_.displacement = false
 					edge_.draw()
