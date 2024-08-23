@@ -8,9 +8,9 @@ var mouse_pos: Vector2
 @export var sweeper: Node2D
 
 # Stores information about what the user clicked on / selected
-var selected: Node = null
-var selected_2: Node = null
-var selected_to_move: Node = null
+var selected: vertex_class = null
+var selected_2: vertex_class = null
+var selected_to_move: vertex_class = null
 
 func add_vertex(pos: Vector2) -> void:
 		print("Vertex will be added at ", pos)
@@ -26,7 +26,7 @@ func add_vertex_at_mouse_pos() -> void:
 	else:
 		print("Hitting upper UI, vertex wont be placed")
 
-func rm_vertex(vertex: Node) -> void:
+func rm_vertex(vertex: vertex_class) -> void:
 	print("Removing Vertex ", vertex.id_)
 	for i in range(vertex_class.node_count):
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
@@ -107,7 +107,7 @@ func forbid_vertex_at_mouse_pos_to_move() -> void:
 		selected_to_move.set_allowed_to_move(false)
 		selected_to_move = null
 
-func try_select_vertex() -> Node:
+func try_select_vertex() -> vertex_class:
 	mouse_pos = get_viewport().get_mouse_position()
 	
 	# Teleport the sweeper to mouse_pos and check if it hits anything

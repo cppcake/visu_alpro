@@ -1,6 +1,5 @@
 extends Control
 
-var statemachine: Node
 @export var controller: Node
 
 func _on_button_knoten_pressed():

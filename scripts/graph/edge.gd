@@ -2,26 +2,30 @@ class_name edge_class extends Node2D
 
 var start_vertex: Node2D
 var target_vertex: Node2D
+
+# Needed to draw edge
 var line: Line2D
 var head: Polygon2D
 static var distance_head_node: float = 85
 
-static var color_def: Color = Color.WHITE
-static var color_visited: Color = constants.uni_hellblau_c
-
 # Needed to properly draw an edge, if there exists a counteredge
 var displacement: bool = false
 static var displacement_factor: int = 15
-# Number of points of per quarter circle
-static var points_per_quarter_circle: int = 20
-# Radius of circle
-static var radius: float = 50
 
+# Needed to draw circle edge
+static var points_per_quarter_circle: int = 20
+static var radius: float = 50
 static var already_calculated = false
 static var points_origin = []
 
+# Needed to color edge during algorithm
+static var color_def: Color = Color.WHITE
+static var color_visited: Color = constants.uni_hellblau_c
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Calculate points of circle once and just once.
+	# Use these points to draw circles by translating points.
 	if already_calculated == false:
 		for i in range(points_per_quarter_circle + 1):
 			var angle: float = (float)(2.0 * PI * i) / (points_per_quarter_circle + (points_per_quarter_circle/4.0));
@@ -34,9 +38,11 @@ func _ready():
 	head = get_node("./Polygon2D")
 
 func _process(_delta):
+	# Draw edge every frame. Probably not the most efficient way, but it works reliably.
 	draw()
 
 func draw():
+	# Case 01: Edge from once vertex to another
 	if start_vertex != target_vertex:
 		var start_position = start_vertex.position
 		var target_position = target_vertex.position
@@ -56,11 +62,11 @@ func draw():
 		head.rotation = start_position.angle_to_point(target_position)
 		return
 
+	#  Case 02: Edge from self to self
 	if start_vertex == target_vertex:
 		line.clear_points()
 			
 		var points = []
-		# start_vertex.position.y
 		for i in range(0, points_per_quarter_circle):
 			points.push_back(Vector2(points_origin[i].x + start_vertex.position.x, points_origin[i].y + start_vertex.position.y - 65))
 			

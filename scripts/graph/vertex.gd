@@ -13,7 +13,7 @@ enum sprites {unselected, selected, hovered, current, visited}
 @export var sprite_current: CompressedTexture2D
 @export var sprite_visited: CompressedTexture2D
 
-# Node specific data
+# Vertex specific data
 var id_: int
 var label: Label
 var sprite: Sprite2D
@@ -32,7 +32,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Make sure the node never collides with the UI 
+	# Make sure the vertex never collides with the UI 
 	var screen_size = get_viewport().get_size()
 	if global_position.y < constants.upper_ui_margin:
 		global_position = lerp(global_position, Vector2(global_position.x, 100), lerp_speed * delta)
@@ -46,7 +46,7 @@ func _physics_process(delta):
 	if global_position.x > screen_size.x - constants.right_ui_margin:
 		global_position = lerp(global_position, Vector2(screen_size.x - constants.right_ui_margin, global_position.y), lerp_speed * delta)
 		
-	# Make sure every node desnt collide with any other node
+	# Make sure every vertex desnt collide with any other vertex
 	for vertex in get_tree().get_nodes_in_group("vertex_group"):
 		if vertex != self && global_position.distance_to(vertex.global_position) <  constants.node_margin:
 			vertex.global_position = lerp(vertex.global_position, global_position + (vertex.global_position - global_position).normalized() *  constants.node_margin, lerp_speed * delta)
