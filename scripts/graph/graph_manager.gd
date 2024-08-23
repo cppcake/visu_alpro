@@ -79,10 +79,9 @@ func rm_edge(start, target) -> void:
 			# Displacement der Gegenkante ggf. entfernen
 			for edge_ in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
 				if edge_.target_vertex.id_ == start.id_:
-					# Counter edge existed. Undo displacement and redraw it.
+					# Counter edge existed. Undo displacement
+					print("Reset counteredge")
 					edge_.displacement = false
-					edge_.draw()
-					print("Gegenkante wurde zurückgesetzt!")
 					break
 			print("Removing edge between vertex ", start.id_, " and vertex ", target.id_)
 			edge.queue_free()
