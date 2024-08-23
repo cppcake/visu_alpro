@@ -30,7 +30,7 @@ func rm_vertex(vertex: Node) -> void:
 	print("Removing Vertex ", vertex.id_)
 	for i in range(vertex_class.node_count):
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
-			if edge.target_vertex.id_ == vertex.id_ or edge.start_knoten.id_ == vertex.id_:
+			if edge.target_vertex.id_ == vertex.id_ or edge.start_vertex.id_ == vertex.id_:
 				edge.queue_free()
 	vertex.queue_free()
 
@@ -53,7 +53,7 @@ func add_edge(start, target) -> void:
 			
 	print("Adding edge between vertex ", start.id_, " and vertex ", target.id_)
 	var edge_instance = edge_scene.instantiate()
-	edge_instance.start_knoten = start
+	edge_instance.start_vertex = start
 	edge_instance.target_vertex = target
 	
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(target.id_)):
