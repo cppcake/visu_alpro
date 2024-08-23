@@ -49,9 +49,9 @@ func backward():
 
 func stop():
 	s.label.set_text(str(s.id_))
-	for knoten: knoten_klasse in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(knoten_klasse.sprites.unselected)
-	for i in range(knoten_klasse.node_count):
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	for i in range(vertex_class.node_count):
 		get_tree().call_group("edge_group" + str(i), "reset_color")
 	$meta_data_setion/VBoxContainer/label_queue.visible = false
 	$meta_data_setion/VBoxContainer/label_sequence.visible = false
@@ -61,7 +61,7 @@ func breitensuche(start_knoten: Node2D):
 	# Init
 	states.clear()
 	start_knoten.label.set_text(str(start_knoten.id_) + " (s)")
-	start_knoten.set_sprite(knoten_klasse.sprites.unselected)
+	start_knoten.set_sprite(vertex_class.sprites.unselected)
 	s = start_knoten
 	
 	$meta_data_setion/VBoxContainer/display.set_text(" 1. Erstelle leere Folge F und eine leere Warteschlange (Queue) Q\n 2. Markiere s als erkundet und füge s in Q und F ein\n 3. [b]while[/b] Q ist nicht leer [b]do[/b]\n 4.  |  Sei v = Q.pop() \n 5.  |  [b]for[/b] alle Kanten (v, w) [b]do[/b] \n 6.  |   |  [b]if[/b] w ist noch unerkundet [b]then[/b] \n 7.  |   |   |  Markiere w als erkundet und füge w am Ende von Q und F ein \n 8. [b]return[/b] F") 
@@ -118,16 +118,16 @@ func int_array_to_string(array: Array) -> String:
 	return string
 
 func update_visited_nodes():
-	for knoten: knoten_klasse in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(knoten_klasse.sprites.unselected)
-	for knoten: knoten_klasse in states[state][bfs_indices.current_sequence]:
-		knoten.set_sprite(knoten_klasse.sprites.besucht)
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	for knoten: vertex_class in states[state][bfs_indices.current_sequence]:
+		knoten.set_sprite(vertex_class.sprites.besucht)
 		
 	if states[state][bfs_indices.curernt_node] != null:
-		states[state][bfs_indices.curernt_node].set_sprite(knoten_klasse.sprites.current)
+		states[state][bfs_indices.curernt_node].set_sprite(vertex_class.sprites.current)
 
 func update_visited_edges():
-	for i in range(knoten_klasse.node_count):
+	for i in range(vertex_class.node_count):
 		get_tree().call_group("edge_group" + str(i), "reset_color")
 	for kante: kanten_klasse in states[state][bfs_indices.currently_visited_edges]:
 		kante.mark_visited()

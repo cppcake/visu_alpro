@@ -28,7 +28,7 @@ func add_vertex_at_mouse_pos() -> void:
 
 func rm_vertex(vertex: Node) -> void:
 	print("Removing Vertex ", vertex.id_)
-	for i in range(knoten_klasse.node_count):
+	for i in range(vertex_class.node_count):
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
 			if edge.ziel_knoten.id_ == vertex.id_ or edge.start_knoten.id_ == vertex.id_:
 				edge.queue_free()
@@ -137,7 +137,7 @@ func update_selected():
 		if selected == null:
 			print("New selected ", collider.id_)
 			selected = collider
-			collider.set_sprite(knoten_klasse.sprites.selected)
+			collider.set_sprite(vertex_class.sprites.selected)
 			return
 		
 		print("New selected_2 ", collider.id_)
@@ -147,8 +147,8 @@ func update_selected():
 # Reset selected nodes and their sprites
 func reset_selected():
 	if selected != null:
-		selected.set_sprite(knoten_klasse.sprites.unselected)
+		selected.set_sprite(vertex_class.sprites.unselected)
 	if selected_2 != null:
-		selected_2.set_sprite(knoten_klasse.sprites.unselected)
+		selected_2.set_sprite(vertex_class.sprites.unselected)
 	selected = null
 	selected_2 = null

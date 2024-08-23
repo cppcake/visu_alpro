@@ -1,4 +1,4 @@
-class_name knoten_klasse extends Area2D
+class_name vertex_class extends Area2D
 
 # Static variables and functions
 static var node_count: int = 0
