@@ -76,7 +76,7 @@ func breitensuche(start_knoten: Node2D):
 	var besuchte_kanten = []
 	states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [1]])
 	
-	start_knoten.besucht = true
+	start_knoten.visited = true
 	queue.push_back(start_knoten)
 	erg.push_back(start_knoten)
 	
@@ -88,15 +88,15 @@ func breitensuche(start_knoten: Node2D):
 		for kante in get_tree().get_nodes_in_group("edge_group" + str(current.id_)):
 			besuchte_kanten.push_back(kante)
 			states.push_back([besuchte_kanten.duplicate(), kante, queue.duplicate(), erg.duplicate(), current, [5]])	
-			if !kante.target_vertex.besucht:
-				kante.target_vertex.besucht = true
+			if !kante.target_vertex.visited:
+				kante.target_vertex.visited = true
 				queue.push_back(kante.target_vertex)
 				erg.push_back(kante.target_vertex)
 				states.push_back([besuchte_kanten.duplicate(), kante, queue.duplicate(), erg.duplicate(), current, [6, 7]])	
 	states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [8]])
 	
 	# Markiere alle Knoten wieder als unbesucht
-	get_tree().call_group("vertex_group", "reset_besucht")
+	get_tree().call_group("vertex_group", "reset_visited")
 
 	state = 0
 
@@ -121,7 +121,7 @@ func update_visited_nodes():
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)
 	for knoten: vertex_class in states[state][bfs_indices.current_sequence]:
-		knoten.set_sprite(vertex_class.sprites.besucht)
+		knoten.set_sprite(vertex_class.sprites.visited)
 		
 	if states[state][bfs_indices.curernt_node] != null:
 		states[state][bfs_indices.curernt_node].set_sprite(vertex_class.sprites.current)

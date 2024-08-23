@@ -6,7 +6,7 @@ static var lerp_speed: int = 15;
 static var hover_allowed: bool = true
 
 # Sprites
-enum sprites {unselected, selected, hovered, current, besucht}
+enum sprites {unselected, selected, hovered, current, visited}
 @export var sprite_unselected: CompressedTexture2D
 @export var sprite_selected: CompressedTexture2D
 @export var sprite_hovered: CompressedTexture2D
@@ -18,7 +18,7 @@ var id_: int
 var label: Label
 var sprite: Sprite2D
 var move: bool = false
-var besucht: bool = false
+var visited: bool = false
 
 # Should be removed in future, because a node should not need to know about the controller!
 var controller: Node
@@ -66,8 +66,8 @@ func set_move(state: bool):
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
 	move = state
 
-func reset_besucht():
-	besucht = false
+func reset_visited():
+	visited = false
 
 func set_sprite(selection: sprites):
 	match selection:
@@ -79,7 +79,7 @@ func set_sprite(selection: sprites):
 			sprite.texture = sprite_hovered
 		sprites.current:
 			sprite.texture = sprite_current
-		sprites.besucht:
+		sprites.visited:
 			sprite.texture = sprite_visited
 
 func _on_mouse_entered():
