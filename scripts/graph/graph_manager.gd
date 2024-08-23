@@ -99,12 +99,12 @@ func allow_vertex_at_mouse_pos_to_move() -> void:
 	if collider != null:
 		selected_to_move = collider
 		print("Allowing vertex ", selected_to_move.id_, " to move")
-		selected_to_move.set_move(true)
+		selected_to_move.set_allowed_to_move(true)
 
 func forbid_vertex_at_mouse_pos_to_move() -> void:
 	if selected_to_move != null:
 		print("Forbidding vertex ", selected_to_move.id_, " to move")
-		selected_to_move.set_move(false)
+		selected_to_move.set_allowed_to_move(false)
 		selected_to_move = null
 
 func try_select_vertex() -> Node:

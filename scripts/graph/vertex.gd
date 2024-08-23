@@ -17,15 +17,10 @@ enum sprites {unselected, selected, hovered, current, visited}
 var id_: int
 var label: Label
 var sprite: Sprite2D
-var move: bool = false
+var allowed_to_move: bool = false
 var visited: bool = false
 
-# Should be removed in future, because a node should not need to know about the controller!
-var controller: Node
-
 func _ready():
-	controller = get_node("/root")
-	
 	# Set id and update node_count
 	id_ = node_count
 	node_count += 1
@@ -52,19 +47,20 @@ func _physics_process(delta):
 		global_position = lerp(global_position, Vector2(screen_size.x - constants.right_ui_margin, global_position.y), lerp_speed * delta)
 		
 	# Make sure every node desnt collide with any other node
-	for knoten in get_tree().get_nodes_in_group("vertex_group"):
-		if knoten != self && global_position.distance_to(knoten.global_position) <  constants.node_margin:
-			knoten.global_position = lerp(knoten.global_position, global_position + (knoten.global_position - global_position).normalized() *  constants.node_margin, lerp_speed * delta)
+	for vertex in get_tree().get_nodes_in_group("vertex_group"):
+		if vertex != self && global_position.distance_to(vertex.global_position) <  constants.node_margin:
+			vertex.global_position = lerp(vertex.global_position, global_position + (vertex.global_position - global_position).normalized() *  constants.node_margin, lerp_speed * delta)
 	
-	if move:
+	# Lerp vertex position to mouse position if vertex is allowed to move
+	if allowed_to_move:
 		global_position = lerp(global_position, get_global_mouse_position(), lerp_speed * delta)
 
-func set_move(state: bool):
+func set_allowed_to_move(state: bool):
 	if state:
 		modulate = constants.hovered
 	else:
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
-	move = state
+	allowed_to_move = state
 
 func reset_visited():
 	visited = false
@@ -86,5 +82,5 @@ func _on_mouse_entered():
 	modulate = constants.hovered
 
 func _on_mouse_exited():
-	if not move:
+	if not allowed_to_move:
 		modulate = Color(1.0, 1.0, 1.0, 1.0)

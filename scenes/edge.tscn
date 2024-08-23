@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwlgqfos6kle8"]
 
-[ext_resource type="Script" path="res://scripts/graph/edge.gd" id="1_lfca4"]
+[ext_resource type="Script" path="res://scripts/graph/edge.gd" id="1_t2688"]
 
 [node name="edge" type="Node2D"]
-script = ExtResource("1_lfca4")
+script = ExtResource("1_t2688")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
