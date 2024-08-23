@@ -16,10 +16,8 @@ enum modes
 }
 var mode: modes = modes.vertices
 
-# Preload needed scenes
+# Graphenmanager
 @export var graph_manager: Node
-@onready var knoten_scene = preload("res://scenes/knoten.tscn")
-@onready var kante_scene = preload("res://scenes/kante.tscn")
 
 # Algorithm
 var algorithm_running: bool = false
@@ -62,7 +60,7 @@ func _process(_delta):
 				control_movement(left_click, left_click_released)
 				
 			if left_click and not algorithm_running:
-				var collider = graph_manager.try_select_node()
+				var collider = graph_manager.try_select_vertex()
 				if collider != null:
 					get_tree().call_group("buttons_active", "release_focus")
 					current_step = 0
@@ -72,10 +70,10 @@ func _process(_delta):
 
 func control_movement(left_click: bool, left_click_released: bool):
 	if left_click:
-		graph_manager.allow_node_at_mouse_pos_to_move()
+		graph_manager.allow_vertex_at_mouse_pos_to_move()
 	# Forbid node from moving
 	if left_click_released:
-		graph_manager.forbid_node_at_mouse_pos_to_move()
+		graph_manager.forbid_vertex_at_mouse_pos_to_move()
 
 # ALGORITHM NAVIGATION
 func forward():
