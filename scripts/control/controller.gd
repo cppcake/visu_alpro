@@ -138,13 +138,13 @@ func set_mode(mode_: modes):
 	mode = mode_
 	match mode:
 		modes.vertices:
-			display.set_text("Current mode: [color=" + constants.uni_blau + "]VERTICES[/color]\n\t- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]VERTICES[/color]\n\t- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it")
 			button_knoten.grab_focus()
 		modes.edges:
-			display.set_text("Current mode: [color=" + constants.uni_blau + "]EDGES[/color]\n\t- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]EDGES[/color]\n\t- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them")
 		modes.move:
-			display.set_text("Current mode: [color=" + constants.uni_blau + "]MOVE[/color]\n\t- Select and drag a vertex to move it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]MOVE[/color]\n\t- Select and drag a vertex to move it")
 		modes.bfs:
-			display.set_text("Current mode: [color=" + constants.uni_blau + "]BFS[/color]\n\t- Select a vertex s to start a breadth-first search starting from it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]BFS[/color]\n\t- Select a vertex s to start a breadth-first search starting from it")
 		modes.dfs:
 			display.set_text("NOT YET IMPLEMENTED :(")

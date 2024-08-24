@@ -112,25 +112,25 @@ alignment = 1
 
 [node name="button_knoten" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Switch to VERTICES mode"
+tooltip_text = "VERTICES_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "VERTICES"
 
 [node name="button_kanten" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Switch to EDGES mode"
+tooltip_text = "EDGES_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "EDGES"
 
 [node name="button_move" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Switch to MOVE mode"
+tooltip_text = "MOVE_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "MOVE"
 
 [node name="button_reset" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Clear the whole graph"
+tooltip_text = "RESET_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "RESET"
 script = ExtResource("2_h4ido")
@@ -146,13 +146,13 @@ alignment = 1
 
 [node name="button_breitensuche" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Switch to BFS mode"
+tooltip_text = "BFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "BFS"
 
 [node name="button_tiefensuche" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
-tooltip_text = "Switch to DFS mode"
+tooltip_text = "DFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "DFS"
 
@@ -202,6 +202,7 @@ alignment = 2
 
 [node name="OptionButton" type="OptionButton" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
 layout_mode = 2
+tooltip_text = "LOCAL_TOOLTIP"
 theme = ExtResource("5_3mibj")
 item_count = 2
 selected = 0
@@ -213,10 +214,9 @@ script = ExtResource("9_b5v8w")
 
 [node name="button_exit" type="Button" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
 layout_mode = 2
-tooltip_text = "Close the program"
+tooltip_text = "EXIT_TOOLTIP"
 theme = ExtResource("5_3mibj")
-text = "EXIT
-"
+text = "EXIT"
 script = ExtResource("1_7moob")
 
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_knoten" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]

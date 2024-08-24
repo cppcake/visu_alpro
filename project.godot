@@ -30,7 +30,7 @@ M2={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locals.de.translation", "res://locals.en.translation")
+locale/translations=PackedStringArray("res://local/locals.de.translation", "res://local/locals.en.translation")
 
 [rendering]
 
