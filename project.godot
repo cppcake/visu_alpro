@@ -28,6 +28,10 @@ M2={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://locals.de.translation", "res://locals.en.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

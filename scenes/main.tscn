@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvogahh8sitx"]
+[gd_scene load_steps=14 format=3 uid="uid://dvogahh8sitx"]
 
 [ext_resource type="Script" path="res://scripts/control/exit.gd" id="1_7moob"]
 [ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="1_g52vd"]
-[ext_resource type="Script" path="res://scripts/control/clear.gd" id="2_h4ido"]
+[ext_resource type="Script" path="res://scripts/control/reset.gd" id="2_h4ido"]
 [ext_resource type="Script" path="res://scripts/control/controller.gd" id="4_emc72"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://theme.tres" id="5_3mibj"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://fonts/ProggyVector-Regular.otf" id="5_cnn2h"]
 [ext_resource type="Script" path="res://scripts/algorithms/bfs.gd" id="5_hhmca"]
 [ext_resource type="Script" path="res://scripts/ui/linepainter.gd" id="5_kgjw7"]
 [ext_resource type="Script" path="res://scripts/graph/graph_manager.gd" id="6_3dfej"]
+[ext_resource type="Script" path="res://scripts/control/local_select.gd" id="9_b5v8w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -17,7 +18,7 @@ radius = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten")]
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten")]
 script = ExtResource("4_emc72")
 graph_manager = NodePath("graph_manager")
 bfs = NodePath("algorithms/bfs")
@@ -127,11 +128,11 @@ tooltip_text = "Switch to MOVE mode"
 theme = ExtResource("5_3mibj")
 text = "MOVE"
 
-[node name="button_clear" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
+[node name="button_reset" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "Clear the whole graph"
 theme = ExtResource("5_3mibj")
-text = "CLEAR"
+text = "RESET"
 script = ExtResource("2_h4ido")
 controller = NodePath("../../../../..")
 
@@ -199,6 +200,17 @@ theme = ExtResource("5_3mibj")
 layout_mode = 2
 alignment = 2
 
+[node name="OptionButton" type="OptionButton" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("5_3mibj")
+item_count = 2
+selected = 0
+popup/item_0/text = "DE"
+popup/item_0/id = 0
+popup/item_1/text = "EN"
+popup/item_1/id = 1
+script = ExtResource("9_b5v8w")
+
 [node name="button_exit" type="Button" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
 layout_mode = 2
 tooltip_text = "Close the program"
@@ -210,10 +222,11 @@ script = ExtResource("1_7moob")
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_knoten" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_kanten" to="navigation_ui/buttons" method="_on_button_kanten_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="navigation_ui/buttons" method="_on_button_auswahl_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_clear" to="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_clear" method="_on_pressed"]
+[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_breitensuche" to="navigation_ui/buttons" method="_on_button_breitensuche_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_tiefensuche" to="navigation_ui/buttons" method="_on_button_tiefensuche_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_stop" to="." method="stop"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_backward" to="." method="backward"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="item_selected" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/OptionButton" to="navigation_ui/buttons/buttons_misc/HBoxContainer3/OptionButton" method="_on_item_selected"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" to="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

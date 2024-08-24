@@ -21,10 +21,10 @@ func add_vertex(pos: Vector2) -> void:
 
 func add_vertex_at_mouse_pos() -> void:
 	mouse_pos = get_viewport().get_mouse_position()
-	if(mouse_pos.y > constants.upper_ui_margin - 60):
+	if(mouse_pos.y > constants.upper_ui_margin - 60 && mouse_pos.x < constants.right_ui_margin):
 		add_vertex(mouse_pos)
 	else:
-		print("Hitting upper UI, vertex wont be placed")
+		print("Hitting UI, vertex wont be placed")
 
 func rm_vertex(vertex: vertex_class) -> void:
 	print("Removing Vertex ", vertex.id_)
