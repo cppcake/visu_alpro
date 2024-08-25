@@ -15,7 +15,9 @@ enum sprites {unselected, selected, hovered, current, visited}
 
 # Vertex specific data
 var id_: int
-var label: Label
+var label_id: Label
+var label_info: Label
+var label_meta: Label
 var sprite: Sprite2D
 var allowed_to_move: bool = false
 var visited: bool = false
@@ -27,8 +29,12 @@ func _ready():
 	# Init visuals
 	sprite = get_node("Sprite2D")
 	sprite.texture = sprite_unselected
-	label = get_node("./Label")
-	label.set_text(str(id_))
+	label_id = get_node("./Label_id")
+	label_id.set_text(str(id_))
+	label_info = get_node("./Label_info")
+	label_info.set_text("")
+	label_meta = get_node("./Label_meta")
+	label_meta.set_text("")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -69,14 +75,21 @@ func set_sprite(selection: sprites):
 	match selection:
 		sprites.unselected: 
 			sprite.texture = sprite_unselected
+			label_info.set_text("")
+			label_meta.set_text("")
 		sprites.selected:
 			sprite.texture = sprite_selected
+			label_info.set_text("")
+			label_meta.set_text("")
 		sprites.hovered:
 			sprite.texture = sprite_hovered
 		sprites.current:
 			sprite.texture = sprite_current
+			label_meta.set_text("v")
 		sprites.visited:
 			sprite.texture = sprite_visited
+			label_info.set_text(tr("VISITED"))
+			label_meta.set_text("")
 
 func _on_mouse_entered():
 	modulate = constants.hovered

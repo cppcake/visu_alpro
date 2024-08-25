@@ -30,7 +30,7 @@ M2={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://local/upper_ui.de.translation", "res://local/upper_ui.en.translation")
+locale/translations=PackedStringArray("res://local/upper_ui.de.translation", "res://local/upper_ui.en.translation", "res://local/algorithms.de.translation", "res://local/algorithms.en.translation")
 
 [rendering]
 

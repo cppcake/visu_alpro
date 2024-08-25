@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bul2lkf60h7l"
+
+[deps]
+
+files=["res://local/algorithms.en.translation", "res://local/algorithms.de.translation"]
+
+source_file="res://local/algorithms.csv"
+dest_files=["res://local/algorithms.en.translation", "res://local/algorithms.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

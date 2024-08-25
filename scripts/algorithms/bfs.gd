@@ -48,7 +48,7 @@ func backward():
 		$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
 func stop():
-	s.label.set_text(str(s.id_))
+	s.label_id.set_text(str(s.id_))
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)
 	for i in range(vertex_class.node_count):
@@ -60,11 +60,11 @@ func stop():
 func breitensuche(start_knoten: Node2D):
 	# Init
 	states.clear()
-	start_knoten.label.set_text(str(start_knoten.id_) + " (s)")
+	start_knoten.label_id.set_text(str(start_knoten.id_) + " (s)")
 	start_knoten.set_sprite(vertex_class.sprites.unselected)
 	s = start_knoten
 	
-	$meta_data_setion/VBoxContainer/display.set_text(" 1. Erstelle leere Folge F und eine leere Warteschlange (Queue) Q\n 2. Markiere s als erkundet und füge s in Q und F ein\n 3. [b]while[/b] Q ist nicht leer [b]do[/b]\n 4.  |  Sei v = Q.pop() \n 5.  |  [b]for[/b] alle Kanten (v, w) [b]do[/b] \n 6.  |   |  [b]if[/b] w ist noch unerkundet [b]then[/b] \n 7.  |   |   |  Markiere w als erkundet und füge w am Ende von Q und F ein \n 8. [b]return[/b] F") 
+	$meta_data_setion/VBoxContainer/display.set_text(tr("BFS_PSEUDOCODE")) 
 	
 	# Ein Zustand besteht aus:
 	# [Momentan besuchte Kanten, Momentane Kante, Momentante Queue, Momentane Folge, Momentaner Current Knoten, Zeile im Pseudocode)
