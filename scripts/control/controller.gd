@@ -29,6 +29,7 @@ var current_step: int = 1
 var steps: int = 0
 
 func _ready():	
+	TranslationServer.set_locale("en")
 	set_mode(mode)
 
 func _process(_delta):
@@ -133,18 +134,34 @@ func navigation_mode():
 
 @export var display: RichTextLabel
 @export var button_knoten: Button
+@export var button_kanten: Button
+@export var button_move: Button
+@export var button_bfs: Button
+@export var button_dfs: Button
 # Set current mode and info text accordingly
 func set_mode(mode_: modes):
 	mode = mode_
 	match mode:
 		modes.vertices:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]VERTICES[/color]\n\t- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("VERTICES") + "[/color]\n\t" + tr("VERTICES_INFO"))
 			button_knoten.grab_focus()
 		modes.edges:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]EDGES[/color]\n\t- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("EDGES") + "[/color]\n\t" + tr("EDGES_INFO"))
+			button_kanten.grab_focus()
 		modes.move:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]MOVE[/color]\n\t- Select and drag a vertex to move it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("MOVE") + "[/color]\n\t" + tr("MOVE_INFO"))
+			button_move.grab_focus()
 		modes.bfs:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]BFS[/color]\n\t- Select a vertex s to start a breadth-first search starting from it")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("BFS") + "[/color]\n\t" + tr("BFS_INFO"))
+			button_bfs.grab_focus()
 		modes.dfs:
-			display.set_text("NOT YET IMPLEMENTED :(")
+			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
+			button_dfs.grab_focus()
+
+func set_local(index: int):
+	match index:
+		0:
+			TranslationServer.set_locale("en")
+		1:
+			TranslationServer.set_locale("de")
+	set_mode(mode)

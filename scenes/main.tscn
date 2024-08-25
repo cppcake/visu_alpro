@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/algorithms/bfs.gd" id="5_hhmca"]
 [ext_resource type="Script" path="res://scripts/ui/linepainter.gd" id="5_kgjw7"]
 [ext_resource type="Script" path="res://scripts/graph/graph_manager.gd" id="6_3dfej"]
-[ext_resource type="Script" path="res://scripts/control/local_select.gd" id="9_b5v8w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -18,13 +17,31 @@ radius = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten")]
+[sub_resource type="GDScript" id="GDScript_5nve5"]
+script/source = "extends OptionButton
+
+func _ready():
+	TranslationServer.set_locale(\"de\")
+
+func _on_item_selected(index):
+	match index:
+		0:
+			TranslationServer.set_locale(\"de\")
+		1:
+			TranslationServer.set_locale(\"en\")
+"
+
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
 script = ExtResource("4_emc72")
 graph_manager = NodePath("graph_manager")
 bfs = NodePath("algorithms/bfs")
 state_counter = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/state_counter")
 display = NodePath("algorithms/bfs/meta_data_setion/VBoxContainer/display")
-button_knoten = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_knoten")
+button_knoten = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
+button_kanten = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
+button_move = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move")
+button_bfs = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs")
+button_dfs = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs")
 
 [node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("sweeper")]
 process_mode = 1
@@ -110,13 +127,13 @@ layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="button_knoten" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_vertices" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "VERTICES_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "VERTICES"
 
-[node name="button_kanten" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_edges" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "EDGES_TOOLTIP"
 theme = ExtResource("5_3mibj")
@@ -144,13 +161,13 @@ theme = ExtResource("5_3mibj")
 layout_mode = 2
 alignment = 1
 
-[node name="button_breitensuche" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_bfs" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "BFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "BFS"
 
-[node name="button_tiefensuche" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_dfs" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "DFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
@@ -200,17 +217,17 @@ theme = ExtResource("5_3mibj")
 layout_mode = 2
 alignment = 2
 
-[node name="OptionButton" type="OptionButton" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
+[node name="dropdown_local" type="OptionButton" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "LOCAL_TOOLTIP"
 theme = ExtResource("5_3mibj")
 item_count = 2
 selected = 0
-popup/item_0/text = "DE"
+popup/item_0/text = "EN"
 popup/item_0/id = 0
-popup/item_1/text = "EN"
+popup/item_1/text = "DE"
 popup/item_1/id = 1
-script = ExtResource("9_b5v8w")
+script = SubResource("GDScript_5nve5")
 
 [node name="button_exit" type="Button" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
 layout_mode = 2
@@ -219,14 +236,14 @@ theme = ExtResource("5_3mibj")
 text = "EXIT"
 script = ExtResource("1_7moob")
 
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_knoten" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_kanten" to="navigation_ui/buttons" method="_on_button_kanten_pressed"]
+[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]
+[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="navigation_ui/buttons" method="_on_button_kanten_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="navigation_ui/buttons" method="_on_button_auswahl_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_breitensuche" to="navigation_ui/buttons" method="_on_button_breitensuche_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_tiefensuche" to="navigation_ui/buttons" method="_on_button_tiefensuche_pressed"]
+[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs" to="navigation_ui/buttons" method="_on_button_breitensuche_pressed"]
+[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs" to="navigation_ui/buttons" method="_on_button_tiefensuche_pressed"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_stop" to="." method="stop"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_backward" to="." method="backward"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_forward" to="." method="forward"]
-[connection signal="item_selected" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/OptionButton" to="navigation_ui/buttons/buttons_misc/HBoxContainer3/OptionButton" method="_on_item_selected"]
+[connection signal="item_selected" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
 [connection signal="pressed" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" to="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

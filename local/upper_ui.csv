@@ -1,0 +1,22 @@
+keys,en,de
+VERTICES,VERTICES,KNOTEN
+EDGES,EDGES,KANTEN
+MOVE,MOVE,BEWEGEN
+RESET,RESET,ZURÜCKSETZEN
+EXIT,EXIT,BEENDEN
+,,
+VERTICES_TOOLTIP,Switch to VERTICES mode,Wechsel zum KNOTEN Modus
+EDGES_TOOLTIP,Switch to EDGES mode,Wechsel zum KANTEN Modus
+MOVE_TOOLTIP,Switch to MOVE mode,Wechsel zum BEWEGEN Modus
+RESET_TOOLTIP,Clear the graph,Setze den Graphen zurück
+BFS_TOOLTIP,Switch to BFS mode,Wechsel zum BFS Modus
+DFS_TOOLTIP,Switch to DFS mode,Wechsel zum DFS Modus
+LOCAL_TOOLTIP,Switch Language,Wechsel die Sprache
+EXIT_TOOLTIP,Close the program,Beende das Programm
+,,
+CURRENT_MODE, Current mode: , Momentaner Modus: 
+VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it,"- Linksklick auf den grauen Bereich, um einen Knoten hinzuzufügen\n\t- Rechtsklick auf einen Knoten, um ihn zu entfernen"
+EDGES_INFO,- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them,"- Linksklick auf zwei Knoten, um eine Kante zwischen ihnen hinzuzufügen\n\t- Rechtsklick auf zwei Knoten, um die Kante zwischen ihnen zu entfernen"
+MOVE_INFO,- Select and drag a vertex to move it,"- Wähle einen Knoten aus und ziehe, um ihn zu bewegen."
+BFS_INFO,- Select a vertex s to start a breadth-first search starting from it,"- Wähle einen Knoten s aus, um eine Breitensuche von ihm aus zu starten."
+DFS_INFO,NOT YET IMPLEMENTED :(,NOCH NICHT IMPLEMENTIERT :(
