@@ -48,6 +48,7 @@ func backward():
 		$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
 func stop():
+	$meta_data_setion.visible = false
 	s.label_id.set_text(str(s.id_))
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)
@@ -59,6 +60,7 @@ func stop():
 # Breitensuche, aber: Der Zustand aller relevanten Variablen der Breitensuche werden jeden Schritt gesichert
 func breitensuche(start_knoten: Node2D):
 	# Init
+	$meta_data_setion.visible = true
 	states.clear()
 	start_knoten.label_id.set_text(str(start_knoten.id_) + " (s)")
 	start_knoten.set_sprite(vertex_class.sprites.unselected)

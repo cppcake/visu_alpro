@@ -31,17 +31,18 @@ func _on_item_selected(index):
 			TranslationServer.set_locale(\"en\")
 "
 
-[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
 script = ExtResource("4_emc72")
 graph_manager = NodePath("graph_manager")
 bfs = NodePath("algorithms/bfs")
-state_counter = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/state_counter")
-display = NodePath("algorithms/bfs/meta_data_setion/VBoxContainer/display")
-button_knoten = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
-button_kanten = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
-button_move = NodePath("navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move")
-button_bfs = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs")
-button_dfs = NodePath("navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs")
+state_counter = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/state_counter")
+info_ui = NodePath("info_ui")
+display = NodePath("info_ui/VBoxContainer/display")
+button_knoten = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
+button_kanten = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
+button_move = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move")
+button_bfs = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs")
+button_dfs = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs")
 
 [node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("sweeper")]
 process_mode = 1
@@ -61,6 +62,7 @@ collide_with_bodies = false
 script = ExtResource("5_hhmca")
 
 [node name="meta_data_setion" type="ColorRect" parent="algorithms/bfs"]
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -101,13 +103,13 @@ theme_override_fonts/bold_font = ExtResource("5_cnn2h")
 bbcode_enabled = true
 script = ExtResource("5_kgjw7")
 
-[node name="navigation_ui" type="ColorRect" parent="."]
+[node name="upper_ui" type="ColorRect" parent="."]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="buttons" type="HBoxContainer" parent="navigation_ui" node_paths=PackedStringArray("controller")]
+[node name="buttons" type="HBoxContainer" parent="upper_ui" node_paths=PackedStringArray("controller")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -117,35 +119,35 @@ alignment = 1
 script = ExtResource("1_g52vd")
 controller = NodePath("../..")
 
-[node name="buttons_graphmanager" type="MarginContainer" parent="navigation_ui/buttons"]
+[node name="buttons_graphmanager" type="MarginContainer" parent="upper_ui/buttons"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("5_3mibj")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="navigation_ui/buttons/buttons_graphmanager"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="upper_ui/buttons/buttons_graphmanager"]
 layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="button_vertices" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_vertices" type="Button" parent="upper_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "VERTICES_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "VERTICES"
 
-[node name="button_edges" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_edges" type="Button" parent="upper_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "EDGES_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "EDGES"
 
-[node name="button_move" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_move" type="Button" parent="upper_ui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "MOVE_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "MOVE"
 
-[node name="button_reset" type="Button" parent="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
+[node name="button_reset" type="Button" parent="upper_ui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller") groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "RESET_TOOLTIP"
 theme = ExtResource("5_3mibj")
@@ -153,30 +155,30 @@ text = "RESET"
 script = ExtResource("2_h4ido")
 controller = NodePath("../../../../..")
 
-[node name="buttons_algorithms" type="MarginContainer" parent="navigation_ui/buttons"]
+[node name="buttons_algorithms" type="MarginContainer" parent="upper_ui/buttons"]
 layout_mode = 2
 theme = ExtResource("5_3mibj")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="navigation_ui/buttons/buttons_algorithms"]
+[node name="HBoxContainer" type="HBoxContainer" parent="upper_ui/buttons/buttons_algorithms"]
 layout_mode = 2
 alignment = 1
 
-[node name="button_bfs" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_bfs" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "BFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "BFS"
 
-[node name="button_dfs" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_dfs" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "DFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "DFS"
 
-[node name="VSeparator" type="VSeparator" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer"]
 layout_mode = 2
 
-[node name="button_stop" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_stop" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Stop currently running algorithm"
 mouse_filter = 2
@@ -185,7 +187,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
 text = "STOP"
 
-[node name="button_backward" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Go step backwards"
 mouse_filter = 2
@@ -194,7 +196,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<---"
 
-[node name="button_forward" type="Button" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Go step forward"
 mouse_filter = 2
@@ -203,21 +205,21 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "--->"
 
-[node name="state_counter" type="Label" parent="navigation_ui/buttons/buttons_algorithms/HBoxContainer"]
+[node name="state_counter" type="Label" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_3mibj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
-[node name="buttons_misc" type="MarginContainer" parent="navigation_ui/buttons"]
+[node name="buttons_misc" type="MarginContainer" parent="upper_ui/buttons"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("5_3mibj")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="navigation_ui/buttons/buttons_misc"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="upper_ui/buttons/buttons_misc"]
 layout_mode = 2
 alignment = 2
 
-[node name="dropdown_local" type="OptionButton" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3" groups=["buttons_active"]]
+[node name="dropdown_local" type="OptionButton" parent="upper_ui/buttons/buttons_misc/HBoxContainer3" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "LOCAL_TOOLTIP"
 theme = ExtResource("5_3mibj")
@@ -229,21 +231,48 @@ popup/item_1/text = "DE"
 popup/item_1/id = 1
 script = SubResource("GDScript_5nve5")
 
-[node name="button_exit" type="Button" parent="navigation_ui/buttons/buttons_misc/HBoxContainer3"]
+[node name="button_exit" type="Button" parent="upper_ui/buttons/buttons_misc/HBoxContainer3"]
 layout_mode = 2
 tooltip_text = "EXIT_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "EXIT"
 script = ExtResource("1_7moob")
 
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="navigation_ui/buttons" method="_on_button_knoten_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="navigation_ui/buttons" method="_on_button_kanten_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="navigation_ui/buttons" method="_on_button_auswahl_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="navigation_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs" to="navigation_ui/buttons" method="_on_button_breitensuche_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs" to="navigation_ui/buttons" method="_on_button_tiefensuche_pressed"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_stop" to="." method="stop"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_backward" to="." method="backward"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_algorithms/HBoxContainer/button_forward" to="." method="forward"]
-[connection signal="item_selected" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
-[connection signal="pressed" from="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" to="navigation_ui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]
+[node name="info_ui" type="ColorRect" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="info_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="display" type="RichTextLabel" parent="info_ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("5_cnn2h")
+bbcode_enabled = true
+script = ExtResource("5_kgjw7")
+
+[connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="upper_ui/buttons" method="_on_button_knoten_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="upper_ui/buttons" method="_on_button_kanten_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="upper_ui/buttons" method="_on_button_auswahl_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs" to="upper_ui/buttons" method="_on_button_breitensuche_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs" to="upper_ui/buttons" method="_on_button_tiefensuche_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_stop" to="." method="stop"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_backward" to="." method="backward"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="item_selected" from="upper_ui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_misc/HBoxContainer3/button_exit" to="upper_ui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

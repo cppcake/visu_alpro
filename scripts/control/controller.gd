@@ -28,6 +28,7 @@ var algorithm_running: bool = false
 var current_step: int = 1
 var steps: int = 0
 
+@export var info_ui: ColorRect
 @export var display: RichTextLabel
 @export var button_knoten: Button
 @export var button_kanten: Button
@@ -80,6 +81,7 @@ func set_local(index: int):
 #
 # Unblock active buttons, block navigation buttons
 func active_mode():
+	info_ui.visible = true
 	get_tree().call_group("buttons_navigation", "release_focus")
 	algorithm_running = false
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
@@ -91,6 +93,7 @@ func active_mode():
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
+	info_ui.visible = false
 	get_tree().call_group("buttons_active", "release_focus")
 	algorithm_running = true
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
