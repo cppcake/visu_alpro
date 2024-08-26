@@ -81,9 +81,19 @@ func set_local(index: int):
 #
 # Unblock active buttons, block navigation buttons
 func active_mode():
+	# Reset graph appearance
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	for i in range(vertex_class.node_count):
+		get_tree().call_group("edge_group" + str(i), "reset_color")
+		
+	# Make Info UI visible
 	info_ui.visible = true
-	get_tree().call_group("buttons_navigation", "release_focus")
+	
 	algorithm_running = false
+	
+	# Unblock active buttons, block navigation buttons
+	get_tree().call_group("buttons_navigation", "release_focus")
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
 		button.disabled = false
 		button.mouse_filter = button.MOUSE_FILTER_STOP

@@ -48,12 +48,8 @@ func backward():
 		$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
 func stop():
-	$meta_data_setion.visible = false
 	s.label_id.set_text(str(s.id_))
-	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(vertex_class.sprites.unselected)
-	for i in range(vertex_class.node_count):
-		get_tree().call_group("edge_group" + str(i), "reset_color")
+	$meta_data_setion.visible = false
 	$meta_data_setion/VBoxContainer/label_queue.visible = false
 	$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
