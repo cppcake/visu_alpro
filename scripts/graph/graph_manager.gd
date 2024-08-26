@@ -28,10 +28,13 @@ func add_vertex_at_mouse_pos() -> void:
 
 func rm_vertex(vertex: vertex_class) -> void:
 	print("Removing Vertex ", vertex.id_)
+	# Iterate through all edges and remove all edges connected to/from the vertex
+	# Inefficient but it works reliably and fast enough to not be noticed whatsoever
 	for i in range(vertex_class.node_count):
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(i)):
 			if edge.target_vertex.id_ == vertex.id_ or edge.start_vertex.id_ == vertex.id_:
 				edge.queue_free()
+	# Remove the vertex
 	vertex.queue_free()
 
 func remove_vertex_at_mouse_pos() -> void:
