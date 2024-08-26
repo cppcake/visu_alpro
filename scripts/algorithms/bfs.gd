@@ -25,8 +25,8 @@ func forward():
 	state += 1
 	update_visited_nodes()
 	update_visited_edges()
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][2])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + int_array_to_string(states[state][3])
+	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][2])
+	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][3])
 	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][5])
 	
 	$meta_data_setion/VBoxContainer/label_queue.visible = true
@@ -39,8 +39,8 @@ func backward():
 
 	update_visited_nodes()
 	update_visited_edges()
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + int_array_to_string(states[state][bfs_indices.current_queue])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + int_array_to_string(states[state][bfs_indices.current_sequence])
+	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
+	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
 	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][bfs_indices.line_in_pseudo_code])
 
 	if(states[state][5] == []):
@@ -70,7 +70,7 @@ func breitensuche(start_knoten: Node2D):
 	# [Momentan besuchte Kanten, Momentane Kante, Momentante Queue, Momentane Folge, Momentaner Current Knoten, Zeile im Pseudocode)
 	states.push_back([[], null, [], [], null, []])
 	
-	# Ich weiß, diese Zeile ist cursed. Aber so funktioniert es eben in der Godotengine ^^
+	# Ich weiß, diese Zeile ist cursed. Aber so funktioniert es eben in Godot ^^
 	var queue: Array = []
 	var erg: Array = []
 	var besuchte_kanten = []
@@ -100,23 +100,11 @@ func breitensuche(start_knoten: Node2D):
 
 	state = 0
 
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + int_array_to_string(states[state][bfs_indices.current_queue])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + int_array_to_string(states[state][bfs_indices.current_sequence])
+	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
+	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
 	
 	return states.size()
 	
-func int_array_to_string(array: Array) -> String:
-	if array.is_empty():
-		return "[]"
-		
-	var string: String = "["
-	for knoten: Node in array:
-		string += str(knoten.id_)
-		string += ", "
-	#/string = string.erase(-2, 2)
-	string += "]"
-	return string
-
 func update_visited_nodes():
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)
