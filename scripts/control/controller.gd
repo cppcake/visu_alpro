@@ -1,5 +1,10 @@
 extends Node
 
+# User input
+var left_click: bool
+var left_click_released: bool
+var right_click: bool
+
 # Modes
 enum modes
 {
@@ -21,7 +26,8 @@ var mode: modes = modes.vertices
 
 # Algorithm
 var algorithm_running: bool = false
-@export var bfs: Node
+var current_algorithm: Node
+@export var algorithms: Node
 
 # Needed to display progress in algorithm
 @export var state_counter: Label
@@ -115,7 +121,7 @@ func navigation_mode():
 		button.mouse_filter = button.MOUSE_FILTER_STOP
 
 # Allow / Forbid vertex from moving based on input		
-func control_movement(left_click: bool, left_click_released: bool):
+func control_movement():
 	if left_click:
 		graph_manager.allow_vertex_at_mouse_pos_to_move()
 	# Forbid vertex from moving
@@ -127,45 +133,58 @@ func control_movement(left_click: bool, left_click_released: bool):
 # To make sure these buttons work on every algorithm and to also make sure that the controller 
 # is always in control, these buttons call their according function below.
 # Based on the current algorithm, the controller will then call the equal function 
-# of the currently active algorithm and do some clean ups/UI updates too.
+# of the currently active algorithm and do some clean up/UI updates too.
 # Thus every algorithm needs to support these functions!
 #
-# Proceed the algorithm one step forward and update state-counter
-func forward():
-	# Return, because we are already at the last step
-	if(current_step >= steps):
-		return
-	
-	match mode:
-		modes.bfs:
-			bfs.forward()
-	
-	# Update state-(counter)	
-	current_step += 1
-	state_counter.text = str(current_step) + "/" + str(steps)
-# Proceed the algorithm one step backward and update state-counter
-func backward():
-	# Return, because we are at the first step
-	if(current_step <= 0):
-		return
+# Start the current algorithm if not already started and make vertices moveable
+func manage_algorithm():
+	# To make the vertices moveable during algorithm
+	if algorithm_running:
+		control_movement()
 		
-	match mode:
-		modes.bfs:
-			bfs.backward()
-		
-	# Update state-counter
-	current_step -= 1
-	state_counter.text = str(current_step) + "/" + str(steps)
-# Step the current algorithm
-func stop():
-	match mode:
-		modes.bfs:
-			bfs.stop()
+	# Start the current algorithm if not already started	
+	if not algorithm_running:
+		# If the algorithm is not running, no vertex has been selected yet.
+		if left_click:
+			# Try to select a vertex with the graph manager
+			var collider = graph_manager.try_select_vertex()
+			# If the selection was successful, start algorithm on selected vertex
+			# (There is nothing else to select but vertices anyways)
+			if collider != null:
+				current_step = 0
+				steps = current_algorithm.algorithm(collider) - 1
+				state_counter.text = str(current_step) + "/" + str(steps)
+				navigation_mode()
+# Stop the current algorithm
+func stop_algorithm():
+	current_algorithm.stop()
 			
 	# Clean up
 	set_mode(modes.vertices)
 	active_mode()
 	state_counter.text = ""
+# Proceed the algorithm one step forward and update state-counter
+func forward_algorithm():
+	# Return, because we are already at the last step
+	if(current_step >= steps):
+		return
+	
+	current_algorithm.forward()
+	
+	# Update state-(counter)	
+	current_step += 1
+	state_counter.text = str(current_step) + "/" + str(steps)
+# Proceed the algorithm one step backward and update state-counter
+func backward_algorithm():
+	# Return, because we are at the first step
+	if(current_step <= 0):
+		return
+		
+	current_algorithm.backward()
+		
+	# Update state-counter
+	current_step -= 1
+	state_counter.text = str(current_step) + "/" + str(steps)
 
 # Init
 func _ready():
@@ -174,12 +193,14 @@ func _ready():
 	# Set init mode
 	set_mode(mode)
 
+#
 # Control loop
+#
 func _process(_delta):
-	# Get user input
-	var left_click: bool = Input.is_action_just_pressed("M1")
-	var left_click_released: bool = Input.is_action_just_released("M1")
-	var right_click: bool = Input.is_action_just_pressed("M2")
+	# Update user input
+	left_click = Input.is_action_just_pressed("M1")
+	left_click_released = Input.is_action_just_released("M1")
+	right_click = Input.is_action_just_pressed("M2")
 	
 	# Change state based on current mode and user input.
 	match mode:
@@ -199,26 +220,14 @@ func _process(_delta):
 				graph_manager.rm_edge_between_selected()
 				
 		modes.move:
-			control_movement(left_click, left_click_released)
+			control_movement()
 		
 		modes.bfs:
-			# To make the vertices moveable during algorithm
-			if algorithm_running:
-				control_movement(left_click, left_click_released)
-			
-			# If the algorithm is not running, so no vertex has been selected yet.
-			if left_click and not algorithm_running:
-				# Try to select a vertex with the graph manager
-				var collider = graph_manager.try_select_vertex()
-				# If the selection was successful, start breitensuche on selected vertex
-				# (There is nothing else to select but vertices anyways)
-				if collider != null:
-					current_step = 0
-					steps = bfs.breitensuche(collider) - 1
-					state_counter.text = str(current_step) + "/" + str(steps)
-					navigation_mode()
+			# Get bfs node and set it as the current_algorithm
+			current_algorithm = algorithms.get_node("bfs")
+			# Start the bfs if not already started and make vertices moveable
+			manage_algorithm()
 		
 		modes.dfs:
 			# To make the vertices moveable during algorithm
-			if algorithm_running:
-				control_movement(left_click, left_click_released)
+			pass

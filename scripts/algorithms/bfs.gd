@@ -54,7 +54,7 @@ func stop():
 	$meta_data_setion/VBoxContainer/label_sequence.visible = false
 
 # Breitensuche, aber: Der Zustand aller relevanten Variablen der Breitensuche werden jeden Schritt gesichert
-func breitensuche(start_knoten: Node2D):
+func algorithm(start_knoten: Node2D):
 	# Init
 	$meta_data_setion.visible = true
 	states.clear()

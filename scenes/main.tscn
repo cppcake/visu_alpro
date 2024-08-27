@@ -31,18 +31,18 @@ func _on_item_selected(index):
 			TranslationServer.set_locale(\"en\")
 "
 
-[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "bfs", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
 script = ExtResource("4_emc72")
 graph_manager = NodePath("graph_manager")
-bfs = NodePath("algorithms/bfs")
-state_counter = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/state_counter")
+algorithms = NodePath("algorithms")
+state_counter = NodePath("upper_ui/buttons/buttons_algorithm/HBoxContainer/state_counter")
 info_ui = NodePath("info_ui")
 display = NodePath("info_ui/VBoxContainer/display")
 button_knoten = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
 button_kanten = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
 button_move = NodePath("upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move")
-button_bfs = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs")
-button_dfs = NodePath("upper_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs")
+button_bfs = NodePath("upper_ui/buttons/buttons_algorithm/HBoxContainer/button_bfs")
+button_dfs = NodePath("upper_ui/buttons/buttons_algorithm/HBoxContainer/button_dfs")
 
 [node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("sweeper")]
 process_mode = 1
@@ -155,30 +155,30 @@ text = "RESET"
 script = ExtResource("2_h4ido")
 controller = NodePath("../../../../..")
 
-[node name="buttons_algorithms" type="MarginContainer" parent="upper_ui/buttons"]
+[node name="buttons_algorithm" type="MarginContainer" parent="upper_ui/buttons"]
 layout_mode = 2
 theme = ExtResource("5_3mibj")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="upper_ui/buttons/buttons_algorithms"]
+[node name="HBoxContainer" type="HBoxContainer" parent="upper_ui/buttons/buttons_algorithm"]
 layout_mode = 2
 alignment = 1
 
-[node name="button_bfs" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_bfs" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "BFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "BFS"
 
-[node name="button_dfs" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_active"]]
+[node name="button_dfs" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "DFS_TOOLTIP"
 theme = ExtResource("5_3mibj")
 text = "DFS"
 
-[node name="VSeparator" type="VSeparator" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer"]
 layout_mode = 2
 
-[node name="button_stop" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_stop" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Stop currently running algorithm"
 mouse_filter = 2
@@ -187,7 +187,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
 text = "STOP"
 
-[node name="button_backward" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Go step backwards"
 mouse_filter = 2
@@ -196,7 +196,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<---"
 
-[node name="button_forward" type="Button" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "Go step forward"
 mouse_filter = 2
@@ -205,7 +205,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "--->"
 
-[node name="state_counter" type="Label" parent="upper_ui/buttons/buttons_algorithms/HBoxContainer"]
+[node name="state_counter" type="Label" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_3mibj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -269,10 +269,10 @@ script = ExtResource("5_kgjw7")
 [connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="upper_ui/buttons" method="_on_button_kanten_pressed"]
 [connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="upper_ui/buttons" method="_on_button_auswahl_pressed"]
 [connection signal="pressed" from="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="upper_ui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_bfs" to="upper_ui/buttons" method="_on_button_breitensuche_pressed"]
-[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_dfs" to="upper_ui/buttons" method="_on_button_tiefensuche_pressed"]
-[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_stop" to="." method="stop"]
-[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_backward" to="." method="backward"]
-[connection signal="pressed" from="upper_ui/buttons/buttons_algorithms/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="upper_ui/buttons" method="_on_button_breitensuche_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="upper_ui/buttons" method="_on_button_tiefensuche_pressed"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithm/HBoxContainer/button_backward" to="." method="backward_algorithm"]
+[connection signal="pressed" from="upper_ui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="." method="forward_algorithm"]
 [connection signal="item_selected" from="upper_ui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
 [connection signal="pressed" from="upper_ui/buttons/buttons_misc/HBoxContainer3/button_exit" to="upper_ui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

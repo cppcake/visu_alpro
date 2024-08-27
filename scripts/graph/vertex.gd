@@ -3,7 +3,6 @@ class_name vertex_class extends Area2D
 # Static variables and functions
 static var node_count: int = 0
 static var lerp_speed: int = 15;
-static var hover_allowed: bool = true
 
 # Sprites
 enum sprites {unselected, selected, hovered, current, visited}
@@ -13,14 +12,17 @@ enum sprites {unselected, selected, hovered, current, visited}
 @export var sprite_current: CompressedTexture2D
 @export var sprite_visited: CompressedTexture2D
 
-# Vertex specific data
+# Vertex data
 var id_: int
+var allowed_to_move: bool = false
+var visited: bool = false
+
+# Visuals of vertex 
 var label_id: Label
 var label_info: Label
 var label_meta: Label
 var sprite: Sprite2D
-var allowed_to_move: bool = false
-var visited: bool = false
+
 
 func _ready():
 	# Set id and update node_count
