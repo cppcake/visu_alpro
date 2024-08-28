@@ -24,16 +24,17 @@ var mode: modes = modes.vertices
 # Graphenmanager
 @export var graph_manager: Node
 
-# Algorithm
+# Algorithm stuff
 var algorithm_running: bool = false
 var current_algorithm: Node
 @export var algorithms: Node
 
-# Needed to display progress in algorithm
+# Needed to display progress of algorithm
 @export var state_counter: Label
 var current_step: int = 1
 var steps: int = 0
 
+# Needed to manipulate upper_ui efficiently
 @export var info_ui: ColorRect
 @export var display: RichTextLabel
 @export var button_knoten: Button
@@ -87,16 +88,8 @@ func set_local(index: int):
 #
 # Unblock active buttons, block navigation buttons
 func active_mode():
-	# Reset graph appearance
-	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(vertex_class.sprites.unselected)
-	for i in range(vertex_class.node_count):
-		get_tree().call_group("edge_group" + str(i), "reset_color")
-		
 	# Make Info UI visible
 	info_ui.visible = true
-	
-	algorithm_running = false
 	
 	# Unblock active buttons, block navigation buttons
 	get_tree().call_group("buttons_navigation", "release_focus")
@@ -107,11 +100,14 @@ func active_mode():
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
+#
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
+	# Make Info UI invisible
 	info_ui.visible = false
+	
+	# Block active buttons, unblock navigation buttons
 	get_tree().call_group("buttons_active", "release_focus")
-	algorithm_running = true
 	for button: Button in get_tree().get_nodes_in_group("buttons_active"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
@@ -134,7 +130,11 @@ func control_movement():
 # is always in control, these buttons call their according function below.
 # Based on the current algorithm, the controller will then call the equal function 
 # of the currently active algorithm and do some clean up/UI updates too.
-# Thus every algorithm needs to support these functions!
+# Thus every algorithm needs to support these functions:
+#	'algorithm': calculate algorithm steps and return the size of the steps to display progress properly
+#	'stop': Stop algorithm with clean up
+#	'forward': Visualize the next step of algorithm
+#	'backward': Visualize the last step of algorithm
 #
 # Start the current algorithm if not already started and make vertices moveable
 func manage_algorithm():
@@ -147,22 +147,33 @@ func manage_algorithm():
 		# If the algorithm is not running, no vertex has been selected yet.
 		if left_click:
 			# Try to select a vertex with the graph manager
-			var collider = graph_manager.try_select_vertex()
+			var start_vertex = graph_manager.try_select_vertex()
 			# If the selection was successful, start algorithm on selected vertex
 			# (There is nothing else to select but vertices anyways)
-			if collider != null:
+			if start_vertex != null:
+				algorithm_running = true
 				current_step = 0
-				steps = current_algorithm.algorithm(collider) - 1
+				steps = current_algorithm.algorithm(start_vertex) - 1
 				state_counter.text = str(current_step) + "/" + str(steps)
 				navigation_mode()
+#
 # Stop the current algorithm
 func stop_algorithm():
+	# Reset graph appearance
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	for i in range(vertex_class.node_count):
+		get_tree().call_group("edge_group" + str(i), "reset_color")
+	
+	# Stop current algorithm cleanly
 	current_algorithm.stop()
-			
+	
 	# Clean up
-	set_mode(modes.vertices)
-	active_mode()
+	algorithm_running = false
 	state_counter.text = ""
+	active_mode()
+	set_mode(modes.vertices)
+#
 # Proceed the algorithm one step forward and update state-counter
 func forward_algorithm():
 	# Return, because we are already at the last step
@@ -174,6 +185,7 @@ func forward_algorithm():
 	# Update state-(counter)	
 	current_step += 1
 	state_counter.text = str(current_step) + "/" + str(steps)
+#
 # Proceed the algorithm one step backward and update state-counter
 func backward_algorithm():
 	# Return, because we are at the first step
@@ -185,6 +197,7 @@ func backward_algorithm():
 	# Update state-counter
 	current_step -= 1
 	state_counter.text = str(current_step) + "/" + str(steps)
+
 
 # Init
 func _ready():
