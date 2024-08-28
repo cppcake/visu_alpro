@@ -1,7 +1,7 @@
 class_name edge_class extends Node2D
 
-var start_vertex: Node2D
-var target_vertex: Node2D
+var start_vertex: vertex_class
+var target_vertex: vertex_class
 
 # Needed to draw edge
 var line: Line2D
