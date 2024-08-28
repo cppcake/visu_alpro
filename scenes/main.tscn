@@ -180,7 +180,7 @@ layout_mode = 2
 
 [node name="button_stop" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
-tooltip_text = "Stop currently running algorithm"
+tooltip_text = "STOP_TOOLTIP"
 mouse_filter = 2
 theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
@@ -189,7 +189,7 @@ text = "STOP"
 
 [node name="button_backward" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
-tooltip_text = "Go step backwards"
+tooltip_text = "BACKWARD_TOOLTIP"
 mouse_filter = 2
 theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
@@ -198,7 +198,7 @@ text = "<---"
 
 [node name="button_forward" type="Button" parent="upper_ui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
-tooltip_text = "Go step forward"
+tooltip_text = "FORWARD_TOOLTIP"
 mouse_filter = 2
 theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")

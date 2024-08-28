@@ -13,6 +13,9 @@ BFS_TOOLTIP,Switch to BFS mode,Wechsel zum BFS Modus
 DFS_TOOLTIP,Switch to DFS mode,Wechsel zum DFS Modus
 LOCAL_TOOLTIP,Switch Language,Wechsel die Sprache
 EXIT_TOOLTIP,Close the program,Beende das Programm
+STOP_TOOLTIP,Stop the current algorithm,Beende den Algorithmus
+FORWARD_TOOLTIP,Proceed the algorithm a step forward,Führe den Algorithmus einen Schritt nach vorne
+BACKWARD_TOOLTIP,Proceed the algorithm a step backward,Führe den Algorithmus einen Schritt zurück
 ,,
 CURRENT_MODE, Current mode: , Momentaner Modus: 
 VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it,"- Linksklick auf den grauen Bereich, um einen Knoten hinzuzufügen\n\t- Rechtsklick auf einen Knoten, um ihn zu entfernen"
