@@ -25,12 +25,12 @@ func forward():
 	state += 1
 	update_visited_nodes()
 	update_visited_edges()
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][2])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][3])
-	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][5])
+	$own_gui/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][2])
+	$own_gui/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][3])
+	$own_gui/VBoxContainer/display.highlight_state(states[state][5])
 	
-	$meta_data_setion/VBoxContainer/label_queue.visible = true
-	$meta_data_setion/VBoxContainer/label_sequence.visible = true
+	$own_gui/VBoxContainer/label_queue.visible = true
+	$own_gui/VBoxContainer/label_sequence.visible = true
 
 func backward():
 	if state == 0:
@@ -39,30 +39,30 @@ func backward():
 
 	update_visited_nodes()
 	update_visited_edges()
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
-	$meta_data_setion/VBoxContainer/display.highlight_state(states[state][bfs_indices.line_in_pseudo_code])
+	$own_gui/VBoxContainer/label_queue.text = " Queue Q = " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
+	$own_gui/VBoxContainer/label_sequence.text = " Folge F = " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
+	$own_gui/VBoxContainer/display.highlight_state(states[state][bfs_indices.line_in_pseudo_code])
 
 	if(states[state][5] == []):
-		$meta_data_setion/VBoxContainer/label_queue.visible = false
-		$meta_data_setion/VBoxContainer/label_sequence.visible = false
+		$own_gui/VBoxContainer/label_queue.visible = false
+		$own_gui/VBoxContainer/label_sequence.visible = false
 
 func stop():
 	s.label_id.set_text(str(s.id_))
-	$meta_data_setion.visible = false
-	$meta_data_setion/VBoxContainer/label_queue.visible = false
-	$meta_data_setion/VBoxContainer/label_sequence.visible = false
+	$own_gui.visible = false
+	$own_gui/VBoxContainer/label_queue.visible = false
+	$own_gui/VBoxContainer/label_sequence.visible = false
 
 # Breitensuche, aber: Der Zustand aller relevanten Variablen der Breitensuche werden jeden Schritt gesichert
 func algorithm(start_knoten: Node2D):
 	# Init
-	$meta_data_setion.visible = true
+	$own_gui.visible = true
 	states.clear()
 	start_knoten.label_id.set_text(str(start_knoten.id_) + " (s)")
 	start_knoten.set_sprite(vertex_class.sprites.unselected)
 	s = start_knoten
 	
-	$meta_data_setion/VBoxContainer/display.set_text(tr("BFS_PSEUDOCODE")) 
+	$own_gui/VBoxContainer/display.set_text(tr("BFS_PSEUDOCODE")) 
 	
 	# Ein Zustand besteht aus:
 	# [Momentan besuchte Kanten, Momentane Kante, Momentante Queue, Momentane Folge, Momentaner Current Knoten, Zeile im Pseudocode)
@@ -98,8 +98,8 @@ func algorithm(start_knoten: Node2D):
 
 	state = 0
 
-	$meta_data_setion/VBoxContainer/label_queue.text = " Queue: " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
-	$meta_data_setion/VBoxContainer/label_sequence.text = " Folge: " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
+	$own_gui/VBoxContainer/label_queue.text = " Queue: " + misc.int_array_to_string(states[state][bfs_indices.current_queue])
+	$own_gui/VBoxContainer/label_sequence.text = " Folge: " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
 	
 	return states.size()
 	
