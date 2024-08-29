@@ -216,15 +216,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="stack_frame" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
-visible = false
 layout_mode = 2
 
 [node name="stack_frame2" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
-visible = false
 layout_mode = 2
 
 [node name="stack_frame3" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
-visible = false
 layout_mode = 2
 
 [node name="upper_gui" type="ColorRect" parent="."]
