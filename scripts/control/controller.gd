@@ -242,5 +242,7 @@ func _process(_delta):
 			manage_algorithm()
 		
 		modes.dfs:
-			# To make the vertices moveable during algorithm
-			pass
+			# Get dfs node and set it as the current_algorithm
+			current_algorithm = algorithms.get_node("dfs")
+			# Start the dfs if not already started and make vertices moveable
+			manage_algorithm()
