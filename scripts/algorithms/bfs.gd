@@ -3,7 +3,7 @@ extends Node
 var states: Array = []
 var state: int = 0
 # Der Startknoten
-var s: Node
+var s: vertex_class
 
 enum bfs_indices
 {
