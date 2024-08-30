@@ -72,7 +72,6 @@ collide_with_bodies = false
 script = ExtResource("5_hhmca")
 
 [node name="own_gui" type="ColorRect" parent="algorithms/bfs"]
-visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -109,11 +108,15 @@ theme_override_fonts/bold_font = ExtResource("5_cnn2h")
 bbcode_enabled = true
 script = ExtResource("5_kgjw7")
 
-[node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("stackspeicher")]
+[node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("stackspeicher", "label_call", "label_sequence", "label_sequence_2")]
 script = ExtResource("6_80uru")
-stackspeicher = NodePath("own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack")
+stackspeicher = NodePath("own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack")
+label_call = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_call")
+label_sequence = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_sequence")
+label_sequence_2 = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_sequence_2")
 
 [node name="own_gui" type="ColorRect" parent="algorithms/dfs"]
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -132,32 +135,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="algorithms/dfs/own_gui/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="aufruf" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer"]
+[node name="label_call" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
-[node name="label_sequence" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer"]
+[node name="label_sequence" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = " F  =  [...]"
 
-[node name="label_sequence_2" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer"]
+[node name="label_sequence_2" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = " F' =  [...] (von Aufruf y)"
 
-[node name="display" type="RichTextLabel" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer"]
+[node name="display" type="RichTextLabel" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -169,36 +180,37 @@ script = ExtResource("5_kgjw7")
 [node name="VSeparator" type="VSeparator" parent="algorithms/dfs/own_gui/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="algorithms/dfs/own_gui/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="stack" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2"]
+[node name="stack" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "Stackspeicher"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="Panel" type="Panel" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer"]
+[node name="Panel" type="Panel" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,19 +221,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="stack" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer"]
+[node name="stack" type="VBoxContainer" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer"]
 light_mask = 17
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="stack_frame" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
+[node name="stack_frame" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
 layout_mode = 2
 
-[node name="stack_frame2" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
+[node name="stack_frame2" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
 layout_mode = 2
 
-[node name="stack_frame3" parent="algorithms/dfs/own_gui/HBoxContainer/VBoxContainer2/MarginContainer/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
+[node name="stack_frame3" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
 layout_mode = 2
 
 [node name="upper_gui" type="ColorRect" parent="."]
@@ -360,7 +372,6 @@ text = "EXIT"
 script = ExtResource("1_7moob")
 
 [node name="info_gui" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0

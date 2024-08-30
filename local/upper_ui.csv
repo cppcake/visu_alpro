@@ -22,4 +22,4 @@ VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a ve
 EDGES_INFO,- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them,"- Linksklick auf zwei Knoten, um eine Kante zwischen ihnen hinzuzufügen\n\t- Rechtsklick auf zwei Knoten, um die Kante zwischen ihnen zu entfernen"
 MOVE_INFO,- Select and drag a vertex to move it,"- Wähle einen Knoten aus und ziehe, um ihn zu bewegen."
 BFS_INFO,- Select a vertex s to start a breadth-first search starting from it,"- Wähle einen Knoten s aus, um eine Breitensuche von ihm aus zu starten."
-DFS_INFO,NOT YET IMPLEMENTED :(,NOCH NICHT IMPLEMENTIERT :(
+DFS_INFO,- Select a vertex s to start a depht-first search starting from it,"- Wähle einen Knoten s aus, um eine Tiefensuche von ihm aus zu starten."
