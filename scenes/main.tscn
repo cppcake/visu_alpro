@@ -108,12 +108,13 @@ theme_override_fonts/bold_font = ExtResource("5_cnn2h")
 bbcode_enabled = true
 script = ExtResource("5_kgjw7")
 
-[node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("stackspeicher", "label_call", "label_sequence", "label_sequence_2")]
+[node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("stackspeicher", "label_call", "label_sequence", "label_sequence_2", "code_display")]
 script = ExtResource("6_80uru")
 stackspeicher = NodePath("own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack")
 label_call = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_call")
 label_sequence = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_sequence")
 label_sequence_2 = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/label_sequence_2")
+code_display = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/code_display")
 
 [node name="own_gui" type="ColorRect" parent="algorithms/dfs"]
 visible = false
@@ -168,7 +169,7 @@ modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = " F' =  [...] (von Aufruf y)"
 
-[node name="display" type="RichTextLabel" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="code_display" type="RichTextLabel" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)

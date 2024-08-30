@@ -8,6 +8,6 @@ static func int_array_to_string(array: Array) -> String:
 	for knoten: Node in array:
 		string += str(knoten.id_)
 		string += ", "
-	#/string = string.erase(-2, 2)
+	string = string.erase(string.length() - 2, 2)
 	string += "]"
 	return string

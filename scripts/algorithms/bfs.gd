@@ -102,7 +102,7 @@ func algorithm(start_knoten: Node2D):
 	$own_gui/VBoxContainer/label_sequence.text = " Folge: " + misc.int_array_to_string(states[state][bfs_indices.current_sequence])
 	
 	return states.size()
-	
+
 func update_visited_nodes():
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)

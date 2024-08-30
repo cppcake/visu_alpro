@@ -11,7 +11,7 @@ func highlight_state(numbers_of_lines_to_paint: Array):
 		paint_line(line_nr)
 	
 	numbers_of_painted_lines = numbers_of_lines_to_paint
-	
+
 func paint_line(line_nr: int) -> void:
 	replace_line(line_nr, ("[color=" + color + "]" + get_line(line_nr) + "[/color]"))
 

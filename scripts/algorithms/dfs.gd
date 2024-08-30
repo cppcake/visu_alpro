@@ -10,6 +10,7 @@ var s: vertex_class
 var states: Array = []
 var state: int = 0
 var current_stack: Array = []
+var visited_vertices: Array = []
 var visited_edges = []
 var call_counter: int = 0
 
@@ -19,9 +20,10 @@ enum dfs_keys
 	call_id,
 	F,
 	F_2,
-	line_nr,
+	lines_to_paint,
 	last_pop,
 	stack,
+	visited_vertices,
 	visited_edges
 }
 
@@ -32,6 +34,7 @@ func algorithm(start_knoten: vertex_class):
 	states.clear()
 	current_stack.clear()
 	visited_edges.clear()
+	visited_vertices.clear()
 	call_counter = 0
 
 	tiefensuche(start_knoten)
@@ -50,33 +53,35 @@ func tiefensuche(start_vertex: vertex_class) -> Array:
 	current_stack.push_front(call_id)
 	
 	# The beginning of a call is a state, create a state for it
-	store_state(call_id, null, null)
+	store_state(call_id, null, null, [])
 	
 	# Create empty sequences F and F_2
 	var F: Array = []
 	var F_2: Array = []
 	
-	store_state(call_id - 1, F, F_2)
+	store_state(call_id - 1, F, F_2, [1])
 	# Mark start_vertex as visited and push_back in F
 	start_vertex.visited = true
+	visited_vertices.push_back(start_vertex)
 	F.push_back(start_vertex)
 	
-	store_state(call_id - 1, F, F_2)
+	store_state(call_id - 1, F, F_2, [2])
 	for outgoing_edge: edge_class in get_tree().get_nodes_in_group("edge_group" + str(start_vertex.id_)):
 		visited_edges.push_back(outgoing_edge)
-		store_state(call_id, F, F_2)
+		store_state(call_id, F, F_2, [3])
 		if not outgoing_edge.target_vertex.visited:
+			store_state(call_id, F, F_2, [4])
 			F_2 = tiefensuche(outgoing_edge.target_vertex)
-			store_state(call_id - 1, F, F_2)
+			store_state(call_id - 1, F, F_2, [4])
 			F.append_array(F_2)
-			store_state(call_id, F, F_2)
+			store_state(call_id, F, F_2, [5])
 	
 	
 
 	# We will return, so pop the stack
 	current_stack.pop_front()
 	
-	store_state(call_id - 1, F, F_2)
+	store_state(call_id - 1, F, F_2, [6])
 	
 	return F
 
@@ -84,9 +89,6 @@ func stop():
 	get_tree().call_group("vertex_group", "reset_visited")
 	s.label_id.set_text(str(s.id_))
 	$own_gui.visible = false
-
-@export var stackspeicher: VBoxContainer
-#@export 
 
 func forward():
 	state += 1
@@ -98,7 +100,7 @@ func backward():
 
 	update_visuals()
 
-func store_state(call_id: int, F, F_2):
+func store_state(call_id: int, F, F_2, lines_to_paint: Array):
 	var dict: Dictionary = {}
 	dict[dfs_keys.call_id] = call_id
 	if F != null:
@@ -109,8 +111,11 @@ func store_state(call_id: int, F, F_2):
 		dict[dfs_keys.F_2] = F_2
 	dict[dfs_keys.stack] = current_stack.duplicate()
 	dict[dfs_keys.visited_edges] = visited_edges.duplicate()
+	dict[dfs_keys.visited_vertices] = visited_vertices.duplicate()
+	dict[dfs_keys.lines_to_paint] = lines_to_paint
 	states.push_back(dict)
 
+@export var stackspeicher: VBoxContainer
 func draw_stack(stack: Array):
 	# Clear all stack frames before redrawing
 	for child: Control in stackspeicher.get_children():
@@ -147,6 +152,18 @@ func update_code_labels(call_id: int, F, F_2):
 	label_sequence_2.visible = true
 	label_sequence_2.text = "F' = " +  misc.int_array_to_string(F_2)
 
+@export var code_display: RichTextLabel
+func update_lines_selected(lines_to_paint: Array):
+	code_display.text = tr("DFS_PSEUDOCODE")
+	for line_nr: int in lines_to_paint:
+		code_display.paint_line(line_nr)
+
+func update_visited_vertices():
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	for vertex: vertex_class in states[state].get(dfs_keys.visited_vertices):
+		vertex.set_sprite(vertex_class.sprites.visited)
+
 func update_visited_edges():
 	for i in range(vertex_class.node_count):
 		get_tree().call_group("edge_group" + str(i), "reset_color")
@@ -158,7 +175,10 @@ func update_visuals():
 	var call_id: int = states[state].get(dfs_keys.call_id)
 	var F = states[state].get(dfs_keys.F)
 	var F_2 = states[state].get(dfs_keys.F_2)
+	var lines_to_paint = states[state].get(dfs_keys.lines_to_paint)
 	
+	update_visited_vertices()
 	update_visited_edges()
 	draw_stack(current_stack_frame)
 	update_code_labels(call_id, F, F_2)
+	update_lines_selected(lines_to_paint)
