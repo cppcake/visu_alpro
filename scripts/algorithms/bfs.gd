@@ -111,6 +111,7 @@ func update_visited_nodes():
 		
 	if states[state][bfs_indices.curernt_node] != null:
 		states[state][bfs_indices.curernt_node].set_sprite(vertex_class.sprites.current)
+		states[state][bfs_indices.curernt_node].label_meta.set_text("v")
 
 func update_visited_edges():
 	for i in range(vertex_class.node_count):

@@ -1,9 +1,10 @@
 keys,en,de
-VISITED,visited,erkundet
+VISITED, explored,erkundet
 CALL,Call,Aufruf
+RETURN_VALUE_OF,Return value of,Rückgabewert von
 ,,
 BFS_PSEUDOCODE," 1. Create an empty sequence F and an empty queue Q\n 2. Mark s as explored and add s to Q and F\n 3. [b]while[/b] Q is not empty [b]do[/b]\n 4. | Let v = Q.pop() \n 5. | [b]for[/b] all edges (v, w) [b]do[/b] \n 6. | | [b]if[/b] w is still unexplored [b]then[/b] \n 7. | | | Mark w as explored and add w to the end of Q and F \n 8. [b]return[/b] F"," 1. Erstelle leere Folge F und eine leere Warteschlange Q\n 2. Markiere s als erkundet und füge s in Q und F ein\n 3. [b]while[/b] Q ist nicht leer [b]do[/b]\n 4.  |  Sei v = Q.pop() \n 5.  |  [b]for[/b] alle Kanten (v, w) [b]do[/b] \n 6.  |   |  [b]if[/b] w ist noch unerkundet [b]then[/b] \n 7.  |   |   |  Markiere w als erkundet und füge w am Ende von Q und F ein \n 8. [b]return[/b] F"
 ,,
 ,,
-DFS_PSEUDOCODE," 1. Erstelle die leeren Folgen F und F'\n 2. Markiere s als erkundet und füge s zu F hinzu\n 3. [b]for[/b] alle Kanten (s, w) mit w unerkundet [b]do[/b]\n 4. | F' = Tiefensuche(w) \n 5. | Füge F' hinter F ein\n 6. [b]return[/b] F"," 1. Erstelle die leeren Folgen F und F'\n 2. Markiere s als erkundet und füge s zu F hinzu\n 3. [b]for[/b] alle Kanten (s, w) mit w unerkundet [b]do[/b]\n 4. | F' = Tiefensuche(w) \n 5. | Füge F' hinter F ein\n 6. [b]return[/b] F"
-DEPHT-FIRST-SEARCH,Depth-first search,Tiefensuche
+DFS_PSEUDOCODE," 1. Create empty sequences F and F' \n 2. Mark s as explored and add s to F \n 3. [b]for[/b] all edges (s, w) with w unexplored [b]do[/b] \n 4. | F' = Depth-First Search(w) \n 5. | Insert F' behind F \n 6. [b]return[/b] F"," 1. Erstelle die leeren Folgen F und F'\n 2. Markiere s als erkundet und füge s zu F hinzu\n 3. [b]for[/b] alle Kanten (s, w) mit w unerkundet [b]do[/b]\n 4. | F' = Tiefensuche(w) \n 5. | Füge F' hinter F ein\n 6. [b]return[/b] F"
+DEPHT-FIRST-SEARCH,Depth-first search(s),Tiefensuche(s)
