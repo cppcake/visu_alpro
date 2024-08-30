@@ -53,8 +53,8 @@ func tiefensuche(start_vertex: vertex_class) -> Array:
 	store_state(call_id, null, null)
 	
 	# Create empty sequences F and F_2
-	var F: Array
-	var F_2: Array
+	var F: Array = []
+	var F_2: Array = []
 	
 	store_state(call_id - 1, F, F_2)
 	# Mark start_vertex as visited and push_back in F
@@ -99,7 +99,7 @@ func backward():
 	update_visuals()
 
 func store_state(call_id: int, F, F_2):
-	var dict: Dictionary
+	var dict: Dictionary = {}
 	dict[dfs_keys.call_id] = call_id
 	if F != null:
 		dict[dfs_keys.F] = F.duplicate()
@@ -129,12 +129,12 @@ func draw_stack(stack: Array):
 @export var label_sequence: Label
 @export var label_sequence_2: Label
 func update_code_labels(call_id: int, F, F_2):
-	var dfs: String = tr("DEPHT-FIRST-SEARCH")
+	var dfs_str: String = tr("DEPHT-FIRST-SEARCH")
 	if call_id == 0:
-		label_call.text = dfs
+		label_call.text = dfs_str
 	else:
-		var call: String = tr("CALL")
-		label_call.text = dfs + " (" + call + " " + str(call_id) + " )"
+		var call_str: String = tr("CALL")
+		label_call.text = dfs_str + " (" + call_str + " " + str(call_id) + " )"
 		
 	if F == null:
 		label_sequence.visible = false
