@@ -80,20 +80,14 @@ func set_sprite(selection: sprites):
 	match selection:
 		sprites.unselected: 
 			sprite.texture = sprite_unselected
-			label_info.set_text("")
-			label_meta.set_text("")
 		sprites.selected:
 			sprite.texture = sprite_selected
-			label_info.set_text("")
-			label_meta.set_text("")
 		sprites.hovered:
 			sprite.texture = sprite_hovered
 		sprites.current:
 			sprite.texture = sprite_current
 		sprites.visited:
 			sprite.texture = sprite_visited
-			label_info.set_text(tr("VISITED"))
-			label_meta.set_text("")
 
 func _on_mouse_entered():
 	modulate = constants.hovered

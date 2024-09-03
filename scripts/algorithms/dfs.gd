@@ -43,7 +43,7 @@ func algorithm(start_knoten: vertex_class):
 	var F = dfs(start_knoten)
 	
 	# Last state after return
-	store_state(0, F, null, [], null, null, -1)
+	store_state(0, F, null, [], null, null, null)
 
 	current_state = 0
 	update_visuals()
@@ -114,13 +114,11 @@ func stop():
 # Increment the current state and update the visuals
 func forward():
 	current_state += 1
-	
 	update_visuals()
 
 # Decrement the current state and update the visuals
 func backward():
 	current_state -= 1
-
 	update_visuals()
 
 # Create and push a new state on the array of states
@@ -221,15 +219,16 @@ func update_visited_vertices():
 		knoten.set_sprite(vertex_class.sprites.unselected)
 	for vertex: vertex_class in states[current_state].get(dfs_keys.visited_vertices):
 		vertex.set_sprite(vertex_class.sprites.visited)
+		vertex.label_info.set_text(tr("VISITED"))
 
 func update_s_w(s_p: vertex_class, w_p: vertex_class):
 	get_tree().call_group("vertex_group", "reset_labels")
 	
 	if s_p != null:
-		s_p.label_id.text = s_p.label_id.text + " (s)"
+		s_p.label_meta.text = "s"
 	
 	if w_p != null:
-		w_p.label_id.text = w_p.label_id.text + " (w)"
+		w_p.label_meta.text = "w"
 	
 func update_visited_edges():
 	for i in range(vertex_class.node_count):
