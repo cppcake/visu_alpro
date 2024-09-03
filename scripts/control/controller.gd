@@ -250,3 +250,11 @@ func _process(_delta):
 			current_algorithm = algorithms.get_node("dfs")
 			# Start the dfs if not already started and make vertices moveable
 			manage_algorithm()
+		
+	# Quality of Life Stuff	
+	var arrow_right = Input.is_action_just_released("ui_right")
+	var arrow_left = Input.is_action_just_pressed("ui_left")
+	if(arrow_right and algorithm_running):
+		forward_algorithm()
+	if(arrow_left and algorithm_running):
+		backward_algorithm()

@@ -83,7 +83,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -671.0
+offset_left = -913.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
@@ -167,7 +167,7 @@ size_flags_stretch_ratio = 0.66
 [node name="stack" type="Label" parent="algorithms/bfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
-text = "Stackspeicher"
+text = "STACK"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="algorithms/bfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
@@ -221,7 +221,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -671.0
+offset_left = -913.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
@@ -305,7 +305,7 @@ size_flags_stretch_ratio = 0.66
 [node name="stack" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
-text = "Stackspeicher"
+text = "STACK"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2"]
@@ -484,7 +484,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -671.0
+offset_left = -913.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0

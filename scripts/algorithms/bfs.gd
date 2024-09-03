@@ -215,11 +215,19 @@ func update_visited_vertices():
 
 # Update labels of vertices s and w
 func update_s_v(s: vertex_class, v: vertex_class):
+	if(s == null and v == null):
+		return
+	
+	if(v == s):
+		s.label_meta.text = "s v"
+		return
+	
 	if s != null:
-		s.label_meta.text = "s "
+		s.label_meta.text = "s"
 	
 	if v != null:
-		v.label_meta.text = v.label_meta.text + "v"
+		v.label_meta.text = "v"
+		
 
 # Mark visited edges
 func update_visited_edges():
