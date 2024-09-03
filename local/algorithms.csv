@@ -10,3 +10,4 @@ BFS_PSEUDOCODE,"1. Create an empty sequence F and an empty queue Q\n2. Mark s as
 ,,
 DFS_PSEUDOCODE,"1. Create empty sequences F and F' \n2. Mark s as explored and add s to F \n3. [b]for[/b] all edges (s, w) with w unexplored [b]do[/b] \n4. | F' = DFS(w) \n5. | Insert F' behind F \n6. [b]return[/b] F","1. Erstelle die leeren Folgen F und F'\n2. Markiere s als erkundet und füge s zu F hinzu\n3. [b]for[/b] alle Kanten (s, w) mit w unerkundet [b]do[/b]\n4. | F' = Tiefensuche(w) \n5. | Füge F' hinter F ein\n6. [b]return[/b] F"
 DEPHT-FIRST-SEARCH,DFS,Tiefensuche
+BREADTH-FIRST-SEARCH,BFS,Breitensuche
