@@ -118,6 +118,7 @@ label_return = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/la
 code_display = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/code_display")
 
 [node name="own_gui" type="ColorRect" parent="algorithms/dfs"]
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -381,7 +382,6 @@ text = "EXIT"
 script = ExtResource("1_7moob")
 
 [node name="info_gui" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0

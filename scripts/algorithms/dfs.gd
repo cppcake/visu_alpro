@@ -13,7 +13,7 @@ var current_stack: Array = []
 var visited_vertices: Array = []
 var visited_edges = []
 var call_counter: int = 0
-var last_pop: int
+var last_pop
 
 # We will save dictionaries in the states Array. These will have these keys:
 enum dfs_keys
@@ -31,7 +31,7 @@ enum dfs_keys
 }
 
 func algorithm(start_knoten: vertex_class):
-	# Init
+	# Init pre Tiefensuche
 	$own_gui.visible = true
 	s = start_knoten
 	states.clear()
@@ -39,7 +39,6 @@ func algorithm(start_knoten: vertex_class):
 	visited_edges.clear()
 	visited_vertices.clear()
 	call_counter = 0
-	last_pop = -1
 
 	var F = dfs(start_knoten)
 	
@@ -52,42 +51,42 @@ func algorithm(start_knoten: vertex_class):
 
 #
 func dfs(start_vertex: vertex_class) -> Array:
-	# Increment the number of counts and save the calls id
+	# Increment the number of counts and save the id of the call
 	call_counter += 1
 	var call_id = call_counter
 	
 	# For good reasons trust me
-	last_pop = -1
+	last_pop = null
 	
 	# Update the current stackframe
 	current_stack.push_front([call_id, start_vertex.id_])
 	
 	# The beginning of a call is a state, create a state for it
-	store_state(call_id, null, null, [], start_vertex, null, -1)
+	store_state(call_id, null, null, [], start_vertex, null, null)
 	
 	# Create empty sequences F and F_2
 	var F: Array = []
 	var F_2: Array = []
 	
-	store_state(call_id, F, F_2, [1], start_vertex, null, -1)
+	store_state(call_id, F, F_2, [1], start_vertex, null, null)
 	# Mark start_vertex as visited and push_back in F
 	start_vertex.visited = true
 	visited_vertices.push_back(start_vertex)
 	F.push_back(start_vertex)
 	
-	store_state(call_id, F, F_2, [2], start_vertex, null, -1)
+	store_state(call_id, F, F_2, [2], start_vertex, null, null)
 	var already_looped = false
 	for outgoing_edge: edge_class in get_tree().get_nodes_in_group("edge_group" + str(start_vertex.id_)):
 		visited_edges.push_back(outgoing_edge)
 		if already_looped == false:
-			store_state(call_id, F, F_2, [3], start_vertex, null, -1)
+			store_state(call_id, F, F_2, [3], start_vertex, null, null)
 		else:
 			store_state(call_id, F, F_2, [3], start_vertex, null, last_pop)
 		
 		var w: vertex_class = outgoing_edge.target_vertex
 		if not w.visited:
 			if already_looped == false:
-				store_state(call_id, F, F_2, [4], start_vertex, w, -1)
+				store_state(call_id, F, F_2, [4], start_vertex, w, null)
 			else:
 				store_state(call_id, F, F_2, [4], start_vertex, w, last_pop)
 			F_2 = dfs(w)
@@ -99,7 +98,7 @@ func dfs(start_vertex: vertex_class) -> Array:
 	
 	store_state(call_id, F, F_2, [6], start_vertex, null, last_pop)
 	
-	last_pop = call_id
+	last_pop = [call_id, start_vertex]
 	# We will return, so pop the stack
 	current_stack.pop_front()
 	
@@ -127,7 +126,7 @@ func backward():
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
 # See the enum above to fin out what a state contains
-func store_state(call_id: int, F, F_2, lines_to_paint: Array, s_p: vertex_class, w_p:vertex_class, last_pop_p: int):
+func store_state(call_id: int, F, F_2, lines_to_paint: Array, s_p: vertex_class, w_p:vertex_class, last_pop_p):
 	# Create the dictionary for the state
 	var dict: Dictionary = {}
 	
@@ -149,7 +148,7 @@ func store_state(call_id: int, F, F_2, lines_to_paint: Array, s_p: vertex_class,
 	dict[dfs_keys.lines_to_paint] = lines_to_paint
 	dict[dfs_keys.s] = s_p
 	dict[dfs_keys.w] = w_p
-	dict[dfs_keys.last_pop] = int(last_pop_p)
+	dict[dfs_keys.last_pop] = last_pop_p
 	
 	# Push the new state
 	states.push_back(dict)
@@ -172,12 +171,11 @@ func draw_stack(stack: Array):
 @export var label_sequence: Label
 @export var label_sequence_2: Label
 @export var label_return: Label
-func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from: int):
-	var dfs_str: String = tr("DEPHT-FIRST-SEARCH")
+func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from):
+	label_call.text = make_call_name(s_p, call_id)
 	
 	# Case return
 	if call_id == 0:
-		label_call.text = dfs_str + "(s: " + tr("vertex") + ")"
 		label_sequence.visible = false
 		label_sequence_2.visible = false
 		label_return.visible = true
@@ -185,12 +183,6 @@ func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from: int):
 		return
 	
 	label_return.visible = false
-	
-	# Add start_vertex and caller id to call, always avaible when algorithm has not returned
-	
-	var call_str: String = tr("CALL")
-	var s_id = s_p.id_
-	label_call.text = dfs_str + "(s = " + str(s_id) + ") (" + call_str + " " + str(call_id) + " )"
 	
 	if F == null:
 		# Case F and F' not created yet
@@ -205,8 +197,18 @@ func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from: int):
 		label_sequence_2.text = "F' = " +  misc.int_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
-	if(from != -1):
-		label_sequence_2.text = label_sequence_2.text +  " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(from) + ")"
+	if(from != null):
+		label_sequence_2.text = label_sequence_2.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
+
+func make_call_name(s_p: vertex_class, call_id: int) -> String:
+	var dfs_str: String = tr("DEPHT-FIRST-SEARCH")
+	
+	# Case Algorithm has returned
+	if s_p == null:
+		return dfs_str + "(s: " + tr("vertex") + ")"
+	
+	# Add start_vertex and caller id to call, always avaible when algorithm has not returned (eg. s != null)
+	return dfs_str + "(s = " + str(s_p.id_) + ") (" + tr("CALL") + " " + str(call_id) + " )"
 
 @export var code_display: RichTextLabel
 func update_lines_selected(lines_to_paint: Array):
