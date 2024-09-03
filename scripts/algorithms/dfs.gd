@@ -3,9 +3,6 @@ extends Node
 # Needed scenes
 @onready var stack_frame_scene = preload("res://scenes/stack_frame.tscn")
 
-# Der starting vertex
-var s: vertex_class
-
 # Everything needed to save the states
 var states: Array = []
 var current_state: int = 0
@@ -18,22 +15,21 @@ var last_pop
 # We will save dictionaries in the states Array. These will have these keys:
 enum dfs_keys
 {
-	call_id,
+	call_id, # The ID of the current Call
 	F,
-	F_2,
-	lines_to_paint,
-	last_pop,
-	stack,
+	F_2, # current F'
+	lines_to_paint, # The lines to paint on the display
+	last_pop, # Array of [start vertex of call popped, ID of call popped]
+	stack, # The current stack of calls
 	visited_vertices,
 	visited_edges,
-	s,
-	w
+	s, # starting vertex
+	w # vertex w
 }
 
 func algorithm(start_knoten: vertex_class):
 	# Init pre Tiefensuche
 	$own_gui.visible = true
-	s = start_knoten
 	states.clear()
 	current_stack.clear()
 	visited_edges.clear()
@@ -45,11 +41,14 @@ func algorithm(start_knoten: vertex_class):
 	# Last state after return
 	store_state(0, F, null, [], null, null, null)
 
+	# Visualize the first step
 	current_state = 0
 	update_visuals()
+	
+	# Return the amount of states for the controller
 	return states.size()
 
-#
+# DFS but the state of the algorithm is saved in specific steps
 func dfs(start_vertex: vertex_class) -> Array:
 	# Increment the number of counts and save the id of the call
 	call_counter += 1
@@ -61,48 +60,66 @@ func dfs(start_vertex: vertex_class) -> Array:
 	# Update the current stackframe
 	current_stack.push_front([call_id, start_vertex.id_])
 	
-	# The beginning of a call is a state, create a state for it
+	# New state
 	store_state(call_id, null, null, [], start_vertex, null, null)
 	
 	# Create empty sequences F and F_2
 	var F: Array = []
 	var F_2: Array = []
 	
+	# New state
 	store_state(call_id, F, F_2, [1], start_vertex, null, null)
+	
 	# Mark start_vertex as visited and push_back in F
 	start_vertex.visited = true
 	visited_vertices.push_back(start_vertex)
 	F.push_back(start_vertex)
 	
+	# New state
 	store_state(call_id, F, F_2, [2], start_vertex, null, null)
+	
+	# This variable is needed for a sneaky edge case in the visualisation. Its hard to exlain.
 	var already_looped = false
+	
+	# Loop part
 	for outgoing_edge: edge_class in get_tree().get_nodes_in_group("edge_group" + str(start_vertex.id_)):
 		visited_edges.push_back(outgoing_edge)
 		if already_looped == false:
+			# New state
 			store_state(call_id, F, F_2, [3], start_vertex, null, null)
 		else:
+			# New state
 			store_state(call_id, F, F_2, [3], start_vertex, null, last_pop)
 		
 		var w: vertex_class = outgoing_edge.target_vertex
 		if not w.visited:
 			if already_looped == false:
+				# New state
 				store_state(call_id, F, F_2, [4], start_vertex, w, null)
 			else:
+				# New state
 				store_state(call_id, F, F_2, [4], start_vertex, w, last_pop)
+			
+			# The recrusiv part
 			F_2 = dfs(w)
+			
+			# New state
 			store_state(call_id, F, F_2, [4], start_vertex, w, last_pop)
+			
+			# Append the return value of last call to sequence
 			F.append_array(F_2)
+			
+			# New state
 			store_state(call_id, F, F_2, [5], start_vertex, w, last_pop)
 			
 			already_looped = true
 	
+	# New state
 	store_state(call_id, F, F_2, [6], start_vertex, null, last_pop)
 	
+	# We will return, update the last popped call and pop
 	last_pop = [call_id, start_vertex]
-	# We will return, so pop the stack
 	current_stack.pop_front()
-	
-	#store_state(call_id - 1, F, F_2, [1], start_vertex, null)
 	
 	return F
 
@@ -124,7 +141,7 @@ func backward():
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
 # See the enum above to fin out what a state contains
-func store_state(call_id: int, F, F_2, lines_to_paint: Array, s_p: vertex_class, w_p:vertex_class, last_pop_p):
+func store_state(call_id: int, F, F_2, lines_to_paint: Array, s: vertex_class, w:vertex_class, last_pop_p):
 	# Create the dictionary for the state
 	var dict: Dictionary = {}
 	
@@ -144,8 +161,8 @@ func store_state(call_id: int, F, F_2, lines_to_paint: Array, s_p: vertex_class,
 	dict[dfs_keys.visited_edges] = visited_edges.duplicate()
 	dict[dfs_keys.visited_vertices] = visited_vertices.duplicate()
 	dict[dfs_keys.lines_to_paint] = lines_to_paint
-	dict[dfs_keys.s] = s_p
-	dict[dfs_keys.w] = w_p
+	dict[dfs_keys.s] = s
+	dict[dfs_keys.w] = w
 	dict[dfs_keys.last_pop] = last_pop_p
 	
 	# Push the new state
@@ -169,8 +186,8 @@ func draw_stack(stack: Array):
 @export var label_sequence: Label
 @export var label_sequence_2: Label
 @export var label_return: Label
-func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from):
-	label_call.text = make_call_name(s_p, call_id)
+func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
+	label_call.text = make_call_name(s, call_id)
 	
 	# Case return
 	if call_id == 0:
@@ -198,57 +215,67 @@ func update_code_labels(s_p: vertex_class, call_id: int, F, F_2, from):
 	if(from != null):
 		label_sequence_2.text = label_sequence_2.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
 
-func make_call_name(s_p: vertex_class, call_id: int) -> String:
+# Create a string like: DFS(s = x) (Call y) based on parameter
+func make_call_name(s: vertex_class, call_id: int) -> String:
 	var dfs_str: String = tr("DEPHT-FIRST-SEARCH")
 	
 	# Case Algorithm has returned
-	if s_p == null:
+	if s == null:
 		return dfs_str + "(s: " + tr("vertex") + ")"
 	
 	# Add start_vertex and caller id to call, always avaible when algorithm has not returned (eg. s != null)
-	return dfs_str + "(s = " + str(s_p.id_) + ") (" + tr("CALL") + " " + str(call_id) + " )"
+	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + " )"
 
+# Highlight selected lines in the pseudocode
 @export var code_display: RichTextLabel
 func update_lines_selected(lines_to_paint: Array):
 	code_display.text = tr("DFS_PSEUDOCODE")
 	for line_nr: int in lines_to_paint:
 		code_display.paint_line(line_nr)
 
+# Mark all visited vertices
 func update_visited_vertices():
-	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(vertex_class.sprites.unselected)
 	for vertex: vertex_class in states[current_state].get(dfs_keys.visited_vertices):
-		vertex.set_sprite(vertex_class.sprites.visited)
-		vertex.label_info.set_text(tr("VISITED"))
+		vertex.mark_visited()
 
-func update_s_w(s_p: vertex_class, w_p: vertex_class):
-	get_tree().call_group("vertex_group", "reset_labels")
+# Update labels of vertices s and w
+func update_s_w(s: vertex_class, w: vertex_class):
+	if s != null:
+		s.label_meta.text = "s"
 	
-	if s_p != null:
-		s_p.label_meta.text = "s"
-	
-	if w_p != null:
-		w_p.label_meta.text = "w"
-	
+	if w != null:
+		w.label_meta.text = "w"
+
+# Mark visited edges
 func update_visited_edges():
-	for i in range(vertex_class.node_count):
-		get_tree().call_group("edge_group" + str(i), "reset_color")
 	for edge: edge_class in states[current_state].get(dfs_keys.visited_edges):
 		edge.mark_visited()
 
+# Apply the visuals of the current state
 func update_visuals():
 	var current_stack_frame: Array = states[current_state].get(dfs_keys.stack)
 	var call_id: int = states[current_state].get(dfs_keys.call_id)
 	var F = states[current_state].get(dfs_keys.F)
 	var F_2 = states[current_state].get(dfs_keys.F_2)
 	var lines_to_paint = states[current_state].get(dfs_keys.lines_to_paint)
-	var s_p = states[current_state].get(dfs_keys.s)
-	var w_p = states[current_state].get(dfs_keys.w)
+	var s = states[current_state].get(dfs_keys.s)
+	var w = states[current_state].get(dfs_keys.w)
 	var from = states[current_state].get(dfs_keys.last_pop)
 	
-	update_s_w(s_p, w_p)
+	# Reset visuals
+	# Reset sprites
+	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		knoten.set_sprite(vertex_class.sprites.unselected)
+	# Reset labels
+	get_tree().call_group("vertex_group", "reset_labels")
+	# Reset edges
+	for i in range(vertex_class.node_count):
+		get_tree().call_group("edge_group" + str(i), "reset_color")
+	
+	# Redraw new visuals
+	update_s_w(s, w)
 	update_visited_vertices()
 	update_visited_edges()
 	draw_stack(current_stack_frame)
-	update_code_labels(s_p, call_id, F, F_2, from)
+	update_code_labels(s, call_id, F, F_2, from)
 	update_lines_selected(lines_to_paint)

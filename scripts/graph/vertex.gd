@@ -68,6 +68,10 @@ func set_allowed_to_move(state: bool):
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
 	allowed_to_move = state
 
+func mark_visited():
+	set_sprite(vertex_class.sprites.visited)
+	label_info.set_text(tr("VISITED"))
+
 func reset_visited():
 	visited = false
 
