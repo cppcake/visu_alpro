@@ -23,7 +23,6 @@ var label_info: Label
 var label_meta: Label
 var sprite: Sprite2D
 
-
 func _ready():
 	# Set id and update node_count
 	id_ = node_count
@@ -31,12 +30,11 @@ func _ready():
 	# Init visuals
 	sprite = get_node("Sprite2D")
 	sprite.texture = sprite_unselected
+	
 	label_id = get_node("./Label_id")
-	label_id.set_text(str(id_))
 	label_info = get_node("./Label_info")
-	label_info.set_text("")
 	label_meta = get_node("./Label_meta")
-	label_meta.set_text("")
+	reset_labels()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -70,28 +68,30 @@ func set_allowed_to_move(state: bool):
 		modulate = Color(1.0, 1.0, 1.0, 1.0)
 	allowed_to_move = state
 
+func mark_visited():
+	set_sprite(vertex_class.sprites.visited)
+	label_info.set_text(tr("VISITED"))
+
 func reset_visited():
 	visited = false
+
+func reset_labels():
+	label_id.text = str(id_)
+	label_info.text = ""
+	label_meta.text = ""
 
 func set_sprite(selection: sprites):
 	match selection:
 		sprites.unselected: 
 			sprite.texture = sprite_unselected
-			label_info.set_text("")
-			label_meta.set_text("")
 		sprites.selected:
 			sprite.texture = sprite_selected
-			label_info.set_text("")
-			label_meta.set_text("")
 		sprites.hovered:
 			sprite.texture = sprite_hovered
 		sprites.current:
 			sprite.texture = sprite_current
-			label_meta.set_text("v")
 		sprites.visited:
 			sprite.texture = sprite_visited
-			label_info.set_text(tr("VISITED"))
-			label_meta.set_text("")
 
 func _on_mouse_entered():
 	modulate = constants.hovered

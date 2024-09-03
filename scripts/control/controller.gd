@@ -159,7 +159,11 @@ func manage_algorithm():
 #
 # Stop the current algorithm
 func stop_algorithm():
+	# Reset graph properties
+	get_tree().call_group("vertex_group", "reset_visited")
+	
 	# Reset graph appearance
+	get_tree().call_group("vertex_group", "reset_labels")
 	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
 		knoten.set_sprite(vertex_class.sprites.unselected)
 	for i in range(vertex_class.node_count):
@@ -242,5 +246,7 @@ func _process(_delta):
 			manage_algorithm()
 		
 		modes.dfs:
-			# To make the vertices moveable during algorithm
-			pass
+			# Get dfs node and set it as the current_algorithm
+			current_algorithm = algorithms.get_node("dfs")
+			# Start the dfs if not already started and make vertices moveable
+			manage_algorithm()
