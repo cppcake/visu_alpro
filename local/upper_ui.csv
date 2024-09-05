@@ -16,6 +16,8 @@ EXIT_TOOLTIP,Close the program,Beende das Programm
 STOP_TOOLTIP,Stop the current algorithm,Beende den Algorithmus
 FORWARD_TOOLTIP,Proceed the algorithm a step forward,Führe den Algorithmus einen Schritt nach vorne
 BACKWARD_TOOLTIP,Proceed the algorithm a step backward,Führe den Algorithmus einen Schritt zurück
+FORWARD_TOOLTIP_2,Proceed the algorithm 5 steps forward,Führe den Algorithmus fünf Schritte nach vorne
+BACKWARD_TOOLTIP_2,Proceed the algorithm 5 steps backward,Führe den Algorithmus fünf Schritte zurück
 ,,
 CURRENT_MODE, Current mode: , Momentaner Modus: 
 VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it,"- Linksklick auf den grauen Bereich, um einen Knoten hinzuzufügen\n\t- Rechtsklick auf einen Knoten, um ihn zu entfernen"
