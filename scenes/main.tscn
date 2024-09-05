@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvogahh8sitx"]
+[gd_scene load_steps=18 format=3 uid="uid://dvogahh8sitx"]
 
 [ext_resource type="Script" path="res://scripts/control/exit.gd" id="1_7moob"]
 [ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="1_g52vd"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/graph/graph_manager.gd" id="6_3dfej"]
 [ext_resource type="Script" path="res://scripts/algorithms/dfs.gd" id="6_80uru"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://scenes/stack_frame.tscn" id="7_3x5ov"]
+[ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="11_ayaj7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -83,7 +84,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -913.0
+offset_left = -953.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
@@ -221,7 +222,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -913.0
+offset_left = -953.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
@@ -435,17 +436,20 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
 text = "STOP"
 
-[node name="button_backward2" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_backward_further" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
-tooltip_text = "BACKWARD_TOOLTIP"
+tooltip_text = "BACKWARD_TOOLTIP_2"
 focus_mode = 1
 mouse_filter = 2
 theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<<--"
+script = ExtResource("11_ayaj7")
+controller = NodePath("../../../../..")
+jump = -5
 
-[node name="button_backward" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
@@ -454,8 +458,11 @@ theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<---"
+script = ExtResource("11_ayaj7")
+controller = NodePath("../../../../..")
+jump = -1
 
-[node name="button_forward" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
@@ -464,16 +471,22 @@ theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "--->"
+script = ExtResource("11_ayaj7")
+controller = NodePath("../../../../..")
+jump = 1
 
-[node name="button_forward2" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_forward_further" type="Button" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
-tooltip_text = "FORWARD_TOOLTIP"
+tooltip_text = "FORWARD_TOOLTIP_2"
 focus_mode = 1
 mouse_filter = 2
 theme = ExtResource("5_3mibj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "-->>"
+script = ExtResource("11_ayaj7")
+controller = NodePath("../../../../..")
+jump = 5
 
 [node name="state_counter" type="Label" parent="upper_gui/buttons/buttons_algorithm/HBoxContainer"]
 layout_mode = 2
@@ -515,7 +528,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -913.0
+offset_left = -953.0
 offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
@@ -537,16 +550,19 @@ theme_override_fonts/bold_font = ExtResource("5_cnn2h")
 bbcode_enabled = true
 script = ExtResource("5_kgjw7")
 
-[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="upper_gui/buttons" method="_on_button_knoten_pressed"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="upper_gui/buttons" method="_on_button_kanten_pressed"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="upper_gui/buttons" method="_on_button_auswahl_pressed"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="upper_gui/buttons" method="_on_button_vertices_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="upper_gui/buttons" method="_on_button_edges_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="upper_gui/buttons" method="_on_button_move_pressed"]
 [connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="upper_gui/buttons" method="_on_button_breitensuche_pressed"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="upper_gui/buttons" method="_on_button_tiefensuche_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="upper_gui/buttons" method="_on_button_bfs_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="upper_gui/buttons" method="_on_button_dfs_pressed"]
 [connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward2" to="." method="backward_algorithm"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward" to="." method="backward_algorithm"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="." method="forward_algorithm"]
-[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward2" to="." method="forward_algorithm"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further" to="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further" method="_on_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward" to="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward" method="_on_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
+[connection signal="pressed" from="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
 [connection signal="item_selected" from="upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
 [connection signal="pressed" from="upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" to="upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]

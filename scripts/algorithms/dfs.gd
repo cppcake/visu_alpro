@@ -5,7 +5,7 @@ extends Node
 
 # Everything needed to save the states
 var states: Array = []
-var current_state: int = 0
+var current_step: int = 0
 var current_stack: Array = []
 var visited_vertices: Array = []
 var visited_edges = []
@@ -27,7 +27,7 @@ enum dfs_keys
 	w # vertex w
 }
 
-func algorithm(start_knoten: vertex_class):
+func init_algorithm(start_knoten: vertex_class):
 	# Init pre Tiefensuche
 	$own_gui.visible = true
 	states.clear()
@@ -41,10 +41,6 @@ func algorithm(start_knoten: vertex_class):
 	# Last state after return
 	store_state(0, F, null, [], null, null, null)
 
-	# Visualize the first step
-	current_state = 0
-	update_visuals()
-	
 	# Return the amount of states for the controller
 	return states.size()
 
@@ -130,12 +126,16 @@ func stop():
 
 # Increment the current state and update the visuals
 func forward():
-	current_state += 1
+	current_step += 1
 	update_visuals()
 
 # Decrement the current state and update the visuals
 func backward():
-	current_state -= 1
+	current_step -= 1
+	update_visuals()
+
+func visualize_step(step: int) -> void:
+	current_step = step
 	update_visuals()
 
 # Create and push a new state on the array of states
@@ -235,7 +235,7 @@ func update_lines_selected(lines_to_paint: Array):
 
 # Mark all visited vertices
 func update_visited_vertices():
-	for vertex: vertex_class in states[current_state].get(dfs_keys.visited_vertices):
+	for vertex: vertex_class in states[current_step].get(dfs_keys.visited_vertices):
 		vertex.mark_visited()
 
 # Update labels of vertices s and w
@@ -248,19 +248,19 @@ func update_s_w(s: vertex_class, w: vertex_class):
 
 # Mark visited edges
 func update_visited_edges():
-	for edge: edge_class in states[current_state].get(dfs_keys.visited_edges):
+	for edge: edge_class in states[current_step].get(dfs_keys.visited_edges):
 		edge.mark_visited()
 
 # Apply the visuals of the current state
 func update_visuals():
-	var current_stack_frame: Array = states[current_state].get(dfs_keys.stack)
-	var call_id: int = states[current_state].get(dfs_keys.call_id)
-	var F = states[current_state].get(dfs_keys.F)
-	var F_2 = states[current_state].get(dfs_keys.F_2)
-	var lines_to_paint = states[current_state].get(dfs_keys.lines_to_paint)
-	var s = states[current_state].get(dfs_keys.s)
-	var w = states[current_state].get(dfs_keys.w)
-	var from = states[current_state].get(dfs_keys.last_pop)
+	var current_stack_frame: Array = states[current_step].get(dfs_keys.stack)
+	var call_id: int = states[current_step].get(dfs_keys.call_id)
+	var F = states[current_step].get(dfs_keys.F)
+	var F_2 = states[current_step].get(dfs_keys.F_2)
+	var lines_to_paint = states[current_step].get(dfs_keys.lines_to_paint)
+	var s = states[current_step].get(dfs_keys.s)
+	var w = states[current_step].get(dfs_keys.w)
+	var from = states[current_step].get(dfs_keys.last_pop)
 	
 	# Reset visuals
 	# Reset sprites

@@ -32,7 +32,7 @@ var current_algorithm: Node
 # Needed to display progress of algorithm
 @export var state_counter: Label
 var current_step: int = 1
-var steps: int = 0
+var algorithm_step_count: int = 0
 
 # Needed to manipulate upper_ui efficiently
 @export var info_ui: ColorRect
@@ -152,10 +152,12 @@ func manage_algorithm():
 			# (There is nothing else to select but vertices anyways)
 			if start_vertex != null:
 				algorithm_running = true
-				current_step = 0
-				steps = current_algorithm.algorithm(start_vertex) - 1
-				state_counter.text = str(current_step) + "/" + str(steps)
+				algorithm_step_count = current_algorithm.init_algorithm(start_vertex) - 1
 				navigation_mode()
+				
+				# Visualize the first step
+				current_step = 0
+				proceed_algorithm(0)
 #
 # Stop the current algorithm
 func stop_algorithm():
@@ -177,31 +179,20 @@ func stop_algorithm():
 	state_counter.text = ""
 	active_mode()
 	set_mode(modes.vertices)
-#
-# Proceed the algorithm one step forward and update state-counter
-func forward_algorithm():
-	# Return, because we are already at the last step
-	if(current_step >= steps):
-		return
-	
-	current_algorithm.forward()
-	
-	# Update state-(counter)	
-	current_step += 1
-	state_counter.text = str(current_step) + "/" + str(steps)
-#
-# Proceed the algorithm one step backward and update state-counter
-func backward_algorithm():
-	# Return, because we are at the first step
-	if(current_step <= 0):
-		return
-		
-	current_algorithm.backward()
-		
-	# Update state-counter
-	current_step -= 1
-	state_counter.text = str(current_step) + "/" + str(steps)
 
+#
+func proceed_algorithm(steps: int) -> void:
+	current_step += steps
+	
+	# Check borders
+	if(current_step > algorithm_step_count):
+		current_step = algorithm_step_count
+	if(current_step < 0):
+		current_step = 0
+	
+	# Visualize the current step
+	current_algorithm.visualize_step(current_step)
+	state_counter.text = str(current_step) + "/" + str(algorithm_step_count)
 
 # Init
 func _ready():
@@ -252,9 +243,9 @@ func _process(_delta):
 			manage_algorithm()
 	
 	# Quality of Life Stuff	
-	var arrow_right = Input.is_action_just_released("ui_right")
-	var arrow_left = Input.is_action_just_pressed("ui_left")
+	var arrow_right = Input.is_action_just_pressed("Right")
+	var arrow_left = Input.is_action_just_pressed("Left")
 	if(arrow_right and algorithm_running):
-		forward_algorithm()
+		proceed_algorithm(1)
 	if(arrow_left and algorithm_running):
-		backward_algorithm()
+		proceed_algorithm(-1)
