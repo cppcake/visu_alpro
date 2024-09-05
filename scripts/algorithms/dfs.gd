@@ -27,7 +27,7 @@ enum dfs_keys
 	w # vertex w
 }
 
-func init_algorithm(start_knoten: vertex_class):
+func init(start_knoten: vertex_class):
 	# Init pre Tiefensuche
 	$own_gui.visible = true
 	states.clear()
@@ -119,24 +119,15 @@ func dfs(start_vertex: vertex_class) -> Array:
 	
 	return F
 
+# Visualize a certain step
+func visualize_step(step: int) -> void:
+	current_step = step
+	update_visuals()
+
 # Clean up before controller stops algorithm
 func stop():
 	# Deactivate own gui
 	$own_gui.visible = false
-
-# Increment the current state and update the visuals
-func forward():
-	current_step += 1
-	update_visuals()
-
-# Decrement the current state and update the visuals
-func backward():
-	current_step -= 1
-	update_visuals()
-
-func visualize_step(step: int) -> void:
-	current_step = step
-	update_visuals()
 
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
@@ -264,8 +255,8 @@ func update_visuals():
 	
 	# Reset visuals
 	# Reset sprites
-	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(vertex_class.sprites.unselected)
+	for vertex: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		vertex.set_sprite(vertex_class.sprites.unselected)
 	# Reset labels
 	get_tree().call_group("vertex_group", "reset_labels")
 	# Reset edges

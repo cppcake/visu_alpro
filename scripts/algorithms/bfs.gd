@@ -12,6 +12,7 @@ var visited_edges = []
 var call_counter: int = 0
 var last_pop
 
+# We will save dictionaries in the states Array. These will have these keys:
 enum bfs_keys
 {
 	call_id, # The ID of the current Call
@@ -26,24 +27,7 @@ enum bfs_keys
 	v # vertex w
 }
 
-func forward():
-	current_step += 1
-	update_visuals()
-
-func backward():
-	current_step -= 1
-	update_visuals()
-
-func visualize_step(step: int) -> void:
-	current_step = step
-	update_visuals()
-
-func stop():
-	# Deactivate own gui
-	$own_gui.visible = false
-
-# Breitensuche, aber: Der Zustand aller relevanten Variablen der Breitensuche werden jeden Schritt gesichert
-func init_algorithm(start_knoten: vertex_class):
+func init(start_vertex: vertex_class):
 	# Init pre Tiefensuche
 	$own_gui.visible = true
 	states.clear()
@@ -52,7 +36,7 @@ func init_algorithm(start_knoten: vertex_class):
 	visited_vertices.clear()
 	call_counter = 0
 
-	var F = bfs(start_knoten)
+	var F = bfs(start_vertex)
 	
 	# Last state after return
 	store_state(0, F, null, [], null, null, null)
@@ -60,6 +44,7 @@ func init_algorithm(start_knoten: vertex_class):
 	# Return the amount of states for the controller
 	return states.size()
 
+# BFS but the state of the algorithm is saved in specific steps
 func bfs(s: vertex_class) -> Array:
 	# Increment the number of counts and save the id of the call
 	call_counter += 1
@@ -116,6 +101,19 @@ func bfs(s: vertex_class) -> Array:
 	
 	return F
 
+# Visualize a certain step
+func visualize_step(step: int) -> void:
+	current_step = step
+	update_visuals()
+
+# Clean up before controller stops algorithm
+func stop():
+	# Deactivate own gui
+	$own_gui.visible = false
+
+# Create and push a new state on the array of states
+# A state stores the state of the algorithm at the time of creating the state
+# See the enum above to fin out what a state contains
 func store_state(call_id: int, F, Q, lines_to_paint: Array, s: vertex_class, v:vertex_class, last_pop_p):
 	# Create the dictionary for the state
 	var dict: Dictionary = {}
@@ -227,7 +225,6 @@ func update_s_v(s: vertex_class, v: vertex_class):
 	
 	if v != null:
 		v.label_meta.text = "v"
-		
 
 # Mark visited edges
 func update_visited_edges():
@@ -247,8 +244,8 @@ func update_visuals():
 	
 	# Reset visuals
 	# Reset sprites
-	for knoten: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
-		knoten.set_sprite(vertex_class.sprites.unselected)
+	for vertex: vertex_class in get_tree().get_nodes_in_group("vertex_group"):
+		vertex.set_sprite(vertex_class.sprites.unselected)
 	# Reset labels
 	get_tree().call_group("vertex_group", "reset_labels")
 	# Reset edges
@@ -262,5 +259,3 @@ func update_visuals():
 	draw_stack(current_stack_frame)
 	update_code_labels(s, call_id, F, Q, from)
 	update_lines_selected(lines_to_paint)
-
-

@@ -152,7 +152,7 @@ func manage_algorithm():
 			# (There is nothing else to select but vertices anyways)
 			if start_vertex != null:
 				algorithm_running = true
-				algorithm_step_count = current_algorithm.init_algorithm(start_vertex) - 1
+				algorithm_step_count = current_algorithm.init(start_vertex) - 1
 				navigation_mode()
 				
 				# Visualize the first step
@@ -180,7 +180,7 @@ func stop_algorithm():
 	active_mode()
 	set_mode(modes.vertices)
 
-#
+# Proceed algorithm by steps
 func proceed_algorithm(steps: int) -> void:
 	current_step += steps
 	
