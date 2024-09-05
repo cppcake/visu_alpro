@@ -550,9 +550,6 @@ theme_override_fonts/bold_font = ExtResource("5_cnn2h")
 bbcode_enabled = true
 script = ExtResource("5_kgjw7")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-
 [connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="upper_gui/buttons" method="_on_button_vertices_pressed"]
 [connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="upper_gui/buttons" method="_on_button_edges_pressed"]
 [connection signal="pressed" from="upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="upper_gui/buttons" method="_on_button_move_pressed"]

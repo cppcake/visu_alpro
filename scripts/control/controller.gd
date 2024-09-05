@@ -242,10 +242,21 @@ func _process(_delta):
 			# Start the dfs if not already started and make vertices moveable
 			manage_algorithm()
 	
+	# HACKY STUFF BECAUSE I DONT FULLY UNDERSTAND THE AWAIT KEYWORD
 	# Quality of Life Stuff	
-	var arrow_right = Input.is_action_just_pressed("Right")
-	var arrow_left = Input.is_action_just_pressed("Left")
-	if(arrow_right and algorithm_running):
+	# The spam of "and algorithm_running" is a hacky fix to some problems that appear
+	# because of await
+	if Input.is_action_just_pressed("Right") and algorithm_running:
 		proceed_algorithm(1)
-	if(arrow_left and algorithm_running):
+		await get_tree().create_timer(0.25).timeout
+		while Input.is_action_pressed("Right") and algorithm_running:
+			await get_tree().create_timer(0.15).timeout
+			if Input.is_action_pressed("Right") and algorithm_running:
+				proceed_algorithm(1)
+	if Input.is_action_just_pressed("Left") and algorithm_running:
 		proceed_algorithm(-1)
+		await get_tree().create_timer(0.25).timeout
+		while Input.is_action_pressed("Left") and algorithm_running:
+			await get_tree().create_timer(0.15).timeout
+			if Input.is_action_pressed("Left") and algorithm_running:
+				proceed_algorithm(-1)
