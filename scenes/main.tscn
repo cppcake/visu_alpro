@@ -144,7 +144,7 @@ script = ExtResource("5_kgjw7")
 layout_mode = 2
 
 [node name="label_return" type="Label" parent="algorithms/bfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0.305882, 0.623529, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 
@@ -282,7 +282,7 @@ script = ExtResource("5_kgjw7")
 layout_mode = 2
 
 [node name="label_return" type="Label" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0.305882, 0.623529, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 
