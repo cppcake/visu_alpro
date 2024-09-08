@@ -8,7 +8,6 @@ static var lerp_speed: int = 15;
 enum sprites {unselected, selected, hovered, current, visited}
 @export var sprite_unselected: CompressedTexture2D
 @export var sprite_selected: CompressedTexture2D
-@export var sprite_hovered: CompressedTexture2D
 @export var sprite_current: CompressedTexture2D
 @export var sprite_visited: CompressedTexture2D
 
@@ -85,13 +84,11 @@ func set_sprite(selection: sprites):
 		sprites.unselected: 
 			sprite.texture = sprite_unselected
 		sprites.selected:
-			sprite.texture = sprite_selected
-		sprites.hovered:
-			sprite.texture = sprite_hovered
+			sprite.texture = sprite_current
 		sprites.current:
 			sprite.texture = sprite_current
 		sprites.visited:
-			sprite.texture = sprite_visited
+			sprite.texture = sprite_current
 
 func _on_mouse_entered():
 	modulate = constants.hovered

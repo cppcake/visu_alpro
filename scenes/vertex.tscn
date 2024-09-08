@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8tc5dy0jmf0y"]
+[gd_scene load_steps=5 format=3 uid="uid://c8tc5dy0jmf0y"]
 
 [ext_resource type="Script" path="res://scripts/graph/vertex.gd" id="1_ey4sf"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://sprites/vertex_unselected.png" id="2_6dpir"]
-[ext_resource type="Texture2D" uid="uid://dy03cdb2sf711" path="res://sprites/vertex_selected.png" id="3_8j12s"]
-[ext_resource type="Texture2D" uid="uid://twjw2dsyqrds" path="res://sprites/vertex_hovered.png" id="4_x025f"]
-[ext_resource type="Texture2D" uid="uid://e4y0fyio8suv" path="res://sprites/vertex_current.png" id="5_nmo3r"]
-[ext_resource type="Texture2D" uid="uid://dii5xksq1222v" path="res://sprites/vertex_visited.png" id="6_2ob3q"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://sprites/vertex_uni_gelb.png" id="2_jj0ph"]
+[ext_resource type="Texture2D" uid="uid://e4y0fyio8suv" path="res://sprites/vertex_uni_blau.png" id="5_btwxg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
@@ -13,11 +10,10 @@ radius = 50.0
 [node name="vertex" type="Area2D"]
 z_index = 3
 script = ExtResource("1_ey4sf")
-sprite_unselected = ExtResource("2_6dpir")
-sprite_selected = ExtResource("3_8j12s")
-sprite_hovered = ExtResource("4_x025f")
-sprite_current = ExtResource("5_nmo3r")
-sprite_visited = ExtResource("6_2ob3q")
+sprite_unselected = ExtResource("2_jj0ph")
+sprite_selected = ExtResource("5_btwxg")
+sprite_current = ExtResource("5_btwxg")
+sprite_visited = ExtResource("5_btwxg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lky5f")

@@ -20,7 +20,7 @@ static var points_origin = []
 
 # Needed to color edge during algorithm
 static var color_def: Color = Color.WHITE
-static var color_visited: Color = constants.uni_hellblau_c
+static var color_visited: Color = constants.uni_blau_c
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://twjw2dsyqrds"
-path="res://.godot/imported/vertex_hovered.png-90809b2b543b8f576174a8cf8cd346e5.ctex"
+uid="uid://e4y0fyio8suv"
+path="res://.godot/imported/vertex_uni_blau.png-3a92bd11ad2e83c6abd728880ccf1140.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/vertex_hovered.png"
-dest_files=["res://.godot/imported/vertex_hovered.png-90809b2b543b8f576174a8cf8cd346e5.ctex"]
+source_file="res://sprites/vertex_uni_blau.png"
+dest_files=["res://.godot/imported/vertex_uni_blau.png-3a92bd11ad2e83c6abd728880ccf1140.ctex"]
 
 [params]
 
