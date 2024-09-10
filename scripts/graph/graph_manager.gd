@@ -1,4 +1,4 @@
-extends Node
+class_name GraphManager extends Node
 
 @onready var vertex_scene = preload("res://scenes/vertex.tscn")
 @onready var edge_scene = preload("res://scenes/edge.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dvogahh8sitx"]
+[gd_scene load_steps=40 format=3 uid="uid://dvogahh8sitx"]
 
 [ext_resource type="Script" path="res://scripts/control/exit.gd" id="1_7moob"]
 [ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="1_g52vd"]
@@ -11,7 +11,29 @@
 [ext_resource type="Script" path="res://scripts/graph/graph_manager.gd" id="6_3dfej"]
 [ext_resource type="Script" path="res://scripts/algorithms/dfs.gd" id="6_80uru"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://scenes/stack_frame.tscn" id="7_3x5ov"]
+[ext_resource type="Script" path="res://misc/easteregg/easteregg.gd" id="8_gui1e"]
+[ext_resource type="Texture2D" uid="uid://ciybw5iwfesd1" path="res://misc/easteregg/sprites/T_Adventure_Core.png" id="9_2o4qt"]
+[ext_resource type="Texture2D" uid="uid://cpxmrsqaqkxu1" path="res://misc/easteregg/sprites/T_Handheld_Portal_Device.png" id="11_7dw4e"]
 [ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="11_ayaj7"]
+[ext_resource type="Texture2D" uid="uid://dfvjwmtxfcom5" path="res://misc/easteregg/sprites/T_Companion_Cube.png" id="11_qa31r"]
+[ext_resource type="Texture2D" uid="uid://scgh683jvfi3" path="res://misc/easteregg/sprites/T_Cake.png" id="11_yqnv4"]
+[ext_resource type="Texture2D" uid="uid://tf4fod7pptw7" path="res://misc/easteregg/sprites/T_Fact_Core.png" id="12_t3b2i"]
+[ext_resource type="Texture2D" uid="uid://oypgn10d4281" path="res://misc/easteregg/sprites/T_PotatOS.png" id="13_us58e"]
+[ext_resource type="Texture2D" uid="uid://b0d0nb1r26gqr" path="res://misc/easteregg/sprites/scout_A_pose.png" id="14_1adbb"]
+[ext_resource type="Texture2D" uid="uid://8i2im2f5eoki" path="res://misc/easteregg/sprites/wusel.png" id="15_f6ht2"]
+[ext_resource type="Texture2D" uid="uid://dxt0moanjslh0" path="res://misc/easteregg/sprites/T_Wheatley.png" id="16_08nma"]
+[ext_resource type="AudioStream" uid="uid://dr77hd7wl1wtm" path="res://misc/easteregg/sounds/Wheatley_bw_sp_a2_core_history_response05.wav" id="16_iaqta"]
+[ext_resource type="Texture2D" uid="uid://dphsn0nohagrn" path="res://misc/easteregg/sprites/T_Sentry_Turret.png" id="16_x5tm3"]
+[ext_resource type="AudioStream" uid="uid://bwbx6sxmm0dwi" path="res://misc/easteregg/sounds/Fact_core_fact10.wav" id="17_jjnig"]
+[ext_resource type="AudioStream" uid="uid://gqljk4rbeoym" path="res://misc/easteregg/sounds/sound_weapons_portalgun_portal_open2.wav" id="17_q6hfi"]
+[ext_resource type="Texture2D" uid="uid://dyhnwx0u1d4q2" path="res://misc/easteregg/sprites/T_No_Cake.png" id="18_i3285"]
+[ext_resource type="AudioStream" uid="uid://diqyb0slq61wl" path="res://misc/easteregg/sounds/Adventure_core_singing01.wav" id="18_r34af"]
+[ext_resource type="AudioStream" uid="uid://bgvw83o81yus2" path="res://misc/easteregg/sounds/GLaDOS_potatos_longfall_speech03.mp3" id="19_4fume"]
+[ext_resource type="AudioStream" uid="uid://cjdwf8tgecacs" path="res://misc/easteregg/sounds/GLaDOS_13_part1_middle-2.wav" id="20_1ooa8"]
+[ext_resource type="AudioStream" uid="uid://yibdqft8s6tc" path="res://misc/easteregg/sounds/Scout_needdispenser01.wav" id="21_ibe7t"]
+[ext_resource type="AudioStream" uid="uid://crewgsoal7w0h" path="res://misc/easteregg/sounds/discord-notification.mp3" id="22_5o71j"]
+[ext_resource type="AudioStream" uid="uid://b3yl0v3jwnqh2" path="res://misc/easteregg/sounds/Turret_turret_active_5.wav" id="24_mcs7x"]
+[ext_resource type="AudioStream" uid="uid://yrrla05irsrc" path="res://misc/easteregg/sounds/Confetti - Sound Effect.wav" id="25_utdva"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -344,6 +366,162 @@ layout_mode = 2
 
 [node name="stack_frame3" parent="algorithms/dfs/own_gui/HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("7_3x5ov")]
 layout_mode = 2
+
+[node name="easteregg" type="Node" parent="algorithms" node_paths=PackedStringArray("graph_manager", "code_display")]
+script = ExtResource("8_gui1e")
+sprites_array = Array[CompressedTexture2D]([ExtResource("16_08nma"), ExtResource("12_t3b2i"), ExtResource("9_2o4qt"), ExtResource("13_us58e"), ExtResource("11_qa31r"), ExtResource("14_1adbb"), ExtResource("15_f6ht2"), ExtResource("16_x5tm3")])
+audio_wh = ExtResource("16_iaqta")
+audio_fc = ExtResource("17_jjnig")
+audio_ac = ExtResource("18_r34af")
+audio_gp = ExtResource("19_4fume")
+audio_cc = ExtResource("20_1ooa8")
+audio_sc = ExtResource("21_ibe7t")
+audio_ws = ExtResource("22_5o71j")
+audio_st = ExtResource("24_mcs7x")
+audio_ct = ExtResource("25_utdva")
+graph_manager = NodePath("../../graph_manager")
+code_display = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/code_display")
+
+[node name="own_gui" type="ColorRect" parent="algorithms/easteregg"]
+visible = false
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -953.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="algorithms/easteregg/own_gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="algorithms/easteregg/own_gui/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[rainbow freq=2.0 sat=0.8 val=0.8]PORTAL ALGORITHM[/rainbow]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="code_display" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("5_cnn2h")
+bbcode_enabled = true
+text = "HEHE"
+fit_content = true
+script = ExtResource("5_kgjw7")
+
+[node name="HSeparator2" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="label_return" type="Label" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+visible = false
+modulate = Color(0, 0.305882, 0.623529, 1)
+layout_mode = 2
+text = "BY MISTAKE YOU USED SALT INSTEAD OF SUGAR SO TECHNICALY IT'S NOT EVEN A CAKE. DISGUSTING :(
+Algorithm terminated and returned: Sadness"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="xd" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
+modulate = Color(0.880209, 0.491947, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Recipe: 
+- 1 (18.25-ounce) package chocolate cake mix
+- 1 can prepared coconut–pecan frosting
+- 3/4 cup vegetable oil
+- 4 large eggs, 1 cup semi-sweet chocolate chips, 3/4 cup butter or margarine
+- 1 2/3 cup granulated sugar (NOT SALT)
+- 2 cups all-purpose flour, Fish-shaped crackers
+- Fish-shaped candies
+- Fish-shaped solid waste
+- Fish-shaped dirt
+- Fish-shaped ethylbenzene
+- Pull-and-peel licorice
+- Fish-shaped volatile organic compounds and sediment-shaped sediment
+- Candy-coated peanut butter pieces (shaped like fish)
+- 1 cup lemon juice
+- Alpha resins
+- Unsaturated polyester resin
+- Fiberglass surface resins and volatile malted milk impoundments
+- 9 large egg yolks
+- 12 medium geosynthetic membranes
+- 1 cup granulated sugar
+- An entry called: <<How to Kill Someone with Your Bare Hands>>
+- 2 cups rhubarb, sliced
+- 2/3 cups granulated rhubarb
+- 1 tbsp. all-purpose rhubarb
+- 1 tsp. grated orange rhubarb
+- 3 tbsp. rhubarb, on fire
+- 1 large rhubarb
+- 1 cross borehole electromagnetic imaging rhubarb
+- 2 tbsp. rhubarb juice
+- Adjustable aluminum head positioner
+- Slaughter electric needle injector
+-Cordless electric needle injector
+- Injector needle driver
+- Injector needle gun
+- Cranial caps"
+fit_content = true
+
+[node name="portal_gun" type="Sprite2D" parent="algorithms/easteregg"]
+visible = false
+z_index = 1
+position = Vector2(1564, 162)
+rotation = -0.261799
+scale = Vector2(1, 1)
+texture = ExtResource("11_7dw4e")
+flip_h = true
+
+[node name="no_cake" type="Sprite2D" parent="algorithms/easteregg"]
+visible = false
+z_index = 1
+position = Vector2(1452, 670)
+scale = Vector2(3, 3)
+texture = ExtResource("18_i3285")
+
+[node name="cake" type="Sprite2D" parent="algorithms/easteregg"]
+visible = false
+z_index = 1
+position = Vector2(1452, 670)
+scale = Vector2(3, 3)
+texture = ExtResource("11_yqnv4")
+
+[node name="dj2" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
+visible = false
+stream = ExtResource("17_q6hfi")
+
+[node name="dj" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
+visible = false
 
 [node name="upper_gui" type="ColorRect" parent="."]
 anchors_preset = 10

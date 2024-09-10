@@ -17,7 +17,9 @@ enum modes
 	# Mode BFS - Start BFS Demonstrator
 	bfs,
 	# Mode DFS - Start DFS Demonstrator
-	dfs
+	dfs,
+	# Hehe
+	easteregg
 }
 var mode: modes = modes.vertices
 
@@ -63,6 +65,9 @@ func set_mode(mode_: modes):
 		modes.dfs:
 			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
 			button_dfs.grab_focus()
+		modes.easteregg:
+			display.set_text("[tornado radius=15.0 freq=3.0 connected=1]\n\n          pick a vertex to start the [rainbow freq=2.0 sat=0.8 val=0.8]PORTAL[/rainbow] algorithm[/tornado]")
+			
 
 # Change the language, 0 - english; 1 - german and reapply the mode to update the info-text
 func set_local(index: int):
@@ -204,6 +209,7 @@ func _ready():
 #
 # Control loop
 #
+var egg_counter: int = 0
 func _process(_delta):
 	# Update user input
 	left_click = Input.is_action_just_pressed("M1")
@@ -241,6 +247,12 @@ func _process(_delta):
 			current_algorithm = algorithms.get_node("dfs")
 			# Start the dfs if not already started and make vertices moveable
 			manage_algorithm()
+			
+		modes.easteregg:
+			# Get dfs node and set it as the current_algorithm
+			current_algorithm = algorithms.get_node("easteregg")
+			# Start the dfs if not already started and make vertices moveable
+			manage_algorithm()
 	
 	# HACKY STUFF BECAUSE I DONT FULLY UNDERSTAND THE AWAIT KEYWORD
 	# Quality of Life Stuff	
@@ -260,3 +272,42 @@ func _process(_delta):
 			await get_tree().create_timer(0.15).timeout
 			if Input.is_action_pressed("Left") and algorithm_running:
 				proceed_algorithm(-1)
+
+	# Hehe
+	if not algorithm_running:
+		if Input.is_action_just_pressed("P"):
+			if egg_counter == 0:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if Input.is_action_just_pressed("O"):
+			if egg_counter == 1:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if Input.is_action_just_pressed("R"):
+			if egg_counter == 2:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if Input.is_action_just_pressed("T"):
+			if egg_counter == 3:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if Input.is_action_just_pressed("A"):
+			if egg_counter == 4:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if Input.is_action_just_pressed("L"):
+			if egg_counter == 5:
+				egg_counter += 1
+			else:
+				egg_counter = 0
+		if egg_counter == 6:
+			set_mode(modes.easteregg)
+			egg_counter = 0
+				
+	else:
+		egg_counter = 0
