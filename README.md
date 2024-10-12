@@ -2,7 +2,7 @@
 
 ## Description
 This is a demonstrator for simple graph algorithms made entirely in Godot 4.2 using GDScript. Currently only BFS and DFS are supported, but other algorithms could be implemented in the future as well. Please create an Issue if you have any Feedback.
-![](https://md.fachschaften.org/uploads/71e800c8-253a-41b5-a92a-e3fc44bdeb53.png)
+![](https://md.fachschaften.org/uploads/35d38daa-82c8-46de-8dbb-9855e7ce6510.png)
 
 ## Build
 The latest builds for Linux and Windows can always be found [here](https://uni-bonn.sciebo.de/s/hSFIm3XhwKR4jMA).
