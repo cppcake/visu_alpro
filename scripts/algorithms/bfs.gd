@@ -24,7 +24,8 @@ enum bfs_keys
 	visited_vertices,
 	visited_edges,
 	s, # starting vertex
-	v # vertex w
+	v, # vertex v
+	w # vertex w
 }
 
 func init(start_vertex: vertex_class):
@@ -39,7 +40,7 @@ func init(start_vertex: vertex_class):
 	var F = bfs(start_vertex)
 	
 	# Last state after return
-	store_state(0, F, null, [], null, null, null)
+	store_state(0, F, null, [], null, null, null, null)
 	
 	# Return the amount of states for the controller
 	return states.size()
@@ -54,47 +55,41 @@ func bfs(s: vertex_class) -> Array:
 	current_stack.push_front([call_id, s.id_])
 	
 	# New state
-	store_state(call_id, null, null, [], s, null, null)
+	store_state(call_id, null, null, [], s, null, null, null)
 	
 	# Ich weiß, diese Zeile ist cursed. Aber so funktioniert es eben in Godot ^^
 	var F: Array = []
 	var Q: Array = []
 	
-	store_state(call_id, F, Q, [1], s, null, null)
-	#states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [1]])
-	
+	store_state(call_id, F, Q, [1], s, null, null, null)
+
 	s.visited = true
 	visited_vertices.push_back(s)
 	F.push_back(s)
 	Q.push_back(s)
 	
-	store_state(call_id, F, Q, [2], s, null, null)
-	#states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [2]])
+	store_state(call_id, F, Q, [2], s, null, null, null)
 	
 	while !Q.is_empty():
 		var v: Node = Q.pop_front()
 		
-		store_state(call_id, F, Q, [4], s, v, null)
-		#states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), current, [4]])
-		
+		store_state(call_id, F, Q, [4], s, v, null, null)
+
 		for edge in get_tree().get_nodes_in_group("edge_group" + str(v.id_)):
 			visited_edges.push_back(edge)
 			
-			store_state(call_id, F, Q, [5], s, v, null)
-			#states.push_back([besuchte_kanten.duplicate(), edge, queue.duplicate(), erg.duplicate(), current, [5]])	
-			
+			store_state(call_id, F, Q, [5], s, v, edge.target_vertex, null)
+		
 			if !edge.target_vertex.visited:
 				edge.target_vertex.visited = true
 				visited_vertices.push_back(edge.target_vertex)
 				F.push_back(edge.target_vertex)
 				Q.push_back(edge.target_vertex)
 				
-				store_state(call_id, F, Q, [6, 7], s, v, null)
-				#states.push_back([besuchte_kanten.duplicate(), edge, queue.duplicate(), erg.duplicate(), current, [6, 7]])	
-	
-	store_state(call_id, F, Q, [8], s, null, null)
-	#states.push_back([besuchte_kanten.duplicate(), null, queue.duplicate(), erg.duplicate(), null, [8]])
-	
+				store_state(call_id, F, Q, [6, 7], s, v, edge.target_vertex, null)
+		
+	store_state(call_id, F, Q, [8], s, null, null, null)
+
 	# We will return, update the last popped call and pop
 	last_pop = [call_id, s]
 	current_stack.pop_front()
@@ -114,7 +109,7 @@ func stop():
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
 # See the enum above to fin out what a state contains
-func store_state(call_id: int, F, Q, lines_to_paint: Array, s: vertex_class, v:vertex_class, last_pop_p):
+func store_state(call_id: int, F, Q, lines_to_paint: Array, s: vertex_class, v: vertex_class, w: vertex_class, last_pop_p):
 	# Create the dictionary for the state
 	var dict: Dictionary = {}
 	
@@ -136,6 +131,7 @@ func store_state(call_id: int, F, Q, lines_to_paint: Array, s: vertex_class, v:v
 	dict[bfs_keys.lines_to_paint] = lines_to_paint
 	dict[bfs_keys.s] = s
 	dict[bfs_keys.v] = v
+	dict[bfs_keys.w] = w
 	dict[bfs_keys.last_pop] = last_pop_p
 	
 	# Push the new state
@@ -212,20 +208,22 @@ func update_visited_vertices():
 		vertex.mark_visited()
 
 # Update labels of vertices s and w
-func update_s_v(s: vertex_class, v: vertex_class):
-	if(s == null and v == null):
-		return
-	
-	if(v == s):
-		s.label_meta.text = "s v"
-		return
-	
+func update_s_v(s: vertex_class, v: vertex_class, w: vertex_class):
 	if s != null:
 		s.label_meta.text = "s"
 	
 	if v != null:
-		v.label_meta.text = "v"
-
+		if v.label_meta.text.length() == 0:
+			v.label_meta.text = "v"
+		else:
+			v.label_meta.text = v.label_meta.text + " v"
+		
+	if w != null:
+		if w.label_meta.text.length() == 0:
+			w.label_meta.text = "w"
+		else:
+			w.label_meta.text = w.label_meta.text + " w"
+		
 # Mark visited edges
 func update_visited_edges():
 	for edge: edge_class in states[current_step].get(bfs_keys.visited_edges):
@@ -240,6 +238,7 @@ func update_visuals():
 	var lines_to_paint = states[current_step].get(bfs_keys.lines_to_paint)
 	var s = states[current_step].get(bfs_keys.s)
 	var v = states[current_step].get(bfs_keys.v)
+	var w = states[current_step].get(bfs_keys.w)
 	var from = states[current_step].get(bfs_keys.last_pop)
 	
 	# Reset visuals
@@ -253,7 +252,7 @@ func update_visuals():
 		get_tree().call_group("edge_group" + str(i), "reset_color")
 	
 	# Redraw new visuals
-	update_s_v(s, v)
+	update_s_v(s, v, w)
 	update_visited_vertices()
 	update_visited_edges()
 	draw_stack(current_stack_frame)
