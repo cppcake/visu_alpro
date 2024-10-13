@@ -80,14 +80,14 @@ func dfs(start_vertex: vertex_class) -> Array:
 	# Loop part
 	for outgoing_edge: edge_class in get_tree().get_nodes_in_group("edge_group" + str(start_vertex.id_)):
 		visited_edges.push_back(outgoing_edge)
+		var w: vertex_class = outgoing_edge.target_vertex
 		if already_looped == false:
 			# New state
-			store_state(call_id, F, F_2, [3], start_vertex, null, null)
+			store_state(call_id, F, F_2, [3], start_vertex, w, null)
 		else:
 			# New state
-			store_state(call_id, F, F_2, [3], start_vertex, null, last_pop)
+			store_state(call_id, F, F_2, [3], start_vertex, w, last_pop)
 		
-		var w: vertex_class = outgoing_edge.target_vertex
 		if not w.visited:
 			if already_looped == false:
 				# New state
@@ -236,6 +236,9 @@ func update_s_w(s: vertex_class, w: vertex_class):
 	
 	if w != null:
 		w.label_meta.text = "w"
+		
+	if w == s and w != null:
+		s.label_meta.text = "s w"
 
 # Mark visited edges
 func update_visited_edges():
