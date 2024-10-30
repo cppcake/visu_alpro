@@ -193,7 +193,7 @@ func make_call_name(s: vertex_class, call_id: int) -> String:
 		return dfs_str + "(s: " + tr("vertex") + ")"
 	
 	# Add start_vertex and caller id to call, always avaible when algorithm has not returned (eg. s != null)
-	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + " )"
+	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + ")"
 
 # Highlight selected lines in the pseudocode
 @export var code_display: RichTextLabel
