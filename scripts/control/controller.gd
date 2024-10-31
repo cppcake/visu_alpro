@@ -163,7 +163,7 @@ func manage_algorithm():
 				# Visualize the first step
 				current_step = 0
 				proceed_algorithm(0)
-#
+
 # Stop the current algorithm
 func stop_algorithm():
 	# Reset graph properties

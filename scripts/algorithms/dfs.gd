@@ -24,7 +24,8 @@ enum dfs_keys
 	visited_vertices,
 	visited_edges,
 	s, # starting vertex
-	w # vertex w
+	w, # vertex w
+	current_edge
 }
 
 func init(start_knoten: vertex_class):
@@ -39,7 +40,7 @@ func init(start_knoten: vertex_class):
 	var F = dfs(start_knoten)
 	
 	# Last state after return
-	store_state(0, F, null, [], null, null, null)
+	store_state(0, F, null, [], null, null, null, null)
 
 	# Return the amount of states for the controller
 	return states.size()
@@ -57,14 +58,14 @@ func dfs(start_vertex: vertex_class) -> Array:
 	current_stack.push_front([call_id, start_vertex.id_])
 	
 	# New state
-	store_state(call_id, null, null, [], start_vertex, null, null)
+	store_state(call_id, null, null, [], start_vertex, null, null, null)
 	
 	# Create empty sequences F and F_2
 	var F: Array = []
 	var F_2: Array = []
 	
 	# New state
-	store_state(call_id, F, F_2, [1], start_vertex, null, null)
+	store_state(call_id, F, F_2, [1], start_vertex, null, null, null)
 	
 	# Mark start_vertex as visited and push_back in F
 	start_vertex.visited = true
@@ -72,7 +73,7 @@ func dfs(start_vertex: vertex_class) -> Array:
 	F.push_back(start_vertex)
 	
 	# New state
-	store_state(call_id, F, F_2, [2], start_vertex, null, null)
+	store_state(call_id, F, F_2, [2], start_vertex, null, null, null)
 	
 	# This variable is needed for a sneaky edge case in the visualisation. Its hard to exlain.
 	var already_looped = false
@@ -83,35 +84,35 @@ func dfs(start_vertex: vertex_class) -> Array:
 		var w: vertex_class = outgoing_edge.target_vertex
 		if already_looped == false:
 			# New state
-			store_state(call_id, F, F_2, [3], start_vertex, w, null)
+			store_state(call_id, F, F_2, [3], start_vertex, w, null, outgoing_edge)
 		else:
 			# New state
-			store_state(call_id, F, F_2, [3], start_vertex, w, last_pop)
+			store_state(call_id, F, F_2, [3], start_vertex, w, last_pop, outgoing_edge)
 		
 		if not w.visited:
 			if already_looped == false:
 				# New state
-				store_state(call_id, F, F_2, [4], start_vertex, w, null)
+				store_state(call_id, F, F_2, [4], start_vertex, w, null, outgoing_edge)
 			else:
 				# New state
-				store_state(call_id, F, F_2, [4], start_vertex, w, last_pop)
+				store_state(call_id, F, F_2, [4], start_vertex, w, last_pop, outgoing_edge)
 			
 			# The recrusiv part
 			F_2 = dfs(w)
 			
 			# New state
-			store_state(call_id, F, F_2, [4], start_vertex, w, last_pop)
+			store_state(call_id, F, F_2, [4], start_vertex, w, last_pop, outgoing_edge)
 			
 			# Append the return value of last call to sequence
 			F.append_array(F_2)
 			
 			# New state
-			store_state(call_id, F, F_2, [5], start_vertex, w, last_pop)
+			store_state(call_id, F, F_2, [5], start_vertex, w, last_pop, outgoing_edge)
 			
 			already_looped = true
 	
 	# New state
-	store_state(call_id, F, F_2, [6], start_vertex, null, last_pop)
+	store_state(call_id, F, F_2, [6], start_vertex, null, last_pop, null)
 	
 	# We will return, update the last popped call and pop
 	last_pop = [call_id, start_vertex]
@@ -132,7 +133,14 @@ func stop():
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
 # See the enum above to fin out what a state contains
-func store_state(call_id: int, F, F_2, lines_to_paint: Array, s: vertex_class, w:vertex_class, last_pop_p):
+func store_state(	call_id: int,
+					F,
+					F_2,
+					lines_to_paint: Array,
+					s: vertex_class,
+					w:vertex_class,
+					last_pop_p,
+					current_edge):
 	# Create the dictionary for the state
 	var dict: Dictionary = {}
 	
@@ -155,6 +163,7 @@ func store_state(call_id: int, F, F_2, lines_to_paint: Array, s: vertex_class, w
 	dict[dfs_keys.s] = s
 	dict[dfs_keys.w] = w
 	dict[dfs_keys.last_pop] = last_pop_p
+	dict[dfs_keys.current_edge] = current_edge
 	
 	# Push the new state
 	states.push_back(dict)
@@ -244,6 +253,10 @@ func update_s_w(s: vertex_class, w: vertex_class):
 func update_visited_edges():
 	for edge: edge_class in states[current_step].get(dfs_keys.visited_edges):
 		edge.mark_visited()
+	
+	var current_edge = states[current_step].get(dfs_keys.current_edge)
+	if current_edge != null:
+		current_edge.mark_freshly_visited()
 
 # Apply the visuals of the current state
 func update_visuals():
