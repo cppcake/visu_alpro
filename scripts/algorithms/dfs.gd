@@ -168,10 +168,9 @@ func store_state(	call_id: int,
 	# Push the new state
 	states.push_back(dict)
 
-@export var stackspeicher: VBoxContainer
 func draw_stack(stack: Array):
 	# Clear all stack frames before redrawing
-	for child: Control in stackspeicher.get_children():
+	for child: Control in $own_gui.callstack.get_children():
 		child.queue_free()	
 
 	# Iterate through stack in reverse
@@ -185,40 +184,36 @@ func draw_stack(stack: Array):
 		if i == 0:
 			stack_frame_instance.get_child(0).modulate = constants.uni_blau_c
 		
-		stackspeicher.add_child(stack_frame_instance)
+		$own_gui.callstack.add_child(stack_frame_instance)
 
-@export var label_call: Label
-@export var label_sequence: Label
-@export var label_sequence_2: Label
-@export var label_return: Label
 func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
-	label_call.text = make_call_name(s, call_id)
+	$own_gui.label_call.text = make_call_name(s, call_id)
 	
 	# Case return
 	if call_id == 0:
-		label_sequence.visible = false
-		label_sequence_2.visible = false
-		label_return.visible = true
-		label_return.text = "--> " + tr("TERMINATE") + misc.int_array_to_string(F)
+		$own_gui.label_sequence.visible = false
+		$own_gui.label_queue.visible = false
+		$own_gui.label_return.visible = true
+		$own_gui.label_return.text = "--> " + tr("TERMINATE") + misc.int_array_to_string(F)
 		return
 	
-	label_return.visible = false
+	$own_gui.label_return.visible = false
 	
 	if F == null:
 		# Case F and F' not created yet
-		label_sequence.visible = false
-		label_sequence_2.visible = false
+		$own_gui.label_sequence.visible = false
+		$own_gui.label_queue.visible = false
 	else:
 		# Case F and F' created
-		label_sequence.visible = true
-		label_sequence.text = "F = " + misc.int_array_to_string(F)
+		$own_gui.label_sequence.visible = true
+		$own_gui.label_sequence.text = "F = " + misc.int_array_to_string(F)
 		
-		label_sequence_2.visible = true
-		label_sequence_2.text = "F' = " +  misc.int_array_to_string(F_2)
+		$own_gui.label_queue.visible = true
+		$own_gui.label_queue.text = "F' = " +  misc.int_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
 	if(from != null):
-		label_sequence_2.text = label_sequence_2.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
+		$own_gui.label_queue.text = $own_gui.label_queue.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
 
 # Create a string like: DFS(s = x) (Call y) based on parameter
 func make_call_name(s: vertex_class, call_id: int) -> String:
@@ -232,11 +227,10 @@ func make_call_name(s: vertex_class, call_id: int) -> String:
 	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + ")"
 
 # Highlight selected lines in the pseudocode
-@export var code_display: RichTextLabel
 func update_lines_selected(lines_to_paint: Array):
-	code_display.text = tr("DFS_PSEUDOCODE")
+	$own_gui.code_display.text = tr("DFS_PSEUDOCODE")
 	for line_nr: int in lines_to_paint:
-		code_display.paint_line(line_nr)
+		$own_gui.code_display.paint_line(line_nr)
 
 # Mark all visited vertices
 func update_visited_vertices():

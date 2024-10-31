@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl4ls2jdv3xlm"]
+
+[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://fonts/ProggyVector-Regular.otf" id="1_cx3fp"]
+[ext_resource type="Script" path="res://scripts/ui/linepainter.gd" id="2_7axx6"]
+[ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://scenes/stack_frame.tscn" id="3_inv42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pod14"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="own_gui" type="ColorRect"]
+visible = false
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -953.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label_call" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="label_sequence" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F  =  [...]"
+
+[node name="label_sequence_2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F' =  [...] (von Aufruf y)"
+
+[node name="code_display" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("1_cx3fp")
+bbcode_enabled = true
+text = "DFS_PSEUDOCODE"
+fit_content = true
+script = ExtResource("2_7axx6")
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="label_return" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+modulate = Color(0, 0.305882, 0.623529, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="stack" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer2"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "STACK"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/MarginContainer/VBoxContainer2"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="stack" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer"]
+light_mask = 17
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="stack_frame" parent="HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("3_inv42")]
+layout_mode = 2
+
+[node name="stack_frame2" parent="HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("3_inv42")]
+layout_mode = 2
+
+[node name="stack_frame3" parent="HBoxContainer/MarginContainer/VBoxContainer2/Panel/ScrollContainer/stack" instance=ExtResource("3_inv42")]
+layout_mode = 2

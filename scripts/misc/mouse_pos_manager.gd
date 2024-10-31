@@ -8,7 +8,7 @@ var over_ui: bool
 var upper_ui_margin: int = 100
 var lower_ui_margin: int = 60
 var left_ui_margin: int = 60
-var right_ui_margin: int = 1010
+var right_ui_margin: int = 630
 
 var viewport_pos: Vector2
 var world_pos: Vector2
@@ -31,13 +31,14 @@ func drag_camera():
 		init_drag_mouse_pos = viewport_pos
 
 func zoom_camera(delta):
-	if Input.is_action_just_pressed("mouse_wheel_up"):
-		if zoom.x < zoom_level:
-			zoom += Vector2(5.0, 5.0) * delta
+	if is_over_playground():
+		if Input.is_action_just_pressed("mouse_wheel_up"):
+			if zoom.x < zoom_level:
+				zoom += Vector2(5.0, 5.0) * delta
 
-	if Input.is_action_just_pressed("mouse_wheel_down"):
-		if zoom.x > 1.0/zoom_level:
-			zoom -= Vector2(5.0, 5.0) * delta
+		if Input.is_action_just_pressed("mouse_wheel_down"):
+			if zoom.x > 1.0/zoom_level:
+				zoom -= Vector2(5.0, 5.0) * delta
 
 func reset_zoom():
 	zoom = Vector2(1.0, 1.0)

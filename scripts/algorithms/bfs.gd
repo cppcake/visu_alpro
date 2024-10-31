@@ -12,6 +12,13 @@ var visited_edges = []
 var call_counter: int = 0
 var last_pop
 
+# Controls
+var callstack: VBoxContainer
+var label_call: Label
+var label_sequence: Label
+var label_queue: Label
+var label_return: Label
+
 # We will save dictionaries in the states Array. These will have these keys:
 enum bfs_keys
 {
@@ -30,6 +37,13 @@ enum bfs_keys
 }
 
 func init(start_vertex: vertex_class):
+	# Init controls
+	callstack = $own_gui.callstack
+	label_call = $own_gui.label_call
+	label_sequence = $own_gui.label_sequence 
+	label_queue = $own_gui.label_queue
+	label_return = $own_gui.label_return
+	
 	# Init pre Tiefensuche
 	$own_gui.visible = true
 	states.clear()
@@ -147,10 +161,9 @@ func store_state(	call_id: int,
 	# Push the new state
 	states.push_back(dict)
 
-@export var stackspeicher: VBoxContainer
 func draw_stack(stack: Array):
 	# Clear all stack frames before redrawing
-	for child: Control in stackspeicher.get_children():
+	for child: Control in callstack.get_children():
 		child.queue_free()	
 
 	# Iterate through stack in reverse
@@ -163,12 +176,8 @@ func draw_stack(stack: Array):
 		if i == 0:
 			stack_frame_instance.get_child(0).modulate = constants.uni_blau_c
 		
-		stackspeicher.add_child(stack_frame_instance)
+		callstack.add_child(stack_frame_instance)
 
-@export var label_call: Label
-@export var label_sequence: Label
-@export var label_queue: Label
-@export var label_return: Label
 func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 	label_call.text = make_call_name(s, call_id)
 	
@@ -210,11 +219,10 @@ func make_call_name(s: vertex_class, call_id: int) -> String:
 	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + ")"
 
 # Highlight selected lines in the pseudocode
-@export var code_display: RichTextLabel
 func update_lines_selected(lines_to_paint: Array):
-	code_display.text = tr("BFS_PSEUDOCODE")
+	$own_gui.code_display.text = tr("BFS_PSEUDOCODE")
 	for line_nr: int in lines_to_paint:
-		code_display.paint_line(line_nr)
+		$own_gui.code_display.paint_line(line_nr)
 
 # Mark all visited vertices
 func update_visited_vertices():
