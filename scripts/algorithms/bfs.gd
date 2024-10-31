@@ -159,6 +159,10 @@ func draw_stack(stack: Array):
 		var start_vertex_id: int = stack[i][1]
 		var stack_frame_instance = stack_frame_scene.instantiate()
 		stack_frame_instance.get_child(0).text = tr("BREADTH-FIRST-SEARCH") + "(s = " + str(start_vertex_id) + ") (" + tr("CALL") + " " + str(stack_frame_id) +  ")"
+		
+		if i == 0:
+			stack_frame_instance.get_child(0).modulate = constants.uni_blau_c
+		
 		stackspeicher.add_child(stack_frame_instance)
 
 @export var label_call: Label
