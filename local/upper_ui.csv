@@ -18,10 +18,12 @@ FORWARD_TOOLTIP,Proceed the algorithm a step forward,Führe den Algorithmus eine
 BACKWARD_TOOLTIP,Proceed the algorithm a step backward,Führe den Algorithmus einen Schritt zurück
 FORWARD_TOOLTIP_2,Proceed the algorithm 5 steps forward,Führe den Algorithmus fünf Schritte nach vorne
 BACKWARD_TOOLTIP_2,Proceed the algorithm 5 steps backward,Führe den Algorithmus fünf Schritte zurück
+BACKWARD_TOOLTIP_3,Jump to the first step,Springe zum ersten Schritt
+FORWARD_TOOLTIP_3,Jump to the last step,Springe zum letzten Schritt
 ,,
 CURRENT_MODE, Current mode: , Momentaner Modus: 
-VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it,"- Linksklick auf den grauen Bereich, um einen Knoten hinzuzufügen\n\t- Rechtsklick auf einen Knoten, um ihn zu entfernen"
-EDGES_INFO,- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them,"- Linksklick auf zwei Knoten, um eine Kante zwischen ihnen hinzuzufügen\n\t- Rechtsklick auf zwei Knoten, um die Kante zwischen ihnen zu entfernen"
-MOVE_INFO,- Select and drag a vertex to move it,"- Wähle einen Knoten aus und ziehe, um ihn zu bewegen."
+VERTICES_INFO,- Left click on grey area to add a vertex\n\t- Right click on a vertex to remove it\n\t- Hold middle mouse button to move around and scroll to zoom,"- Linksklick auf den grauen Bereich, um einen Knoten hinzuzufügen\n\t- Rechtsklick auf einen Knoten, um ihn zu entfernen\n\t- - Halte die mittlere Maustaste gedrückt um dich herum zu bewegen und scroll zum zoomen"
+EDGES_INFO,- Left click on two vertices to add an edge between them\n\t- Right click on two vertices to remove edge between them\n\t- Hold middle mouse button to move around and scroll to zoom,"- Linksklick auf zwei Knoten, um eine Kante zwischen ihnen hinzuzufügen\n\t- Rechtsklick auf zwei Knoten, um die Kante zwischen ihnen zu entfernen\n\t- - Halte die mittlere Maustaste gedrückt um dich herum zu bewegen und scroll zum zoomen"
+MOVE_INFO,- Select and drag a vertex to move it\n\t- Hold middle mouse button to move around and scroll to zoom,"- Wähle einen Knoten aus und ziehe, um ihn zu bewegen.\n\t- - Halte die mittlere Maustaste gedrückt um dich herum zu bewegen und scroll zum zoomen"
 BFS_INFO,- Select a vertex s to start a breadth-first search starting from it,"- Wähle einen Knoten s aus, um eine Breitensuche von ihm aus zu starten."
 DFS_INFO,- Select a vertex s to start a depht-first search starting from it,"- Wähle einen Knoten s aus, um eine Tiefensuche von ihm aus zu starten."

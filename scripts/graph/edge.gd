@@ -42,6 +42,7 @@ func _process(_delta):
 	draw()
 
 func draw():
+	head.visible = true
 	# Case 01: Edge from once vertex to another
 	if start_vertex != target_vertex:
 		var start_position = start_vertex.position
@@ -80,6 +81,10 @@ func draw():
 func mark_visited():
 	line.default_color = color_visited
 	head.color = color_visited
+
+func mark_freshly_visited():
+	line.default_color = color_visited * 0.5
+	head.color = color_visited * 0.5
 
 func reset_color():
 	line.default_color = color_def

@@ -7,10 +7,10 @@ script = ExtResource("1_t2688")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
-round_precision = 16
 antialiased = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 rotation = 1.309
 scale = Vector2(0.96035, 0.758169)
 antialiased = true

@@ -226,9 +226,12 @@ func update_s_v(s: vertex_class, v: vertex_class, w: vertex_class):
 		
 # Mark visited edges
 func update_visited_edges():
-	for edge: edge_class in states[current_step].get(bfs_keys.visited_edges):
+	var edges = states[current_step].get(bfs_keys.visited_edges)
+	for edge: edge_class in edges:
 		edge.mark_visited()
-
+	
+	#if edges.size() > 0:
+	#	edges[edges.size() - 1].mark_freshly_visited()
 # Apply the visuals of the current state
 func update_visuals():
 	var current_stack_frame: Array = states[current_step].get(bfs_keys.stack)

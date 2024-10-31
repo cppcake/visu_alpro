@@ -4,7 +4,7 @@ class_name GraphManager extends Node
 @onready var edge_scene = preload("res://scenes/edge.tscn")
 
 # Needed to decide what the user clicked on / selected
-var mouse_pos: Vector2
+@export var camera: Camera2D
 @export var sweeper: Node2D
 
 # Stores information about what the user clicked on / selected
@@ -20,9 +20,8 @@ func add_vertex(pos: Vector2) -> void:
 		add_child(vertex_instance)
 
 func add_vertex_at_mouse_pos() -> void:
-	mouse_pos = get_viewport().get_mouse_position()
-	if(mouse_pos.y > constants.upper_ui_margin - 60 && mouse_pos.x < get_viewport().get_visible_rect().size[0] - constants.right_ui_margin + 60):
-		add_vertex(mouse_pos)
+	if(camera.is_over_playground()):
+		add_vertex(camera.get_world_pos())
 	else:
 		print("Hitting UI, vertex wont be placed")
 
@@ -111,10 +110,8 @@ func forbid_vertex_at_mouse_pos_to_move() -> void:
 		selected_to_move = null
 
 func try_select_vertex() -> vertex_class:
-	mouse_pos = get_viewport().get_mouse_position()
-	
-	# Teleport the sweeper to mouse_pos and check if it hits anything
-	sweeper.set_global_position(mouse_pos)
+	# Teleport the sweeper to mouse_pos in world coordinates and check if it hits anything
+	sweeper.set_global_position(camera.get_world_pos())
 	sweeper.enabled = true
 	sweeper.force_shapecast_update()
 	

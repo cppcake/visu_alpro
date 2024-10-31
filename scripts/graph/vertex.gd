@@ -37,20 +37,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Make sure the vertex never collides with the UI 
-	var screen_size = get_viewport().get_size()
-	if global_position.y < constants.upper_ui_margin:
-		global_position = lerp(global_position, Vector2(global_position.x, 100), lerp_speed * delta)
-		
-	if global_position.y > screen_size.y - constants.lower_ui_margin:
-		global_position = lerp(global_position, Vector2(global_position.x, screen_size.y - constants.lower_ui_margin), lerp_speed * delta)
-		
-	if global_position.x < constants.left_ui_margin:
-		global_position = lerp(global_position, Vector2(constants.left_ui_margin, global_position.y), lerp_speed * delta)
-		
-	if global_position.x > screen_size.x - constants.right_ui_margin:
-		global_position = lerp(global_position, Vector2(screen_size.x - constants.right_ui_margin, global_position.y), lerp_speed * delta)
-		
 	# Make sure every vertex desnt collide with any other vertex
 	for vertex in get_tree().get_nodes_in_group("vertex_group"):
 		if vertex != self && global_position.distance_to(vertex.global_position) <  constants.node_margin:

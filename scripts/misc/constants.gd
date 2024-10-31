@@ -1,10 +1,6 @@
 class_name constants
 
 # UI Margin for vertex, includes the width of a vertex (thats bad)
-static var upper_ui_margin: int = 100
-static var lower_ui_margin: int = 60
-static var left_ui_margin: int = 60
-static var right_ui_margin: int = 1010
 static var node_margin: int = 125
 
 static var uni_blau = "#004e9f"
