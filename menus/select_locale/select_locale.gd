@@ -8,7 +8,7 @@ func _ready():
 	
 	# Locale already choosen, go to main
 	if config.has_section("locale"):
-		get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://menus/select_topic/select_topic.tscn")
 		return
 	
 	# Save defaults
@@ -27,7 +27,7 @@ func pick_locale(locale: String):
 	config.set_value("locale", "locale", locale)
 	config.set_value("locale", "has_choosen", true)
 	config.save("user://config.cfg")
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://menus/select_topic/select_topic.tscn")
 
 func pick_en():
 	pick_locale("en")

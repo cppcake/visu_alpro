@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/control/controller.gd" id="1_alfpf"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_pxai6"]
-[ext_resource type="Script" path="res://algorithms/bfs.gd" id="3_y7hy3"]
+[ext_resource type="Script" path="res://algorithms/graph_traversal/bfs.gd" id="3_y7hy3"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://algorithms/ui/scenes/pseudocode_variables_stack_gui_vertical.tscn" id="4_alt3w"]
-[ext_resource type="Script" path="res://algorithms/dfs.gd" id="5_eow1u"]
+[ext_resource type="Script" path="res://algorithms/graph_traversal/dfs.gd" id="5_eow1u"]
 [ext_resource type="Script" path="res://misc/easteregg/easteregg.gd" id="6_qp5x6"]
 [ext_resource type="Texture2D" uid="uid://dxt0moanjslh0" path="res://misc/easteregg/sprites/T_Wheatley.png" id="7_h1p85"]
 [ext_resource type="Texture2D" uid="uid://tf4fod7pptw7" path="res://misc/easteregg/sprites/T_Fact_Core.png" id="8_1jjjk"]

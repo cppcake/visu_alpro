@@ -29,7 +29,7 @@ size_flags_vertical = 4
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center][rainbow freq=2.0 sat=0.8 val=0.8]GRAPHENDEMONSTRATOR[/rainbow] [/center]
+text = "[center][rainbow freq=2.0 sat=0.8 val=0.8]alpro_demonstrator[/rainbow] [/center]
 "
 fit_content = true
 
