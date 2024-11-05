@@ -1,7 +1,7 @@
 extends Node
 
 # Needed scenes
-@onready var stack_frame_scene = preload("res://scenes/stack_frame.tscn")
+@onready var stack_frame_scene = preload("res://algorithms/ui/scenes/stack_frame.tscn")
 
 # Everything needed to save the states
 var states: Array = []
@@ -194,7 +194,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 		$own_gui.label_sequence.visible = false
 		$own_gui.label_queue.visible = false
 		$own_gui.label_return.visible = true
-		$own_gui.label_return.text = "--> " + tr("TERMINATE") + misc.int_array_to_string(F)
+		$own_gui.label_return.text = "--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F)
 		return
 	
 	$own_gui.label_return.visible = false
@@ -206,10 +206,10 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 	else:
 		# Case F and F' created
 		$own_gui.label_sequence.visible = true
-		$own_gui.label_sequence.text = "F = " + misc.int_array_to_string(F)
+		$own_gui.label_sequence.text = "F = " + helper_functions.vertex_array_to_string(F)
 		
 		$own_gui.label_queue.visible = true
-		$own_gui.label_queue.text = "F' = " +  misc.int_array_to_string(F_2)
+		$own_gui.label_queue.text = "F' = " +  helper_functions.vertex_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
 	if(from != null):

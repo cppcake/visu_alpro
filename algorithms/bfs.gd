@@ -1,7 +1,7 @@
 extends Node
 
 # Needed scenes
-@onready var stack_frame_scene = preload("res://scenes/stack_frame.tscn")
+@onready var stack_frame_scene = preload("res://algorithms/ui/scenes/stack_frame.tscn")
 
 # Everything needed to save the states
 var states: Array = []
@@ -186,7 +186,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 		label_sequence.visible = false
 		label_queue.visible = false
 		label_return.visible = true
-		label_return.text = "--> " + tr("TERMINATE") + misc.int_array_to_string(F)
+		label_return.text = "--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F)
 		return
 	
 	label_return.visible = false
@@ -198,10 +198,10 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 	else:
 		# Case F and F' created
 		label_sequence.visible = true
-		label_sequence.text = "F = " + misc.int_array_to_string(F)
+		label_sequence.text = "F = " + helper_functions.vertex_array_to_string(F)
 		
 		label_queue.visible = true
-		label_queue.text = "Q = " +  misc.int_array_to_string(F_2)
+		label_queue.text = "Q = " +  helper_functions.vertex_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
 	if(from != null):

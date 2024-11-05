@@ -25,6 +25,18 @@ window/size/mode=2
 
 import/blender/enabled=false
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
+
+[importer_defaults]
+
+csv_translation={
+"compress": true,
+"delimiter": 0
+}
+
 [input]
 
 M1={
@@ -97,7 +109,7 @@ mouse_wheel_down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://local/upper_ui.de.translation", "res://local/upper_ui.en.translation", "res://local/algorithms.de.translation", "res://local/algorithms.en.translation")
+locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation")
 
 [rendering]
 

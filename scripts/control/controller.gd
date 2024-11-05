@@ -201,8 +201,10 @@ func proceed_algorithm(steps: int) -> void:
 
 # Init
 func _ready():
-	# Set init language
-	TranslationServer.set_locale("en")
+	# Set init language from config file
+	var config = ConfigFile.new()
+	config.load("user://config.cfg")
+	TranslationServer.set_locale(config.get_value("locale", "locale"))
 	# Set init mode
 	set_mode(mode)
 

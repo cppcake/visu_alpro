@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://ce6y5gjob4a57"
-path="res://.godot/imported/ProggyVector-Regular.otf-08440524eb9c967d4515ddfeb5ab344c.fontdata"
+path="res://.godot/imported/ProggyVector-Regular.otf-6e1b7c68153b22ae8e29f1d51c9db6b7.fontdata"
 
 [deps]
 
-source_file="res://fonts/ProggyVector-Regular.otf"
-dest_files=["res://.godot/imported/ProggyVector-Regular.otf-08440524eb9c967d4515ddfeb5ab344c.fontdata"]
+source_file="res://misc/fonts/ProggyVector-Regular.otf"
+dest_files=["res://.godot/imported/ProggyVector-Regular.otf-6e1b7c68153b22ae8e29f1d51c9db6b7.fontdata"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://7oq8rdksswhi"]
 
-[ext_resource type="Script" path="res://scripts/ui/pseudocode_variables_stack_gui.gd" id="1_tx2x8"]
-[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://fonts/ProggyVector-Regular.otf" id="2_loyqh"]
-[ext_resource type="Script" path="res://scripts/ui/linepainter.gd" id="3_kbc4t"]
-[ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://scenes/stack_frame.tscn" id="4_w1iwb"]
+[ext_resource type="Script" path="res://algorithms/ui/scripts/pseudocode_variables_stack_gui.gd" id="1_tx2x8"]
+[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="2_loyqh"]
+[ext_resource type="Script" path="res://algorithms/ui/scripts/linepainter.gd" id="3_kbc4t"]
+[ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://algorithms/ui/scenes/stack_frame.tscn" id="4_w1iwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pod14"]
 bg_color = Color(1, 1, 1, 1)

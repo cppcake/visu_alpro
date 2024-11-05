@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://vplmas503u44"]
+
+[ext_resource type="Script" path="res://menus/select_locale/select_locale.gd" id="1_rtr0l"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_et7ij"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center][rainbow freq=2.0 sat=0.8 val=0.8]GRAPHENDEMONSTRATOR[/rainbow] [/center]
+"
+fit_content = true
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Pick a language to proceed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LocaleSelector" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_rtr0l")
+
+[node name="ButtonEN" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/LocaleSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_et7ij")
+text = "ENGLISH"
+
+[node name="ButtonDE" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/LocaleSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_et7ij")
+text = "GERMAN"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/LocaleSelector/ButtonEN" to="ColorRect/MarginContainer/VBoxContainer/LocaleSelector" method="pick_en"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/LocaleSelector/ButtonDE" to="ColorRect/MarginContainer/VBoxContainer/LocaleSelector" method="pick_de"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0n2fo0ty8gbg"
-path="res://.godot/imported/uni_bonn.jpeg-012043d7dbb37c680f3da03d4b61f17f.ctex"
+uid="uid://e4y0fyio8suv"
+path="res://.godot/imported/vertex_uni_blau.png-6ec865acaebcb39080f70c87c6f31257.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/uni_bonn.jpeg"
-dest_files=["res://.godot/imported/uni_bonn.jpeg-012043d7dbb37c680f3da03d4b61f17f.ctex"]
+source_file="res://graph/sprites/vertex_uni_blau.png"
+dest_files=["res://.godot/imported/vertex_uni_blau.png-6ec865acaebcb39080f70c87c6f31257.ctex"]
 
 [params]
 
