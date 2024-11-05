@@ -13,7 +13,7 @@ config_version=5
 config/name="graphendemonstrator"
 run/main_scene="res://menus/select_locale/select_locale.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://misc/icon.svg"
 
 [display]
 
