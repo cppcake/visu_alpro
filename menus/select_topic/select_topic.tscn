@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4byyinbr8yl6"]
+[gd_scene load_steps=5 format=3 uid="uid://d4byyinbr8yl6"]
 
 [ext_resource type="Texture2D" uid="uid://cp8jmj4055ddo" path="res://menus/select_topic/images/placeholder.png" id="1_83yua"]
 [ext_resource type="Theme" uid="uid://bb7wilt84kypn" path="res://menus/select_topic/item_list.tres" id="1_uwio3"]
+[ext_resource type="Script" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
 [ext_resource type="Script" path="res://menus/select_topic/select_topic.gd" id="5_g53c3"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -13,49 +14,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 22.0
-grow_horizontal = 2
-
 [node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -858.5
-offset_bottom = 858.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 theme = ExtResource("1_uwio3")
 theme_override_font_sizes/font_size = 42
-text = "
-alpro_demonstrator
-
-"
+text = "alpro_demonstrator"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 theme = ExtResource("1_uwio3")
 theme_override_font_sizes/font_size = 30
-text = "Pick a topic to visualize
-"
+text = "Pick a topic to visualize"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemList" type="ItemList" parent="ColorRect/CenterContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_5hq36")
+
+[node name="ItemList" type="ItemList" parent="ColorRect/CenterContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(1680, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource("1_uwio3")
 auto_height = true
 item_count = 9
@@ -81,4 +81,4 @@ item_7/icon = ExtResource("1_83yua")
 item_8/text = ""
 script = ExtResource("5_g53c3")
 
-[connection signal="item_selected" from="ColorRect/CenterContainer/VBoxContainer/ItemList" to="ColorRect/CenterContainer/VBoxContainer/ItemList" method="_on_item_selected"]
+[connection signal="item_selected" from="ColorRect/CenterContainer/VBoxContainer/ScrollContainer/ItemList" to="ColorRect/CenterContainer/VBoxContainer/ScrollContainer/ItemList" method="_on_item_selected"]
