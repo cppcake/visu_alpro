@@ -69,15 +69,6 @@ func set_mode(mode_: modes):
 			display.set_text("[tornado radius=15.0 freq=3.0 connected=1]\n\n          pick a vertex to start the [rainbow freq=2.0 sat=0.8 val=0.8]PORTAL[/rainbow] algorithm[/tornado]")
 			
 
-# Change the language, 0 - english; 1 - german and reapply the mode to update the info-text
-func set_local(index: int):
-	match index:
-		0:
-			TranslationServer.set_locale("en")
-		1:
-			TranslationServer.set_locale("de")
-	set_mode(mode)
-
 # There are two groups of buttons:
 # - The active buttons group. It consists:
 #	 - Buttons that manipulate the graph

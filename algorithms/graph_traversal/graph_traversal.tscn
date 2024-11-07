@@ -47,14 +47,25 @@ radius = 1.0
 script/source = "extends OptionButton
 
 func _ready():
-	TranslationServer.set_locale(\"de\")
+	var config = ConfigFile.new()
+	config.load(\"user://config.cfg\")
+
+	match config.get_value(\"locale\", \"locale\"):
+		\"en\":
+			selected = 0
+		\"de\":
+			selected = 1
 
 func _on_item_selected(index):
+	var scene_man = scene_manager.new()
+	add_child(scene_man)
 	match index:
 		0:
-			TranslationServer.set_locale(\"de\")
+			helper_functions.select_locale(\"en\")
 		1:
-			TranslationServer.set_locale(\"en\")
+			helper_functions.select_locale(\"de\")
+	
+	scene_man.change_scene(\"select_topic\")
 "
 
 [node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
@@ -502,5 +513,5 @@ zoom_level = 2.0
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" method="_on_pressed"]
-[connection signal="item_selected" from="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="." method="set_local"]
+[connection signal="item_selected" from="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" method="_on_item_selected"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" to="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]
