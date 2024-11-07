@@ -5,12 +5,15 @@ class_name GraphManager extends Node
 
 # Needed to decide what the user clicked on / selected
 @export var camera: Camera2D
-@export var sweeper: Node2D
+var sweeper: Node2D
 
 # Stores information about what the user clicked on / selected
 var selected: vertex_class = null
 var selected_2: vertex_class = null
 var selected_to_move: vertex_class = null
+
+func _ready():
+	sweeper = get_child(0)
 
 func add_vertex(pos: Vector2) -> void:
 		print("Vertex will be added at ", pos)

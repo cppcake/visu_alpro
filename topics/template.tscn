@@ -1,0 +1,187 @@
+[gd_scene load_steps=10 format=3 uid="uid://bthcdr4abtmxb"]
+
+[ext_resource type="PackedScene" uid="uid://dq8n3q2fa7rns" path="res://graph/graph_manager.tscn" id="1_4qwbx"]
+[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_spxkm"]
+[ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_85jl3"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_0rtpr"]
+[ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="33_22dmt"]
+[ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ilx38"]
+[ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_1qd0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
+
+[node name="root" type="Node"]
+
+[node name="graph_manager" parent="." instance=ExtResource("1_4qwbx")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="upper_gui" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("31_0rtpr")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm"]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+alignment = 1
+
+[node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+layout_mode = 2
+theme = ExtResource("31_0rtpr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_navigation"]
+layout_mode = 2
+alignment = 1
+
+[node name="button_stop" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "STOP_TOOLTIP"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
+disabled = true
+text = "STOP"
+
+[node name="button_backward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP_3"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "<<<-"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = -9999999
+
+[node name="button_backward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP_2"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "<<--"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = -5
+
+[node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "<---"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = -1
+
+[node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("31_0rtpr")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "FORWARD_TOOLTIP"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "--->"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = 1
+
+[node name="button_forward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "FORWARD_TOOLTIP_2"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "-->>"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = 5
+
+[node name="button_forward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "FORWARD_TOOLTIP_3"
+focus_mode = 1
+mouse_filter = 2
+theme = ExtResource("31_0rtpr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+text = "->>>"
+script = ExtResource("33_22dmt")
+controller = NodePath("../../../../../..")
+jump = 9999999
+
+[node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("34_ilx38")]
+layout_mode = 2
+
+[node name="info_gui" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -563.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/info_gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="display" type="RichTextLabel" parent="CanvasLayer/info_gui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("24_spxkm")
+bbcode_enabled = true
+script = ExtResource("25_85jl3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("35_1qd0j")
+zoom_level = 2.0
+
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop_algorithm"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further2" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further2" method="_on_pressed"]

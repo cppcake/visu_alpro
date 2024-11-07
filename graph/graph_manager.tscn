@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq8n3q2fa7rns"]
+
+[ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="1_340bl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
+radius = 1.0
+
+[node name="graph_manager" type="Node" node_paths=PackedStringArray("camera")]
+process_mode = 1
+script = ExtResource("1_340bl")
+camera = NodePath("")
+
+[node name="sweeper" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource("CircleShape2D_uforu")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+collide_with_bodies = false

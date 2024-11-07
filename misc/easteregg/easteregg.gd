@@ -79,7 +79,7 @@
 
 extends Node
 
-@onready var stack_frame_scene = preload("res://algorithms/ui/scenes/stack_frame.tscn")
+@onready var stack_frame_scene = preload("res://topics/ui/scenes/stack_frame.tscn")
 
 var states: Array = []
 var current_step: int = 0

@@ -5,10 +5,10 @@ var over_ui: bool
 @export var zoom_level: float
 
 # UI Margin for vertex, includes the width of a vertex (thats bad)
-var upper_ui_margin: int = 100
-var lower_ui_margin: int = 60
-var left_ui_margin: int = 60
-var right_ui_margin: int = 630
+@export var upper_ui_margin: int = 100
+@export var lower_ui_margin: int = 60
+@export var left_ui_margin: int = 60
+@export var right_ui_margin: int = 630
 
 var viewport_pos: Vector2
 var world_pos: Vector2

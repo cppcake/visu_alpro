@@ -2,7 +2,7 @@ class_name scene_manager extends Node
 
 var select_locale_path = "res://menus/select_locale/select_locale.tscn"
 var select_topic_path = "res://menus/select_topic/select_topic.tscn"
-var graph_traversal_path = "res://algorithms/graph_traversal/graph_traversal.tscn"
+var graph_traversal_path = "res://topics/graph_traversal/graph_traversal.tscn"
 
 func change_scene(scene: String):
 	match scene:
