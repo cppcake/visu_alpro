@@ -105,6 +105,12 @@ func clear() -> void:
 	for n in get_children():
 		remove_child(n)
 		n.queue_free() 
+		
+func clear_edges() -> void:
+	for n in get_children():
+		if type_string(typeof(n)) == "edge_class":
+			remove_child(n)
+			n.queue_free() 
 
 func allow_vertex_at_mouse_pos_to_move() -> void:
 	var collider = try_select_vertex()

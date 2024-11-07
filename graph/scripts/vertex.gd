@@ -16,6 +16,7 @@ enum sprites {unselected, selected, hovered, current, visited}
 var id_: int
 var allowed_to_move: bool = false
 var visited: bool = false
+var extra_info: Array
 
 # Visuals of vertex 
 var label_id: Label
