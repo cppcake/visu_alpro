@@ -1,4 +1,4 @@
-extends Camera2D
+class_name CameraManager extends Camera2D
 
 var over_ui: bool
 

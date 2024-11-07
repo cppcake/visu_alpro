@@ -6,7 +6,7 @@ var target_vertex: vertex_class
 # Needed to draw edge
 var line: Line2D
 var head: Polygon2D
-static var distance_head_node: float = 85
+var distance_head_node: float = 85
 
 # Needed to properly draw an edge, if there exists a counteredge
 var displacement: bool = false

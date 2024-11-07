@@ -192,6 +192,7 @@ func proceed_algorithm(steps: int) -> void:
 
 # Init
 func _ready():
+	vertex_class.automatic_labeling = true
 	# Set init language from config file
 	var config = ConfigFile.new()
 	config.load("user://config.cfg")

@@ -8,7 +8,7 @@ func _on_pressed():
 	
 	for id in range(vertex_class.node_count):
 		get_tree().call_group("edge_group" + str(id), "queue_free")
-		
+	
 	vertex_class.node_count = 0
 	
 	camera.reset_zoom()

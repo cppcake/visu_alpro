@@ -15,12 +15,13 @@ var selected_to_move: vertex_class = null
 func _ready():
 	sweeper = get_child(0)
 
-func add_vertex(pos: Vector2) -> void:
-		print("Vertex will be added at ", pos)
-		var vertex_instance = vertex_scene.instantiate()
-		vertex_instance.set_global_position(pos)
-		vertex_instance.add_to_group("vertex_group")
-		add_child(vertex_instance)
+func add_vertex(pos: Vector2) -> vertex_class:
+	print("Vertex will be added at ", pos)
+	var vertex_instance = vertex_scene.instantiate()
+	vertex_instance.set_global_position(pos)
+	vertex_instance.add_to_group("vertex_group")
+	add_child(vertex_instance)
+	return vertex_instance
 
 func add_vertex_at_mouse_pos() -> void:
 	if(camera.is_over_playground()):
@@ -50,11 +51,11 @@ func get_vertex_by_id(vertex_id):
 			return vertex
 	return null
 
-func add_edge(start, target) -> void:
+func add_edge(start: vertex_class, target: vertex_class) -> edge_class:
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
 		if edge.target_vertex.id_ == target.id_:
 			print("Edge from vertex ", start.id_, " to vertex ", target.id_, " already exists")
-			return
+			return edge
 			
 	print("Adding edge between vertex ", start.id_, " and vertex ", target.id_)
 	var edge_instance = edge_scene.instantiate()
@@ -70,6 +71,7 @@ func add_edge(start, target) -> void:
 			
 	edge_instance.add_to_group("edge_group" + str(start.id_))
 	add_child(edge_instance)
+	return edge_instance
 
 func add_edge_between_selected() -> void:
 	update_selected()
@@ -77,7 +79,7 @@ func add_edge_between_selected() -> void:
 		add_edge(selected, selected_2) 
 		reset_selected()
 
-func rm_edge(start, target) -> void:
+func rm_edge(start: vertex_class, target: vertex_class) -> void:
 	# Die Laufzeit ist trotzdem in O(n), also alles gut :P
 	for edge in get_tree().get_nodes_in_group("edge_group" + str(start.id_)):
 		if edge.target_vertex == target:
@@ -98,6 +100,11 @@ func rm_edge_between_selected() -> void:
 	if selected != null && selected_2 != null:
 		rm_edge(selected, selected_2) 
 		reset_selected()
+
+func clear() -> void:
+	for n in get_children():
+		remove_child(n)
+		n.queue_free() 
 
 func allow_vertex_at_mouse_pos_to_move() -> void:
 	var collider = try_select_vertex()

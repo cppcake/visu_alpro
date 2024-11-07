@@ -3,6 +3,7 @@ class_name vertex_class extends Area2D
 # Static variables and functions
 static var node_count: int = 0
 static var lerp_speed: int = 15;
+static var automatic_labeling = true
 
 # Sprites
 enum sprites {unselected, selected, hovered, current, visited}
@@ -61,9 +62,11 @@ func reset_visited():
 	visited = false
 
 func reset_labels():
-	label_id.text = str(id_)
 	label_info.text = ""
 	label_meta.text = ""
+	label_id.text = ""
+	if automatic_labeling:
+		label_id.text = str(id_)
 
 func set_sprite(selection: sprites):
 	match selection:

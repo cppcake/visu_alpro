@@ -14,3 +14,5 @@ func _on_item_selected(index):
 	match index:
 		0:
 			scene_man.change_scene("graph_traversal")
+		1:
+			scene_man.change_scene("simple_list")

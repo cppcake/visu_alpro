@@ -5,10 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
 
-[node name="graph_manager" type="Node" node_paths=PackedStringArray("camera")]
+[node name="graph_manager" type="Node"]
 process_mode = 1
 script = ExtResource("1_340bl")
-camera = NodePath("")
 
 [node name="sweeper" type="ShapeCast2D" parent="."]
 enabled = false
