@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://bomrfiqo5sk4q"]
 
-[ext_resource type="Script" path="res://scripts/control/controller.gd" id="1_1864d"]
+[ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/scenes/pseudocode_variables_stack_gui_vertical.tscn" id="4_g3jgw"]
@@ -29,10 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://dyhnwx0u1d4q2" path="res://misc/easteregg/sprites/T_No_Cake.png" id="27_vxkff"]
 [ext_resource type="Texture2D" uid="uid://scgh683jvfi3" path="res://misc/easteregg/sprites/T_Cake.png" id="28_5friv"]
 [ext_resource type="AudioStream" uid="uid://gqljk4rbeoym" path="res://misc/easteregg/sounds/sound_weapons_portalgun_portal_open2.wav" id="29_0n7ow"]
-[ext_resource type="Script" path="res://scripts/control/mode_select.gd" id="30_d3yqm"]
+[ext_resource type="Script" path="res://topics/graph_traversal/scripts/mode_select.gd" id="30_d3yqm"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_phvch"]
 [ext_resource type="Script" path="res://menus/main/scripts/buttons/reset.gd" id="32_ojub5"]
-[ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="33_huo3b"]
+[ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_gotrf"]
 

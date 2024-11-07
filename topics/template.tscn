@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_spxkm"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_85jl3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_0rtpr"]
-[ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="33_22dmt"]
+[ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_22dmt"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ilx38"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_1qd0j"]
 
