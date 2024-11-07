@@ -30,7 +30,9 @@ func drag_camera():
 		position += init_drag_mouse_pos - viewport_pos
 		init_drag_mouse_pos = viewport_pos
 
+var previous_zoom
 func zoom_camera(delta):
+	previous_zoom = zoom
 	if is_over_playground():
 		if Input.is_action_just_pressed("mouse_wheel_up"):
 			if zoom.x < zoom_level:
@@ -39,6 +41,10 @@ func zoom_camera(delta):
 		if Input.is_action_just_pressed("mouse_wheel_down"):
 			if zoom.x > 1.0/zoom_level:
 				zoom -= Vector2(5.0, 5.0) * delta
+
+	var zoom_factor = zoom / previous_zoom
+	var diff_pos = (get_world_pos() - position) * (zoom_factor - Vector2(1, 1))
+	position += diff_pos
 
 func reset_zoom():
 	zoom = Vector2(1.0, 1.0)

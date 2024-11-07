@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=39 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://scripts/control/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
@@ -33,7 +33,7 @@
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_phvch"]
 [ext_resource type="Script" path="res://menus/main/scripts/buttons/reset.gd" id="32_ojub5"]
 [ext_resource type="Script" path="res://scripts/control/navigate_algorithm.gd" id="33_huo3b"]
-[ext_resource type="Script" path="res://menus/main/scripts/buttons/exit.gd" id="34_wtibs"]
+[ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://algorithms/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_gotrf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
@@ -42,31 +42,6 @@ radius = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
-
-[sub_resource type="GDScript" id="GDScript_5nve5"]
-script/source = "extends OptionButton
-
-func _ready():
-	var config = ConfigFile.new()
-	config.load(\"user://config.cfg\")
-
-	match config.get_value(\"locale\", \"locale\"):
-		\"en\":
-			selected = 0
-		\"de\":
-			selected = 1
-
-func _on_item_selected(index):
-	var scene_man = scene_manager.new()
-	add_child(scene_man)
-	match index:
-		0:
-			helper_functions.select_locale(\"en\")
-		1:
-			helper_functions.select_locale(\"de\")
-	
-	scene_man.change_scene(\"select_topic\")
-"
 
 [node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
 script = ExtResource("1_1864d")
@@ -438,35 +413,8 @@ script = ExtResource("33_huo3b")
 controller = NodePath("../../../../../..")
 jump = 9999999
 
-[node name="buttons_misc" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("34_ip20d")]
 layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("31_phvch")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_misc"]
-layout_mode = 2
-alignment = 2
-
-[node name="dropdown_local" type="OptionButton" parent="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3" groups=["buttons_active"]]
-layout_mode = 2
-tooltip_text = "LOCAL_TOOLTIP"
-focus_mode = 1
-theme = ExtResource("31_phvch")
-item_count = 2
-selected = 0
-popup/item_0/text = "EN"
-popup/item_0/id = 0
-popup/item_1/text = "DE"
-popup/item_1/id = 1
-script = SubResource("GDScript_5nve5")
-
-[node name="button_exit" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3"]
-layout_mode = 2
-tooltip_text = "EXIT_TOOLTIP"
-focus_mode = 1
-theme = ExtResource("31_phvch")
-text = "EXIT"
-script = ExtResource("34_wtibs")
 
 [node name="info_gui" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 11
@@ -513,5 +461,3 @@ zoom_level = 2.0
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" method="_on_pressed"]
-[connection signal="item_selected" from="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" to="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/dropdown_local" method="_on_item_selected"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" to="CanvasLayer/upper_gui/buttons/buttons_misc/HBoxContainer3/button_exit" method="_on_pressed"]
