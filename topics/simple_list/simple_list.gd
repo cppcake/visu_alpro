@@ -13,6 +13,8 @@ var vertices: Array
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	vertex_class.automatic_labeling = false
+	vertex_class.lerp_speed = 5
+	vertex_class.bahn = false
 	
 	head = graph_manager.add_vertex(Vector2(0, 0))
 	head.sprite.visible = false
@@ -25,9 +27,23 @@ func _ready():
 		positions.append(Vector2(i * corona_distance, 0))
 	recreate_list()
 
+var current_step = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	var left_click = Input.is_action_just_pressed("M1")
+	if left_click:
+		current_step = current_step + 1
+		insert_front_forward(current_step, "xD")
+	
+	var right_click = Input.is_action_just_pressed("M2")
+	if right_click:
+		insert_front_backward(current_step)
+		current_step = current_step - 1
+		
+	var middle_click = Input.is_action_just_pressed("M3")
+	if middle_click:
+		pass
+		
 
 func recreate_list():
 	# Clear current graph
@@ -77,43 +93,55 @@ func redraw_labels():
 	null_.label_id.text = "null"
 	null_.label_id.position = Vector2(-50, -40)	
 
-func insert_front(step: int, save: bool, name: String):
-	# Step 0 - Reset to init
-	recreate_list()
+var new_vertex: vertex_class
+var invis: vertex_class
+func insert_front_forward(step: int, data: String):
+	match step:
+		1:
+			new_vertex = graph_manager.add_vertex(Vector2(vertices[0].position.x - 100, 200))
+			new_vertex.label_id.text = data
+			invis = graph_manager.add_vertex(Vector2(vertices[0].position.x + 100, 200))
+			invis.visible = false
+			graph_manager.add_edge(new_vertex, invis)
 	
-	if step < 1:
-		return
-	
-	# Step 1 - create vertex pointing into nothing
-	var new_vertex: vertex_class = graph_manager.add_vertex(Vector2(vertices[0].position.x - 100, 200))
-	new_vertex.label_id.text = name
-	var nothingness: vertex_class = graph_manager.add_vertex(Vector2(vertices[0].position.x + 100, 200))
-	nothingness.visible = false
-	graph_manager.add_edge(new_vertex, nothingness)
-	
-	if step < 2:
-		return
-	
-	# Step 2 - let new vertex point at vertex pointed at by head
-	graph_manager.rm_edge(new_vertex, nothingness)
-	graph_manager.add_edge(new_vertex, vertices[0])
+		2:
+			# Step 2 - let new vertex point at vertex pointed at by head
+			invis.move_to(vertices[0].position)
 
-	if step < 3:
-		return
+		3:
+			graph_manager.rm_edge(new_vertex, invis)
+			graph_manager.add_edge(new_vertex, vertices[0])
+			# Step 3 - make head point at the new vertex
+			graph_manager.rm_edge(head, vertices[0])
+			graph_manager.add_edge(head, invis)
+			invis.move_to(new_vertex.position)
+			
+			
+		4:
+			graph_manager.rm_edge(head, invis)
+			graph_manager.add_edge(head, new_vertex)
+			# Step 4 - repositon
+			new_vertex.move_to(Vector2(vertices[0].position.x - corona_distance, 0))
+			vertices.push_front(new_vertex)
+			reposition_head_tail()
+
+func insert_front_backward(step: int):
+	match step:
+		1:
+			# Step 1 - create vertex pointing into nothing
+			graph_manager.rm_vertex(new_vertex)
 	
-	# Step 3 - make head point at the new vertex
-	graph_manager.rm_edge(head, vertices[0])
-	graph_manager.add_edge(head, new_vertex)
-	
-	if step < 4:
-		return
-	
-	# Step 4 - repositon
-	new_vertex.position = Vector2(vertices[0].position.x - corona_distance, 0)
-	vertices.push_front(new_vertex)
-	reposition_head_tail()
-	
-	# Save
-	if save:
-		names.push_front(name)
-		positions.push_front(new_vertex.position)
+		2:
+			# Step 2 - let new vertex point at vertex pointed at by head
+			graph_manager.add_edge(new_vertex, invis)
+			graph_manager.rm_edge(new_vertex, vertices[0])
+
+		3:
+			# Step 3 - make head point at the new vertex
+			graph_manager.add_edge(head, vertices[0])
+			graph_manager.rm_edge(head, new_vertex)
+		4:
+			# Step 4 - repositon
+			vertices.pop_front()
+			new_vertex.move_to(Vector2(vertices[0].position.x - 100, 200))
+			reposition_head_tail()

@@ -192,7 +192,11 @@ func proceed_algorithm(steps: int) -> void:
 
 # Init
 func _ready():
+	vertex_class.node_count = 0 
 	vertex_class.automatic_labeling = true
+	vertex_class.lerp_speed = 25
+	vertex_class.bahn = true
+	
 	# Set init language from config file
 	var config = ConfigFile.new()
 	config.load("user://config.cfg")
