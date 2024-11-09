@@ -37,6 +37,8 @@ func backward():
 		current_step = current_step - 1
 
 func stop():
+	while current_step < max_step:
+		forward()
 	current_step = 0
 	max_step= 0
 	current_algo = ""

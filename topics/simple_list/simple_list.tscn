@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=11 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list_2.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://graph/pointer.tscn" id="2_6nbmj"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
+[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="5_ses31"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="6_su72p"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="7_7vu2n"]
@@ -46,25 +47,26 @@ layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="button_insert_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
+[node name="button_insert_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Insert front"
+script = ExtResource("4_kusec")
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 placeholder_text = "String to add"
 
-[node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
+[node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Insert after"
 
-[node name="button_remove_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
+[node name="button_remove_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Remove front
 "
 
-[node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
+[node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Remove after"
 
@@ -82,7 +84,9 @@ tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
+disabled = true
 text = "STOP"
+script = ExtResource("4_kusec")
 
 [node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
@@ -90,6 +94,7 @@ tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
 text = "<---"
 
 [node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer"]
@@ -103,6 +108,7 @@ tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
 text = "--->"
 
 [node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("4_6cqoy")]
@@ -141,8 +147,8 @@ script = ExtResource("7_7vu2n")
 zoom_level = 2.0
 
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="." method="_on_button_insert_front_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" method="_on_pressed"]
