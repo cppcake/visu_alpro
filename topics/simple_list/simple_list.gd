@@ -1,11 +1,13 @@
 extends Node
 
 @export var head: pointer_class
+@export var current: pointer_class
 var size: int = 0
 
 @onready var list_v_scene = preload("res://graph/list_vertex.tscn")
 
-@export var label_progress: Label
+func _ready():
+	make_current(null)
 
 var current_step: int = 0
 var max_step: int = 0
@@ -43,6 +45,7 @@ func stop():
 	max_step= 0
 	current_algo = ""
 	update_step_label()
+	make_current(null)
 	reposition_list()
 	
 	if to_remove != null:
@@ -100,13 +103,14 @@ func reposition_list():
 	if head.target == null:
 		head.position = Vector2(0, -75)
 	else:
-		var current = head.target
+		var current_ = head.target
 		var pos = head.position + Vector2(150, 75)
-		while current != null:
-			current.move_to(pos)
+		while current_ != null:
+			current_.move_to(pos)
 			pos += Vector2(200, 0)
-			current = current.p1.target
+			current_ = current_.p1.target
 
+@export var label_progress: Label
 func update_step_label():
 	label_progress.update_step_label(current_step, max_step)
 
@@ -114,13 +118,24 @@ func update_step_label():
 func update_size_label(addend: int):
 	size = size + addend
 	size_label.text = "List size: " + str(size)
-	
+
 func init_algo(max_step_: int, current_algo_: String):
 	print("Size of list: " + str(size))
 	current_step = 0
 	max_step = max_step_
 	current_algo = current_algo_
 	update_step_label()
+
+func make_current(target):
+	if target == null:
+		current.visible = false
+		current.target = null
+		current.global_position = Vector2(9000, 9000)
+	else:
+		current.position = target.position + Vector2(0, 100)
+		current.target = target
+		current.current_end_point = target.position
+		current.visible = true
 
 func _on_button_insert_front_pressed():
 	init_algo(4, "insert_front")
@@ -131,4 +146,24 @@ func _on_button_remove_front_pressed():
 	else:
 		init_algo(3, "remove_front")
 
+func prepare_insert_after(_viewport, event, _shape_idx):
+	# Check if the event is an InputEventMouseButton
+	if event is InputEventMouseButton:
+		# Check if it's a left-click (left mouse button has index 1)
+		if event.button_index == 1 and event.pressed:
+			while list_vertex_class.selected_vertex == null:
+				pass
+			make_current(list_vertex_class.selected_vertex)
+			for child in self.get_children():
+				if type_string(typeof(child)) == "Object":
+					if child is list_vertex_class:
+						child.disconnect("input_event", prepare_insert_after)
 
+func _on_button_insert_after_pressed():
+	for child in self.get_children():
+		if type_string(typeof(child)) == "Object":
+			if child is list_vertex_class:
+				child.connect("input_event", prepare_insert_after)
+
+func _on_button_remove_after_pressed():
+	pass # Replace with function body.

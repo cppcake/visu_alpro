@@ -31,3 +31,12 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+static var selected_vertex = null
+func _on_input_event(_viewport, event, _shape_idx):
+	# Check if the event is an InputEventMouseButton
+	if event is InputEventMouseButton:
+		# Check if it's a left-click (left mouse button has index 1)
+		if event.button_index == 1 and event.pressed:
+			selected_vertex = self
+			print(selected_vertex.position)

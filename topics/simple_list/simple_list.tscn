@@ -15,15 +15,19 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "label_progress", "size_label")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "current", "label_progress", "size_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
+current = NodePath("current")
 label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/state_counter")
 size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
 position = Vector2(0, -75)
 label_start_text = "Head"
+
+[node name="current" parent="." instance=ExtResource("2_6nbmj")]
+label_start_text = "current"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -59,6 +63,7 @@ script = ExtResource("4_kusec")
 [node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Insert after"
+script = ExtResource("4_kusec")
 
 [node name="button_remove_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
@@ -69,6 +74,7 @@ script = ExtResource("4_kusec")
 [node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 text = "Remove after"
+script = ExtResource("4_kusec")
 
 [node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
 layout_mode = 2
@@ -85,7 +91,7 @@ focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "STOP"
+text = "Finish"
 script = ExtResource("4_kusec")
 
 [node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
@@ -238,8 +244,12 @@ zoom_level = 2.0
 
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="." method="_on_button_insert_front_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="." method="_on_button_insert_after_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="." method="_on_button_remove_front_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="." method="_on_button_remove_after_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
