@@ -1,148 +1,113 @@
 extends Node
 
-@export var graph_manager: GraphManager
-@export var camera: CameraManager
-var vector: vertex_class
+@export var head: pointer_class
+var size: int = 0
 
-@export var corona_distance: int = 250
-var head: vertex_class
-var null_: vertex_class
-var head_deref = null
-var names: Array
-var positions: Array
-var vertices: Array
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	vertex_class.automatic_labeling = false
-	vertex_class.lerp_speed = 5
-	vertex_class.bahn = false
-	
-	head = graph_manager.add_vertex(Vector2(0, 0))
-	head.sprite.visible = false
-	null_ = graph_manager.add_vertex(Vector2(0, 0))
-	null_.sprite.visible = false
-	
-	for i in range(3):
-		vertices.append(graph_manager.add_vertex(Vector2(i * corona_distance, 0)))
-		names.append(str(i) + "xd")
-		positions.append(Vector2(i * corona_distance, 0))
-	recreate_list()
+@onready var list_v_scene = preload("res://graph/list_vertex.tscn")
 
-var current_step = 0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var left_click = Input.is_action_just_pressed("M1")
-	if left_click:
+@export var label_progress: Label
+
+var current_step: int = 0
+var max_step: int = 0
+var current_algo: String = ""
+func forward():
+	if current_step < max_step:
 		current_step = current_step + 1
-		insert_front_forward(current_step, "xD")
-	
-	var right_click = Input.is_action_just_pressed("M2")
-	if right_click:
-		insert_front_backward(current_step)
+	match current_algo:
+		"insert_front_empty":
+			insert_front_empty(current_step)
+		"insert_front":
+			insert_front(current_step)
+	update_state_counter()	
+
+func backward():
+	match current_algo:
+		"insert_front_empty":
+			insert_front_empty_b(current_step)
+		"insert_front":
+			insert_front_b(current_step)
+	if current_step > 0:
 		current_step = current_step - 1
-		
-	var middle_click = Input.is_action_just_pressed("M3")
-	if middle_click:
-		pass
-		
+	update_state_counter()
 
-func recreate_list():
-	# Clear current graph
-	graph_manager.clear()
-	vertices.clear()
-	
-	# Add head and null pointers
-	head = graph_manager.add_vertex(Vector2(0, 0))
-	head.sprite.visible = false
-	null_ = graph_manager.add_vertex(Vector2(0, 0))
-	null_.sprite.visible = false
-	
-	# Recreate old vertices
-	for i in range(names.size()):
-		vertices.append(graph_manager.add_vertex(positions[i]))
+func stop():
+	while current_step < max_step:
+		forward()
+	current_step = 0
+	max_step= 0
+	current_algo = ""
+	update_state_counter()
+	reposition_list()
 
-	reposition_vertices()
-	reposition_head_tail()
-	redraw_pointers()
-	redraw_labels()
-
-func reposition_vertices():
-	var n = vertices.size()
-	for i in range(n):
-		vertices[i].position = positions[i]
-	
-func reposition_head_tail():
-	var n = vertices.size()
-	head.position = Vector2(vertices[0].position.x - 110, -110)
-	null_.position = Vector2(vertices[n - 1].position.x + 150, 150)
-
-func redraw_pointers():
-	var n = vertices.size()
-	for i in range(n):
-		if i != n - 1:
-			graph_manager.add_edge(vertices[i], vertices[i + 1])
-	graph_manager.add_edge(head, vertices[0])
-	graph_manager.add_edge(vertices[n - 1], null_)
-
-func redraw_labels():
-	var n = vertices.size()
-	for i in range(n):
-		vertices[i].label_id.text = names[i]
-	
-	head.label_id.text = "Head"
-	head.label_id.position = Vector2(-25, -25)
-	null_.label_id.text = "null"
-	null_.label_id.position = Vector2(-50, -40)	
-
-var new_vertex: vertex_class
-var invis: vertex_class
-func insert_front_forward(step: int, data: String):
+var new_vertex: list_vertex_class
+func insert_front(step: int):
 	match step:
 		1:
-			new_vertex = graph_manager.add_vertex(Vector2(vertices[0].position.x - 100, 200))
-			new_vertex.label_id.text = data
-			invis = graph_manager.add_vertex(Vector2(vertices[0].position.x + 100, 200))
-			invis.visible = false
-			graph_manager.add_edge(new_vertex, invis)
-	
+			new_vertex = list_v_scene.instantiate()
+			new_vertex.position = head.position + Vector2(0, 200)
+			
+			add_child(new_vertex)
+			size = size + 1
 		2:
-			# Step 2 - let new vertex point at vertex pointed at by head
-			invis.move_to(vertices[0].position)
-
+			if head.target == null:
+				head.target = new_vertex
+			else:
+				new_vertex.p1.target = head.target
 		3:
-			graph_manager.rm_edge(new_vertex, invis)
-			graph_manager.add_edge(new_vertex, vertices[0])
-			# Step 3 - make head point at the new vertex
-			graph_manager.rm_edge(head, vertices[0])
-			graph_manager.add_edge(head, invis)
-			invis.move_to(new_vertex.position)
-			
-			
-		4:
-			graph_manager.rm_edge(head, invis)
-			graph_manager.add_edge(head, new_vertex)
-			# Step 4 - repositon
-			new_vertex.move_to(Vector2(vertices[0].position.x - corona_distance, 0))
-			vertices.push_front(new_vertex)
-			reposition_head_tail()
+			head.target = new_vertex
 
-func insert_front_backward(step: int):
+func insert_front_b(step: int):
+	match step:
+		3:
+			head.target = new_vertex.p1.target
+		2:
+			new_vertex.p1.target = null
+		1:
+			new_vertex.queue_free()
+			size = size - 1
+
+func insert_front_empty(step: int):
 	match step:
 		1:
-			# Step 1 - create vertex pointing into nothing
-			graph_manager.rm_vertex(new_vertex)
-	
+			new_vertex = list_v_scene.instantiate()
+			new_vertex.position = head.position + Vector2(0, 200)
+			add_child(new_vertex)
+			size = size + 1
 		2:
-			# Step 2 - let new vertex point at vertex pointed at by head
-			graph_manager.add_edge(new_vertex, invis)
-			graph_manager.rm_edge(new_vertex, vertices[0])
+			head.target = new_vertex
 
-		3:
-			# Step 3 - make head point at the new vertex
-			graph_manager.add_edge(head, vertices[0])
-			graph_manager.rm_edge(head, new_vertex)
-		4:
-			# Step 4 - repositon
-			vertices.pop_front()
-			new_vertex.move_to(Vector2(vertices[0].position.x - 100, 200))
-			reposition_head_tail()
+func insert_front_empty_b(step: int):
+	match step:
+		2:
+			head.target = null
+		1:
+			new_vertex.queue_free()
+			size = size - 1
+
+func reposition_list():
+	if head.target == null:
+		head.position = Vector2(0, -75)
+	else:
+		var current = head.target
+		var pos = head.position + Vector2(150, 75)
+		while current != null:
+			current.move_to(pos)
+			pos += Vector2(200, 0)
+			current = current.p1.target
+
+func init_algo(max_step_: int, current_algo_: String):
+	print("Size of list: " + str(size))
+	current_step = 0
+	max_step = max_step_
+	current_algo = current_algo_
+	update_state_counter()
+
+func _on_button_insert_front_pressed():
+	if size == 0:
+		init_algo(2, "insert_front_empty")
+	else:
+		init_algo(3, "insert_front")
+	update_state_counter()
+
+func update_state_counter():
+	label_progress.update_state_counter(current_step, max_step)

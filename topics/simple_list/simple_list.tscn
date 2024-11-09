@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=12 format=3 uid="uid://dwnnxeub60gee"]
 
-[ext_resource type="Script" path="res://topics/simple_list/simple_list_2.gd" id="1_rx7lk"]
+[ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://graph/pointer.tscn" id="2_6nbmj"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
+[ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="5_ses31"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="6_su72p"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="7_7vu2n"]
@@ -13,9 +14,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "label_progress")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
+label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/state_counter")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
 position = Vector2(0, -75)
@@ -51,11 +53,6 @@ alignment = 1
 layout_mode = 2
 text = "Insert front"
 script = ExtResource("4_kusec")
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-placeholder_text = "String to add"
 
 [node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
@@ -101,6 +98,7 @@ text = "<---"
 layout_mode = 2
 theme = ExtResource("2_0ki28")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+script = ExtResource("5_jpi4x")
 
 [node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
