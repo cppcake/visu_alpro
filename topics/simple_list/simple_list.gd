@@ -84,6 +84,11 @@ func insert_front_empty_b(step: int):
 			new_vertex.queue_free()
 			size = size - 1
 
+func remove_front(step: int):
+	match step:
+		1:
+			pass
+
 func reposition_list():
 	if head.target == null:
 		head.position = Vector2(0, -75)
