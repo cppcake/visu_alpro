@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bthcdr4abtmxb"]
 
 [ext_resource type="PackedScene" uid="uid://dq8n3q2fa7rns" path="res://graph/graph_manager.tscn" id="1_4qwbx"]
+[ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera_2d.tscn" id="7_ygilh"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_spxkm"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_85jl3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_0rtpr"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_22dmt"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ilx38"]
-[ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_1qd0j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
@@ -173,10 +173,8 @@ theme_override_fonts/bold_font = ExtResource("24_spxkm")
 bbcode_enabled = true
 script = ExtResource("25_85jl3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("7_ygilh")]
 unique_name_in_owner = true
-script = ExtResource("35_1qd0j")
-zoom_level = 2.0
 
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop_algorithm"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" method="_on_pressed"]

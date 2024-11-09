@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv1b12m1qqxbo"]
+
+[ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
+[ext_resource type="PackedScene" uid="uid://mxl4v0nx4ry6" path="res://graph/list_vertex.tscn" id="3_gw0rp"]
+[ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera_2d.tscn" id="4_7ovg7"]
+
+[node name="Test" type="Node" node_paths=PackedStringArray("v", "v2", "v3", "cam")]
+script = ExtResource("1_1g5mx")
+v = NodePath("list_vertex")
+v2 = NodePath("list_vertex2")
+v3 = NodePath("list_vertex3")
+cam = NodePath("Camera2D")
+
+[node name="list_vertex" parent="." instance=ExtResource("3_gw0rp")]
+position = Vector2(-325, -256)
+
+[node name="list_vertex2" parent="." instance=ExtResource("3_gw0rp")]
+position = Vector2(-5, 21)
+
+[node name="list_vertex3" parent="." instance=ExtResource("3_gw0rp")]
+position = Vector2(348, 258)
+
+[node name="Camera2D" parent="." instance=ExtResource("4_7ovg7")]

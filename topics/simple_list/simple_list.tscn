@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dwnnxeub60gee"]
 
-[ext_resource type="PackedScene" uid="uid://dq8n3q2fa7rns" path="res://graph/graph_manager.tscn" id="1_77tli"]
-[ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_lhglq"]
+[ext_resource type="Script" path="res://topics/simple_list/simple_list_2.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://graph/pointer.tscn" id="2_6nbmj"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="3_xmf3i"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="5_ses31"]
@@ -13,12 +13,12 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("graph_manager", "camera")]
-script = ExtResource("1_lhglq")
-graph_manager = NodePath("graph_manager")
-camera = NodePath("Camera2D")
+[node name="root" type="Node" node_paths=PackedStringArray("head")]
+script = ExtResource("1_rx7lk")
+head = NodePath("head")
 
-[node name="graph_manager" parent="." instance=ExtResource("1_77tli")]
+[node name="head" parent="." instance=ExtResource("2_6nbmj")]
+position = Vector2(0, -100)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

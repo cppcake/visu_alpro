@@ -7,6 +7,7 @@ var vector: vertex_class
 @export var corona_distance: int = 250
 var head: vertex_class
 var null_: vertex_class
+var head_deref = null
 var names: Array
 var positions: Array
 var vertices: Array
