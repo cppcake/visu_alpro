@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=13 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
@@ -9,15 +9,17 @@
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="5_ses31"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="6_su72p"]
 [ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="9_083mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "label_progress")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "label_progress", "size_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
 label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/state_counter")
+size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
 position = Vector2(0, -75)
@@ -62,6 +64,7 @@ text = "Insert after"
 layout_mode = 2
 text = "Remove front
 "
+script = ExtResource("4_kusec")
 
 [node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
@@ -112,6 +115,14 @@ text = "--->"
 [node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("4_6cqoy")]
 layout_mode = 2
 
+[node name="label_list_size" type="Label" parent="CanvasLayer/upper_gui"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 47.0
+offset_right = 85.0
+offset_bottom = 70.0
+text = "List size: 0"
+
 [node name="info_gui" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 11
 anchor_left = 1.0
@@ -139,13 +150,96 @@ theme_override_fonts/bold_font = ExtResource("5_ses31")
 bbcode_enabled = true
 script = ExtResource("6_su72p")
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -44.0
+offset_right = 45.0
+offset_bottom = -4.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="pointer" type="Node2D" parent="CanvasLayer/Control"]
+position = Vector2(74, -85)
+scale = Vector2(0.75, 0.75)
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/pointer"]
+antialiased = true
+polygon = PackedVector2Array(30, 0, 0, 20, 0, -20)
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/Control/pointer"]
+position = Vector2(-99, 0)
+points = PackedVector2Array(0, 0, 99.47, 0)
+antialiased = true
+
+[node name="label_pointer" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -117.0
+offset_right = 323.0
+offset_bottom = -47.0
+grow_horizontal = 0
+grow_vertical = 2
+text = " - Shared Pointer"
+
+[node name="list_vertex" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(49, -8)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_083mb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/list_vertex"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.5
+offset_top = -171.0
+offset_right = -138.5
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 39
+text = "DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="label_list_vertex" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -42.0
+offset_right = 323.0
+offset_bottom = 28.0
+grow_horizontal = 0
+grow_vertical = 2
+text = " - List node"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(300, 0)
 script = ExtResource("7_7vu2n")
 zoom_level = 2.0
 
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="." method="_on_button_insert_front_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="." method="_on_button_remove_front_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]

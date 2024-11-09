@@ -12,7 +12,6 @@ var dest_pos
 
 func _ready():
 	label_data = get_child(2)
-	dest_pos = null
 	
 	p1 = get_child(3)
 

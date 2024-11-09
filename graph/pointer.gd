@@ -18,12 +18,12 @@ func _ready():
 	head = get_node("./Polygon2D")
 	label_start.text = label_start_text
 
-func _process(_delta):
-	var target_position: Vector2
+var current_end_point: Vector2 = position + Vector2(0, 150)
+func _physics_process(delta):
+	var target_position: Vector2 = position + Vector2(0, 150)
 	
 	match type_string(typeof(target)):
 		"Nil":
-			target_position = position + Vector2(0, 150)
 			label_target.text = "null"
 		"Object":
 			target_position = to_local(target.global_position)
@@ -32,10 +32,11 @@ func _process(_delta):
 			target_position = to_local(target)
 			label_target.text = ""
 	
-	label_start.position = position + Vector2(-50, -25)
-	draw(target_position)
+	current_end_point = lerp(current_end_point, target_position, 21 * delta)
+	draw(current_end_point)
 
 func draw(target_position: Vector2):
+	label_start.position = position + Vector2(-50, -25)
 	head.visible = true
 
 	var distance: float = position.distance_to(target_position)

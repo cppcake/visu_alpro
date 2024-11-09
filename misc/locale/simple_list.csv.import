@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b4kjiwcfya3vw"
+
+[deps]
+
+files=["res://misc/locale/simple_list.en.translation", "res://misc/locale/simple_list.de.translation"]
+
+source_file="res://misc/locale/simple_list.csv"
+dest_files=["res://misc/locale/simple_list.en.translation", "res://misc/locale/simple_list.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

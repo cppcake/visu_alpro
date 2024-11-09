@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://mxl4v0nx4ry6"]
+[gd_scene load_steps=5 format=3 uid="uid://def3gbilknoxq"]
 
 [ext_resource type="Script" path="res://graph/list_vertex.gd" id="1_hry7q"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="2_k25f1"]
