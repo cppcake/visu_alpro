@@ -130,10 +130,10 @@ func make_current(target):
 	if target == null:
 		current.visible = false
 		current.target = null
-		current.global_position = Vector2(9000, 9000)
+		current.position = Vector2(9000, 9000)
 	else:
-		current.position = target.position + Vector2(0, 100)
 		current.target = target
+		current.position = target.position + Vector2(0, -200)
 		current.current_end_point = target.position
 		current.visible = true
 

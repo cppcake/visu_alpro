@@ -12,7 +12,6 @@ points = PackedVector2Array(0, 0, 0, 0)
 antialiased = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-rotation = 1.309
 antialiased = true
 polygon = PackedVector2Array(30, 0, 0, 20, 0, -20)
 

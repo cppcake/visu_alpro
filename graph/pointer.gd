@@ -18,32 +18,32 @@ func _ready():
 	head = get_node("./Polygon2D")
 	label_start.text = label_start_text
 
-var current_end_point: Vector2 = position + Vector2(0, 150)
+var current_end_point: Vector2 = global_position + Vector2(0, 150)
 func _physics_process(delta):
-	var target_position: Vector2 = position + Vector2(0, 150)
+	var target_position: Vector2 = global_position + Vector2(0, 150)
 	
 	match type_string(typeof(target)):
 		"Nil":
 			label_target.text = "null"
 		"Object":
-			target_position = to_local(target.global_position)
+			target_position = target.global_position
 			label_target.text = ""
 		"Vector2":
-			target_position = to_local(target)
+			target_position = target
 			label_target.text = ""
 	
 	current_end_point = lerp(current_end_point, target_position, 21 * delta)
 	draw(current_end_point)
 
 func draw(target_position: Vector2):
-	label_start.position = position + Vector2(-50, -25)
+	label_start.position = Vector2(-50, -30)
 	head.visible = true
 
-	var distance: float = position.distance_to(target_position)
-	var direction: Vector2 = (target_position - position).normalized()
-	target_position = position + direction * (distance - distance_head_node)
+	var distance: float = global_position.distance_to(target_position)
+	var direction: Vector2 = (target_position - global_position).normalized()
+	target_position = direction * (distance - distance_head_node)
 	
-	line.set_point_position(0, position)
+	line.set_point_position(0, Vector2(0, 0))
 	line.set_point_position(1, target_position)
 	head.position = target_position
-	head.rotation = position.angle_to_point(target_position)
+	head.rotation = Vector2(0, 0).angle_to_point(target_position)
