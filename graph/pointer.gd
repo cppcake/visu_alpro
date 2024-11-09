@@ -1,5 +1,9 @@
 class_name pointer_class extends Node2D
 
+@export var label_start: Label
+@export var label_start_text: String
+@export var label_target: Label
+
 var start
 var target = null
 
@@ -12,26 +16,28 @@ var distance_head_node: float = 85
 func _ready():		
 	line = get_node("./Line2D")
 	head = get_node("./Polygon2D")
+	label_start.text = label_start_text
 
 func _process(_delta):
-	draw()
-
-func draw():
-	head.visible = true
-	
 	var target_position: Vector2
 	
 	match type_string(typeof(target)):
 		"Nil":
 			target_position = position + Vector2(0, 150)
-			print("pointing at null")
+			label_target.text = "null"
 		"Object":
 			target_position = to_local(target.global_position)
-			print("pointing at object")
+			label_target.text = ""
 		"Vector2":
 			target_position = to_local(target)
-			print("pointing at position")
+			label_target.text = ""
 	
+	label_start.position = position + Vector2(-50, -25)
+	draw(target_position)
+
+func draw(target_position: Vector2):
+	head.visible = true
+
 	var distance: float = position.distance_to(target_position)
 	var direction: Vector2 = (target_position - position).normalized()
 	target_position = position + direction * (distance - distance_head_node)
