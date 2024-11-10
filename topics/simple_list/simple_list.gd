@@ -1,13 +1,9 @@
 extends Node
 
 @export var head: pointer_class
-@export var current: pointer_class
 var size: int = 0
 
 @onready var list_v_scene = preload("res://graph/list_vertex.tscn")
-
-func _ready():
-	make_current(null)
 
 var current_algo: Callable
 var current_algo_b: Callable
@@ -36,12 +32,14 @@ func stop():
 		forward()
 	current_step = 0
 	max_step= 0
-	update_step_label()
+	unshare(false)
 	make_current(null)
-	reposition_list()
+	update_step_label()
 	
 	if to_remove != null:
 		to_remove.queue_free()
+	
+	reposition_list()
 
 func reposition_list():
 	if head.target == null:
@@ -51,9 +49,10 @@ func reposition_list():
 		var pos = head.position + Vector2(150, 150)
 		while current_ != null:
 			current_.move_to(pos)
-			pos += Vector2(200, 0)
+			pos += Vector2(250, 0)
 			current_ = current_.p1.target
-	
+
+@export var current: pointer_class
 func make_current(target):
 	if target == null:
 		current.visible = false
@@ -63,7 +62,35 @@ func make_current(target):
 		current.set_target(target)
 		current.position = target.position + Vector2(0, -200)
 		current.current_end_point = target.position
+		current.draw()
 		current.visible = true	
+
+@export var new: pointer_class
+func make_shared(position_: Vector2, from: String = "left") -> list_vertex_class:
+	var new_v = list_v_scene.instantiate()
+	new_v.position = position_
+	new_vertex = new_v
+	add_child(new_v)	
+	
+	new.set_target(new_v)
+	match from:
+		"left":
+			new.position = new_v.position + Vector2(-150, 0)
+		"above":
+			new.position = new_v.position + Vector2(0, -150)
+	new.current_end_point = new_v.position
+	new.draw()
+	new.visible = true
+	
+	return new_v
+
+func unshare(remove: bool = true) -> void:
+	new.visible = false
+	new.position = Vector2(4200, 3900)
+	new.set_target(null)
+	
+	if remove:
+		new_vertex.queue_free()
 
 @export var label_progress: Label
 func update_step_label():
@@ -82,6 +109,7 @@ func init_algo(max_step_: int = max_step, current_algo_: Callable = current_algo
 	current_algo_b = current_algo_b_
 	update_step_label()
 
+var max_step_pre: int
 func get_current_for_algo(_viewport, event, _shape_idx):
 	# Check if the event is an InputEventMouseButton
 	if event is InputEventMouseButton:
@@ -90,6 +118,10 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 			while list_vertex_class.selected_vertex == null:
 				pass
 			make_current(list_vertex_class.selected_vertex)
+			if(list_vertex_class.selected_vertex.p1.target == null):
+				max_step = 1
+			else:
+				max_step = max_step_pre
 			for child in self.get_children():
 				if type_string(typeof(child)) == "Object":
 					if child is list_vertex_class:
@@ -100,9 +132,7 @@ var new_vertex: list_vertex_class
 func insert_front(step: int):
 	match step:
 		1:
-			new_vertex = list_v_scene.instantiate()
-			new_vertex.position = head.position + Vector2(0, 200)
-			add_child(new_vertex)
+			make_shared(head.position + Vector2(0, 200))
 		2:
 			new_vertex.p1.set_target(head.target)
 		3:
@@ -119,7 +149,7 @@ func insert_front_b(step: int):
 		2:
 			new_vertex.p1.set_target(null)
 		1:
-			new_vertex.queue_free()
+			unshare()
 
 var to_remove = null
 func remove_front(step: int):
@@ -145,11 +175,33 @@ func remove_front_b(step: int):
 		4:
 			update_size_label(1)
 
-func insert_after():
-	pass
+func insert_after(step: int):
+	var pred: list_vertex_class = list_vertex_class.selected_vertex
+	match step:
+		1:
+			pass
+		2:
+			make_shared(pred.position + Vector2(125, -175), "above")
+		3:
+			new_vertex.p1.set_target(pred.p1.target)
+		4:
+			pred.p1.set_target(new_vertex)
+		5:
+			update_size_label(1)
 
-func insert_after_b():
-	pass
+func insert_after_b(step: int):
+	var pred: list_vertex_class = list_vertex_class.selected_vertex
+	match step:
+		5:
+			update_size_label(-1)
+		4:
+			pred.p1.set_target(new_vertex.p1.target)
+		3:
+			new_vertex.p1.set_target(null)
+		2:
+			unshare()
+		1:
+			pass
 	
 func _on_button_insert_front_pressed():
 	init_algo(4, insert_front, insert_front_b)
@@ -164,10 +216,12 @@ func _on_button_insert_after_pressed():
 	for child in self.get_children():
 		if type_string(typeof(child)) == "Object":
 			if child is list_vertex_class:
-				current_algo = insert_after
-				current_algo_b = insert_after_b
-				max_step = 5
-				child.connect("input_event", get_current_for_algo)
+				if not child.is_connected("input_event", get_current_for_algo):
+					child.connect("input_event", get_current_for_algo)
+	
+	max_step_pre = 5
+	current_algo = insert_after
+	current_algo_b = insert_after_b
 
 func _on_button_remove_after_pressed():
 	pass # Replace with function body.

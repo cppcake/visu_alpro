@@ -17,6 +17,9 @@ func _ready():
 	label_data = get_child(2)
 	label_ref_count = get_child(3)
 	p1 = get_child(4)
+	p1.current_end_point = global_position + Vector2(0, 150)
+	p1.draw()
+	p1.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

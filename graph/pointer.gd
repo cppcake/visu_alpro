@@ -35,7 +35,7 @@ func _physics_process(delta):
 	current_end_point = lerp(target_position, current_end_point, 21 * delta)
 	draw(current_end_point)
 
-func draw(target_position: Vector2):
+func draw(target_position: Vector2 = current_end_point):
 	label_start.position = Vector2(-50, -30)
 
 	var distance: float = global_position.distance_to(target_position)

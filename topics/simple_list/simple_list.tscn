@@ -15,10 +15,11 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "current", "label_progress", "size_label")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "current", "new", "label_progress", "size_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
 current = NodePath("current")
+new = NodePath("new")
 label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/state_counter")
 size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
 
@@ -26,7 +27,13 @@ size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
 label_start_text = "Head"
 
 [node name="current" parent="." instance=ExtResource("2_6nbmj")]
+visible = false
+position = Vector2(2000, 2000)
 label_start_text = "current"
+
+[node name="new" parent="." instance=ExtResource("2_6nbmj")]
+visible = false
+label_start_text = "new"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
