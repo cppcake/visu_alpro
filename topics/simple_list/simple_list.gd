@@ -72,15 +72,29 @@ func update_step_label():
 @export var size_label: Label
 func update_size_label(addend: int):
 	size = size + addend
-	size_label.text = "List size: " + str(size)
+	size_label.text = "size: " + str(size)
 
-func init_algo(max_step_: int, current_algo_: Callable, current_algo_b_: Callable):
+func init_algo(max_step_: int = max_step, current_algo_: Callable = current_algo, current_algo_b_: Callable = current_algo_b):
 	print("Size of list: " + str(size))
 	current_step = 0
 	max_step = max_step_
 	current_algo = current_algo_
 	current_algo_b = current_algo_b_
 	update_step_label()
+
+func get_current_for_algo(_viewport, event, _shape_idx):
+	# Check if the event is an InputEventMouseButton
+	if event is InputEventMouseButton:
+		# Check if it's a left-click (left mouse button has index 1)
+		if event.button_index == 1 and event.pressed:
+			while list_vertex_class.selected_vertex == null:
+				pass
+			make_current(list_vertex_class.selected_vertex)
+			for child in self.get_children():
+				if type_string(typeof(child)) == "Object":
+					if child is list_vertex_class:
+						child.disconnect("input_event", get_current_for_algo)
+						init_algo()
 
 var new_vertex: list_vertex_class
 func insert_front(step: int):
@@ -131,6 +145,12 @@ func remove_front_b(step: int):
 		4:
 			update_size_label(1)
 
+func insert_after():
+	pass
+
+func insert_after_b():
+	pass
+	
 func _on_button_insert_front_pressed():
 	init_algo(4, insert_front, insert_front_b)
 
@@ -140,24 +160,14 @@ func _on_button_remove_front_pressed():
 	else:
 		init_algo(4, remove_front, remove_front_b)
 
-func prepare_insert_after(_viewport, event, _shape_idx):
-	# Check if the event is an InputEventMouseButton
-	if event is InputEventMouseButton:
-		# Check if it's a left-click (left mouse button has index 1)
-		if event.button_index == 1 and event.pressed:
-			while list_vertex_class.selected_vertex == null:
-				pass
-			make_current(list_vertex_class.selected_vertex)
-			for child in self.get_children():
-				if type_string(typeof(child)) == "Object":
-					if child is list_vertex_class:
-						child.disconnect("input_event", prepare_insert_after)
-
 func _on_button_insert_after_pressed():
 	for child in self.get_children():
 		if type_string(typeof(child)) == "Object":
 			if child is list_vertex_class:
-				child.connect("input_event", prepare_insert_after)
+				current_algo = insert_after
+				current_algo_b = insert_after_b
+				max_step = 5
+				child.connect("input_event", get_current_for_algo)
 
 func _on_button_remove_after_pressed():
 	pass # Replace with function body.

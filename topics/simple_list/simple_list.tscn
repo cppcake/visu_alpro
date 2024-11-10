@@ -126,7 +126,7 @@ offset_left = 6.0
 offset_top = 47.0
 offset_right = 85.0
 offset_bottom = 70.0
-text = "List size: 0"
+text = "size: 0"
 
 [node name="info_gui" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 11
