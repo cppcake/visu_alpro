@@ -23,7 +23,6 @@ label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBox
 size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
-position = Vector2(0, -75)
 label_start_text = "Head"
 
 [node name="current" parent="." instance=ExtResource("2_6nbmj")]
@@ -238,7 +237,7 @@ text = " - List node"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(300, 0)
+position = Vector2(300, 100)
 script = ExtResource("7_7vu2n")
 zoom_level = 2.0
 

@@ -47,3 +47,10 @@ func draw(target_position: Vector2):
 	line.set_point_position(1, target_position)
 	head.position = target_position
 	head.rotation = Vector2(0, 0).angle_to_point(target_position)
+
+func set_target(new_target):
+	if target is list_vertex_class:
+		target.reference_counter -= 1
+	if new_target is list_vertex_class:
+		new_target.reference_counter += 1
+	target = new_target
