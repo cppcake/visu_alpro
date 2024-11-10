@@ -9,7 +9,7 @@ var size: int = 0
 func _ready():
 	make_current(null)
 
-var current_algo: String = ""
+var current_algo: Callable
 var current_step: int = 0
 var max_step: int = 0
 func forward():
@@ -17,11 +17,7 @@ func forward():
 		return
 		
 	current_step = current_step + 1
-	match current_algo:
-		"insert_front":
-			insert_front(current_step)
-		"remove_front":
-			remove_front(current_step)
+	current_algo.call(current_step)
 	
 	update_step_label()
 
@@ -29,11 +25,7 @@ func backward():
 	if current_step == 0:
 		return
 		
-	match current_algo:
-		"insert_front":
-			insert_front_b(current_step)
-		"remove_front":
-			remove_front_b(current_step)
+	current_algo.call(current_step)
 	current_step = current_step - 1
 	
 	update_step_label()
@@ -43,7 +35,6 @@ func stop():
 		forward()
 	current_step = 0
 	max_step= 0
-	current_algo = ""
 	update_step_label()
 	make_current(null)
 	reposition_list()
@@ -82,7 +73,7 @@ func update_size_label(addend: int):
 	size = size + addend
 	size_label.text = "List size: " + str(size)
 
-func init_algo(max_step_: int, current_algo_: String):
+func init_algo(max_step_: int, current_algo_: Callable):
 	print("Size of list: " + str(size))
 	current_step = 0
 	max_step = max_step_
@@ -139,13 +130,13 @@ func remove_front_b(step: int):
 			update_size_label(1)
 
 func _on_button_insert_front_pressed():
-	init_algo(4, "insert_front")
+	init_algo(4, insert_front)
 
 func _on_button_remove_front_pressed():
 	if size == 0:
-		init_algo(1, "remove_front")
+		init_algo(1, remove_front)
 	else:
-		init_algo(4, "remove_front")
+		init_algo(4, remove_front)
 
 func prepare_insert_after(_viewport, event, _shape_idx):
 	# Check if the event is an InputEventMouseButton
