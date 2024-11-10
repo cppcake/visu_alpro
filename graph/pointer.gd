@@ -32,12 +32,11 @@ func _physics_process(delta):
 			target_position = target
 			label_target.text = ""
 	
-	current_end_point = lerp(current_end_point, target_position, 21 * delta)
+	current_end_point = lerp(target_position, current_end_point, 21 * delta)
 	draw(current_end_point)
 
 func draw(target_position: Vector2):
 	label_start.position = Vector2(-50, -30)
-	head.visible = true
 
 	var distance: float = global_position.distance_to(target_position)
 	var direction: Vector2 = (target_position - global_position).normalized()
@@ -47,6 +46,9 @@ func draw(target_position: Vector2):
 	line.set_point_position(1, target_position)
 	head.position = target_position
 	head.rotation = Vector2(0, 0).angle_to_point(target_position)
+	
+	line.visible = true
+	head.visible = true
 
 func set_target(new_target):
 	if target is list_vertex_class:
