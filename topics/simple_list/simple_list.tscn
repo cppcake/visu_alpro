@@ -29,7 +29,7 @@ label_start_text = "Head"
 [node name="current" parent="." instance=ExtResource("2_6nbmj")]
 visible = false
 position = Vector2(2000, 2000)
-label_start_text = "current"
+label_start_text = "pred"
 
 [node name="new" parent="." instance=ExtResource("2_6nbmj")]
 visible = false

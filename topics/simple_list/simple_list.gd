@@ -56,7 +56,7 @@ func reposition_list():
 		head.position = Vector2(0, 0)
 	else:
 		var current_ = head.target
-		var pos = head.position + Vector2(150, 150)
+		var pos = head.position + Vector2(90, 175)
 		while current_ != null:
 			current_.move_to(pos)
 			pos += Vector2(250, 0)
@@ -150,25 +150,29 @@ func pseudo_remove():
 	to_remove.visible = false
 	target_before = to_remove.p1.target
 	to_remove.p1.set_target(null)
-
 func pseudo_remove_undo():
 	to_remove.p1.set_target(target_before)
-	to_remove.p1.current_end_point = target_before.global_position
-	to_remove.p1.draw()
+	if target_before != null:
+		to_remove.p1.current_end_point = target_before.global_position
+		to_remove.p1.draw()
 	to_remove.visible = true
 
 var new_vertex: list_vertex_class
+var to_remove = null
+
 func insert_front(step: int):
 	match step:
 		1:
-			make_shared(head.position + Vector2(0, 200))
+			if head.target == null:
+				make_shared(head.position + Vector2(0, 200))
+			else:
+				make_shared(head.position + Vector2(0, 325))
 		2:
 			new_vertex.p1.set_target(head.target)
 		3:
 			head.set_target(new_vertex)
 		4:
 			update_size_label(1)
-
 func insert_front_b(step: int):
 	match step:
 		4:
@@ -179,8 +183,9 @@ func insert_front_b(step: int):
 			new_vertex.p1.set_target(null)
 		1:
 			unshare()
+func _on_button_insert_front_pressed():
+	init_algo(4, insert_front, insert_front_b)
 
-var to_remove = null
 func remove_front(step: int):
 	match step:
 		1:
@@ -192,7 +197,6 @@ func remove_front(step: int):
 			pseudo_remove()
 		4:
 			update_size_label(-1)
-
 func remove_front_b(step: int):
 	match step:
 		1:
@@ -203,6 +207,11 @@ func remove_front_b(step: int):
 			pseudo_remove_undo()
 		4:
 			update_size_label(1)
+func _on_button_remove_front_pressed():
+	if size == 0:
+		init_algo(1, remove_front, remove_front_b)
+	else:
+		init_algo(4, remove_front, remove_front_b)
 
 func insert_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
@@ -217,7 +226,6 @@ func insert_after(step: int):
 			pred.p1.set_target(new_vertex)
 		5:
 			update_size_label(1)
-
 func insert_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
@@ -231,6 +239,11 @@ func insert_after_b(step: int):
 			unshare()
 		1:
 			pass
+func _on_button_insert_after_pressed():
+	prepare_signals_for_current()
+	max_step_pre = 5
+	current_algo = insert_after
+	current_algo_b = insert_after_b
 
 func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
@@ -246,7 +259,6 @@ func remove_after(step: int):
 			pseudo_remove()
 		4:
 			update_size_label(-1)
-
 func remove_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
@@ -260,22 +272,6 @@ func remove_after_b(step: int):
 			pred.p1.set_target(to_remove)
 		1:
 			pass
-
-func _on_button_insert_front_pressed():
-	init_algo(4, insert_front, insert_front_b)
-
-func _on_button_remove_front_pressed():
-	if size == 0:
-		init_algo(1, remove_front, remove_front_b)
-	else:
-		init_algo(4, remove_front, remove_front_b)
-
-func _on_button_insert_after_pressed():
-	prepare_signals_for_current()
-	max_step_pre = 5
-	current_algo = insert_after
-	current_algo_b = insert_after_b
-
 func _on_button_remove_after_pressed():
 	prepare_signals_for_current()
 	max_step_pre = 4

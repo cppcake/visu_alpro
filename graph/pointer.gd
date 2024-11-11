@@ -56,3 +56,4 @@ func set_target(new_target):
 	if new_target is list_vertex_class:
 		new_target.reference_counter += 1
 	target = new_target
+	draw()
