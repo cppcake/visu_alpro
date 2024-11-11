@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
 [ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://graph/list_vertex.tscn" id="3_gw0rp"]
-[ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera_2d.tscn" id="4_7ovg7"]
+[ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="4_7ovg7"]
 
 [node name="Test" type="Node" node_paths=PackedStringArray("v", "v2", "v3", "cam")]
 script = ExtResource("1_1g5mx")

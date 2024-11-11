@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://clygp0jsmsfgs"]
-
-[ext_resource type="Script" path="res://menus/mouse_pos_manager.gd" id="1_giuj6"]
-
-[node name="Camera2D" type="Camera2D"]
-script = ExtResource("1_giuj6")
-zoom_level = 2.0

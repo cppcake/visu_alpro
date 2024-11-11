@@ -35,7 +35,7 @@
 [ext_resource type="Script" path="res://graph/scripts/reset.gd" id="32_ojub5"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
-[ext_resource type="Script" path="res://menus/mouse_pos_manager.gd" id="35_gotrf"]
+[ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="35_gotrf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
