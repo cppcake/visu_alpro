@@ -1,18 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=6 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="3_k2xbj"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="4_jkr46"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="5_p5snr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pod14"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
 
 [node name="side_panel" type="ColorRect"]
 anchors_preset = 11
@@ -24,9 +16,12 @@ offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("2_xsdfw")
+color = Color(0.117647, 0.129412, 0.141176, 0.768627)
 script = ExtResource("1_hcmu3")
 
 [node name="container_info" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,35 +56,26 @@ theme = ExtResource("2_xsdfw")
 [node name="content" type="VBoxContainer" parent="container_algo/container_pseudocode"]
 layout_mode = 2
 
-[node name="title" type="MarginContainer" parent="container_algo/container_pseudocode/content"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-theme = ExtResource("2_xsdfw")
-
-[node name="content" type="VBoxContainer" parent="container_algo/container_pseudocode/content/title"]
+[node name="title" type="VBoxContainer" parent="container_algo/container_pseudocode/content"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator3" type="HSeparator" parent="container_algo/container_pseudocode/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="HSeparator" type="HSeparator" parent="container_algo/container_pseudocode/content/title"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
-[node name="label_call" type="Label" parent="container_algo/container_pseudocode/content/title/content"]
-modulate = Color(0, 0, 0, 1)
+[node name="label_call" type="Label" parent="container_algo/container_pseudocode/content/title"]
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="container_algo/container_pseudocode/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="HSeparator2" type="HSeparator" parent="container_algo/container_pseudocode/content/title"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
-[node name="code_display" type="RichTextLabel" parent="container_algo/container_pseudocode/content/title/content"]
+[node name="code_display" type="RichTextLabel" parent="container_algo/container_pseudocode/content/title"]
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/bold_font = ExtResource("3_k2xbj")
 bbcode_enabled = true
 text = "DFS_PSEUDOCODE"
@@ -102,7 +88,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
 [node name="label_return" type="Label" parent="container_algo/container_pseudocode/content/return"]
-modulate = Color(0, 0.305882, 0.623529, 1)
+modulate = Color(0.447059, 0.537255, 0.854902, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 
@@ -114,47 +100,37 @@ theme = ExtResource("2_xsdfw")
 [node name="content" type="VBoxContainer" parent="container_algo/container_variables"]
 layout_mode = 2
 
-[node name="title" type="MarginContainer" parent="container_algo/container_variables/content"]
+[node name="title" type="VBoxContainer" parent="container_algo/container_variables/content"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="container_algo/container_variables/content/title"]
+layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="content" type="VBoxContainer" parent="container_algo/container_variables/content/title"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator2" type="HSeparator" parent="container_algo/container_variables/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="Variables" type="Label" parent="container_algo/container_variables/content/title/content"]
-modulate = Color(0, 0, 0, 1)
+[node name="Variables" type="Label" parent="container_algo/container_variables/content/title"]
 layout_mode = 2
 text = "VARIABLES"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="container_algo/container_variables/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="HSeparator2" type="HSeparator" parent="container_algo/container_variables/content/title"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
 [node name="content" type="ScrollContainer" parent="container_algo/container_variables/content"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="container_algo/container_variables/content/content"]
+[node name="variables" type="VBoxContainer" parent="container_algo/container_variables/content/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="label_sequence" type="Label" parent="container_algo/container_variables/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
+[node name="label_sequence" type="Label" parent="container_algo/container_variables/content/content/variables"]
 layout_mode = 2
 text = " F  =  [...]"
 
-[node name="label_queue" type="Label" parent="container_algo/container_variables/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
+[node name="label_queue" type="Label" parent="container_algo/container_variables/content/content/variables"]
 layout_mode = 2
 text = " F' =  [...] (von Aufruf y)"
 
@@ -169,35 +145,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="title" type="MarginContainer" parent="container_algo/container_callstack/content"]
+[node name="title" type="VBoxContainer" parent="container_algo/container_callstack/content"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="container_algo/container_callstack/content/title"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="content" type="VBoxContainer" parent="container_algo/container_callstack/content/title"]
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="container_algo/container_callstack/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="stack" type="Label" parent="container_algo/container_callstack/content/title/content"]
-modulate = Color(0, 0, 0, 1)
+[node name="stack" type="Label" parent="container_algo/container_callstack/content/title"]
 layout_mode = 2
 text = "STACK"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="container_algo/container_callstack/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="HSeparator2" type="HSeparator" parent="container_algo/container_callstack/content/title"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
-[node name="Panel" type="Panel" parent="container_algo/container_callstack/content"]
+[node name="MarginContainer" type="MarginContainer" parent="container_algo/container_callstack/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="container_algo/container_callstack/content/Panel"]
+[node name="content" type="Panel" parent="container_algo/container_callstack/content/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_xsdfw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="container_algo/container_callstack/content/MarginContainer/content"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,19 +181,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="stack" type="VBoxContainer" parent="container_algo/container_callstack/content/Panel/ScrollContainer"]
+[node name="call_stack" type="VBoxContainer" parent="container_algo/container_callstack/content/MarginContainer/content/ScrollContainer"]
 light_mask = 17
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="stack_frame" parent="container_algo/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("5_p5snr")]
+[node name="stack_frame" parent="container_algo/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
 
-[node name="stack_frame2" parent="container_algo/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("5_p5snr")]
+[node name="stack_frame2" parent="container_algo/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
 
-[node name="stack_frame3" parent="container_algo/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("5_p5snr")]
+[node name="stack_frame3" parent="container_algo/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
 
 [node name="container_explanation" type="MarginContainer" parent="container_algo"]
@@ -231,36 +204,21 @@ theme = ExtResource("2_xsdfw")
 [node name="content" type="VBoxContainer" parent="container_algo/container_explanation"]
 layout_mode = 2
 
-[node name="title" type="MarginContainer" parent="container_algo/container_explanation/content"]
+[node name="HSeparator" type="HSeparator" parent="container_algo/container_explanation/content"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
 theme = ExtResource("2_xsdfw")
 
-[node name="content" type="VBoxContainer" parent="container_algo/container_explanation/content/title"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator3" type="HSeparator" parent="container_algo/container_explanation/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="label_title" type="Label" parent="container_algo/container_explanation/content/title/content"]
-modulate = Color(0, 0, 0, 1)
+[node name="label_title" type="Label" parent="container_algo/container_explanation/content"]
 layout_mode = 2
 text = "Explanation"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="container_algo/container_explanation/content/title/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="HSeparator2" type="HSeparator" parent="container_algo/container_explanation/content"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
-[node name="rich_text" type="RichTextLabel" parent="container_algo/container_explanation/content/title/content"]
+[node name="rich_text" type="RichTextLabel" parent="container_algo/container_explanation/content"]
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("3_k2xbj")
 bbcode_enabled = true
 text = "explanation..."
 fit_content = true

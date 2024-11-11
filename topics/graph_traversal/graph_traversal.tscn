@@ -94,6 +94,7 @@ offset_top = 39.0
 offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 2
+color = Color(0.117647, 0.129412, 0.141176, 1)
 script = ExtResource("4_3enpf")
 callstack = NodePath("VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack")
 label_call = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/label_call")
@@ -637,6 +638,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
+color = Color(1, 1, 1, 0)
 
 [node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui" node_paths=PackedStringArray("controller")]
 layout_mode = 1

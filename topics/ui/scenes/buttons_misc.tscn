@@ -30,19 +30,23 @@ layout_mode = 2
 alignment = 2
 
 [node name="button_home" type="Button" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme = ExtResource("1_uvpqj")
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("2_8rl7v")
+icon_alignment = 1
 script = SubResource("GDScript_k2pld")
 
 [node name="button_exit" type="Button" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 tooltip_text = "EXIT_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("1_uvpqj")
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_lqq82")
+icon_alignment = 1
 script = SubResource("GDScript_h3rqd")
 
 [connection signal="pressed" from="HBoxContainer3/button_home" to="HBoxContainer3/button_home" method="_on_pressed"]

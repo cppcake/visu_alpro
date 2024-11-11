@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ch47gokw4nkj3"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ch47gokw4nkj3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgknu"]
 bg_color = Color(0.447059, 0.537255, 0.854902, 1)
@@ -21,6 +21,26 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o75dd"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeajt"]
+bg_color = Color(0.117647, 0.129412, 0.141176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8y7k"]
 bg_color = Color(0.352941, 0.352941, 0.352941, 1)
 border_width_left = 3
@@ -32,8 +52,10 @@ border_color = Color(0.352941, 0.352941, 0.352941, 1)
 [resource]
 Button/styles/hover = SubResource("StyleBoxFlat_hgknu")
 Button/styles/normal = SubResource("StyleBoxFlat_yh2hm")
-MarginContainer/constants/margin_bottom = 3
+HSeparator/styles/separator = SubResource("StyleBoxFlat_o75dd")
+MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 3
 MarginContainer/constants/margin_right = 3
 MarginContainer/constants/margin_top = 3
+Panel/styles/panel = SubResource("StyleBoxFlat_jeajt")
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_q8y7k")

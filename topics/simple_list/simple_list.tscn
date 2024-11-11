@@ -149,8 +149,6 @@ offset_bottom = 70.0
 text = "size: 0"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
-visible = false
-color = Color(0.117647, 0.129412, 0.141176, 1)
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
