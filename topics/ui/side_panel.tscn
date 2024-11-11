@@ -222,3 +222,46 @@ layout_mode = 2
 
 [node name="stack_frame3" parent="container_algo/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
+
+[node name="container_explanation" type="MarginContainer" parent="container_algo"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme = ExtResource("2_xsdfw")
+
+[node name="content" type="VBoxContainer" parent="container_algo/container_explanation"]
+layout_mode = 2
+
+[node name="title" type="MarginContainer" parent="container_algo/container_explanation/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xsdfw")
+
+[node name="content" type="VBoxContainer" parent="container_algo/container_explanation/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="container_algo/container_explanation/content/title/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="label_title" type="Label" parent="container_algo/container_explanation/content/title/content"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Explanation"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="container_algo/container_explanation/content/title/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="rich_text" type="RichTextLabel" parent="container_algo/container_explanation/content/title/content"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("3_k2xbj")
+bbcode_enabled = true
+text = "explanation..."
+fit_content = true
+script = ExtResource("4_jkr46")
