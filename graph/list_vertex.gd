@@ -46,6 +46,9 @@ func move_to(dest_pos_: Vector2):
 		global_position = dest_pos
 	dest_pos = dest_pos_
 
+func move_to_rel(offset: Vector2):
+	move_to(position + offset)
+
 func _on_mouse_entered():
 	modulate = constants.hovered
 

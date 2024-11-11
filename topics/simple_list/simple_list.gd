@@ -27,7 +27,7 @@ func backward():
 	
 	update_step_label()
 
-func stop():
+func finish():
 	while current_step < max_step:
 		forward()
 	current_step = 0
@@ -39,6 +39,16 @@ func stop():
 	if to_remove != null:
 		to_remove.queue_free()
 	
+	reposition_list()
+
+func cancel():
+	while current_step > 0:
+		backward()
+	current_step = 0
+	max_step= 0
+	unshare(false)
+	make_current(null)
+	update_step_label()
 	reposition_list()
 
 func reposition_list():
@@ -128,6 +138,25 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 						child.disconnect("input_event", get_current_for_algo)
 						init_algo()
 
+func prepare_signals_for_current() -> void:
+	for child in self.get_children():
+		if type_string(typeof(child)) == "Object":
+			if child is list_vertex_class:
+				if not child.is_connected("input_event", get_current_for_algo):
+					child.connect("input_event", get_current_for_algo)
+
+var target_before
+func pseudo_remove():
+	to_remove.visible = false
+	target_before = to_remove.p1.target
+	to_remove.p1.set_target(null)
+
+func pseudo_remove_undo():
+	to_remove.p1.set_target(target_before)
+	to_remove.p1.current_end_point = target_before.global_position
+	to_remove.p1.draw()
+	to_remove.visible = true
+
 var new_vertex: list_vertex_class
 func insert_front(step: int):
 	match step:
@@ -160,7 +189,7 @@ func remove_front(step: int):
 			to_remove = head.target
 			head.set_target(head.target.p1.target)
 		3:
-			to_remove.visible = false
+			pseudo_remove()
 		4:
 			update_size_label(-1)
 
@@ -171,7 +200,7 @@ func remove_front_b(step: int):
 		2:
 			head.set_target(to_remove)
 		3:
-			to_remove.visible = true
+			pseudo_remove_undo()
 		4:
 			update_size_label(1)
 
@@ -202,7 +231,36 @@ func insert_after_b(step: int):
 			unshare()
 		1:
 			pass
-	
+
+func remove_after(step: int):
+	var pred: list_vertex_class = list_vertex_class.selected_vertex
+	match step:
+		1:
+			pass
+		2:
+			to_remove = pred.p1.target
+			if to_remove.p1.target != null:
+				to_remove.move_to_rel(Vector2(0, 150))
+			pred.p1.set_target(pred.p1.target.p1.target)
+		3:
+			pseudo_remove()
+		4:
+			update_size_label(-1)
+
+func remove_after_b(step: int):
+	var pred: list_vertex_class = list_vertex_class.selected_vertex
+	match step:
+		4:
+			update_size_label(1)
+		3:
+			pseudo_remove_undo()
+		2:
+			if pred.p1.target != null:
+				to_remove.move_to_rel(Vector2(0, -150))
+			pred.p1.set_target(to_remove)
+		1:
+			pass
+
 func _on_button_insert_front_pressed():
 	init_algo(4, insert_front, insert_front_b)
 
@@ -213,15 +271,13 @@ func _on_button_remove_front_pressed():
 		init_algo(4, remove_front, remove_front_b)
 
 func _on_button_insert_after_pressed():
-	for child in self.get_children():
-		if type_string(typeof(child)) == "Object":
-			if child is list_vertex_class:
-				if not child.is_connected("input_event", get_current_for_algo):
-					child.connect("input_event", get_current_for_algo)
-	
+	prepare_signals_for_current()
 	max_step_pre = 5
 	current_algo = insert_after
 	current_algo_b = insert_after_b
 
 func _on_button_remove_after_pressed():
-	pass # Replace with function body.
+	prepare_signals_for_current()
+	max_step_pre = 4
+	current_algo = remove_after
+	current_algo_b = remove_after_b

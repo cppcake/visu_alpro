@@ -90,7 +90,17 @@ theme = ExtResource("2_0ki28")
 layout_mode = 2
 alignment = 1
 
-[node name="button_stop" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_cancel" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+layout_mode = 2
+tooltip_text = "STOP_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("2_0ki28")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
+disabled = true
+text = "Cancel"
+script = ExtResource("4_kusec")
+
+[node name="button_finish" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
@@ -256,7 +266,9 @@ zoom_level = 2.0
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="." method="_on_button_remove_after_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" to="." method="cancel"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
+[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
 [connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
