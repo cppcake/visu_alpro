@@ -1,13 +1,14 @@
-[gd_scene load_steps=39 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=41 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
-[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/scenes/pseudocode_variables_stack_gui_vertical.tscn" id="4_g3jgw"]
+[ext_resource type="Script" path="res://topics/ui/scripts/pseudocode_variables_stack_gui.gd" id="4_3enpf"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
 [ext_resource type="Script" path="res://misc/easteregg/easteregg.gd" id="6_4l3tn"]
 [ext_resource type="Texture2D" uid="uid://dxt0moanjslh0" path="res://misc/easteregg/sprites/T_Wheatley.png" id="7_aqtc4"]
 [ext_resource type="Texture2D" uid="uid://tf4fod7pptw7" path="res://misc/easteregg/sprites/T_Fact_Core.png" id="8_gr0u5"]
+[ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="8_ws5jv"]
 [ext_resource type="Texture2D" uid="uid://ciybw5iwfesd1" path="res://misc/easteregg/sprites/T_Adventure_Core.png" id="9_vwir8"]
 [ext_resource type="Texture2D" uid="uid://oypgn10d4281" path="res://misc/easteregg/sprites/T_PotatOS.png" id="10_cup43"]
 [ext_resource type="Texture2D" uid="uid://dfvjwmtxfcom5" path="res://misc/easteregg/sprites/T_Companion_Cube.png" id="11_3vdvw"]
@@ -31,13 +32,21 @@
 [ext_resource type="AudioStream" uid="uid://gqljk4rbeoym" path="res://misc/easteregg/sounds/sound_weapons_portalgun_portal_open2.wav" id="29_0n7ow"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/mode_select.gd" id="30_d3yqm"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_phvch"]
-[ext_resource type="Script" path="res://menus/main/scripts/buttons/reset.gd" id="32_ojub5"]
+[ext_resource type="Script" path="res://graph/scripts/reset.gd" id="32_ojub5"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
-[ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="35_gotrf"]
+[ext_resource type="Script" path="res://menus/mouse_pos_manager.gd" id="35_gotrf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pod14"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
@@ -75,12 +84,398 @@ collide_with_bodies = false
 [node name="bfs" type="Node" parent="CanvasLayer/algorithms"]
 script = ExtResource("3_87483")
 
-[node name="own_gui" parent="CanvasLayer/algorithms/bfs" instance=ExtResource("4_g3jgw")]
+[node name="own_gui" type="ColorRect" parent="CanvasLayer/algorithms/bfs" node_paths=PackedStringArray("callstack", "label_call", "label_sequence", "label_queue", "label_return", "code_display")]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -562.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("4_3enpf")
+callstack = NodePath("VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack")
+label_call = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/label_call")
+label_sequence = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_sequence")
+label_queue = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_queue")
+label_return = NodePath("VBoxContainer/container_pseudocode/content/return/label_return")
+code_display = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/code_display")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container_pseudocode" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode"]
+layout_mode = 2
+
+[node name="content" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="label_call" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="code_display" type="RichTextLabel" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("24_sn1md")
+bbcode_enabled = true
+text = "DFS_PSEUDOCODE"
+fit_content = true
+script = ExtResource("25_lbqqa")
+
+[node name="return" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="label_return" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/return"]
+modulate = Color(0, 0.305882, 0.623529, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+
+[node name="container_variables" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables"]
+layout_mode = 2
+
+[node name="title" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Variables" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "VARIABLES"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="content" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label_sequence" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F  =  [...]"
+
+[node name="label_queue" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F' =  [...] (von Aufruf y)"
+
+[node name="container_callstack" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="stack" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "STACK"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="stack" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer"]
+light_mask = 17
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="stack_frame" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
+
+[node name="stack_frame2" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
+
+[node name="stack_frame3" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
 
 [node name="dfs" type="Node" parent="CanvasLayer/algorithms"]
 script = ExtResource("5_2xtpe")
 
-[node name="own_gui" parent="CanvasLayer/algorithms/dfs" instance=ExtResource("4_g3jgw")]
+[node name="own_gui" type="ColorRect" parent="CanvasLayer/algorithms/dfs" node_paths=PackedStringArray("callstack", "label_call", "label_sequence", "label_queue", "label_return", "code_display")]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -562.0
+offset_top = 39.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("4_3enpf")
+callstack = NodePath("VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack")
+label_call = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/label_call")
+label_sequence = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_sequence")
+label_queue = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_queue")
+label_return = NodePath("VBoxContainer/container_pseudocode/content/return/label_return")
+code_display = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/code_display")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container_pseudocode" type="MarginContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode"]
+layout_mode = 2
+
+[node name="content" type="MarginContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="label_call" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="code_display" type="RichTextLabel" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("24_sn1md")
+bbcode_enabled = true
+text = "DFS_PSEUDOCODE"
+fit_content = true
+script = ExtResource("25_lbqqa")
+
+[node name="return" type="ScrollContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="label_return" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_pseudocode/content/return"]
+modulate = Color(0, 0.305882, 0.623529, 1)
+layout_mode = 2
+text = "Tiefensuche (Aufruf x)"
+
+[node name="container_variables" type="MarginContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables"]
+layout_mode = 2
+
+[node name="title" type="MarginContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Variables" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "VARIABLES"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="content" type="ScrollContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label_sequence" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F  =  [...]"
+
+[node name="label_queue" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = " F' =  [...] (von Aufruf y)"
+
+[node name="container_callstack" type="MarginContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("31_phvch")
+
+[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="stack" type="Label" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "STACK"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="stack" type="VBoxContainer" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer"]
+light_mask = 17
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="stack_frame" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
+
+[node name="stack_frame2" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
+
+[node name="stack_frame3" parent="CanvasLayer/algorithms/dfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
+layout_mode = 2
 
 [node name="easteregg" type="Node" parent="CanvasLayer/algorithms" node_paths=PackedStringArray("graph_manager", "code_display")]
 script = ExtResource("6_4l3tn")

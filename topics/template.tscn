@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bthcdr4abtmxb"]
+[gd_scene load_steps=8 format=3 uid="uid://bthcdr4abtmxb"]
 
-[ext_resource type="PackedScene" uid="uid://dq8n3q2fa7rns" path="res://graph/graph_manager.tscn" id="1_4qwbx"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel.tscn" id="4_3cjmx"]
 [ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera_2d.tscn" id="7_ygilh"]
-[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_spxkm"]
-[ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_85jl3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_0rtpr"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_22dmt"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ilx38"]
@@ -13,8 +11,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
 [node name="root" type="Node"]
-
-[node name="graph_manager" parent="." instance=ExtResource("1_4qwbx")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -146,32 +142,7 @@ jump = 9999999
 [node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("34_ilx38")]
 layout_mode = 2
 
-[node name="info_gui" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -563.0
-offset_top = 39.0
-offset_bottom = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/info_gui"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="display" type="RichTextLabel" parent="CanvasLayer/info_gui/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("24_spxkm")
-bbcode_enabled = true
-script = ExtResource("25_85jl3")
+[node name="side_panel" parent="CanvasLayer" instance=ExtResource("4_3cjmx")]
 
 [node name="Camera2D" parent="." instance=ExtResource("7_ygilh")]
 unique_name_in_owner = true

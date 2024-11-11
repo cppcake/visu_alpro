@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=12 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
 [ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
-[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="5_ses31"]
-[ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="6_su72p"]
-[ext_resource type="Script" path="res://menus/main/scripts/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="Script" path="res://menus/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel.tscn" id="7_ld1tq"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="9_083mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
@@ -145,32 +144,7 @@ offset_right = 85.0
 offset_bottom = 70.0
 text = "size: 0"
 
-[node name="info_gui" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -563.0
-offset_top = 39.0
-offset_bottom = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/info_gui"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="display" type="RichTextLabel" parent="CanvasLayer/info_gui/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("5_ses31")
-bbcode_enabled = true
-script = ExtResource("6_su72p")
+[node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3

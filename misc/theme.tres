@@ -17,8 +17,8 @@ border_color = Color(0.352941, 0.352941, 0.352941, 1)
 
 [resource]
 Button/styles/focus = SubResource("StyleBoxFlat_ermfv")
-MarginContainer/constants/margin_bottom = 5
-MarginContainer/constants/margin_left = 5
-MarginContainer/constants/margin_right = 5
-MarginContainer/constants/margin_top = 5
+MarginContainer/constants/margin_bottom = 3
+MarginContainer/constants/margin_left = 3
+MarginContainer/constants/margin_right = 3
+MarginContainer/constants/margin_top = 3
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_q8y7k")
