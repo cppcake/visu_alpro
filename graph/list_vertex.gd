@@ -34,10 +34,10 @@ func _process(_delta):
 	# Not efficient i dont care
 	if reference_counter >= 1:
 			sprite.texture = sprite_default
-			label_ref_count.add_theme_color_override("font_color", constants.ok_green_c)
+			label_ref_count.add_theme_color_override("font_color", Color.WHITE)
 	else:
 			sprite.texture = sprite_to_remove
-			label_ref_count.add_theme_color_override("font_color", constants.nope_red_c)
+			label_ref_count.add_theme_color_override("font_color", Color.WEB_MAROON)
 	
 	label_ref_count.text = str(reference_counter)
 

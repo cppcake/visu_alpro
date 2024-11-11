@@ -1,3 +1,1 @@
-extends ColorRect
-
-
+extends Control

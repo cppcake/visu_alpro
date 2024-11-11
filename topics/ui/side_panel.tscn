@@ -1,23 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=9 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="3_k2xbj"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="4_jkr46"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="5_p5snr"]
+[ext_resource type="Texture2D" uid="uid://crds5yinbpcso" path="res://misc/icons/caret_left.png" id="6_spu0b"]
+[ext_resource type="Script" path="res://topics/ui/side_panel/scripts/button_toggle_side_panel.gd" id="7_puxd5"]
 
-[node name="side_panel" type="ColorRect"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="side_panel" type="Panel"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -562.0
-offset_top = 39.0
-offset_bottom = -1.0
+offset_top = 58.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_xsdfw")
-color = Color(0.117647, 0.129412, 0.141176, 0.768627)
 script = ExtResource("1_hcmu3")
 
 [node name="container_info" type="VBoxContainer" parent="."]
@@ -223,3 +227,25 @@ bbcode_enabled = true
 text = "explanation..."
 fit_content = true
 script = ExtResource("4_jkr46")
+
+[node name="button_toggle_side_panel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -22.5
+offset_right = 4.0
+offset_bottom = 22.5
+grow_vertical = 2
+pivot_offset = Vector2(10.5, 22.5)
+theme_override_styles/focus = SubResource("StyleBoxFlat_7rw0g")
+icon = ExtResource("6_spu0b")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_puxd5")
+
+[connection signal="mouse_entered" from="button_toggle_side_panel" to="button_toggle_side_panel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="button_toggle_side_panel" to="button_toggle_side_panel" method="_on_mouse_exited"]
+[connection signal="pressed" from="button_toggle_side_panel" to="button_toggle_side_panel" method="_on_pressed"]
