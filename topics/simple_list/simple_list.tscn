@@ -41,6 +41,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
+color = Color(0.211765, 0.223529, 0.243137, 0)
 
 [node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui"]
 layout_mode = 1
@@ -62,23 +63,27 @@ alignment = 1
 
 [node name="button_insert_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Insert front"
+theme = ExtResource("2_0ki28")
+text = "insert_front"
 script = ExtResource("4_kusec")
 
 [node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Insert after"
+theme = ExtResource("2_0ki28")
+text = "insert_after"
 script = ExtResource("4_kusec")
 
 [node name="button_remove_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Remove front
+theme = ExtResource("2_0ki28")
+text = "remove_front
 "
 script = ExtResource("4_kusec")
 
 [node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Remove after"
+theme = ExtResource("2_0ki28")
+text = "remove_after"
 script = ExtResource("4_kusec")
 
 [node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
@@ -121,7 +126,6 @@ text = "<---"
 [node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 script = ExtResource("5_jpi4x")
 
 [node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
@@ -145,6 +149,8 @@ offset_bottom = 70.0
 text = "size: 0"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
+visible = false
+color = Color(0.117647, 0.129412, 0.141176, 1)
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -205,7 +211,6 @@ offset_right = -138.5
 offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 39
 text = "DATA"
 horizontal_alignment = 1

@@ -113,6 +113,6 @@ locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translati
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.564706, 0.564706, 0.521569, 1)
+environment/defaults/default_clear_color=Color(0.192157, 0.2, 0.219608, 1)
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/screen_space_aa=1
