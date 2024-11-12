@@ -6,7 +6,7 @@ var graph_traversal_path = "res://topics/graph_traversal/graph_traversal.tscn"
 
 func change_scene(scene: String):
 	get_node("/root/OptionsMenu/options_menu").visible = false
-	get_node("/root/OptionsMenu/options_menu/Panel/VBoxContainer/select_locale/OptionButton").update_selected()
+	get_node("/root/OptionsMenu/options_menu/Panel/VBoxContainer/select_locale/OptionButton").selected = 2
 	
 	match scene:
 		"select_locale":

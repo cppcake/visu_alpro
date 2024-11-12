@@ -4,6 +4,7 @@ EDGES,EDGES,KANTEN
 MOVE,MOVE,BEWEGEN
 RESET,RESET,ZURÜCKSETZEN
 EXIT,EXIT,BEENDEN
+SEL_LANG,Select language (restart required),Wähle Sprache (Neustart erforderlich)
 ,,
 VERTICES_TOOLTIP,Switch to VERTICES mode,Wechsel zum KNOTEN Modus
 EDGES_TOOLTIP,Switch to EDGES mode,Wechsel zum KANTEN Modus

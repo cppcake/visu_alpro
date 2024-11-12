@@ -17,7 +17,6 @@ func _process(_delta):
 layer = 5
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,7 +26,6 @@ color = Color(0.192157, 0.2, 0.219608, 0.772549)
 script = SubResource("GDScript_agek1")
 
 [node name="options_menu" type="CenterContainer" parent="." node_paths=PackedStringArray("vbox_content")]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,11 +55,14 @@ theme = ExtResource("1_rjeik")
 [node name="OptionButton" type="OptionButton" parent="options_menu/Panel/VBoxContainer/select_locale"]
 layout_mode = 2
 theme = ExtResource("1_rjeik")
-item_count = 2
+item_count = 3
+selected = 2
 popup/item_0/text = "EN"
 popup/item_0/id = 0
 popup/item_1/text = "DE"
 popup/item_1/id = 1
+popup/item_2/text = "SEL_LANG"
+popup/item_2/id = 2
 script = ExtResource("3_x3ps0")
 
 [node name="toggle_fullscreen" type="MarginContainer" parent="options_menu/Panel/VBoxContainer"]
