@@ -1,21 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4byyinbr8yl6"]
 
-[ext_resource type="Texture2D" uid="uid://cp8jmj4055ddo" path="res://menus/select_topic/images/placeholder.png" id="1_83yua"]
-[ext_resource type="Theme" uid="uid://bb7wilt84kypn" path="res://menus/select_topic/item_list.tres" id="1_uwio3"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_2ti2a"]
 [ext_resource type="Script" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
+[ext_resource type="PackedScene" uid="uid://4yxiit4yk24o" path="res://menus/select_topic/item_box.tscn" id="4_6ddwb"]
 [ext_resource type="Script" path="res://menus/select_topic/select_topic.gd" id="5_g53c3"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
-layout_mode = 1
+[node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,62 +16,51 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("1_uwio3")
 theme_override_font_sizes/font_size = 42
-text = "alpro_demonstrator"
+text = "visu_alpro"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("1_uwio3")
 theme_override_font_sizes/font_size = 30
 text = "Pick a topic to visualize"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_2ti2a")
 script = ExtResource("2_5hq36")
 
-[node name="ItemList" type="ItemList" parent="ColorRect/CenterContainer/VBoxContainer/ScrollContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="grid" type="GridContainer" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer"]
 custom_minimum_size = Vector2(1680, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("1_uwio3")
-auto_height = true
-item_count = 9
-max_columns = 4
-same_column_width = true
-icon_mode = 0
-item_0/text = "Graph Traversal"
-item_0/icon = ExtResource("1_83yua")
-item_1/text = "Simple List"
-item_1/icon = ExtResource("1_83yua")
-item_2/text = "Doubly Linked List"
-item_2/icon = ExtResource("1_83yua")
-item_3/text = "Queue"
-item_3/icon = ExtResource("1_83yua")
-item_4/text = "Stack"
-item_4/icon = ExtResource("1_83yua")
-item_5/text = "Tree Traversal"
-item_5/icon = ExtResource("1_83yua")
-item_6/text = "Balanced Search Tree"
-item_6/icon = ExtResource("1_83yua")
-item_7/text = "Heap"
-item_7/icon = ExtResource("1_83yua")
-item_8/text = "Hash-Table"
-item_8/icon = ExtResource("1_83yua")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_2ti2a")
 script = ExtResource("5_g53c3")
 
-[connection signal="item_selected" from="ColorRect/CenterContainer/VBoxContainer/ScrollContainer/ItemList" to="ColorRect/CenterContainer/VBoxContainer/ScrollContainer/ItemList" method="_on_item_selected"]
+[node name="ItemBox" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+scene_name = "graph_traversal"
+label_text = "Graph Traversal"
+
+[node name="ItemBox2" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+scene_name = "simple_list"
+label_text = "Simple List"

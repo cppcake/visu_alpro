@@ -52,6 +52,8 @@ border_color = Color(0.352941, 0.352941, 0.352941, 1)
 [resource]
 Button/styles/hover = SubResource("StyleBoxFlat_hgknu")
 Button/styles/normal = SubResource("StyleBoxFlat_yh2hm")
+GridContainer/constants/h_separation = 6
+GridContainer/constants/v_separation = 6
 HSeparator/styles/separator = SubResource("StyleBoxFlat_o75dd")
 MarginContainer/constants/margin_bottom = 6
 MarginContainer/constants/margin_left = 4

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="alprodemonstrator"
+config/name="visu_alpro"
 run/main_scene="res://menus/select_locale/select_locale.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://misc/icons/icon.svg"

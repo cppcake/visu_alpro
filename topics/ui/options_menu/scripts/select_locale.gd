@@ -1,12 +1,8 @@
 extends OptionButton
 
-func _ready():
-	update_selected()
-
 func update_selected():
 	var config = ConfigFile.new()
 	config.load("user://config.cfg")
-
 	if config.has_section("locale"):
 		match config.get_value("locale", "locale"):
 			"en":
