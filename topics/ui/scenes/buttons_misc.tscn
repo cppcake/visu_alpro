@@ -18,7 +18,7 @@ resource_name = "quit"
 script/source = "extends Button
 
 func _on_pressed():
-	get_tree().quit()
+	get_node(\"/root/OptionsMenu/options_menu\").visible = !get_node(\"/root/OptionsMenu/options_menu\").visible
 "
 
 [node name="buttons_misc" type="MarginContainer"]
@@ -38,7 +38,7 @@ icon = ExtResource("2_8rl7v")
 icon_alignment = 1
 script = SubResource("GDScript_k2pld")
 
-[node name="button_exit" type="Button" parent="HBoxContainer3"]
+[node name="button_settings" type="Button" parent="HBoxContainer3"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 tooltip_text = "EXIT_TOOLTIP"
@@ -50,4 +50,4 @@ icon_alignment = 1
 script = SubResource("GDScript_h3rqd")
 
 [connection signal="pressed" from="HBoxContainer3/button_home" to="HBoxContainer3/button_home" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer3/button_exit" to="HBoxContainer3/button_exit" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer3/button_settings" to="HBoxContainer3/button_settings" method="_on_pressed"]

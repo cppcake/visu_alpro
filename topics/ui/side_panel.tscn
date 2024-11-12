@@ -233,18 +233,24 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
+offset_left = -25.0
 offset_top = -22.5
-offset_right = 4.0
 offset_bottom = 22.5
 grow_vertical = 2
 pivot_offset = Vector2(10.5, 22.5)
 theme_override_styles/focus = SubResource("StyleBoxFlat_7rw0g")
-icon = ExtResource("6_spu0b")
 flat = true
-icon_alignment = 1
-expand_icon = true
 script = ExtResource("7_puxd5")
+
+[node name="icon" type="TextureRect" parent="button_toggle_side_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_spu0b")
+expand_mode = 1
 
 [connection signal="mouse_entered" from="button_toggle_side_panel" to="button_toggle_side_panel" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="button_toggle_side_panel" to="button_toggle_side_panel" method="_on_mouse_exited"]

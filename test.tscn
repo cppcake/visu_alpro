@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv1b12m1qqxbo"]
+[gd_scene load_steps=5 format=3 uid="uid://bv1b12m1qqxbo"]
 
 [ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
 [ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://graph/list_vertex.tscn" id="3_gw0rp"]
 [ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="4_7ovg7"]
+[ext_resource type="PackedScene" uid="uid://sd8yr560vaj2" path="res://topics/ui/options_menu/options_menu.tscn" id="4_b5c5h"]
 
-[node name="Test" type="Node" node_paths=PackedStringArray("v", "v2", "v3", "cam")]
+[node name="Test" type="Node" node_paths=PackedStringArray("v1", "v2", "v3", "cam")]
 script = ExtResource("1_1g5mx")
-v = NodePath("list_vertex")
+v1 = NodePath("list_vertex")
 v2 = NodePath("list_vertex2")
 v3 = NodePath("list_vertex3")
 cam = NodePath("Camera2D")
@@ -15,9 +16,11 @@ cam = NodePath("Camera2D")
 position = Vector2(-325, -256)
 
 [node name="list_vertex2" parent="." instance=ExtResource("3_gw0rp")]
-position = Vector2(-5, 21)
+position = Vector2(-320, 155)
 
 [node name="list_vertex3" parent="." instance=ExtResource("3_gw0rp")]
-position = Vector2(348, 258)
+position = Vector2(136, -102)
 
 [node name="Camera2D" parent="." instance=ExtResource("4_7ovg7")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_b5c5h")]

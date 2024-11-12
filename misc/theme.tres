@@ -29,7 +29,7 @@ border_width_right = 1
 border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeajt"]
-bg_color = Color(0.117647, 0.129412, 0.141176, 0.839216)
+bg_color = Color(0.117647, 0.129412, 0.141176, 0.901961)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -53,9 +53,9 @@ border_color = Color(0.352941, 0.352941, 0.352941, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_hgknu")
 Button/styles/normal = SubResource("StyleBoxFlat_yh2hm")
 HSeparator/styles/separator = SubResource("StyleBoxFlat_o75dd")
-MarginContainer/constants/margin_bottom = 5
-MarginContainer/constants/margin_left = 3
-MarginContainer/constants/margin_right = 3
-MarginContainer/constants/margin_top = 3
+MarginContainer/constants/margin_bottom = 6
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
 Panel/styles/panel = SubResource("StyleBoxFlat_jeajt")
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_q8y7k")
