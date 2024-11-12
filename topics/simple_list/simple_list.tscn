@@ -7,16 +7,17 @@
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
 [ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
-[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel.tscn" id="7_ld1tq"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="9_083mb"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="7_ld1tq"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_default.png" id="9_083mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "current", "new", "label_progress", "size_label")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "side_panel", "current", "new", "label_progress", "size_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
+side_panel = NodePath("CanvasLayer/side_panel")
 current = NodePath("current")
 new = NodePath("new")
 label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")

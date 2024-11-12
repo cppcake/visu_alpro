@@ -13,7 +13,8 @@ config_version=5
 config/name="visu_alpro"
 run/main_scene="res://menus/select_locale/select_locale.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://misc/icons/icon.svg"
+boot_splash/bg_color=Color(0.192157, 0.2, 0.219608, 1)
+config/icon="res://graph/sprites/vertex_default.png"
 
 [autoload]
 

@@ -92,11 +92,11 @@ func set_sprite(selection: sprites):
 		sprites.unselected: 
 			sprite.texture = sprite_unselected
 		sprites.selected:
-			sprite.texture = sprite_current
+			sprite.texture = sprite_selected
 		sprites.current:
 			sprite.texture = sprite_current
 		sprites.visited:
-			sprite.texture = sprite_current
+			sprite.texture = sprite_visited
 
 func _on_mouse_entered():
 	modulate = constants.hovered

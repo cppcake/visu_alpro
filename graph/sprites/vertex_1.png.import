@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dii5xksq1222v"
-path="res://.godot/imported/vertex_green.png-4b0116c42a32229dc5ea040d9065e8db.ctex"
+uid="uid://byei0vq0s15pl"
+path="res://.godot/imported/vertex_1.png-6a61736f9bbaf39c6938c046f31e7869.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graph/sprites/vertex_green.png"
-dest_files=["res://.godot/imported/vertex_green.png-4b0116c42a32229dc5ea040d9065e8db.ctex"]
+source_file="res://graph/sprites/vertex_1.png"
+dest_files=["res://.godot/imported/vertex_1.png-6a61736f9bbaf39c6938c046f31e7869.ctex"]
 
 [params]
 

@@ -26,6 +26,7 @@ color = Color(0.192157, 0.2, 0.219608, 0.772549)
 script = SubResource("GDScript_agek1")
 
 [node name="options_menu" type="CenterContainer" parent="." node_paths=PackedStringArray("vbox_content")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -82,7 +83,7 @@ theme = ExtResource("1_rjeik")
 [node name="Button" type="Button" parent="options_menu/Panel/VBoxContainer/exit"]
 layout_mode = 2
 theme = ExtResource("1_rjeik")
-text = "EXIT"
+text = "Exit to desktop"
 script = ExtResource("5_ajr2c")
 
 [connection signal="item_selected" from="options_menu/Panel/VBoxContainer/select_locale/OptionButton" to="options_menu/Panel/VBoxContainer/select_locale/OptionButton" method="_on_item_selected"]

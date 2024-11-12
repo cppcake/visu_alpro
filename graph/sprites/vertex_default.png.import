@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cx1plgbv2203k"
-path="res://.godot/imported/icon.svg-7dcc59f4324cb64501ac1cc20add8e4a.ctex"
+uid="uid://cvstya0mkgsf5"
+path="res://.godot/imported/vertex_default.png-529bd365cdabca4e23cffab8339afc09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://misc/icons/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-7dcc59f4324cb64501ac1cc20add8e4a.ctex"]
+source_file="res://graph/sprites/vertex_default.png"
+dest_files=["res://.godot/imported/vertex_default.png-529bd365cdabca4e23cffab8339afc09.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

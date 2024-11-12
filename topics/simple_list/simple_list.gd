@@ -5,6 +5,10 @@ var size: int = 0
 
 @onready var list_v_scene = preload("res://graph/list_vertex.tscn")
 
+@export var side_panel: SidePanel
+func _ready():
+	clean_up()
+
 var current_algo: Callable
 var current_algo_b: Callable
 var current_step: int = 0
@@ -30,11 +34,7 @@ func backward():
 func finish():
 	while current_step < max_step:
 		forward()
-	current_step = 0
-	max_step= 0
-	unshare(false)
-	make_current(null)
-	update_step_label()
+	clean_up()
 	
 	if to_remove != null:
 		to_remove.queue_free()
@@ -44,13 +44,19 @@ func finish():
 func cancel():
 	while current_step > 0:
 		backward()
+	clean_up()
+	reposition_list()
+
+func clean_up():
 	current_step = 0
 	max_step= 0
 	unshare(false)
 	make_current(null)
 	update_step_label()
-	reposition_list()
-
+	
+	side_panel.select_containers(0, 0, 0, 1)
+	side_panel.override_exp("XDDD")
+	
 func reposition_list():
 	if head.target == null:
 		head.position = Vector2(0, 0)
