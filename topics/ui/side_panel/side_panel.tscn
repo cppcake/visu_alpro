@@ -1,17 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=11 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
+[ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_code.gd" id="3_6y0ia"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="3_k2xbj"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="4_jkr46"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="5_p5snr"]
 [ext_resource type="Texture2D" uid="uid://crds5yinbpcso" path="res://misc/icons/caret_left.png" id="6_spu0b"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/button_toggle_side_panel.gd" id="7_puxd5"]
+[ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_explanation.gd" id="7_sbto6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="side_panel" type="Panel" node_paths=PackedStringArray("cont_pseu", "cont_var", "cont_call", "cont_exp")]
+[node name="side_panel" type="Panel" node_paths=PackedStringArray("cont_code", "cont_var", "cont_call", "cont_exp")]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -23,7 +25,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("1_hcmu3")
-cont_pseu = NodePath("content/container_pseudocode")
+cont_code = NodePath("content/container_code")
 cont_var = NodePath("content/container_variables")
 cont_call = NodePath("content/container_callstack")
 cont_exp = NodePath("content/container_explanation")
@@ -36,33 +38,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="container_pseudocode" type="MarginContainer" parent="content"]
+[node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_display", "label_return")]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
+script = ExtResource("3_6y0ia")
+code_display = NodePath("content/title/code_display")
+label_return = NodePath("content/return/label_return")
 
-[node name="content" type="VBoxContainer" parent="content/container_pseudocode"]
+[node name="content" type="VBoxContainer" parent="content/container_code"]
 layout_mode = 2
 
-[node name="title" type="VBoxContainer" parent="content/container_pseudocode/content"]
+[node name="title" type="VBoxContainer" parent="content/container_code/content"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="content/container_pseudocode/content/title"]
+[node name="HSeparator" type="HSeparator" parent="content/container_code/content/title"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="label_call" type="Label" parent="content/container_pseudocode/content/title"]
+[node name="label_call" type="Label" parent="content/container_code/content/title"]
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 horizontal_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="content/container_pseudocode/content/title"]
+[node name="HSeparator2" type="HSeparator" parent="content/container_code/content/title"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="code_display" type="RichTextLabel" parent="content/container_pseudocode/content/title"]
+[node name="code_display" type="RichTextLabel" parent="content/container_code/content/title"]
 layout_mode = 2
 theme_override_fonts/bold_font = ExtResource("3_k2xbj")
 bbcode_enabled = true
@@ -70,12 +75,12 @@ text = "DFS_PSEUDOCODE"
 fit_content = true
 script = ExtResource("4_jkr46")
 
-[node name="return" type="ScrollContainer" parent="content/container_pseudocode/content"]
+[node name="return" type="ScrollContainer" parent="content/container_code/content"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="label_return" type="Label" parent="content/container_pseudocode/content/return"]
+[node name="label_return" type="Label" parent="content/container_code/content/return"]
 modulate = Color(0.447059, 0.537255, 0.854902, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
@@ -184,10 +189,12 @@ layout_mode = 2
 [node name="stack_frame3" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
 
-[node name="container_explanation" type="MarginContainer" parent="content"]
+[node name="container_explanation" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
+script = ExtResource("7_sbto6")
+exp_display = NodePath("content/rich_text")
 
 [node name="content" type="VBoxContainer" parent="content/container_explanation"]
 layout_mode = 2

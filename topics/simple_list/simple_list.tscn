@@ -24,7 +24,7 @@ label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/
 size_label = NodePath("CanvasLayer/label_list_size")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
-label_start_text = "Head"
+label_start_text = "head"
 
 [node name="current" parent="." instance=ExtResource("2_6nbmj")]
 visible = false
@@ -33,7 +33,7 @@ label_start_text = "pred"
 
 [node name="new" parent="." instance=ExtResource("2_6nbmj")]
 visible = false
-label_start_text = "new"
+label_start_text = "new_node_ptr"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

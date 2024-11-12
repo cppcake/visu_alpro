@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ch47gokw4nkj3"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ch47gokw4nkj3"]
+
+[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="1_nqrud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgknu"]
 bg_color = Color(0.447059, 0.537255, 0.854902, 1)
@@ -60,4 +62,7 @@ MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
 MarginContainer/constants/margin_top = 4
 Panel/styles/panel = SubResource("StyleBoxFlat_jeajt")
+RichTextLabel/fonts/bold_font = ExtResource("1_nqrud")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_nqrud")
+RichTextLabel/fonts/italics_font = ExtResource("1_nqrud")
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_q8y7k")
