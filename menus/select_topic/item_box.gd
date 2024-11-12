@@ -4,9 +4,11 @@ extends Panel
 @export var scene_name: String = ""
 @export var label_text: String
 
+@export var button: Button
+@export var texture_rec: TextureRect
 func _ready():
-	$MarginContainer/VBoxContainer/Label.text = label_text
-	$MarginContainer/VBoxContainer/Button/TextureRect.texture = texture_
+	button.text = label_text
+	texture_rec.texture = texture_
 
 func _on_button_pressed():
 	var scene_man = scene_manager.new()

@@ -4,13 +4,15 @@
 [ext_resource type="Script" path="res://menus/select_topic/item_box.gd" id="2_hm6hr"]
 [ext_resource type="Texture2D" uid="uid://cp8jmj4055ddo" path="res://menus/select_topic/images/placeholder.png" id="2_p4x6v"]
 
-[node name="ItemBox" type="Panel"]
-custom_minimum_size = Vector2(450, 280)
+[node name="ItemBox" type="Panel" node_paths=PackedStringArray("button", "texture_rec")]
+custom_minimum_size = Vector2(450, 300)
 offset_right = 450.0
 offset_bottom = 280.0
 size_flags_horizontal = 3
 theme = ExtResource("1_0afqe")
 script = ExtResource("2_hm6hr")
+button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button")
+texture_rec = NodePath("MarginContainer/VBoxContainer/Button/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -43,11 +45,14 @@ grow_vertical = 2
 texture = ExtResource("2_p4x6v")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_0afqe")
-text = "NAME"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Name"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

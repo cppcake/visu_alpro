@@ -237,6 +237,8 @@ func remove_front_b(step: int):
 		4:
 			update_size_label(1)
 func _on_button_remove_front_pressed():
+	set_up()
+	side_panel.override_code_call("list.remove_front()")
 	if size == 0:
 		init_algo(1, remove_front, remove_front_b)
 	else:

@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=16 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://graph/pointer.tscn" id="2_6nbmj"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
+[ext_resource type="Texture2D" uid="uid://b0odra2mn337m" path="res://misc/icons/arrow-small-left.png" id="5_3l5eo"]
 [ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
+[ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_ob6lh"]
+[ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_stef8"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="7_kfnh3"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="7_ld1tq"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_default.png" id="9_083mb"]
 
@@ -88,33 +92,39 @@ layout_mode = 2
 alignment = 1
 
 [node name="button_cancel" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "Cancel"
+icon = ExtResource("5_ob6lh")
+expand_icon = true
 script = ExtResource("4_kusec")
 
 [node name="button_finish" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "Finish"
+icon = ExtResource("6_stef8")
+expand_icon = true
 script = ExtResource("4_kusec")
 
 [node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "<---"
+icon = ExtResource("5_3l5eo")
+expand_icon = true
 
 [node name="state_counter" type="Label" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer"]
 layout_mode = 2
@@ -122,13 +132,15 @@ theme = ExtResource("2_0ki28")
 script = ExtResource("5_jpi4x")
 
 [node name="button_forward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "--->"
+icon = ExtResource("7_kfnh3")
+expand_icon = true
 
 [node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("4_6cqoy")]
 layout_mode = 2
