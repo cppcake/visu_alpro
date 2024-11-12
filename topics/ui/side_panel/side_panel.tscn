@@ -13,7 +13,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="side_panel" type="Panel" node_paths=PackedStringArray("cont_code", "cont_var", "cont_call", "cont_exp")]
+[node name="side_panel" type="Panel" node_paths=PackedStringArray("button_toggle", "cont_code", "cont_var", "cont_call", "cont_exp")]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -25,10 +25,11 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("1_hcmu3")
+button_toggle = NodePath("button_toggle_side_panel")
 cont_code = NodePath("content/container_code")
 cont_var = NodePath("content/container_variables")
 cont_call = NodePath("content/container_callstack")
-cont_exp = NodePath("content/container_explanation")
+cont_exp = NodePath("content/container_info")
 
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -38,12 +39,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_display", "label_return")]
+[node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_display", "label_call", "label_return")]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("3_6y0ia")
 code_display = NodePath("content/title/code_display")
+label_call = NodePath("content/title/label_call")
 label_return = NodePath("content/return/label_return")
 
 [node name="content" type="VBoxContainer" parent="content/container_code"]
@@ -189,30 +191,30 @@ layout_mode = 2
 [node name="stack_frame3" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
 layout_mode = 2
 
-[node name="container_explanation" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
+[node name="container_info" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("7_sbto6")
 exp_display = NodePath("content/rich_text")
 
-[node name="content" type="VBoxContainer" parent="content/container_explanation"]
+[node name="content" type="VBoxContainer" parent="content/container_info"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="content/container_explanation/content"]
+[node name="HSeparator" type="HSeparator" parent="content/container_info/content"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="label_title" type="Label" parent="content/container_explanation/content"]
+[node name="label_title" type="Label" parent="content/container_info/content"]
 layout_mode = 2
-text = "Explanation"
+text = "Info"
 horizontal_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="content/container_explanation/content"]
+[node name="HSeparator2" type="HSeparator" parent="content/container_info/content"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="rich_text" type="RichTextLabel" parent="content/container_explanation/content"]
+[node name="rich_text" type="RichTextLabel" parent="content/container_info/content"]
 layout_mode = 2
 bbcode_enabled = true
 text = "explanation..."

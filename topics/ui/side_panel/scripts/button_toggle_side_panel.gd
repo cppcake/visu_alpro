@@ -1,11 +1,12 @@
 extends Button
 
-var init_width: int
+var init_width: float
 var rect_icon: TextureRect
 func _ready():
 	rect_icon = get_child(0)
 	rect_icon.pivot_offset = size / 2
-	init_width = get_viewport().get_visible_rect().size[0] - get_parent().position.x
+	init_width = float(get_viewport().get_visible_rect().size[0] - get_parent().position.x)
+	get_parent().position.x = get_viewport().get_visible_rect().size[0]
 
 var degree_to: float = 0
 var inside: bool = false
@@ -18,14 +19,26 @@ func _process(delta):
 		rect_icon.scale = lerp(rect_icon.scale, Vector2(1.0, 1.0), 10 * delta)
 	
 	var window_width: float = get_viewport().get_visible_rect().size[0]
+	var t: float = 10 * delta
 	if open:
-		get_parent().position.x = lerp(float(get_parent().position.x), float(window_width - init_width), 10 * delta)
+		get_parent().position.x = lerp(float(get_parent().position.x), window_width - init_width - 6, t)
 	else:
-		get_parent().position.x = lerp(float(get_parent().position.x), float(window_width) + 4.0, 10 * delta)
+		get_parent().position.x = lerp(float(get_parent().position.x), window_width + 6, t)
 
-var open: bool = true
+var open: bool = false
 func _on_pressed():
+	toggle_()
+
+func toggle_():
 	open = !open
+	degree_to = 0
+
+func open_():
+	open = true
+	degree_to = 0
+	
+func close_():
+	open = false
 	degree_to = 0
 
 func _on_mouse_entered():

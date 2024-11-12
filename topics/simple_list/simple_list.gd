@@ -52,6 +52,8 @@ func cancel():
 	reposition_list()
 
 func clean_up():
+	side_panel.close()
+	
 	current_step = 0
 	max_step= 0
 	unshare(false)
@@ -60,7 +62,10 @@ func clean_up():
 	
 	side_panel.reset()
 	side_panel.select_containers(0, 0, 0, 1)
-	
+
+func set_up():
+	side_panel.open()
+
 func reposition_list():
 	if head.target == null:
 		head.position = Vector2(0, 0)
@@ -205,7 +210,9 @@ func insert_front_b(step: int):
 		1:
 			unshare()
 func _on_button_insert_front_pressed():
+	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT"))
+	set_up()
 	init_algo(5, insert_front, insert_front_b)
 
 func remove_front(step: int):
@@ -271,11 +278,14 @@ func insert_after_b(step: int):
 			unshare()
 func _on_button_insert_after_pressed():
 	side_panel.override_code(tr("INS_FRONT_AFTER"))
+	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")
+	set_up()
 	prepare_signals_for_current()
 	max_step_pre = 5
 	current_algo = insert_after
 	current_algo_b = insert_after_b
+	
 
 func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
@@ -305,6 +315,7 @@ func remove_after_b(step: int):
 		1:
 			pass
 func _on_button_remove_after_pressed():
+	set_up()
 	prepare_signals_for_current()
 	max_step_pre = 4
 	current_algo = remove_after
