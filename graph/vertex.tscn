@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8tc5dy0jmf0y"]
+[gd_scene load_steps=6 format=3 uid="uid://c8tc5dy0jmf0y"]
 
 [ext_resource type="Script" path="res://graph/scripts/vertex.gd" id="1_ey4sf"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="2_jj0ph"]
-[ext_resource type="Texture2D" uid="uid://e4y0fyio8suv" path="res://graph/sprites/vertex_uni_blau.png" id="5_btwxg"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_default.png" id="2_jj0ph"]
+[ext_resource type="Texture2D" uid="uid://dy03cdb2sf711" path="res://graph/sprites/vertex_red.png" id="3_2wd6b"]
+[ext_resource type="Texture2D" uid="uid://byei0vq0s15pl" path="res://graph/sprites/vertex_1.png" id="4_lutpy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
@@ -12,9 +13,9 @@ visibility_layer = 2
 z_index = 4
 script = ExtResource("1_ey4sf")
 sprite_unselected = ExtResource("2_jj0ph")
-sprite_selected = ExtResource("5_btwxg")
-sprite_current = ExtResource("5_btwxg")
-sprite_visited = ExtResource("5_btwxg")
+sprite_selected = ExtResource("3_2wd6b")
+sprite_current = ExtResource("2_jj0ph")
+sprite_visited = ExtResource("4_lutpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lky5f")
@@ -33,14 +34,11 @@ offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label_id" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -5,6 +5,10 @@ var size: int = 0
 
 @onready var list_v_scene = preload("res://graph/list_vertex.tscn")
 
+@export var side_panel: SidePanel
+func _ready():
+	clean_up()
+
 var current_algo: Callable
 var current_algo_b: Callable
 var current_step: int = 0
@@ -19,6 +23,10 @@ func forward():
 	update_step_label()
 
 func backward():
+	if current_step == max_step:
+		side_panel.override_code_return("")
+	if current_step == 1:
+		side_panel.highlight_code([])
 	if current_step == 0:
 		return
 		
@@ -30,11 +38,7 @@ func backward():
 func finish():
 	while current_step < max_step:
 		forward()
-	current_step = 0
-	max_step= 0
-	unshare(false)
-	make_current(null)
-	update_step_label()
+	clean_up()
 	
 	if to_remove != null:
 		to_remove.queue_free()
@@ -44,12 +48,23 @@ func finish():
 func cancel():
 	while current_step > 0:
 		backward()
+	clean_up()
+	reposition_list()
+
+func clean_up():
+	side_panel.close()
+	
 	current_step = 0
 	max_step= 0
 	unshare(false)
 	make_current(null)
 	update_step_label()
-	reposition_list()
+	
+	side_panel.reset()
+	side_panel.select_containers(0, 0, 0, 1)
+
+func set_up():
+	side_panel.open()
 
 func reposition_list():
 	if head.target == null:
@@ -112,12 +127,14 @@ func update_size_label(addend: int):
 	size_label.text = "size: " + str(size)
 
 func init_algo(max_step_: int = max_step, current_algo_: Callable = current_algo, current_algo_b_: Callable = current_algo_b):
-	print("Size of list: " + str(size))
 	current_step = 0
 	max_step = max_step_
 	current_algo = current_algo_
 	current_algo_b = current_algo_b_
 	update_step_label()
+	side_panel.select_containers(1, 0, 0, 1)
+	side_panel.override_code_return("")
+	
 
 var max_step_pre: int
 func get_current_for_algo(_viewport, event, _shape_idx):
@@ -128,10 +145,7 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 			while list_vertex_class.selected_vertex == null:
 				pass
 			make_current(list_vertex_class.selected_vertex)
-			if(list_vertex_class.selected_vertex.p1.target == null):
-				max_step = 1
-			else:
-				max_step = max_step_pre
+			max_step = max_step_pre
 			for child in self.get_children():
 				if type_string(typeof(child)) == "Object":
 					if child is list_vertex_class:
@@ -146,11 +160,11 @@ func prepare_signals_for_current() -> void:
 					child.connect("input_event", get_current_for_algo)
 
 var target_before
-func pseudo_remove():
+func codedo_remove():
 	to_remove.visible = false
 	target_before = to_remove.p1.target
 	to_remove.p1.set_target(null)
-func pseudo_remove_undo():
+func codedo_remove_undo():
 	to_remove.p1.set_target(target_before)
 	if target_before != null:
 		to_remove.p1.current_end_point = target_before.global_position
@@ -167,24 +181,39 @@ func insert_front(step: int):
 				make_shared(head.position + Vector2(0, 200))
 			else:
 				make_shared(head.position + Vector2(0, 325))
+			side_panel.highlight_code([1])
 		2:
 			new_vertex.p1.set_target(head.target)
+			side_panel.highlight_code([2])
 		3:
 			head.set_target(new_vertex)
+			side_panel.highlight_code([3])
 		4:
 			update_size_label(1)
+			side_panel.highlight_code([4])
+		5:
+			side_panel.highlight_code([5])
+			side_panel.override_code_return()
 func insert_front_b(step: int):
 	match step:
+		5:
+			side_panel.highlight_code([4])
 		4:
 			update_size_label(-1)
+			side_panel.highlight_code([3])
 		3:
 			head.set_target(new_vertex.p1.target)
+			side_panel.highlight_code([2])
 		2:
 			new_vertex.p1.set_target(null)
+			side_panel.highlight_code([1])
 		1:
 			unshare()
 func _on_button_insert_front_pressed():
-	init_algo(4, insert_front, insert_front_b)
+	side_panel.override_code_call("list.insert_front(data)")
+	side_panel.override_code(tr("INS_FRONT"))
+	set_up()
+	init_algo(5, insert_front, insert_front_b)
 
 func remove_front(step: int):
 	match step:
@@ -194,7 +223,7 @@ func remove_front(step: int):
 			to_remove = head.target
 			head.set_target(head.target.p1.target)
 		3:
-			pseudo_remove()
+			codedo_remove()
 		4:
 			update_size_label(-1)
 func remove_front_b(step: int):
@@ -204,10 +233,12 @@ func remove_front_b(step: int):
 		2:
 			head.set_target(to_remove)
 		3:
-			pseudo_remove_undo()
+			codedo_remove_undo()
 		4:
 			update_size_label(1)
 func _on_button_remove_front_pressed():
+	set_up()
+	side_panel.override_code_call("list.remove_front()")
 	if size == 0:
 		init_algo(1, remove_front, remove_front_b)
 	else:
@@ -217,33 +248,46 @@ func insert_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		1:
-			pass
-		2:
 			make_shared(pred.position + Vector2(125, -175), "above")
-		3:
+			side_panel.highlight_code([1])
+		2:
 			new_vertex.p1.set_target(pred.p1.target)
-		4:
+			side_panel.highlight_code([2])
+		3:
 			pred.p1.set_target(new_vertex)
-		5:
+			side_panel.highlight_code([3])
+		4:
 			update_size_label(1)
+			side_panel.highlight_code([4])
+		5:
+			side_panel.highlight_code([5])
+			side_panel.override_code_return()
 func insert_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		5:
-			update_size_label(-1)
+			side_panel.highlight_code([4])
 		4:
-			pred.p1.set_target(new_vertex.p1.target)
+			side_panel.highlight_code([3])
+			update_size_label(-1)
 		3:
-			new_vertex.p1.set_target(null)
+			side_panel.highlight_code([2])
+			pred.p1.set_target(new_vertex.p1.target)
 		2:
-			unshare()
+			side_panel.highlight_code([1])
+			new_vertex.p1.set_target(null)
 		1:
-			pass
+			unshare()
 func _on_button_insert_after_pressed():
+	side_panel.override_code(tr("INS_FRONT_AFTER"))
+	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
+	side_panel.override_exp("Pick a predecessor Node")
+	set_up()
 	prepare_signals_for_current()
 	max_step_pre = 5
 	current_algo = insert_after
 	current_algo_b = insert_after_b
+	
 
 func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
@@ -256,7 +300,7 @@ func remove_after(step: int):
 				to_remove.move_to_rel(Vector2(0, 150))
 			pred.p1.set_target(pred.p1.target.p1.target)
 		3:
-			pseudo_remove()
+			codedo_remove()
 		4:
 			update_size_label(-1)
 func remove_after_b(step: int):
@@ -265,7 +309,7 @@ func remove_after_b(step: int):
 		4:
 			update_size_label(1)
 		3:
-			pseudo_remove_undo()
+			codedo_remove_undo()
 		2:
 			if pred.p1.target != null:
 				to_remove.move_to_rel(Vector2(0, -150))
@@ -273,6 +317,7 @@ func remove_after_b(step: int):
 		1:
 			pass
 func _on_button_remove_after_pressed():
+	set_up()
 	prepare_signals_for_current()
 	max_step_pre = 4
 	current_algo = remove_after

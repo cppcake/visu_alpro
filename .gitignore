@@ -2,3 +2,5 @@
 .godot/
 build/
 *.translation
+*.lock
+*.bkp

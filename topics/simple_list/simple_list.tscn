@@ -1,29 +1,34 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=16 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://graph/pointer.tscn" id="2_6nbmj"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="4_6cqoy"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_kusec"]
+[ext_resource type="Texture2D" uid="uid://b0odra2mn337m" path="res://misc/icons/arrow-small-left.png" id="5_3l5eo"]
 [ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
+[ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_ob6lh"]
+[ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_stef8"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
-[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel.tscn" id="7_ld1tq"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_uni_gelb.png" id="9_083mb"]
+[ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="7_kfnh3"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="7_ld1tq"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://graph/sprites/vertex_default.png" id="9_083mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "current", "new", "label_progress", "size_label")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "side_panel", "current", "new", "label_progress", "size_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
+side_panel = NodePath("CanvasLayer/side_panel")
 current = NodePath("current")
 new = NodePath("new")
-label_progress = NodePath("CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/state_counter")
-size_label = NodePath("CanvasLayer/upper_gui/label_list_size")
+label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")
+size_label = NodePath("CanvasLayer/label_list_size")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
-label_start_text = "Head"
+label_start_text = "head"
 
 [node name="current" parent="." instance=ExtResource("2_6nbmj")]
 visible = false
@@ -32,112 +37,115 @@ label_start_text = "pred"
 
 [node name="new" parent="." instance=ExtResource("2_6nbmj")]
 visible = false
-label_start_text = "new"
+label_start_text = "new_node_ptr"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="upper_gui" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui"]
-layout_mode = 1
+[node name="buttons" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 41.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("2_0ki28")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_algorithm"]
 layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="button_insert_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_insert_front" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Insert front"
+theme = ExtResource("2_0ki28")
+text = "insert_front"
 script = ExtResource("4_kusec")
 
-[node name="button_insert_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_insert_after" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Insert after"
+theme = ExtResource("2_0ki28")
+text = "insert_after"
 script = ExtResource("4_kusec")
 
-[node name="button_remove_front" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_remove_front" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Remove front
+theme = ExtResource("2_0ki28")
+text = "remove_front
 "
 script = ExtResource("4_kusec")
 
-[node name="button_remove_after" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_remove_after" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
-text = "Remove after"
+theme = ExtResource("2_0ki28")
+text = "remove_after"
 script = ExtResource("4_kusec")
 
-[node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_navigation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_navigation"]
 layout_mode = 2
 alignment = 1
 
-[node name="button_cancel" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_cancel" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "Cancel"
+icon = ExtResource("5_ob6lh")
+expand_icon = true
 script = ExtResource("4_kusec")
 
-[node name="button_finish" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_finish" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "Finish"
+icon = ExtResource("6_stef8")
+expand_icon = true
 script = ExtResource("4_kusec")
 
-[node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "<---"
+icon = ExtResource("5_3l5eo")
+expand_icon = true
 
-[node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer"]
+[node name="state_counter" type="Label" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 script = ExtResource("5_jpi4x")
 
-[node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "--->"
+icon = ExtResource("7_kfnh3")
+expand_icon = true
 
-[node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("4_6cqoy")]
+[node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("4_6cqoy")]
 layout_mode = 2
 
-[node name="label_list_size" type="Label" parent="CanvasLayer/upper_gui"]
-layout_mode = 0
+[node name="label_list_size" type="Label" parent="CanvasLayer"]
 offset_left = 6.0
 offset_top = 47.0
 offset_right = 85.0
@@ -145,8 +153,9 @@ offset_bottom = 70.0
 text = "size: 0"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
+is_open = false
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="legend" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -160,20 +169,20 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="pointer" type="Node2D" parent="CanvasLayer/Control"]
+[node name="pointer" type="Node2D" parent="CanvasLayer/legend"]
 position = Vector2(74, -85)
 scale = Vector2(0.75, 0.75)
 
-[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/pointer"]
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/legend/pointer"]
 antialiased = true
 polygon = PackedVector2Array(30, 0, 0, 20, 0, -20)
 
-[node name="Line2D" type="Line2D" parent="CanvasLayer/Control/pointer"]
+[node name="Line2D" type="Line2D" parent="CanvasLayer/legend/pointer"]
 position = Vector2(-99, 0)
 points = PackedVector2Array(0, 0, 99.47, 0)
 antialiased = true
 
-[node name="label_pointer" type="Label" parent="CanvasLayer/Control"]
+[node name="label_pointer" type="Label" parent="CanvasLayer/legend"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -188,12 +197,12 @@ grow_horizontal = 0
 grow_vertical = 2
 text = " - Shared Pointer"
 
-[node name="list_vertex" type="Sprite2D" parent="CanvasLayer/Control"]
+[node name="list_vertex" type="Sprite2D" parent="CanvasLayer/legend"]
 position = Vector2(49, -8)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_083mb")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/list_vertex"]
+[node name="Label" type="Label" parent="CanvasLayer/legend/list_vertex"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -205,13 +214,12 @@ offset_right = -138.5
 offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 39
 text = "DATA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="label_list_vertex" type="Label" parent="CanvasLayer/Control"]
+[node name="label_list_vertex" type="Label" parent="CanvasLayer/legend"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -232,17 +240,17 @@ position = Vector2(300, 100)
 script = ExtResource("7_7vu2n")
 zoom_level = 2.0
 
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="." method="_on_button_insert_front_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="." method="_on_button_insert_after_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="." method="_on_button_remove_front_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="." method="_on_button_remove_after_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" to="." method="cancel"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="." method="_on_button_insert_front_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_front" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="." method="_on_button_insert_after_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_after" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="." method="_on_button_remove_front_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_front" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="." method="_on_button_remove_after_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_after" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="." method="cancel"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]

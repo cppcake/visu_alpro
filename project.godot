@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="alprodemonstrator"
+config/name="visu_alpro"
 run/main_scene="res://menus/select_locale/select_locale.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://misc/icon.svg"
+boot_splash/bg_color=Color(0.192157, 0.2, 0.219608, 1)
+config/icon="res://graph/sprites/vertex_default.png"
+
+[autoload]
+
+OptionsMenu="*res://topics/ui/options_menu/options_menu.tscn"
 
 [display]
 
@@ -106,13 +111,23 @@ mouse_wheel_down={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+ESC={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+F11={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation")
+locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation")
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.564706, 0.564706, 0.521569, 1)
+environment/defaults/default_clear_color=Color(0.192157, 0.2, 0.219608, 1)
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/screen_space_aa=1

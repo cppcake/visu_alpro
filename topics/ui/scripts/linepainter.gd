@@ -1,36 +1,19 @@
 extends RichTextLabel
 
-var color = constants.uni_blau
-var numbers_of_painted_lines = []
+var color = constants.color_1
+var init_text = ""
 
-func highlight_state(numbers_of_lines_to_paint: Array):
-	for line_nr in numbers_of_painted_lines:
-		unpaint_line(line_nr)
-	
-	for line_nr in numbers_of_lines_to_paint:
-		paint_line(line_nr)
-	
-	numbers_of_painted_lines = numbers_of_lines_to_paint
+func highlight_lines(lines_to_paint: Array) -> void:
+	text = init_text
+	# Split the label's text by lines
+	var lines = text.split("\n")
 
-func paint_line(line_nr: int) -> void:
-	replace_line(line_nr, ("[color=" + color + "]" + get_line(line_nr) + "[/color]"))
+	# Iterate through each index in the array
+	for i in lines_to_paint:
+		# Check if the index is within the bounds of the lines array
+		if i >= 0 and i < lines.size() + 1:
+		# Modify the line with the front and back strings
+			lines[i - 1] = ("[color=" + color + "]") + lines[i - 1] + "[/color]"
 
-func unpaint_line(line_nr: int) -> void:
-	replace_line(line_nr, get_line(line_nr).lstrip("[color=" + color + "]").rstrip("[/color]"))
-	
-func get_line(line_nr) -> String:
-	var lines = get_text().split('\n', false)
-	if !lines.is_empty():
-		return lines[line_nr - 1]
-	return ""
-
-func replace_line(line_nr: int, new_line: String) -> void:
-	var lines = get_text().split('\n', false)
-	if lines.size() >= line_nr:
-		lines[line_nr - 1] = new_line
-		
-	var new_text = ""
-	for line in lines:
-		new_text += line + '\n'
-		
-	set_text(new_text)
+	# Join the lines back together and set the label's text
+	text = "\n".join(lines)
