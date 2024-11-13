@@ -9,6 +9,9 @@ var size: int = 0
 func _ready():
 	clean_up()
 
+func _process(_delta):
+	update_stack_frame()
+
 var current_algo: Callable
 var current_algo_b: Callable
 var current_step: int = 0
@@ -122,9 +125,13 @@ func update_step_label():
 	label_progress.update_step_label(current_step, max_step)
 
 @export var size_label: Label
-func update_size_label(addend: int):
-	size = size + addend
-	size_label.text = "size: " + str(size)
+@export var head_label: Label
+func update_stack_frame():
+	size_label.text = "size = " + str(size)
+	if head.target == null:
+		head_label.text = "head = null"
+	else:
+		head_label.text = "head = 0x..."
 
 func init_algo(max_step_: int = max_step, current_algo_: Callable = current_algo, current_algo_b_: Callable = current_algo_b):
 	current_step = 0
@@ -189,7 +196,7 @@ func insert_front(step: int):
 			head.set_target(new_vertex)
 			side_panel.highlight_code([3])
 		4:
-			update_size_label(1)
+			size += 1
 			side_panel.highlight_code([4])
 		5:
 			side_panel.highlight_code([5])
@@ -199,7 +206,7 @@ func insert_front_b(step: int):
 		5:
 			side_panel.highlight_code([4])
 		4:
-			update_size_label(-1)
+			size -= 1
 			side_panel.highlight_code([3])
 		3:
 			head.set_target(new_vertex.p1.target)
@@ -225,7 +232,7 @@ func remove_front(step: int):
 		3:
 			codedo_remove()
 		4:
-			update_size_label(-1)
+			size -= 1
 func remove_front_b(step: int):
 	match step:
 		1:
@@ -235,7 +242,7 @@ func remove_front_b(step: int):
 		3:
 			codedo_remove_undo()
 		4:
-			update_size_label(1)
+			size += 1
 func _on_button_remove_front_pressed():
 	set_up()
 	side_panel.override_code_call("list.remove_front()")
@@ -257,7 +264,7 @@ func insert_after(step: int):
 			pred.p1.set_target(new_vertex)
 			side_panel.highlight_code([3])
 		4:
-			update_size_label(1)
+			size += 1
 			side_panel.highlight_code([4])
 		5:
 			side_panel.highlight_code([5])
@@ -269,7 +276,7 @@ func insert_after_b(step: int):
 			side_panel.highlight_code([4])
 		4:
 			side_panel.highlight_code([3])
-			update_size_label(-1)
+			size -= 1
 		3:
 			side_panel.highlight_code([2])
 			pred.p1.set_target(new_vertex.p1.target)
@@ -302,12 +309,12 @@ func remove_after(step: int):
 		3:
 			codedo_remove()
 		4:
-			update_size_label(-1)
+			size -= 1
 func remove_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		4:
-			update_size_label(1)
+			size += 1
 		3:
 			codedo_remove_undo()
 		2:

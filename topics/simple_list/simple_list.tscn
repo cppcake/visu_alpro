@@ -18,14 +18,15 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("head", "side_panel", "current", "new", "label_progress", "size_label")]
+[node name="root" type="Node" node_paths=PackedStringArray("head", "side_panel", "current", "new", "label_progress", "size_label", "head_label")]
 script = ExtResource("1_rx7lk")
 head = NodePath("head")
 side_panel = NodePath("CanvasLayer/side_panel")
 current = NodePath("current")
 new = NodePath("new")
 label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")
-size_label = NodePath("CanvasLayer/label_list_size")
+size_label = NodePath("CanvasLayer/stackframe_list/MarginContainer/VBoxContainer/label_size")
+head_label = NodePath("CanvasLayer/stackframe_list/MarginContainer/VBoxContainer/label_head")
 
 [node name="head" parent="." instance=ExtResource("2_6nbmj")]
 label_start_text = "head"
@@ -145,12 +146,50 @@ expand_icon = true
 [node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("4_6cqoy")]
 layout_mode = 2
 
-[node name="label_list_size" type="Label" parent="CanvasLayer"]
-offset_left = 6.0
-offset_top = 47.0
-offset_right = 85.0
-offset_bottom = 70.0
-text = "size: 0"
+[node name="stackframe_list" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 100)
+offset_left = 4.0
+offset_top = 50.0
+offset_right = 44.0
+offset_bottom = 90.0
+theme = ExtResource("2_0ki28")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/stackframe_list"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0ki28")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/stackframe_list/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_0ki28")
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_0ki28")
+
+[node name="Label" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_0ki28")
+text = "stackframe list"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_0ki28")
+
+[node name="label_size" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_0ki28")
+text = "size = 0"
+
+[node name="label_head" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "head = null"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
 is_open = false
