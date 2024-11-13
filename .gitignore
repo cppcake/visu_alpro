@@ -3,3 +3,4 @@
 build/
 *.translation
 *.lock
+*.bkp
