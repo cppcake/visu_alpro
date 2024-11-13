@@ -176,10 +176,7 @@ func store_state(current_vertex: int, lines_to_paint: Array, sound: bool):
 @export var code_display: RichTextLabel
 func update_lines_selected(lines_to_paint: Array):
 	code_display.text = tr("HEHE")
-	if lines_to_paint[0] != 0:
-		for line_nr: int in lines_to_paint:
-			code_display.replace_line(line_nr, ("[wave amp=50.0 freq=5.0 connected=1][color=#004e9f]" + code_display.get_line(line_nr) + "[/color][/wave]"))
-
+	
 func update_visuals():	
 	var lines_to_paint = states[current_step].get(easteregg_keys.lines_to_paint)
 	update_lines_selected(lines_to_paint)

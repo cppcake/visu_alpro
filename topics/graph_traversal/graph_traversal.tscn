@@ -1,27 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=26 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
-[ext_resource type="Script" path="res://misc/easteregg/easteregg.gd" id="6_4l3tn"]
-[ext_resource type="Texture2D" uid="uid://dxt0moanjslh0" path="res://misc/easteregg/sprites/T_Wheatley.png" id="7_aqtc4"]
-[ext_resource type="Texture2D" uid="uid://tf4fod7pptw7" path="res://misc/easteregg/sprites/T_Fact_Core.png" id="8_gr0u5"]
-[ext_resource type="Texture2D" uid="uid://ciybw5iwfesd1" path="res://misc/easteregg/sprites/T_Adventure_Core.png" id="9_vwir8"]
-[ext_resource type="Texture2D" uid="uid://oypgn10d4281" path="res://misc/easteregg/sprites/T_PotatOS.png" id="10_cup43"]
-[ext_resource type="Texture2D" uid="uid://dfvjwmtxfcom5" path="res://misc/easteregg/sprites/T_Companion_Cube.png" id="11_3vdvw"]
-[ext_resource type="Texture2D" uid="uid://b0d0nb1r26gqr" path="res://misc/easteregg/sprites/scout_A_pose.png" id="12_7shv3"]
-[ext_resource type="Texture2D" uid="uid://8i2im2f5eoki" path="res://misc/easteregg/sprites/wusel.png" id="13_gmj20"]
-[ext_resource type="Texture2D" uid="uid://dphsn0nohagrn" path="res://misc/easteregg/sprites/T_Sentry_Turret.png" id="14_uyddy"]
-[ext_resource type="AudioStream" uid="uid://dr77hd7wl1wtm" path="res://misc/easteregg/sounds/Wheatley_bw_sp_a2_core_history_response05.wav" id="15_kb0i3"]
-[ext_resource type="AudioStream" uid="uid://bwbx6sxmm0dwi" path="res://misc/easteregg/sounds/Fact_core_fact10.wav" id="16_oc5h1"]
-[ext_resource type="AudioStream" uid="uid://diqyb0slq61wl" path="res://misc/easteregg/sounds/Adventure_core_singing01.wav" id="17_d3oyj"]
-[ext_resource type="AudioStream" uid="uid://bgvw83o81yus2" path="res://misc/easteregg/sounds/GLaDOS_potatos_longfall_speech03.mp3" id="18_qk200"]
-[ext_resource type="AudioStream" uid="uid://cjdwf8tgecacs" path="res://misc/easteregg/sounds/GLaDOS_13_part1_middle-2.wav" id="19_48xe3"]
-[ext_resource type="AudioStream" uid="uid://yibdqft8s6tc" path="res://misc/easteregg/sounds/Scout_needdispenser01.wav" id="20_8anxc"]
-[ext_resource type="AudioStream" uid="uid://crewgsoal7w0h" path="res://misc/easteregg/sounds/discord-notification.mp3" id="21_5a5kn"]
-[ext_resource type="AudioStream" uid="uid://b3yl0v3jwnqh2" path="res://misc/easteregg/sounds/Turret_turret_active_5.wav" id="22_v4bvs"]
-[ext_resource type="AudioStream" uid="uid://yrrla05irsrc" path="res://misc/easteregg/sounds/Confetti - Sound Effect.wav" id="23_0vv55"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_sn1md"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_lbqqa"]
 [ext_resource type="Texture2D" uid="uid://cpxmrsqaqkxu1" path="res://misc/easteregg/sprites/T_Handheld_Portal_Device.png" id="26_wv8hi"]
@@ -33,11 +15,13 @@
 [ext_resource type="Script" path="res://graph/scripts/reset.gd" id="32_ojub5"]
 [ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="32_q2fe2"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
-[ext_resource type="Texture2D" uid="uid://b0odra2mn337m" path="res://misc/icons/arrow-small-left.png" id="34_dv4dy"]
+[ext_resource type="Texture2D" uid="uid://bgyi6osf1tyog" path="res://misc/icons/angle-double-small-left.png" id="33_jold0"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
+[ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="35_8nkwu"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="35_gotrf"]
 [ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="35_leqr6"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="36_gse77"]
+[ext_resource type="Texture2D" uid="uid://cb8v53pmmdiyt" path="res://misc/icons/angle-double-small-right.png" id="37_rcfd7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -46,10 +30,10 @@ radius = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs", "side_panel")]
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs", "side_panel", "cam")]
 script = ExtResource("1_1864d")
 graph_manager = NodePath("graph_manager")
-algorithms = NodePath("CanvasLayer/algorithms")
+algorithms = NodePath("algorithms")
 state_counter = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/state_counter")
 button_knoten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
 button_kanten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
@@ -57,6 +41,7 @@ button_move = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/
 button_bfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_bfs")
 button_dfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs")
 side_panel = NodePath("CanvasLayer/side_panel")
+cam = NodePath("Camera2D")
 
 [node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("camera")]
 process_mode = 1
@@ -70,34 +55,19 @@ target_position = Vector2(0, 0)
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="algorithms" type="Node" parent="."]
 
-[node name="algorithms" type="Node" parent="CanvasLayer"]
-
-[node name="bfs" type="Node" parent="CanvasLayer/algorithms" node_paths=PackedStringArray("side_panel")]
+[node name="bfs" type="Node" parent="algorithms" node_paths=PackedStringArray("side_panel")]
 script = ExtResource("3_87483")
-side_panel = NodePath("../../side_panel")
+side_panel = NodePath("../../CanvasLayer/side_panel")
 
-[node name="dfs" type="Node" parent="CanvasLayer/algorithms" node_paths=PackedStringArray("side_panel")]
+[node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("side_panel")]
 script = ExtResource("5_2xtpe")
-side_panel = NodePath("../../side_panel")
+side_panel = NodePath("../../CanvasLayer/side_panel")
 
-[node name="easteregg" type="Node" parent="CanvasLayer/algorithms" node_paths=PackedStringArray("graph_manager", "code_display")]
-script = ExtResource("6_4l3tn")
-sprites_array = Array[CompressedTexture2D]([ExtResource("7_aqtc4"), ExtResource("8_gr0u5"), ExtResource("9_vwir8"), ExtResource("10_cup43"), ExtResource("11_3vdvw"), ExtResource("12_7shv3"), ExtResource("13_gmj20"), ExtResource("14_uyddy")])
-audio_wh = ExtResource("15_kb0i3")
-audio_fc = ExtResource("16_oc5h1")
-audio_ac = ExtResource("17_d3oyj")
-audio_gp = ExtResource("18_qk200")
-audio_cc = ExtResource("19_48xe3")
-audio_sc = ExtResource("20_8anxc")
-audio_ws = ExtResource("21_5a5kn")
-audio_st = ExtResource("22_v4bvs")
-audio_ct = ExtResource("23_0vv55")
-graph_manager = NodePath("../../../graph_manager")
-code_display = NodePath("own_gui/HBoxContainer/MarginContainer2/VBoxContainer/code_display")
+[node name="easteregg" type="Node" parent="algorithms"]
 
-[node name="own_gui" type="ColorRect" parent="CanvasLayer/algorithms/easteregg"]
+[node name="own_gui" type="ColorRect" parent="algorithms/easteregg"]
 visible = false
 anchors_preset = 11
 anchor_left = 1.0
@@ -109,7 +79,7 @@ offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/algorithms/easteregg/own_gui"]
+[node name="HBoxContainer" type="HBoxContainer" parent="algorithms/easteregg/own_gui"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +87,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="algorithms/easteregg/own_gui/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 3
@@ -125,22 +95,22 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[rainbow freq=2.0 sat=0.8 val=0.8]PORTAL ALGORITHM[/rainbow]"
 fit_content = true
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
-[node name="code_display" type="RichTextLabel" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="code_display" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/bold_font = ExtResource("24_sn1md")
@@ -149,22 +119,22 @@ text = "HEHE"
 fit_content = true
 script = ExtResource("25_lbqqa")
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="label_return" type="Label" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="label_return" type="Label" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 visible = false
 modulate = Color(0, 0.305882, 0.623529, 1)
 layout_mode = 2
 text = "BY MISTAKE YOU USED SALT INSTEAD OF SUGAR SO TECHNICALY IT'S NOT EVEN A CAKE. DISGUSTING :(
 Algorithm terminated and returned: Sadness"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="xd" type="RichTextLabel" parent="CanvasLayer/algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
+[node name="xd" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
 modulate = Color(0.880209, 0.491947, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -208,7 +178,7 @@ text = "Recipe:
 - Cranial caps"
 fit_content = true
 
-[node name="portal_gun" type="Sprite2D" parent="CanvasLayer/algorithms/easteregg"]
+[node name="portal_gun" type="Sprite2D" parent="algorithms/easteregg"]
 visible = false
 z_index = 1
 position = Vector2(1564, 162)
@@ -216,26 +186,28 @@ rotation = -0.261799
 texture = ExtResource("26_wv8hi")
 flip_h = true
 
-[node name="no_cake" type="Sprite2D" parent="CanvasLayer/algorithms/easteregg"]
+[node name="no_cake" type="Sprite2D" parent="algorithms/easteregg"]
 visible = false
 z_index = 1
 position = Vector2(1452, 670)
 scale = Vector2(3, 3)
 texture = ExtResource("27_vxkff")
 
-[node name="cake" type="Sprite2D" parent="CanvasLayer/algorithms/easteregg"]
+[node name="cake" type="Sprite2D" parent="algorithms/easteregg"]
 visible = false
 z_index = 1
 position = Vector2(1452, 670)
 scale = Vector2(3, 3)
 texture = ExtResource("28_5friv")
 
-[node name="dj2" type="AudioStreamPlayer2D" parent="CanvasLayer/algorithms/easteregg"]
+[node name="dj2" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
 visible = false
 stream = ExtResource("29_0n7ow")
 
-[node name="dj" type="AudioStreamPlayer2D" parent="CanvasLayer/algorithms/easteregg"]
+[node name="dj" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
 visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="buttons" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("controller")]
 anchors_preset = 10
@@ -325,6 +297,7 @@ icon = ExtResource("32_q2fe2")
 expand_icon = true
 
 [node name="button_backward_further2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP_3"
 focus_mode = 1
@@ -332,23 +305,11 @@ mouse_filter = 2
 theme = ExtResource("31_phvch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "<<<-"
+icon = ExtResource("33_jold0")
+expand_icon = true
 script = ExtResource("33_huo3b")
 controller = NodePath("../../../../..")
 jump = -9999999
-
-[node name="button_backward_further" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
-layout_mode = 2
-tooltip_text = "BACKWARD_TOOLTIP_2"
-focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_phvch")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
-disabled = true
-text = "<<--"
-script = ExtResource("33_huo3b")
-controller = NodePath("../../../../..")
-jump = -5
 
 [node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
@@ -359,7 +320,7 @@ mouse_filter = 2
 theme = ExtResource("31_phvch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("34_dv4dy")
+icon = ExtResource("35_8nkwu")
 expand_icon = true
 script = ExtResource("33_huo3b")
 controller = NodePath("../../../../..")
@@ -384,20 +345,8 @@ script = ExtResource("33_huo3b")
 controller = NodePath("../../../../..")
 jump = 1
 
-[node name="button_forward_further" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
-layout_mode = 2
-tooltip_text = "FORWARD_TOOLTIP_2"
-focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_phvch")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
-disabled = true
-text = "-->>"
-script = ExtResource("33_huo3b")
-controller = NodePath("../../../../..")
-jump = 5
-
 [node name="button_forward_further2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP_3"
 focus_mode = 1
@@ -405,7 +354,8 @@ mouse_filter = 2
 theme = ExtResource("31_phvch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "->>>"
+icon = ExtResource("37_rcfd7")
+expand_icon = true
 script = ExtResource("33_huo3b")
 controller = NodePath("../../../../..")
 jump = 9999999
@@ -419,6 +369,7 @@ layout_mode = 2
 unique_name_in_owner = true
 script = ExtResource("35_gotrf")
 zoom_level = 2.0
+right_ui_margin = 660
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="CanvasLayer/buttons" method="_on_button_vertices_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="CanvasLayer/buttons" method="_on_button_edges_pressed"]
@@ -428,8 +379,6 @@ zoom_level = 2.0
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="CanvasLayer/buttons" method="_on_button_dfs_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" method="_on_pressed"]

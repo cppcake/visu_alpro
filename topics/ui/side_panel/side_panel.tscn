@@ -14,7 +14,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="side_panel" type="Panel" node_paths=PackedStringArray("button_toggle", "cont_code", "cont_var", "cont_call", "cont_exp")]
+[node name="side_panel" type="Panel"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -26,11 +26,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("1_hcmu3")
-button_toggle = NodePath("button_toggle_side_panel")
-cont_code = NodePath("content/container_code")
-cont_var = NodePath("content/container_variables")
-cont_call = NodePath("content/container_callstack")
-cont_exp = NodePath("content/container_info")
+is_open = true
 
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 1

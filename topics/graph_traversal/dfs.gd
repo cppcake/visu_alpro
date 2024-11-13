@@ -35,7 +35,7 @@ var label_sequence: Label
 var label_sequence_2: Label
 func init(start_knoten: vertex_class):
 	# Init pre Tiefensuche
-	side_panel.select_containers(1, 1, 1, 1)
+	side_panel.select_containers(1, 1, 1, 0)
 	label_sequence = side_panel.create_variable()
 	label_sequence_2 = side_panel.create_variable()
 	

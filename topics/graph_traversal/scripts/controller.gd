@@ -51,19 +51,19 @@ func set_mode(mode_: modes):
 	mode = mode_
 	match mode:
 		modes.vertices:
-			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("VERTICES") + "[/color]\n\t" + tr("VERTICES_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.color_1 + "]" + tr("VERTICES") + "[/color]\n\t" + tr("VERTICES_INFO"))
 			button_knoten.grab_focus()
 		modes.edges:
-			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("EDGES") + "[/color]\n\t" + tr("EDGES_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.color_1 + "]" + tr("EDGES") + "[/color]\n\t" + tr("EDGES_INFO"))
 			button_kanten.grab_focus()
 		modes.move:
-			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("MOVE") + "[/color]\n\t" + tr("MOVE_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.color_1 + "]" + tr("MOVE") + "[/color]\n\t" + tr("MOVE_INFO"))
 			button_move.grab_focus()
 		modes.bfs:
-			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("BFS") + "[/color]\n\t" + tr("BFS_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.color_1 + "]" + tr("BFS") + "[/color]\n\t" + tr("BFS_INFO"))
 			button_bfs.grab_focus()
 		modes.dfs:
-			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.color_1 + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
 			button_dfs.grab_focus()
 		modes.easteregg:
 			side_panel.override_exp("[tornado radius=15.0 freq=3.0 connected=1]\n\n          pick a vertex to start the [rainbow freq=2.0 sat=0.8 val=0.8]PORTAL[/rainbow] algorithm[/tornado]")
@@ -209,6 +209,7 @@ func _ready():
 #
 # Control loop
 #
+@export var cam: CameraManager
 var egg_counter: int = 0
 func _process(_delta):
 	# Update user input
@@ -254,6 +255,11 @@ func _process(_delta):
 			# Start the dfs if not already started and make vertices moveable
 			manage_algorithm()
 	
+	if side_panel.is_open:
+		cam.right_ui_margin = 660
+	else:
+		cam.right_ui_margin =100
+	
 	# HACKY STUFF BECAUSE I DONT FULLY UNDERSTAND THE AWAIT KEYWORD
 	# Quality of Life Stuff	
 	# The spam of "and algorithm_running" is a hacky fix to some problems that appear
@@ -277,7 +283,7 @@ func _process(_delta):
 	if not algorithm_running:
 		if Input.is_action_just_pressed("P"):
 			if egg_counter == 0:
-				egg_counter += 1
+				egg_counter += 0
 			else:
 				egg_counter = 0
 		if Input.is_action_just_pressed("O"):

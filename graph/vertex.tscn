@@ -34,14 +34,11 @@ offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label_id" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5

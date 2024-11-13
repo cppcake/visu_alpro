@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var color = constants.uni_blau
+var color = constants.color_1
 var init_text = ""
 
 func highlight_lines(lines_to_paint: Array) -> void:

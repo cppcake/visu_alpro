@@ -39,7 +39,7 @@ enum bfs_keys
 
 func init(start_vertex: vertex_class):
 	# Init controls
-	side_panel.select_containers(1, 1, 0, 1)
+	side_panel.select_containers(1, 1, 0, 0)
 	label_sequence = side_panel.create_variable()
 	label_queue = side_panel.create_variable()
 	

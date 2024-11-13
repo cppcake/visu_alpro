@@ -1,6 +1,28 @@
 class_name SidePanel extends Control
 
-@export var button_toggle: Button
+@export var is_open: bool
+
+var button_toggle: Button
+var cont_code: CodeContainer
+var cont_var: VarContainer
+var cont_call: CallStackContainer
+var cont_exp: ExpContainer
+func _ready():
+	cont_code = get_child(0).get_child(0)
+	cont_var = get_child(0).get_child(1)
+	cont_call = get_child(0).get_child(2)
+	cont_exp = get_child(0).get_child(3)
+	button_toggle = get_child(1)
+	
+	button_toggle.open = is_open
+	if is_open:
+		button_toggle.force_open()
+	else:
+		button_toggle.force_close()
+
+func _process(_delta):
+	is_open = button_toggle.open
+
 func toggle():
 	button_toggle.toggle_()
 func open():
@@ -8,10 +30,6 @@ func open():
 func close():
 	button_toggle.close_()
 
-@export var cont_code: CodeContainer
-@export var cont_var: VarContainer
-@export var cont_call: CallStackContainer
-@export var cont_exp: ExpContainer
 func select_containers(c: bool, v: bool, cs: bool, i: bool):
 	cont_code.visible = bool(c)
 	cont_var.visible = bool(v)
@@ -38,8 +56,6 @@ func create_variable() -> Label:
 
 func push_call() -> Label:
 	return cont_call.push_call_()
-	
-
 
 func reset(c: bool = 1, v: bool = 1, cs: bool = 1, i: bool = 1):
 	if c:

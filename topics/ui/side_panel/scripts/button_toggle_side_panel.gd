@@ -43,6 +43,16 @@ func close_():
 	open = false
 	degree_to = 0
 
+func force_open():
+	open_()
+	var window_width: float = get_viewport().get_visible_rect().size[0]
+	get_parent().position.x = window_width - init_width - 6
+
+func force_close():
+	close_()
+	var window_width: float = get_viewport().get_visible_rect().size[0]
+	get_parent().position.x = window_width + 6
+
 func _on_mouse_entered():
 	inside = true
 	if open:
