@@ -28,9 +28,17 @@ enum dfs_keys
 	current_edge
 }
 
+@export var side_panel: SidePanel
+
+
+var label_sequence: Label
+var label_sequence_2: Label
 func init(start_knoten: vertex_class):
 	# Init pre Tiefensuche
-	$own_gui.visible = true
+	side_panel.select_containers(1, 1, 1, 1)
+	label_sequence = side_panel.create_variable()
+	label_sequence_2 = side_panel.create_variable()
+	
 	states.clear()
 	current_stack.clear()
 	visited_edges.clear()
@@ -47,6 +55,8 @@ func init(start_knoten: vertex_class):
 
 # DFS but the state of the algorithm is saved in specific steps
 func dfs(start_vertex: vertex_class) -> Array:
+	side_panel.override_code(tr("DFS_PSEUDOCODE"))
+	
 	# Increment the number of counts and save the id of the call
 	call_counter += 1
 	var call_id = call_counter
@@ -128,7 +138,7 @@ func visualize_step(step: int) -> void:
 # Clean up before controller stops algorithm
 func stop():
 	# Deactivate own gui
-	$own_gui.visible = false
+	pass
 
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
@@ -170,50 +180,42 @@ func store_state(	call_id: int,
 
 func draw_stack(stack: Array):
 	# Clear all stack frames before redrawing
-	for child: Control in $own_gui.callstack.get_children():
-		child.queue_free()	
+	side_panel.reset(0, 0, 1, 0)
 
 	# Iterate through stack in reverse
 	for i in range(stack.size() - 1, -1, -1):
 		var stack_frame_id: int = stack[i][0]
 		var start_vertex_id: int = stack[i][1]
-		var stack_frame_instance = stack_frame_scene.instantiate()
-		stack_frame_instance.get_child(0).text = tr("DEPHT-FIRST-SEARCH") + "(s = " + str(start_vertex_id) + ") (" + tr("CALL") + " " + str(stack_frame_id) +  ")"
-		
-		# Mark the last call
-		if i == 0:
-			stack_frame_instance.get_child(0).modulate = constants.uni_blau_c
-		
-		$own_gui.callstack.add_child(stack_frame_instance)
+		var stack_frame_label = side_panel.push_call()
+		stack_frame_label.text = tr("DEPHT-FIRST-SEARCH") + "(s = " + str(start_vertex_id) + ") (" + tr("CALL") + " " + str(stack_frame_id) +  ")"
 
 func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
-	$own_gui.label_call.text = make_call_name(s, call_id)
+	side_panel.override_code_call(make_call_name(s, call_id))
 	
 	# Case return
 	if call_id == 0:
-		$own_gui.label_sequence.visible = false
-		$own_gui.label_queue.visible = false
-		$own_gui.label_return.visible = true
-		$own_gui.label_return.text = "--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F)
+		label_sequence.visible = false
+		label_sequence_2.visible = false
+		side_panel.override_code_return("--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
 		return
 	
-	$own_gui.label_return.visible = false
+	side_panel.override_code_return("")
 	
 	if F == null:
 		# Case F and F' not created yet
-		$own_gui.label_sequence.visible = false
-		$own_gui.label_queue.visible = false
+		label_sequence.visible = false
+		label_sequence_2.visible = false
 	else:
 		# Case F and F' created
-		$own_gui.label_sequence.visible = true
-		$own_gui.label_sequence.text = "F = " + helper_functions.vertex_array_to_string(F)
+		label_sequence.visible = true
+		label_sequence.text = "F = " + helper_functions.vertex_array_to_string(F)
 		
-		$own_gui.label_queue.visible = true
-		$own_gui.label_queue.text = "F' = " +  helper_functions.vertex_array_to_string(F_2)
+		label_sequence_2.visible = true
+		label_sequence_2.text = "Q = " +  helper_functions.vertex_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
 	if(from != null):
-		$own_gui.label_queue.text = $own_gui.label_queue.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
+		label_sequence_2.text = label_sequence_2.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
 
 # Create a string like: DFS(s = x) (Call y) based on parameter
 func make_call_name(s: vertex_class, call_id: int) -> String:
@@ -225,12 +227,6 @@ func make_call_name(s: vertex_class, call_id: int) -> String:
 	
 	# Add start_vertex and caller id to call, always avaible when algorithm has not returned (eg. s != null)
 	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + ")"
-
-# Highlight selected lines in the pseudocode
-func update_lines_selected(lines_to_paint: Array):
-	$own_gui.code_display.text = tr("DFS_PSEUDOCODE")
-	for line_nr: int in lines_to_paint:
-		$own_gui.code_display.paint_line(line_nr)
 
 # Mark all visited vertices
 func update_visited_vertices():
@@ -284,4 +280,4 @@ func update_visuals():
 	update_visited_edges()
 	draw_stack(current_stack_frame)
 	update_code_labels(s, call_id, F, F_2, from)
-	update_lines_selected(lines_to_paint)
+	side_panel.highlight_code(lines_to_paint)

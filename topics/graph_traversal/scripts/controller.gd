@@ -37,8 +37,6 @@ var current_step: int = 1
 var algorithm_step_count: int = 0
 
 # Needed to manipulate upper_ui efficiently
-@export var info_ui: ColorRect
-@export var display: RichTextLabel
 @export var button_knoten: Button
 @export var button_kanten: Button
 @export var button_move: Button
@@ -86,7 +84,6 @@ func set_mode(mode_: modes):
 # Unblock active buttons, block navigation buttons
 func active_mode():
 	# Make Info UI visible
-	info_ui.visible = true
 	side_panel.reset(0, 1, 1, 1)
 	side_panel.reset(1, 0, 0, 0)
 	
@@ -103,7 +100,6 @@ func active_mode():
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
 	# Make Info UI invisible
-	info_ui.visible = false
 	side_panel.reset(0, 1, 1, 1)
 	
 	# Block active buttons, unblock navigation buttons

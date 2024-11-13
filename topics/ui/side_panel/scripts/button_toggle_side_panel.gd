@@ -6,7 +6,7 @@ func _ready():
 	rect_icon = get_child(0)
 	rect_icon.pivot_offset = size / 2
 	init_width = float(get_viewport().get_visible_rect().size[0] - get_parent().position.x)
-	#get_parent().position.x = get_viewport().get_visible_rect().size[0]
+	get_parent().position.x = get_viewport().get_visible_rect().size[0]
 
 var degree_to: float = 0
 var inside: bool = false
@@ -22,12 +22,12 @@ func _process(delta):
 	var t: float = 10 * delta
 	if open:
 		pass
-		#get_parent().position.x = lerp(float(get_parent().position.x), window_width - init_width - 6, t)
+		get_parent().position.x = lerp(float(get_parent().position.x), window_width - init_width - 6, t)
 	else:
 		pass
-		#get_parent().position.x = lerp(float(get_parent().position.x), window_width + 6, t)
+		get_parent().position.x = lerp(float(get_parent().position.x), window_width + 6, t)
 
-var open: bool = true
+var open: bool = false
 func _on_pressed():
 	toggle_()
 

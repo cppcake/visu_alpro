@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=12 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_code.gd" id="3_6y0ia"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="3_k2xbj"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="4_jkr46"]
-[ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="5_p5snr"]
 [ext_resource type="Texture2D" uid="uid://crds5yinbpcso" path="res://misc/icons/caret_left.png" id="6_spu0b"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_variables.gd" id="6_ul532"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_callstack.gd" id="7_kg1yt"]
@@ -133,12 +132,13 @@ text = " F  =  [...]"
 layout_mode = 2
 text = " F' =  [...] (von Aufruf y)"
 
-[node name="container_callstack" type="MarginContainer" parent="content"]
+[node name="container_callstack" type="MarginContainer" parent="content" node_paths=PackedStringArray("call_stack")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_xsdfw")
 script = ExtResource("7_kg1yt")
+call_stack = NodePath("content/MarginContainer/content/ScrollContainer/call_stack")
 
 [node name="content" type="VBoxContainer" parent="content/container_callstack"]
 layout_mode = 2
@@ -186,15 +186,6 @@ light_mask = 17
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="stack_frame" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
-layout_mode = 2
-
-[node name="stack_frame2" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
-layout_mode = 2
-
-[node name="stack_frame3" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer/call_stack" instance=ExtResource("5_p5snr")]
-layout_mode = 2
 
 [node name="container_info" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
 custom_minimum_size = Vector2(0, 300)

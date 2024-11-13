@@ -234,7 +234,6 @@ func update_visited_edges():
 		
 # Apply the visuals of the current state
 func update_visuals():
-	var current_stack_frame: Array = states[current_step].get(bfs_keys.stack)
 	var call_id: int = states[current_step].get(bfs_keys.call_id)
 	var F = states[current_step].get(bfs_keys.F)
 	var Q = states[current_step].get(bfs_keys.Q)

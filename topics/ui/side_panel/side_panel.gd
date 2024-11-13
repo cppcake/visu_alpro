@@ -36,6 +36,11 @@ func highlight_code(lines: Array):
 func create_variable() -> Label:
 	return cont_var.create_variable()
 
+func push_call() -> Label:
+	return cont_call.push_call_()
+	
+
+
 func reset(c: bool = 1, v: bool = 1, cs: bool = 1, i: bool = 1):
 	if c:
 		cont_code.reset()
