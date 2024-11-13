@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=13 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="4_jkr46"]
 [ext_resource type="PackedScene" uid="uid://cln1agegyr2f4" path="res://topics/ui/scenes/stack_frame.tscn" id="5_p5snr"]
 [ext_resource type="Texture2D" uid="uid://crds5yinbpcso" path="res://misc/icons/caret_left.png" id="6_spu0b"]
+[ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_variables.gd" id="6_ul532"]
+[ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_callstack.gd" id="7_kg1yt"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/button_toggle_side_panel.gd" id="7_puxd5"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_explanation.gd" id="7_sbto6"]
 
@@ -87,10 +89,12 @@ modulate = Color(0.447059, 0.537255, 0.854902, 1)
 layout_mode = 2
 text = "Tiefensuche (Aufruf x)"
 
-[node name="container_variables" type="MarginContainer" parent="content"]
+[node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables")]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
+script = ExtResource("6_ul532")
+variables = NodePath("content/content/variables")
 
 [node name="content" type="VBoxContainer" parent="content/container_variables"]
 layout_mode = 2
@@ -134,6 +138,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_xsdfw")
+script = ExtResource("7_kg1yt")
 
 [node name="content" type="VBoxContainer" parent="content/container_callstack"]
 layout_mode = 2

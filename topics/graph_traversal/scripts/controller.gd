@@ -47,27 +47,28 @@ var algorithm_step_count: int = 0
 
 # Set current mode and info text accordingly. Also manually grab focus of modes button,
 # in case mode was switched via code.
+@export var side_panel: SidePanel
 func set_mode(mode_: modes):
+	side_panel.select_containers(0, 0, 0, 1)
 	mode = mode_
 	match mode:
 		modes.vertices:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("VERTICES") + "[/color]\n\t" + tr("VERTICES_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("VERTICES") + "[/color]\n\t" + tr("VERTICES_INFO"))
 			button_knoten.grab_focus()
 		modes.edges:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("EDGES") + "[/color]\n\t" + tr("EDGES_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("EDGES") + "[/color]\n\t" + tr("EDGES_INFO"))
 			button_kanten.grab_focus()
 		modes.move:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("MOVE") + "[/color]\n\t" + tr("MOVE_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("MOVE") + "[/color]\n\t" + tr("MOVE_INFO"))
 			button_move.grab_focus()
 		modes.bfs:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("BFS") + "[/color]\n\t" + tr("BFS_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("BFS") + "[/color]\n\t" + tr("BFS_INFO"))
 			button_bfs.grab_focus()
 		modes.dfs:
-			display.set_text(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
+			side_panel.override_exp(tr("CURRENT_MODE") + "[color=" + constants.uni_blau + "]" + tr("DFS") + "[/color]\n\t" + tr("DFS_INFO"))
 			button_dfs.grab_focus()
 		modes.easteregg:
-			display.set_text("[tornado radius=15.0 freq=3.0 connected=1]\n\n          pick a vertex to start the [rainbow freq=2.0 sat=0.8 val=0.8]PORTAL[/rainbow] algorithm[/tornado]")
-			
+			side_panel.override_exp("[tornado radius=15.0 freq=3.0 connected=1]\n\n          pick a vertex to start the [rainbow freq=2.0 sat=0.8 val=0.8]PORTAL[/rainbow] algorithm[/tornado]")
 
 # There are two groups of buttons:
 # - The active buttons group. It consists:
@@ -86,6 +87,8 @@ func set_mode(mode_: modes):
 func active_mode():
 	# Make Info UI visible
 	info_ui.visible = true
+	side_panel.reset(0, 1, 1, 1)
+	side_panel.reset(1, 0, 0, 0)
 	
 	# Unblock active buttons, block navigation buttons
 	get_tree().call_group("buttons_navigation", "release_focus")
@@ -96,11 +99,12 @@ func active_mode():
 	for button: Button in get_tree().get_nodes_in_group("buttons_navigation"):
 		button.disabled = true
 		button.mouse_filter = button.MOUSE_FILTER_IGNORE
-#
+
 # Unblock navigation buttons, unblock active button
 func navigation_mode():
 	# Make Info UI invisible
 	info_ui.visible = false
+	side_panel.reset(0, 1, 1, 1)
 	
 	# Block active buttons, unblock navigation buttons
 	get_tree().call_group("buttons_active", "release_focus")
@@ -131,7 +135,7 @@ func control_movement():
 #	'stop': Stop algorithm with clean up
 #	'forward': Visualize the next step of algorithm
 #	'backward': Visualize the last step of algorithm
-#
+
 # Start the current algorithm if not already started and make vertices moveable
 func manage_algorithm():
 	# To make the vertices moveable during algorithm
@@ -148,8 +152,8 @@ func manage_algorithm():
 			# (There is nothing else to select but vertices anyways)
 			if start_vertex != null:
 				algorithm_running = true
-				algorithm_step_count = current_algorithm.init(start_vertex) - 1
 				navigation_mode()
+				algorithm_step_count = current_algorithm.init(start_vertex) - 1
 				
 				# Visualize the first step
 				current_step = 0
@@ -157,6 +161,7 @@ func manage_algorithm():
 
 # Stop the current algorithm
 func stop_algorithm():
+	side_panel.select_containers(0, 0, 0, 1)
 	# Reset graph properties
 	get_tree().call_group("vertex_group", "reset_visited")
 	
@@ -192,6 +197,7 @@ func proceed_algorithm(steps: int) -> void:
 
 # Init
 func _ready():
+	side_panel.select_containers(0, 0, 0, 1)
 	vertex_class.node_count = 0 
 	vertex_class.automatic_labeling = true
 	vertex_class.lerp_speed = 25

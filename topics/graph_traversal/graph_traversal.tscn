@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=42 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="35_gotrf"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="36_gse77"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0
@@ -52,18 +53,19 @@ border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs")]
+[node name="controller" type="Node" node_paths=PackedStringArray("graph_manager", "algorithms", "state_counter", "info_ui", "display", "button_knoten", "button_kanten", "button_move", "button_bfs", "button_dfs", "side_panel")]
 script = ExtResource("1_1864d")
 graph_manager = NodePath("graph_manager")
 algorithms = NodePath("CanvasLayer/algorithms")
-state_counter = NodePath("CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/state_counter")
+state_counter = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/state_counter")
 info_ui = NodePath("CanvasLayer/info_gui")
 display = NodePath("CanvasLayer/info_gui/VBoxContainer/display")
-button_knoten = NodePath("CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
-button_kanten = NodePath("CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
-button_move = NodePath("CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_move")
-button_bfs = NodePath("CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_bfs")
-button_dfs = NodePath("CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_dfs")
+button_knoten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
+button_kanten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
+button_move = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_move")
+button_bfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_bfs")
+button_dfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs")
+side_panel = NodePath("CanvasLayer/side_panel")
 
 [node name="graph_manager" type="Node" parent="." node_paths=PackedStringArray("camera")]
 process_mode = 1
@@ -81,209 +83,15 @@ collide_with_bodies = false
 
 [node name="algorithms" type="Node" parent="CanvasLayer"]
 
-[node name="bfs" type="Node" parent="CanvasLayer/algorithms"]
+[node name="bfs" type="Node" parent="CanvasLayer/algorithms" node_paths=PackedStringArray("side_panel")]
 script = ExtResource("3_87483")
-
-[node name="own_gui" type="ColorRect" parent="CanvasLayer/algorithms/bfs" node_paths=PackedStringArray("callstack", "label_call", "label_sequence", "label_queue", "label_return", "code_display")]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -562.0
-offset_top = 39.0
-offset_bottom = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-color = Color(0.117647, 0.129412, 0.141176, 1)
-script = ExtResource("4_3enpf")
-callstack = NodePath("VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack")
-label_call = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/label_call")
-label_sequence = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_sequence")
-label_queue = NodePath("VBoxContainer/container_variables/content/content/VBoxContainer/label_queue")
-label_return = NodePath("VBoxContainer/container_pseudocode/content/return/label_return")
-code_display = NodePath("VBoxContainer/container_pseudocode/content/content/VBoxContainer/code_display")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="container_pseudocode" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
-layout_mode = 2
-theme = ExtResource("31_phvch")
-
-[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode"]
-layout_mode = 2
-
-[node name="content" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="label_call" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = "Tiefensuche (Aufruf x)"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="code_display" type="RichTextLabel" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/content/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("24_sn1md")
-bbcode_enabled = true
-text = "DFS_PSEUDOCODE"
-fit_content = true
-script = ExtResource("25_lbqqa")
-
-[node name="return" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="label_return" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_pseudocode/content/return"]
-modulate = Color(0, 0.305882, 0.623529, 1)
-layout_mode = 2
-text = "Tiefensuche (Aufruf x)"
-
-[node name="container_variables" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
-custom_minimum_size = Vector2(0, 110)
-layout_mode = 2
-theme = ExtResource("31_phvch")
-
-[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables"]
-layout_mode = 2
-
-[node name="title" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="Variables" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = "VARIABLES"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/title/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="content" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="label_sequence" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = " F  =  [...]"
-
-[node name="label_queue" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_variables/content/content/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = " F' =  [...] (von Aufruf y)"
-
-[node name="container_callstack" type="MarginContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("31_phvch")
-
-[node name="content" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.66
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="stack" type="Label" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-text = "STACK"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_pod14")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.66
-
-[node name="stack" type="VBoxContainer" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer"]
-light_mask = 17
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="stack_frame" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
-layout_mode = 2
-
-[node name="stack_frame2" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
-layout_mode = 2
-
-[node name="stack_frame3" parent="CanvasLayer/algorithms/bfs/own_gui/VBoxContainer/container_callstack/content/Panel/ScrollContainer/stack" instance=ExtResource("8_ws5jv")]
-layout_mode = 2
+side_panel = NodePath("../../side_panel")
 
 [node name="dfs" type="Node" parent="CanvasLayer/algorithms"]
 script = ExtResource("5_2xtpe")
 
 [node name="own_gui" type="ColorRect" parent="CanvasLayer/algorithms/dfs" node_paths=PackedStringArray("callstack", "label_call", "label_sequence", "label_queue", "label_return", "code_display")]
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -633,90 +441,82 @@ stream = ExtResource("29_0n7ow")
 [node name="dj" type="AudioStreamPlayer2D" parent="CanvasLayer/algorithms/easteregg"]
 visible = false
 
-[node name="upper_gui" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 40.0
-grow_horizontal = 2
-color = Color(1, 1, 1, 0)
-
-[node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui" node_paths=PackedStringArray("controller")]
-layout_mode = 1
+[node name="buttons" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("controller")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 41.0
 grow_horizontal = 2
 alignment = 1
 script = ExtResource("30_d3yqm")
-controller = NodePath("../../..")
+controller = NodePath("../..")
 
-[node name="buttons_graphmanager" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_graphmanager" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("31_phvch")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_graphmanager"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_graphmanager"]
 layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="button_vertices" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_vertices" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "VERTICES_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "VERTICES"
 
-[node name="button_edges" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_edges" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "EDGES_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "EDGES"
 
-[node name="button_move" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+[node name="button_move" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "MOVE_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "MOVE"
 
-[node name="button_reset" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller", "camera") groups=["buttons_active"]]
+[node name="button_reset" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller", "camera") groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "RESET_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "RESET"
 script = ExtResource("32_ojub5")
-controller = NodePath("../../../../../..")
-camera = NodePath("../../../../../../Camera2D")
+controller = NodePath("../../../../..")
+camera = NodePath("../../../../../Camera2D")
 
-[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
 theme = ExtResource("31_phvch")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_algorithm"]
 layout_mode = 2
 alignment = 1
 
-[node name="button_bfs" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
+[node name="button_bfs" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "BFS_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "BFS"
 
-[node name="button_dfs" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
+[node name="button_dfs" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "DFS_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "DFS"
 
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer"]
 layout_mode = 2
 
-[node name="button_stop" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_stop" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "STOP_TOOLTIP"
 focus_mode = 1
@@ -726,7 +526,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
 text = "STOP"
 
-[node name="button_backward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_backward_further2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP_3"
 focus_mode = 1
@@ -736,10 +536,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<<<-"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = -9999999
 
-[node name="button_backward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_backward_further" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP_2"
 focus_mode = 1
@@ -749,10 +549,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<<--"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = -5
 
-[node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
@@ -762,15 +562,15 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "<---"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = -1
 
-[node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer"]
+[node name="state_counter" type="Label" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("31_phvch")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
-[node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
@@ -780,10 +580,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "--->"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = 1
 
-[node name="button_forward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_forward_further" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP_2"
 focus_mode = 1
@@ -793,10 +593,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "-->>"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = 5
 
-[node name="button_forward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_forward_further2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP_3"
 focus_mode = 1
@@ -806,10 +606,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 text = "->>>"
 script = ExtResource("33_huo3b")
-controller = NodePath("../../../../../..")
+controller = NodePath("../../../../..")
 jump = 9999999
 
-[node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("34_ip20d")]
+[node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("34_ip20d")]
 layout_mode = 2
 
 [node name="info_gui" type="ColorRect" parent="CanvasLayer"]
@@ -839,21 +639,27 @@ theme_override_fonts/bold_font = ExtResource("24_sn1md")
 bbcode_enabled = true
 script = ExtResource("25_lbqqa")
 
+[node name="side_panel" parent="CanvasLayer" instance=ExtResource("36_gse77")]
+offset_left = -1834.0
+offset_top = 77.0
+offset_right = -1272.0
+offset_bottom = -7.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("35_gotrf")
 zoom_level = 2.0
 
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="CanvasLayer/upper_gui/buttons" method="_on_button_vertices_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="CanvasLayer/upper_gui/buttons" method="_on_button_edges_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="CanvasLayer/upper_gui/buttons" method="_on_button_move_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="CanvasLayer/upper_gui/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="CanvasLayer/upper_gui/buttons" method="_on_button_bfs_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="CanvasLayer/upper_gui/buttons" method="_on_button_dfs_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward_further" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_backward" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" to="CanvasLayer/upper_gui/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="CanvasLayer/buttons" method="_on_button_vertices_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="CanvasLayer/buttons" method="_on_button_edges_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="CanvasLayer/buttons" method="_on_button_move_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="CanvasLayer/buttons" method="_on_button_bfs_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="CanvasLayer/buttons" method="_on_button_dfs_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_forward_further2" method="_on_pressed"]

@@ -1,5 +1,7 @@
 extends Node
 
+# TRASH CODE. GANZ VIELE PFLASTER DIE DAS ALTE SYSTEM INS NEUE ÜBERBRINGEN
+
 # Needed scenes
 @onready var stack_frame_scene = preload("res://topics/ui/scenes/stack_frame.tscn")
 
@@ -13,11 +15,10 @@ var call_counter: int = 0
 var last_pop
 
 # Controls
-var callstack: VBoxContainer
-var label_call: Label
 var label_sequence: Label
 var label_queue: Label
-var label_return: Label
+
+@export var side_panel: SidePanel
 
 # We will save dictionaries in the states Array. These will have these keys:
 enum bfs_keys
@@ -38,14 +39,11 @@ enum bfs_keys
 
 func init(start_vertex: vertex_class):
 	# Init controls
-	callstack = $own_gui.callstack
-	label_call = $own_gui.label_call
-	label_sequence = $own_gui.label_sequence 
-	label_queue = $own_gui.label_queue
-	label_return = $own_gui.label_return
+	side_panel.select_containers(1, 1, 0, 1)
+	label_sequence = side_panel.create_variable()
+	label_queue = side_panel.create_variable()
 	
 	# Init pre Tiefensuche
-	$own_gui.visible = true
 	states.clear()
 	current_stack.clear()
 	visited_edges.clear()
@@ -62,6 +60,8 @@ func init(start_vertex: vertex_class):
 
 # BFS but the state of the algorithm is saved in specific steps
 func bfs(s: vertex_class) -> Array:
+	side_panel.override_code(tr("BFS_PSEUDOCODE"))
+	side_panel.select_containers(1, 1, 0, 1)
 	# Increment the number of counts and save the id of the call
 	call_counter += 1
 	var call_id = call_counter
@@ -119,7 +119,7 @@ func visualize_step(step: int) -> void:
 # Clean up before controller stops algorithm
 func stop():
 	# Deactivate own gui
-	$own_gui.visible = false
+	pass
 
 # Create and push a new state on the array of states
 # A state stores the state of the algorithm at the time of creating the state
@@ -161,35 +161,17 @@ func store_state(	call_id: int,
 	# Push the new state
 	states.push_back(dict)
 
-func draw_stack(stack: Array):
-	# Clear all stack frames before redrawing
-	for child: Control in callstack.get_children():
-		child.queue_free()	
-
-	# Iterate through stack in reverse
-	for i in range(stack.size() - 1, -1, -1):
-		var stack_frame_id: int = stack[i][0]
-		var start_vertex_id: int = stack[i][1]
-		var stack_frame_instance = stack_frame_scene.instantiate()
-		stack_frame_instance.get_child(0).text = tr("BREADTH-FIRST-SEARCH") + "(s = " + str(start_vertex_id) + ") (" + tr("CALL") + " " + str(stack_frame_id) +  ")"
-		
-		if i == 0:
-			stack_frame_instance.get_child(0).modulate = constants.uni_blau_c
-		
-		callstack.add_child(stack_frame_instance)
-
 func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
-	label_call.text = make_call_name(s, call_id)
+	side_panel.override_code_call(make_call_name(s, call_id))
 	
 	# Case return
 	if call_id == 0:
 		label_sequence.visible = false
 		label_queue.visible = false
-		label_return.visible = true
-		label_return.text = "--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F)
+		side_panel.override_code_return("--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
 		return
 	
-	label_return.visible = false
+	side_panel.override_code_return("")
 	
 	if F == null:
 		# Case F and F' not created yet
@@ -208,7 +190,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 		label_queue.text = label_queue.text + " (" + tr("RETURN_VALUE_OF") + " " +  make_call_name(from[1], from[0]) + ")"
 
 # Create a string like: DFS(s = x) (Call y) based on parameter
-func make_call_name(s: vertex_class, call_id: int) -> String:
+func make_call_name(s: vertex_class, _call_id: int) -> String:
 	var dfs_str: String = tr("BREADTH-FIRST-SEARCH")
 	
 	# Case Algorithm has returned
@@ -216,13 +198,7 @@ func make_call_name(s: vertex_class, call_id: int) -> String:
 		return dfs_str + "(s: " + tr("vertex") + ")"
 	
 	# Add start_vertex and caller id to call, always avaible when algorithm has not returned (eg. s != null)
-	return dfs_str + "(s = " + str(s.id_) + ") (" + tr("CALL") + " " + str(call_id) + ")"
-
-# Highlight selected lines in the pseudocode
-func update_lines_selected(lines_to_paint: Array):
-	$own_gui.code_display.text = tr("BFS_PSEUDOCODE")
-	for line_nr: int in lines_to_paint:
-		$own_gui.code_display.paint_line(line_nr)
+	return dfs_str + "(s = " + str(s.id_) + ")"
 
 # Mark all visited vertices
 func update_visited_vertices():
@@ -282,6 +258,5 @@ func update_visuals():
 	update_s_v(s, v, w)
 	update_visited_vertices()
 	update_visited_edges()
-	draw_stack(current_stack_frame)
 	update_code_labels(s, call_id, F, Q, from)
-	update_lines_selected(lines_to_paint)
+	side_panel.highlight_code(lines_to_paint)
