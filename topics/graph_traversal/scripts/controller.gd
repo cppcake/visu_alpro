@@ -220,10 +220,11 @@ func _process(_delta):
 	# Change state based on current mode and user input.
 	match mode:
 		modes.vertices:
-			if(left_click):
-				graph_manager.add_vertex_at_mouse_pos()
-			if(right_click):
-				graph_manager.remove_vertex_at_mouse_pos()
+			if not Input.is_action_just_pressed("M1 Shift"):
+				if(left_click):
+					graph_manager.add_vertex_at_mouse_pos()
+				if(right_click):
+					graph_manager.remove_vertex_at_mouse_pos()
 		
 		# The graph manager keeps track of the selected vertices, we just need to ask
 		# the graph manager to try connecting the selected vertices, if they exist

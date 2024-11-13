@@ -22,11 +22,11 @@ func _process(delta):
 	zoom_camera(delta)
 		
 func drag_camera():
-	if Input.is_action_just_pressed("M3"):
+	if Input.is_action_just_pressed("M3") or Input.is_action_just_pressed("M1 Shift"):
 		init_drag_mouse_pos = viewport_pos
 		return
 		
-	if Input.is_action_pressed("M3"):
+	if Input.is_action_pressed("M3") or Input.is_action_pressed("M1 Shift"):
 		position += init_drag_mouse_pos - viewport_pos
 		init_drag_mouse_pos = viewport_pos
 
