@@ -95,7 +95,7 @@ alignment = 1
 [node name="button_cancel" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-tooltip_text = "STOP_TOOLTIP"
+tooltip_text = "CANCEL_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
@@ -107,7 +107,7 @@ script = ExtResource("4_kusec")
 [node name="button_finish" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-tooltip_text = "STOP_TOOLTIP"
+tooltip_text = "FINISH_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
@@ -149,9 +149,9 @@ layout_mode = 2
 [node name="stackframe_list" type="Panel" parent="CanvasLayer"]
 custom_minimum_size = Vector2(150, 100)
 offset_left = 4.0
-offset_top = 50.0
-offset_right = 44.0
-offset_bottom = 90.0
+offset_top = 43.0
+offset_right = 154.0
+offset_bottom = 143.0
 theme = ExtResource("2_0ki28")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/stackframe_list"]
@@ -192,7 +192,7 @@ layout_mode = 2
 text = "head = null"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
-is_open = false
+is_open = null
 
 [node name="legend" type="Control" parent="CanvasLayer"]
 layout_mode = 3

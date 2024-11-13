@@ -16,8 +16,10 @@ var current_algo: Callable
 var current_algo_b: Callable
 var current_step: int = 0
 var max_step: int = 0
+var crashed: bool = false
 func forward():
-	if current_step == max_step:
+	print(max_step)
+	if current_step == max_step or crashed:
 		return
 		
 	current_step = current_step + 1
@@ -32,7 +34,7 @@ func backward():
 		side_panel.highlight_code([])
 	if current_step == 0:
 		return
-		
+	
 	current_algo_b.call(current_step)
 	current_step = current_step - 1
 	
@@ -41,6 +43,9 @@ func backward():
 func finish():
 	while current_step < max_step:
 		forward()
+		if crashed:
+			cancel()
+			return	
 	clean_up()
 	
 	if to_remove != null:
@@ -138,10 +143,11 @@ func init_algo(max_step_: int = max_step, current_algo_: Callable = current_algo
 	max_step = max_step_
 	current_algo = current_algo_
 	current_algo_b = current_algo_b_
+	
 	update_step_label()
 	side_panel.select_containers(1, 0, 0, 1)
 	side_panel.override_code_return("")
-	
+	current_algo.call(current_step)
 
 var max_step_pre: int
 func get_current_for_algo(_viewport, event, _shape_idx):
@@ -152,10 +158,10 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 			while list_vertex_class.selected_vertex == null:
 				pass
 			make_current(list_vertex_class.selected_vertex)
-			max_step = max_step_pre
 			for child in self.get_children():
 				if type_string(typeof(child)) == "Object":
 					if child is list_vertex_class:
+						max_step = max_step_pre
 						child.disconnect("input_event", get_current_for_algo)
 						init_algo()
 
@@ -167,23 +173,30 @@ func prepare_signals_for_current() -> void:
 					child.connect("input_event", get_current_for_algo)
 
 var target_before
-func codedo_remove():
+func pseudo_remove():
 	to_remove.visible = false
 	target_before = to_remove.p1.target
 	to_remove.p1.set_target(null)
-func codedo_remove_undo():
+func pseudo_remove_undo():
 	to_remove.p1.set_target(target_before)
 	if target_before != null:
 		to_remove.p1.current_end_point = target_before.global_position
 		to_remove.p1.draw()
 	to_remove.visible = true
 
+func crash():
+	side_panel.override_code("[color=red][b]Segmentation fault (core dumped)[/b][/color]", false)
+	crashed = true
+
 var new_vertex: list_vertex_class
 var to_remove = null
 
 func insert_front(step: int):
 	match step:
+		0:
+			side_panel.override_exp(tr("INS_FRONT_0"))
 		1:
+			side_panel.override_exp(tr("INS_FRONT_1"))
 			if head.target == null:
 				make_shared(head.position + Vector2(0, 200))
 			else:
@@ -216,6 +229,7 @@ func insert_front_b(step: int):
 			side_panel.highlight_code([1])
 		1:
 			unshare()
+			side_panel.override_exp(tr("INS_FRONT_0"))
 func _on_button_insert_front_pressed():
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT"))
@@ -225,31 +239,42 @@ func _on_button_insert_front_pressed():
 func remove_front(step: int):
 	match step:
 		1:
-			pass
+			if head.target == null:
+				crash()
+			else:
+				to_remove = head.target
+				head.set_target(head.target.p1.target)
+				side_panel.highlight_code([1])
 		2:
-			to_remove = head.target
-			head.set_target(head.target.p1.target)
+			pseudo_remove()
+			side_panel.highlight_code([1])
 		3:
-			codedo_remove()
-		4:
 			size -= 1
+			side_panel.highlight_code([2])
+		4:
+			side_panel.override_code_return()
+			side_panel.highlight_code([3])
 func remove_front_b(step: int):
 	match step:
 		1:
-			pass
+			if crashed:
+				crashed = false
+			else:
+				head.set_target(to_remove)
+				side_panel.highlight_code([])
 		2:
-			head.set_target(to_remove)
+			pseudo_remove_undo()
+			side_panel.highlight_code([1])
 		3:
-			codedo_remove_undo()
-		4:
 			size += 1
+			side_panel.highlight_code([1])
+		4:
+			side_panel.highlight_code([2])
 func _on_button_remove_front_pressed():
-	set_up()
 	side_panel.override_code_call("list.remove_front()")
-	if size == 0:
-		init_algo(1, remove_front, remove_front_b)
-	else:
-		init_algo(4, remove_front, remove_front_b)
+	side_panel.override_code(tr("RM_FRONT"))
+	set_up()
+	init_algo(4, remove_front, remove_front_b)
 
 func insert_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
@@ -286,46 +311,61 @@ func insert_after_b(step: int):
 		1:
 			unshare()
 func _on_button_insert_after_pressed():
-	side_panel.override_code(tr("INS_FRONT_AFTER"))
+	side_panel.override_code(tr("INS_AFTER"))
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")
 	set_up()
-	prepare_signals_for_current()
 	max_step_pre = 5
 	current_algo = insert_after
 	current_algo_b = insert_after_b
-	
+	prepare_signals_for_current()
 
 func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		1:
-			pass
+			if pred.p1.target == null:
+				crash()
+			else:
+				side_panel.highlight_code([1])
+				to_remove = pred.p1.target
+				if to_remove.p1.target != null:
+					to_remove.move_to_rel(Vector2(0, 150))
+				pred.p1.set_target(pred.p1.target.p1.target)
 		2:
-			to_remove = pred.p1.target
-			if to_remove.p1.target != null:
-				to_remove.move_to_rel(Vector2(0, 150))
-			pred.p1.set_target(pred.p1.target.p1.target)
+			side_panel.highlight_code([1])
+			pseudo_remove()
 		3:
-			codedo_remove()
-		4:
+			side_panel.highlight_code([2])
 			size -= 1
+		4:
+			side_panel.highlight_code([3])
+			side_panel.override_code_return()
 func remove_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		4:
-			size += 1
+			side_panel.highlight_code([2])
 		3:
-			codedo_remove_undo()
+			side_panel.highlight_code([1])
+			size += 1
 		2:
-			if pred.p1.target != null:
-				to_remove.move_to_rel(Vector2(0, -150))
-			pred.p1.set_target(to_remove)
+			side_panel.highlight_code([1])
+			pseudo_remove_undo()
 		1:
-			pass
+			if crashed:
+				crashed = false
+			else:
+				side_panel.highlight_code([])
+				if pred.p1.target != null:
+					to_remove.move_to_rel(Vector2(0, -150))
+				pred.p1.set_target(to_remove)
 func _on_button_remove_after_pressed():
+	side_panel.override_code(tr("RM_AFTER"))
+	side_panel.override_code_call("list.remove_after(ListNodeptr pred)")
+	side_panel.override_exp("Pick a predecessor Node")
 	set_up()
-	prepare_signals_for_current()
 	max_step_pre = 4
 	current_algo = remove_after
 	current_algo_b = remove_after_b
+	prepare_signals_for_current()

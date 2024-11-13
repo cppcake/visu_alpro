@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://byfmyhbqdgipm"
+
+[deps]
+
+files=["res://misc/locale/graph_traversal.en.translation", "res://misc/locale/graph_traversal.de.translation"]
+
+source_file="res://misc/locale/graph_traversal.csv"
+dest_files=["res://misc/locale/graph_traversal.en.translation", "res://misc/locale/graph_traversal.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

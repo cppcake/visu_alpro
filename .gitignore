@@ -4,3 +4,4 @@ build/
 *.translation
 *.lock
 *.bkp
+*.csv#

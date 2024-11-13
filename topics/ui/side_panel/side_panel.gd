@@ -39,8 +39,8 @@ func select_containers(c: bool, v: bool, cs: bool, i: bool):
 func override_exp(text_: String):
 	cont_exp.override(text_)
 
-func override_code(text_: String):
-	cont_code.override(text_)
+func override_code(text_: String, update_init: bool = true):
+	cont_code.override(text_, update_init)
 
 func override_code_return(text_: String = "Algorithm returned"):
 	cont_code.set_return(text_)

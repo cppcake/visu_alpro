@@ -1,3 +1,7 @@
 keys,en,de
-INS_FRONT,1. Create a new node holding [i]data[/i] \n2. Set the new node’s next pointer equal to [i]head[/i] \n3. Update the [i]head[/i] to point at the new node \n4. Increment [i]size[/i] \n5. [b]return[/b],"1. Erstelle einen neuen Knoten mit dem gegebenen Datum [i]data[/i] \n2. Setze den next-Zeiger gleich [i]head[/i] \n3. Aktualisiere [i]head[/i], sodass es auf den neuen Knoten zeigt \n4. Inkrementiere [i]size[/i]\n5. [b]return[/b]"
-INS_FRONT_AFTER,1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data); \n2. new_node_ptr->next = pred→next; \n3. pred->next = new_node_ptr; \n4. size += 1 \n5. [b]return[/b],1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data); \n2. new_node_ptr->next = pred→next; \n3. pred->next = new_node_ptr; \n4. size += 1 \n5. [b]return[/b]
+INS_FRONT,1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data);\n2. new_node_ptr->next = head;\n3. head = new_node_ptr;\n4. size += 1\n5. [b]return[/b],1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data);\n2. new_node_ptr->next = head;\n3. head = new_node_ptr;\n4. size += 1\n5. [b]return[/b]
+INS_AFTER,1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data); \n2. new_node_ptr->next = pred→next; \n3. pred->next = new_node_ptr; \n4. size += 1 \n5. [b]return[/b],1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data); \n2. new_node_ptr->next = pred→next; \n3. pred->next = new_node_ptr; \n4. size += 1 \n5. [b]return[/b]
+RM_FRONT,1.head = head->next;\n2. size -= 1\n3. [b]return[/b],1.head = head->next;\n2. size -= 1\n3. [b]return[/b]
+RM_AFTER,1.pred->next = pred->next->next;\n2.size -= 1\n3. [b]return[/b],1.pred->next = pred->next->next;\n2.size -= 1\n3. [b]return[/b]
+,,
+INS_FRONT_0,The member function insert_front(data) adds a new node holding data to the beginning of the list.,Die Memberfunktion insert_front(data) fügt einen neuen Knoten mit den Daten am Anfang der Liste hinzu.
