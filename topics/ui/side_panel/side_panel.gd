@@ -14,6 +14,11 @@ func _ready():
 	cont_exp = get_child(0).get_child(3)
 	button_toggle = get_child(1)
 	
+	# Workaround because i cant edit @export variables once
+	# i make a node out of the scene... So sad
+	#if custom_minimum_size.x == 1:
+	#	is_open = 0
+		
 	button_toggle.open = is_open
 	if is_open:
 		button_toggle.force_open()
