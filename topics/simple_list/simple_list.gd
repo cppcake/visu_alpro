@@ -185,8 +185,12 @@ func pseudo_remove_undo():
 	to_remove.visible = true
 
 func crash():
-	side_panel.override_code("[color=red][b]Segmentation fault (core dumped)[/b][/color]", false)
+	side_panel.override_code_return("Segmentation fault (core dumped)", Color.RED)
 	crashed = true
+
+func uncrash():
+	crashed = false
+	side_panel.override_code_return("")
 
 var new_vertex: list_vertex_class
 var to_remove = null
@@ -239,12 +243,12 @@ func _on_button_insert_front_pressed():
 func remove_front(step: int):
 	match step:
 		1:
+			side_panel.highlight_code([1])
 			if head.target == null:
 				crash()
 			else:
 				to_remove = head.target
 				head.set_target(head.target.p1.target)
-				side_panel.highlight_code([1])
 		2:
 			pseudo_remove()
 			side_panel.highlight_code([1])
@@ -257,11 +261,11 @@ func remove_front(step: int):
 func remove_front_b(step: int):
 	match step:
 		1:
+			side_panel.highlight_code([])
 			if crashed:
-				crashed = false
+				uncrash()
 			else:
 				head.set_target(to_remove)
-				side_panel.highlight_code([])
 		2:
 			pseudo_remove_undo()
 			side_panel.highlight_code([1])
@@ -324,10 +328,10 @@ func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		1:
+			side_panel.highlight_code([1])
 			if pred.p1.target == null:
 				crash()
 			else:
-				side_panel.highlight_code([1])
 				to_remove = pred.p1.target
 				if to_remove.p1.target != null:
 					to_remove.move_to_rel(Vector2(0, 150))
@@ -353,10 +357,10 @@ func remove_after_b(step: int):
 			side_panel.highlight_code([1])
 			pseudo_remove_undo()
 		1:
+			side_panel.highlight_code([])
 			if crashed:
-				crashed = false
+				uncrash()
 			else:
-				side_panel.highlight_code([])
 				if pred.p1.target != null:
 					to_remove.move_to_rel(Vector2(0, -150))
 				pred.p1.set_target(to_remove)

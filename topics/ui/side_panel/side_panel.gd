@@ -47,8 +47,8 @@ func override_exp(text_: String):
 func override_code(text_: String, update_init: bool = true):
 	cont_code.override(text_, update_init)
 
-func override_code_return(text_: String = "Algorithm returned"):
-	cont_code.set_return(text_)
+func override_code_return(text_: String = "Algorithm returned", color: Color = constants.color_1_c):
+	cont_code.set_return(text_, color)
 
 func override_code_call(text_: String):
 	cont_code.set_call(text_)
