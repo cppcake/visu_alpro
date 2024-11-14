@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=13 format=3 uid="uid://7oq8rdksswhi"]
 
 [ext_resource type="Script" path="res://topics/ui/side_panel/side_panel.gd" id="1_hcmu3"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_callstack.gd" id="7_kg1yt"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/button_toggle_side_panel.gd" id="7_puxd5"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_explanation.gd" id="7_sbto6"]
+[ext_resource type="Texture2D" uid="uid://cd1kgsf44p4d6" path="res://misc/icons/info.png" id="9_mct2w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -197,10 +198,14 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="label_title" type="Label" parent="content/container_info/content"]
+[node name="TextureRect" type="TextureRect" parent="content/container_info/content"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-text = "Info"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_mct2w")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="HSeparator2" type="HSeparator" parent="content/container_info/content"]
 layout_mode = 2

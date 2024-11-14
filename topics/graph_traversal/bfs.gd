@@ -61,7 +61,7 @@ func init(start_vertex: vertex_class):
 # BFS but the state of the algorithm is saved in specific steps
 func bfs(s: vertex_class) -> Array:
 	side_panel.override_code(tr("BFS_PSEUDOCODE"))
-	side_panel.select_containers(1, 1, 0, 1)
+	side_panel.select_containers(1, 1, 0, 0)
 	# Increment the number of counts and save the id of the call
 	call_counter += 1
 	var call_id = call_counter
@@ -168,7 +168,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 	if call_id == 0:
 		label_sequence.visible = false
 		label_queue.visible = false
-		side_panel.override_code_return("--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
+		side_panel.override_code_return(tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
 		return
 	
 	side_panel.override_code_return("")

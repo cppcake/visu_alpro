@@ -196,7 +196,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 	if call_id == 0:
 		label_sequence.visible = false
 		label_sequence_2.visible = false
-		side_panel.override_code_return("--> " + tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
+		side_panel.override_code_return(tr("TERMINATE") + helper_functions.vertex_array_to_string(F))
 		return
 	
 	side_panel.override_code_return("")

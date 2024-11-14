@@ -174,7 +174,7 @@ theme = ExtResource("2_0ki28")
 [node name="Label" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-text = "stackframe list"
+text = "list"
 horizontal_alignment = 1
 vertical_alignment = 1
 

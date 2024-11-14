@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
+[ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="18_iepr2"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_sn1md"]
 [ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_lbqqa"]
 [ext_resource type="Texture2D" uid="uid://cpxmrsqaqkxu1" path="res://misc/easteregg/sprites/T_Handheld_Portal_Device.png" id="26_wv8hi"]
@@ -19,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ip20d"]
 [ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="35_8nkwu"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="35_gotrf"]
-[ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="35_leqr6"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="36_gse77"]
 [ext_resource type="Texture2D" uid="uid://cb8v53pmmdiyt" path="res://misc/icons/angle-double-small-right.png" id="37_rcfd7"]
 
@@ -339,7 +339,7 @@ mouse_filter = 2
 theme = ExtResource("31_phvch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("35_leqr6")
+icon = ExtResource("18_iepr2")
 expand_icon = true
 script = ExtResource("33_huo3b")
 controller = NodePath("../../../../..")
@@ -364,7 +364,6 @@ jump = 9999999
 layout_mode = 2
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("36_gse77")]
-custom_minimum_size = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true

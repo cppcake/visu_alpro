@@ -3,6 +3,13 @@
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_h3h58"]
 
 [node name="stackframe" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 33)
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_h3h58")
 
 [node name="label" type="Label" parent="."]
 layout_mode = 2
