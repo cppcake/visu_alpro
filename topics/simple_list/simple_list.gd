@@ -182,6 +182,9 @@ func uncrash():
 	crashed = false
 	side_panel.override_code_return("")
 
+func empty() -> bool:
+	return head.target == null
+
 func reposition_list():
 	if head.target == null:
 		head.position = Vector2(0, 0)

@@ -17,3 +17,5 @@ func change_scene(scene: String):
 			get_tree().call_deferred("change_scene_to_file", graph_traversal_path)
 		"simple_list":
 			get_tree().call_deferred("change_scene_to_file", "res://topics/simple_list/simple_list.tscn")
+		"doubly_list":
+			get_tree().call_deferred("change_scene_to_file", "res://topics/doubly_list/doubly_list.tscn")

@@ -1,0 +1,4 @@
+keys,en,de
+INS_FRONT_DL,size += 1;\nDListNodeptr new_node_ptr = std::make_shared<DoublyLinkedListNode>(x);\n\n// Case 1: List is empty\nif(empty()) {\n\thead = new_node_ptr;\n\ttail = new_node_ptr;\n\treturn\n}\n\n// Case 2: List is not empty:\nnew_node_ptr->next = head;\nhead->prev = new_node_ptr;head = new_node_ptr;return;,\n2. new_node_ptr->next = head
+INS_AFTER_DL,1. ListNodeptr new_node_ptr = std::make_shared<ListNode>(data), \n2. new_node_ptr->next = pred→next
+RM_DL,1.head = head->next,\n2. size -= 1\n3. [b]return[/b]

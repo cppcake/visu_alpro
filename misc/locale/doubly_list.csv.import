@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ijwkea0wicld"
+
+[deps]
+
+files=["res://misc/locale/doubly_list.en.translation", "res://misc/locale/doubly_list.de.translation"]
+
+source_file="res://misc/locale/doubly_list.csv"
+dest_files=["res://misc/locale/doubly_list.en.translation", "res://misc/locale/doubly_list.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

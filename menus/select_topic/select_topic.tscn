@@ -64,3 +64,8 @@ label_text = "Graph Traversal"
 layout_mode = 2
 scene_name = "simple_list"
 label_text = "Simple List"
+
+[node name="ItemBox3" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+scene_name = "doubly_list"
+label_text = "Doubly List"

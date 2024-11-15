@@ -9,7 +9,14 @@ script = ExtResource("2_qnl5b")
 tail = NodePath("tail")
 
 [node name="tail" parent="." index="1" instance=ExtResource("3_uf7jp")]
+position = Vector2(200, 0)
 label_start_text = "tail"
+
+[node name="button_remove_front" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
+visible = false
+
+[node name="button_remove_after" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+text = "remove"
 
 [node name="stackframe_list" parent="CanvasLayer" index="1"]
 custom_minimum_size = Vector2(150, 120)
@@ -20,6 +27,9 @@ text = "doubly list"
 [node name="label_tail" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer" index="5"]
 layout_mode = 2
 text = "tail = null"
+
+[node name="side_panel" parent="CanvasLayer" index="2"]
+offset_left = -630.0
 
 [node name="weak_pointer" type="Node2D" parent="CanvasLayer/legend" index="0"]
 position = Vector2(74, -144)
