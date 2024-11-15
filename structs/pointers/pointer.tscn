@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjwpe2viggrq0"]
 
-[ext_resource type="Script" path="res://structs/pointer.gd" id="1_eg3og"]
+[ext_resource type="Script" path="res://structs/pointers/pointer.gd" id="1_5xt8g"]
 
 [node name="pointer" type="Node2D" node_paths=PackedStringArray("label_start", "label_target")]
-script = ExtResource("1_eg3og")
+z_index = -1
+script = ExtResource("1_5xt8g")
 label_start = NodePath("Label")
 label_target = NodePath("Polygon2D/Label")
 

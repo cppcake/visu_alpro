@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c05uaoyufgebr"]
+
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="1_8r156"]
+[ext_resource type="Script" path="res://structs/pointers/weak_pointer.gd" id="2_4tp6i"]
+
+[node name="weak_pointer" instance=ExtResource("1_8r156")]
+script = ExtResource("2_4tp6i")

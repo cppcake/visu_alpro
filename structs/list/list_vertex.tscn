@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://structs/list/list_vertex.gd" id="1_hry7q"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_k25f1"]
 [ext_resource type="Texture2D" uid="uid://dy03cdb2sf711" path="res://structs/sprites/vertex_red.png" id="3_5a373"]
-[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointer.tscn" id="3_tbfsw"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="4_g1k1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
@@ -58,9 +58,8 @@ theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="pointer" parent="." instance=ExtResource("3_tbfsw")]
+[node name="pointer" parent="." instance=ExtResource("4_g1k1b")]
 visible = false
-z_index = -1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

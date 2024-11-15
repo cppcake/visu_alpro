@@ -62,4 +62,3 @@ func _on_input_event(_viewport, event, _shape_idx):
 		# Check if it's a left-click (left mouse button has index 1)
 		if event.button_index == 1 and event.pressed:
 			selected_vertex = self
-			print(reference_counter)

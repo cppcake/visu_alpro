@@ -1,70 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv1b12m1qqxbo"]
+[gd_scene load_steps=5 format=3 uid="uid://bv1b12m1qqxbo"]
 
 [ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
-[ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://structs/list/list_vertex.tscn" id="3_gw0rp"]
 [ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="4_7ovg7"]
 [ext_resource type="PackedScene" uid="uid://sd8yr560vaj2" path="res://topics/ui/options_menu/options_menu.tscn" id="4_b5c5h"]
-[ext_resource type="Texture2D" uid="uid://cp8jmj4055ddo" path="res://menus/select_topic/images/placeholder.png" id="5_x8ynn"]
+[ext_resource type="PackedScene" uid="uid://77au65feku51" path="res://structs/doubly_list/doubly_list_vertex.tscn" id="5_mu2sv"]
 
-[node name="Test" type="Node" node_paths=PackedStringArray("v1", "v2", "v3", "cam")]
+[node name="Test" type="Node" node_paths=PackedStringArray("v2", "v3", "cam")]
 script = ExtResource("1_1g5mx")
-v1 = NodePath("list_vertex")
-v2 = NodePath("list_vertex2")
-v3 = NodePath("list_vertex3")
+v2 = NodePath("doubly_list_vertex")
+v3 = NodePath("doubly_list_vertex2")
 cam = NodePath("Camera2D")
-
-[node name="list_vertex" parent="." instance=ExtResource("3_gw0rp")]
-position = Vector2(-325, -256)
-
-[node name="list_vertex2" parent="." instance=ExtResource("3_gw0rp")]
-position = Vector2(-320, 155)
-
-[node name="list_vertex3" parent="." instance=ExtResource("3_gw0rp")]
-position = Vector2(136, -102)
 
 [node name="Camera2D" parent="." instance=ExtResource("4_7ovg7")]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_b5c5h")]
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="doubly_list_vertex" parent="." instance=ExtResource("5_mu2sv")]
+position = Vector2(-156, -395)
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ScrollContainer"]
-layout_mode = 2
-columns = 4
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect7" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
-
-[node name="TextureRect8" type="TextureRect" parent="CanvasLayer/ScrollContainer/GridContainer"]
-layout_mode = 2
-texture = ExtResource("5_x8ynn")
+[node name="doubly_list_vertex2" parent="." instance=ExtResource("5_mu2sv")]
+position = Vector2(211, -397)
