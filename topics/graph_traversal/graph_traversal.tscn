@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
-[ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="2_2m2fs"]
+[ext_resource type="Script" path="res://structs/graph/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
 [ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="18_iepr2"]
@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://gqljk4rbeoym" path="res://misc/easteregg/sounds/sound_weapons_portalgun_portal_open2.wav" id="29_0n7ow"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/mode_select.gd" id="30_d3yqm"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_phvch"]
-[ext_resource type="Script" path="res://graph/scripts/reset.gd" id="32_ojub5"]
+[ext_resource type="Script" path="res://structs/graph/reset.gd" id="32_ojub5"]
 [ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="32_q2fe2"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_huo3b"]
 [ext_resource type="Texture2D" uid="uid://bgyi6osf1tyog" path="res://misc/icons/angle-double-small-left.png" id="33_jold0"]

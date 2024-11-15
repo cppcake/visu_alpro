@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq8n3q2fa7rns"]
 
-[ext_resource type="Script" path="res://graph/scripts/graph_manager.gd" id="1_340bl"]
+[ext_resource type="Script" path="res://structs/graph/graph_manager.gd" id="1_340bl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uforu"]
 radius = 1.0

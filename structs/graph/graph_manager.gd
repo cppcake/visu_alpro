@@ -1,7 +1,7 @@
 class_name GraphManager extends Node
 
-@onready var vertex_scene = preload("res://graph/vertex.tscn")
-@onready var edge_scene = preload("res://graph/edge.tscn")
+@onready var vertex_scene = preload("res://structs/graph/vertex.tscn")
+@onready var edge_scene = preload("res://structs/graph/edge.tscn")
 
 # Needed to decide what the user clicked on / selected
 @export var camera: Camera2D

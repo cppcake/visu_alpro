@@ -3,7 +3,7 @@ extends Node
 @export var head: pointer_class
 var size: int = 0
 
-@onready var list_v_scene = preload("res://graph/list_vertex.tscn")
+@onready var list_v_scene = preload("res://structs/list/list_vertex.tscn")
 
 @export var side_panel: SidePanel
 func _ready():

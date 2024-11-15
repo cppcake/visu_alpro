@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwlgqfos6kle8"]
 
-[ext_resource type="Script" path="res://graph/scripts/edge.gd" id="1_t2688"]
+[ext_resource type="Script" path="res://structs/graph/edge.gd" id="1_t2688"]
 
 [node name="edge" type="Node2D"]
 script = ExtResource("1_t2688")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjwpe2viggrq0"]
 
-[ext_resource type="Script" path="res://graph/pointer.gd" id="1_eg3og"]
+[ext_resource type="Script" path="res://structs/pointer.gd" id="1_eg3og"]
 
 [node name="pointer" type="Node2D" node_paths=PackedStringArray("label_start", "label_target")]
 script = ExtResource("1_eg3og")
