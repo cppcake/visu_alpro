@@ -4,12 +4,13 @@
 [ext_resource type="Script" path="res://topics/doubly_list/doubly_list.gd" id="2_qnl5b"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_uf7jp"]
 
-[node name="root" node_paths=PackedStringArray("tail") instance=ExtResource("1_6c0hh")]
+[node name="root" node_paths=PackedStringArray("tail", "tail_label") instance=ExtResource("1_6c0hh")]
 script = ExtResource("2_qnl5b")
 tail = NodePath("tail")
+tail_label = NodePath("CanvasLayer/stackframe_list/MarginContainer/VBoxContainer/label_tail")
 
 [node name="tail" parent="." index="1" instance=ExtResource("3_uf7jp")]
-position = Vector2(200, 0)
+position = Vector2(180, 0)
 label_start_text = "tail"
 
 [node name="button_remove_front" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]

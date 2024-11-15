@@ -1,7 +1,6 @@
 class_name simple_list_class extends Node
 
 @export var head: pointer_class
-@export var tail: pointer_class
 var size: int = 0
 
 var list_v_scene

@@ -36,23 +36,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_xsdfw")
 
 [node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_display", "label_call", "label_return")]
-custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("3_6y0ia")
-code_display = NodePath("content/title/code_display")
+code_display = NodePath("content/title/MarginContainer/code_display")
 label_call = NodePath("content/title/label_call")
-label_return = NodePath("content/return/label_return")
+label_return = NodePath("content/Panel/return/MarginContainer/label_return")
 
 [node name="content" type="VBoxContainer" parent="content/container_code"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 
 [node name="title" type="VBoxContainer" parent="content/container_code/content"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_xsdfw")
 
 [node name="HSeparator" type="HSeparator" parent="content/container_code/content/title"]
 layout_mode = 2
@@ -60,6 +62,7 @@ theme = ExtResource("2_xsdfw")
 
 [node name="label_call" type="Label" parent="content/container_code/content/title"]
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 text = "Tiefensuche (Aufruf x)"
 horizontal_alignment = 1
 
@@ -67,7 +70,11 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="code_display" type="RichTextLabel" parent="content/container_code/content/title"]
+[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/title"]
+layout_mode = 2
+theme = ExtResource("2_xsdfw")
+
+[node name="code_display" type="RichTextLabel" parent="content/container_code/content/title/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 theme_override_fonts/bold_font = ExtResource("3_k2xbj")
@@ -76,15 +83,33 @@ text = "DFS_PSEUDOCODE"
 fit_content = true
 script = ExtResource("4_jkr46")
 
-[node name="return" type="ScrollContainer" parent="content/container_code/content"]
+[node name="Panel" type="Panel" parent="content/container_code/content"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
+
+[node name="return" type="ScrollContainer" parent="content/container_code/content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
+theme = ExtResource("2_xsdfw")
 
-[node name="label_return" type="Label" parent="content/container_code/content/return"]
+[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/Panel/return"]
+layout_mode = 2
+theme = ExtResource("2_xsdfw")
+
+[node name="label_return" type="Label" parent="content/container_code/content/Panel/return/MarginContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme = ExtResource("2_xsdfw")
 text = "Tiefensuche (Aufruf x)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables")]
 custom_minimum_size = Vector2(0, 110)
@@ -229,6 +254,7 @@ offset_top = -22.5
 offset_bottom = 22.5
 grow_vertical = 2
 pivot_offset = Vector2(10.5, 22.5)
+theme = ExtResource("2_xsdfw")
 theme_override_styles/focus = SubResource("StyleBoxFlat_7rw0g")
 flat = true
 script = ExtResource("7_puxd5")

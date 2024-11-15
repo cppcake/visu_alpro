@@ -8,9 +8,9 @@
 script = ExtResource("2_lqhuq")
 
 [node name="pointer" parent="." index="4"]
-displacement = Vector2(0, -30)
+displacement = Vector2(0, -25)
 rel_null_end_point = Vector2(125, 125)
 
 [node name="weak_pointer" parent="." index="5" instance=ExtResource("3_dpfhx")]
-displacement = Vector2(0, 30)
+displacement = Vector2(0, 25)
 rel_null_end_point = Vector2(-125, 125)
