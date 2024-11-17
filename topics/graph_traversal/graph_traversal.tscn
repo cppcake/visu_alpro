@@ -1,12 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=24 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://structs/graph/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
 [ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="18_iepr2"]
-[ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="24_sn1md"]
-[ext_resource type="Script" path="res://topics/ui/scripts/linepainter.gd" id="25_lbqqa"]
 [ext_resource type="Texture2D" uid="uid://cpxmrsqaqkxu1" path="res://misc/easteregg/sprites/T_Handheld_Portal_Device.png" id="26_wv8hi"]
 [ext_resource type="Texture2D" uid="uid://dyhnwx0u1d4q2" path="res://misc/easteregg/sprites/T_No_Cake.png" id="27_vxkff"]
 [ext_resource type="Texture2D" uid="uid://scgh683jvfi3" path="res://misc/easteregg/sprites/T_Cake.png" id="28_5friv"]
@@ -66,117 +64,6 @@ script = ExtResource("5_2xtpe")
 side_panel = NodePath("../../CanvasLayer/side_panel")
 
 [node name="easteregg" type="Node" parent="algorithms"]
-
-[node name="own_gui" type="ColorRect" parent="algorithms/easteregg"]
-visible = false
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -953.0
-offset_top = 39.0
-offset_bottom = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="algorithms/easteregg/own_gui"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="algorithms/easteregg/own_gui/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[rainbow freq=2.0 sat=0.8 val=0.8]PORTAL ALGORITHM[/rainbow]"
-fit_content = true
-
-[node name="HSeparator" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="code_display" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("24_sn1md")
-bbcode_enabled = true
-text = "HEHE"
-fit_content = true
-script = ExtResource("25_lbqqa")
-
-[node name="HSeparator2" type="HSeparator" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-layout_mode = 2
-
-[node name="label_return" type="Label" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-visible = false
-modulate = Color(0, 0.305882, 0.623529, 1)
-layout_mode = 2
-text = "BY MISTAKE YOU USED SALT INSTEAD OF SUGAR SO TECHNICALY IT'S NOT EVEN A CAKE. DISGUSTING :(
-Algorithm terminated and returned: Sadness"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="xd" type="RichTextLabel" parent="algorithms/easteregg/own_gui/HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
-modulate = Color(0.880209, 0.491947, 1, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "Recipe: 
-- 1 (18.25-ounce) package chocolate cake mix
-- 1 can prepared coconut–pecan frosting
-- 3/4 cup vegetable oil
-- 4 large eggs, 1 cup semi-sweet chocolate chips, 3/4 cup butter or margarine
-- 1 2/3 cup granulated sugar (NOT SALT)
-- 2 cups all-purpose flour, Fish-shaped crackers
-- Fish-shaped candies
-- Fish-shaped solid waste
-- Fish-shaped dirt
-- Fish-shaped ethylbenzene
-- Pull-and-peel licorice
-- Fish-shaped volatile organic compounds and sediment-shaped sediment
-- Candy-coated peanut butter pieces (shaped like fish)
-- 1 cup lemon juice
-- Alpha resins
-- Unsaturated polyester resin
-- Fiberglass surface resins and volatile malted milk impoundments
-- 9 large egg yolks
-- 12 medium geosynthetic membranes
-- 1 cup granulated sugar
-- An entry called: <<How to Kill Someone with Your Bare Hands>>
-- 2 cups rhubarb, sliced
-- 2/3 cups granulated rhubarb
-- 1 tbsp. all-purpose rhubarb
-- 1 tsp. grated orange rhubarb
-- 3 tbsp. rhubarb, on fire
-- 1 large rhubarb
-- 1 cross borehole electromagnetic imaging rhubarb
-- 2 tbsp. rhubarb juice
-- Adjustable aluminum head positioner
-- Slaughter electric needle injector
--Cordless electric needle injector
-- Injector needle driver
-- Injector needle gun
-- Cranial caps"
-fit_content = true
 
 [node name="portal_gun" type="Sprite2D" parent="algorithms/easteregg"]
 visible = false

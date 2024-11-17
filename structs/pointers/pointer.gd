@@ -11,7 +11,7 @@ var target = null
 var line: Line2D
 var head: Polygon2D
 var distance_head_node: float = 85
-var distance_factor: float = 1.0
+var distance_factor: float = 0.85
 @export var displacement: Vector2 = Vector2(0, 0)
 @export var rel_null_end_point = Vector2(0, 150)
 

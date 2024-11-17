@@ -18,7 +18,7 @@ config/icon="res://structs/sprites/vertex_default.png"
 
 [autoload]
 
-OptionsMenu="*res://topics/ui/options_menu/options_menu.tscn"
+OptionsMenu="*res://menus/options_menu/options_menu.tscn"
 
 [display]
 

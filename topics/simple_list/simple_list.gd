@@ -28,10 +28,11 @@ func forward():
 	update_step_label()
 
 func backward():
+	highlight_code_undo()
 	if current_step == max_step:
 		side_panel.override_code_return("")
 	if current_step == 1:
-		side_panel.highlight_code([])
+		highlight_code([])
 	if current_step == 0:
 		return
 	
@@ -73,6 +74,7 @@ func clean_up():
 	side_panel.select_containers(0, 0, 0, 1)
 
 func set_up(max_step_pre_: int, current_algo_: Callable, current_algo_b_, needs_current: bool = false):
+	lines_history = []
 	max_step_pre = max_step_pre_
 	current_algo = current_algo_
 	current_algo_b = current_algo_b_
@@ -174,6 +176,20 @@ func pseudo_remove_undo():
 		to_remove.p1.draw()
 	to_remove.visible = true
 
+var lines_history = []
+func highlight_code(lines):
+	print(lines_history)
+	side_panel.highlight_code(lines)
+	lines_history.append(lines)
+	print(lines_history)
+func highlight_code_undo():
+	lines_history.pop_back()
+
+	if lines_history.size() >= 1:
+		side_panel.highlight_code(lines_history.back())
+	else:
+		side_panel.highlight_code([])
+
 func crash():
 	side_panel.override_code_return("Segmentation fault (core dumped)", Color.RED)
 	crashed = true
@@ -205,32 +221,29 @@ func insert_front(step: int):
 				make_shared(head.position + Vector2(0, 200))
 			else:
 				make_shared(head.position + Vector2(-50, 325))
-			side_panel.highlight_code([1])
+			highlight_code([1])
 		2:
 			new_vertex.p1.set_target(head.target)
-			side_panel.highlight_code([2])
+			highlight_code([2])
 		3:
 			head.set_target(new_vertex)
-			side_panel.highlight_code([3])
+			highlight_code([3])
 		4:
 			size += 1
-			side_panel.highlight_code([4])
+			highlight_code([4])
 		5:
-			side_panel.highlight_code([5])
+			highlight_code([5])
 			side_panel.override_code_return()
 func insert_front_b(step: int):
 	match step:
 		5:
-			side_panel.highlight_code([4])
+			pass
 		4:
 			size -= 1
-			side_panel.highlight_code([3])
 		3:
 			head.set_target(new_vertex.p1.target)
-			side_panel.highlight_code([2])
 		2:
 			new_vertex.p1.set_target(null)
-			side_panel.highlight_code([1])
 		1:
 			unshare()
 			side_panel.override_exp(tr("INS_FRONT_0"))
@@ -243,7 +256,7 @@ func _on_button_insert_front_pressed():
 func remove_front(step: int):
 	match step:
 		1:
-			side_panel.highlight_code([1])
+			highlight_code([1])
 			if head.target == null:
 				crash()
 			else:
@@ -251,29 +264,26 @@ func remove_front(step: int):
 				head.set_target(head.target.p1.target)
 		2:
 			pseudo_remove()
-			side_panel.highlight_code([1])
+			highlight_code([1])
 		3:
 			size -= 1
-			side_panel.highlight_code([2])
+			highlight_code([2])
 		4:
 			side_panel.override_code_return()
-			side_panel.highlight_code([3])
+			highlight_code([3])
 func remove_front_b(step: int):
 	match step:
 		1:
-			side_panel.highlight_code([])
 			if crashed:
 				uncrash()
 			else:
 				head.set_target(to_remove)
 		2:
 			pseudo_remove_undo()
-			side_panel.highlight_code([1])
 		3:
 			size += 1
-			side_panel.highlight_code([1])
 		4:
-			side_panel.highlight_code([2])
+			pass
 func _on_button_remove_front_pressed():
 	side_panel.override_code_call("list.remove_front()")
 	side_panel.override_code(tr("RM_FRONT"))
@@ -285,32 +295,29 @@ func insert_after(step: int):
 	match step:
 		1:
 			make_shared(pred.position + Vector2(125, -175), "above")
-			side_panel.highlight_code([1])
+			highlight_code([1])
 		2:
 			new_vertex.p1.set_target(pred.p1.target)
-			side_panel.highlight_code([2])
+			highlight_code([2])
 		3:
 			pred.p1.set_target(new_vertex)
-			side_panel.highlight_code([3])
+			highlight_code([3])
 		4:
 			size += 1
-			side_panel.highlight_code([4])
+			highlight_code([4])
 		5:
-			side_panel.highlight_code([5])
+			highlight_code([5])
 			side_panel.override_code_return()
 func insert_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		5:
-			side_panel.highlight_code([4])
+			pass
 		4:
-			side_panel.highlight_code([3])
 			size -= 1
 		3:
-			side_panel.highlight_code([2])
 			pred.p1.set_target(new_vertex.p1.target)
 		2:
-			side_panel.highlight_code([1])
 			new_vertex.p1.set_target(null)
 		1:
 			unshare()
@@ -324,7 +331,7 @@ func remove_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		1:
-			side_panel.highlight_code([1])
+			highlight_code([1])
 			if pred.p1.target == null:
 				crash()
 			else:
@@ -333,27 +340,24 @@ func remove_after(step: int):
 					to_remove.move_to_rel(Vector2(0, 150))
 				pred.p1.set_target(pred.p1.target.p1.target)
 		2:
-			side_panel.highlight_code([1])
+			highlight_code([1])
 			pseudo_remove()
 		3:
-			side_panel.highlight_code([2])
+			highlight_code([2])
 			size -= 1
 		4:
-			side_panel.highlight_code([3])
+			highlight_code([3])
 			side_panel.override_code_return()
 func remove_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
 		4:
-			side_panel.highlight_code([2])
+			pass
 		3:
-			side_panel.highlight_code([1])
 			size += 1
 		2:
-			side_panel.highlight_code([1])
 			pseudo_remove_undo()
 		1:
-			side_panel.highlight_code([])
 			if crashed:
 				uncrash()
 			else:

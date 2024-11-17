@@ -19,46 +19,69 @@ func reposition_list():
 	if not empty():
 		tail.position = tail.target.dest_pos + Vector2(90, -175)
 
+func insert_front_empty(step: int):
+	match step:
+		0:
+			side_panel.override_exp(tr("INS_FRONT_0"))
+		1:
+			size += 1
+			highlight_code([1])
+		2:
+			make_shared(head.position + Vector2(-75, 375))
+			highlight_code([2])
+		3:
+			highlight_code([5])
+		4:
+			highlight_code([6])
+			head.set_target(new_vertex)
+		5:
+			highlight_code([7])
+			tail.set_target(new_vertex)
+		6:
+			highlight_code([8])
+			side_panel.override_code_return()
+func insert_front_empty_b(step: int):
+	match step:
+		1:
+			size -= 1
+			highlight_code_undo()
+		2:
+			unshare()
+			highlight_code_undo()
+		3:
+			highlight_code_undo()
+		4:
+			highlight_code_undo()
+			head.set_target(null)
+		5:
+			highlight_code_undo()
+			tail.set_target(null)
+		6:
+			highlight_code_undo()
 func insert_front(step: int):
 	match step:
 		0:
 			side_panel.override_exp(tr("INS_FRONT_0"))
 		1:
 			size += 1
-			side_panel.highlight_code([1])
+			highlight_code([1])
 		2:
 			make_shared(head.position + Vector2(-75, 375))
-			side_panel.highlight_code([2])
+			highlight_code([2])
 		3:
-			side_panel.highlight_code([5])
+			highlight_code([5])
 		4:
-			if empty():
-				side_panel.highlight_code([6])
-				head.set_target(new_vertex)
-				return
-			
-			side_panel.highlight_code([12])
+			highlight_code([12])
 			new_vertex.p1.set_target(head.target)
 		5:
-			if size == 1:
-				side_panel.highlight_code([7])
-				tail.set_target(new_vertex)
-			
-			if size > 1:
-				side_panel.highlight_code([13])
-				head.target.p2.set_target(new_vertex)
+			side_panel.highlight_code([13])
+			head.target.p2.set_target(new_vertex)
 		6:
-			if size == 1:
-				side_panel.highlight_code([8])
-				side_panel.override_code_return()
-				
-			if size > 1:
-				head.set_target(new_vertex)
-				side_panel.highlight_code([14])
+			head.set_target(new_vertex)
+			side_panel.highlight_code([14])
 		7:
-			if size > 1:
-				side_panel.highlight_code([15])
-				side_panel.override_code_return()
+			side_panel.highlight_code([15])
+			side_panel.override_code_return()
 func insert_front_b(step: int):
 	match step:
 		1:
@@ -70,20 +93,17 @@ func insert_front_b(step: int):
 		3:
 			side_panel.highlight_code([2])
 		4:
-			if size == 1:
-				side_panel.highlight_code([5])
-				head.set_target(null)
+			side_panel.highlight_code([5])
 		5:
-			if size == 1:
-				side_panel.highlight_code([6])
-				tail.set_target(null)
-		6:
-			if size == 1:
-				side_panel.highlight_code([7])
+			side_panel.highlight_code([12])
+			new_vertex.p1.set_target(head.target)
 func _on_button_insert_front_pressed():
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT_DL"))
-	set_up(8, insert_front, insert_front_b)
+	if empty():
+		set_up(6, insert_front_empty, insert_front_empty_b)
+	else:
+		set_up(7, insert_front, insert_front_b)
 	init_algo()
 
 func insert_after(step: int):
