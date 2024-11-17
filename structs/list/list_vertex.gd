@@ -23,7 +23,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Lerp vertex position to mouse position if vertex is allowed to move
 	if dest_pos != null:
 		global_position = lerp(global_position, dest_pos, lerp_speed * delta)
 

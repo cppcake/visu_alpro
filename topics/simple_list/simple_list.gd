@@ -128,9 +128,9 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 			for child in self.get_children():
 				if type_string(typeof(child)) == "Object":
 					if child is list_vertex_class:
-						max_step = max_step_pre
 						child.disconnect("input_event", get_current_for_algo)
-						init_algo()
+			max_step = max_step_pre
+			init_algo()
 func prepare_signals_for_current() -> void:
 	for child in self.get_children():
 		if type_string(typeof(child)) == "Object":
