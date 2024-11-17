@@ -1,4 +1,4 @@
-class_name pointer_class extends Node2D
+class_name pointer_class extends anim_node
 
 @export var label_start: Label
 @export var label_start_text: String
@@ -26,6 +26,7 @@ func _ready():
 var current_end_point: Vector2 = global_position + Vector2(0, 150)
 var current_displacement: Vector2 = Vector2(0, 0)
 func _physics_process(delta):
+	super._physics_process(delta)
 	var target_position: Vector2 = global_position + rel_null_end_point
 	
 	match type_string(typeof(target)):

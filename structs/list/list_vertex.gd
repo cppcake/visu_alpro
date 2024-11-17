@@ -1,16 +1,10 @@
-class_name list_vertex_class extends Area2D
-
-# Static variables and functions
-static var lerp_speed: int = 15;
+class_name list_vertex_class extends anim_node
 
 # Visuals of vertex 
 var sprite: Sprite2D
 var label_data: Label
 var label_ref_count: Label
 var p1: pointer_class
-
-# Animation
-var dest_pos
 
 func _ready():
 	sprite = get_child(1)
@@ -20,11 +14,6 @@ func _ready():
 	p1.current_end_point = global_position + Vector2(0, 150)
 	p1.draw()
 	p1.visible = true
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	if dest_pos != null:
-		global_position = lerp(global_position, dest_pos, lerp_speed * delta)
 
 var reference_counter: int = 0
 @export var sprite_default: CompressedTexture2D
@@ -39,14 +28,6 @@ func _process(_delta):
 			label_ref_count.add_theme_color_override("font_color", Color.WEB_MAROON)
 	
 	label_ref_count.text = str(reference_counter)
-
-func move_to(dest_pos_: Vector2):
-	if dest_pos != null:
-		global_position = dest_pos
-	dest_pos = dest_pos_
-
-func move_to_rel(offset: Vector2):
-	move_to(position + offset)
 
 func _on_mouse_entered():
 	modulate = constants.hovered

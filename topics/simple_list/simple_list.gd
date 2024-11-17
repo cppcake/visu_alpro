@@ -149,9 +149,11 @@ func make_shared(position_: Vector2, from: String = "left") -> list_vertex_class
 	new.set_target(new_v)
 	match from:
 		"left":
-			new.position = new_v.position + Vector2(-150, 0)
+			new.position = new_v.position + Vector2(-200, 0)
+		"right":
+			new.position = new_v.position + Vector2(200, 0)
 		"above":
-			new.position = new_v.position + Vector2(0, -150)
+			new.position = new_v.position + Vector2(0, -200)
 	new.current_end_point = new_v.position
 	new.draw()
 	new.visible = true

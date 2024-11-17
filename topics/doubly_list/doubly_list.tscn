@@ -12,6 +12,7 @@ tail_label = NodePath("CanvasLayer/stackframe_list/MarginContainer/VBoxContainer
 [node name="tail" parent="." index="1" instance=ExtResource("3_uf7jp")]
 position = Vector2(180, 0)
 label_start_text = "tail"
+lerp_speed = 10.0
 
 [node name="button_remove_front" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
 visible = false

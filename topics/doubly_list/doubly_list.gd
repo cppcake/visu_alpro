@@ -17,7 +17,7 @@ func update_stack_frame():
 func reposition_list():
 	super.reposition_list()
 	if not empty():
-		tail.position = tail.target.dest_pos + Vector2(90, -175)
+		tail.move_to(tail.target.dest_pos + Vector2(90, -175))
 
 var current_decider = null
 func set_up_decisive(new_decider: Callable):
@@ -190,7 +190,7 @@ func insert_after_tail(step: int):
 			size += 1
 			highlight_code([1])
 		2:
-			make_shared(pred.position + Vector2(250, 0))
+			make_shared(pred.position + Vector2(250, 0), "right")
 			highlight_code([2])
 		3:
 			new_vertex.p1.set_target(pred.p1.target)
