@@ -178,10 +178,8 @@ func pseudo_remove_undo():
 
 var lines_history = []
 func highlight_code(lines):
-	print(lines_history)
 	side_panel.highlight_code(lines)
 	lines_history.append(lines)
-	print(lines_history)
 func highlight_code_undo():
 	lines_history.pop_back()
 

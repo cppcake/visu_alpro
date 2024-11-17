@@ -6,6 +6,7 @@ class_name pointer_class extends Node2D
 
 var start
 var target = null
+var last_target = null
 
 # Needed to draw edge
 var line: Line2D
@@ -61,9 +62,14 @@ func draw(target_position: Vector2 = current_end_point):
 	head.visible = true
 
 func set_target(new_target):
+	last_target = target
 	if target is list_vertex_class:
 		target.reference_counter -= 1
 	if new_target is list_vertex_class:
 		new_target.reference_counter += 1
 	target = new_target
 	draw()
+
+func set_target_undo():
+	set_target(last_target)
+	last_target = null

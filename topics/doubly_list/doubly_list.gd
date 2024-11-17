@@ -32,36 +32,32 @@ func insert_front_empty(step: int):
 		3:
 			highlight_code([5])
 		4:
-			highlight_code([6])
 			head.set_target(new_vertex)
+			highlight_code([6])
 		5:
-			highlight_code([7])
 			tail.set_target(new_vertex)
+			highlight_code([7])
 		6:
-			highlight_code([8])
 			side_panel.override_code_return()
+			highlight_code([8])
 func insert_front_empty_b(step: int):
 	match step:
 		1:
 			size -= 1
-			highlight_code_undo()
 		2:
 			unshare()
-			highlight_code_undo()
 		3:
-			highlight_code_undo()
+			pass
 		4:
-			highlight_code_undo()
-			head.set_target(null)
+			head.set_target_undo()
 		5:
-			highlight_code_undo()
-			tail.set_target(null)
+			tail.set_target_undo()
 		6:
-			highlight_code_undo()
+			pass
 func insert_front(step: int):
 	match step:
 		0:
-			side_panel.override_exp(tr("INS_FRONT_0"))
+			pass
 		1:
 			size += 1
 			highlight_code([1])
@@ -71,32 +67,33 @@ func insert_front(step: int):
 		3:
 			highlight_code([5])
 		4:
-			highlight_code([12])
 			new_vertex.p1.set_target(head.target)
+			highlight_code([12])
 		5:
-			side_panel.highlight_code([13])
 			head.target.p2.set_target(new_vertex)
+			highlight_code([13])
 		6:
 			head.set_target(new_vertex)
-			side_panel.highlight_code([14])
+			highlight_code([14])
 		7:
-			side_panel.highlight_code([15])
 			side_panel.override_code_return()
+			highlight_code([15])
 func insert_front_b(step: int):
 	match step:
 		1:
 			size -= 1
-			side_panel.highlight_code([])
 		2:
 			unshare()
-			side_panel.highlight_code([1])
 		3:
-			side_panel.highlight_code([2])
+			pass
 		4:
-			side_panel.highlight_code([5])
+			new_vertex.p1.set_target_undo()
 		5:
-			side_panel.highlight_code([12])
-			new_vertex.p1.set_target(head.target)
+			head.target.p2.set_target_undo()
+		6:
+			head.set_target_undo()
+		7:
+			pass
 func _on_button_insert_front_pressed():
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT_DL"))
