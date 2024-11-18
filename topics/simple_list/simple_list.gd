@@ -84,13 +84,19 @@ func set_up(max_step_pre_: int, current_algo_: Callable, current_algo_b_, needs_
 		prepare_signals_for_current()
 
 @export var current: pointer_class
-func make_current(target):
+func make_current(target, from: String = "above"):
 	current.set_target(target)
 	if target == null:
 		current.visible = false
 		current.position = Vector2(9000, 9000)
 	else:
-		current.position = target.position + Vector2(0, -200)
+		match from:
+			"above":
+				current.position = target.position + Vector2(0, -200)
+			"left":
+				current.position = target.position + Vector2(200, 0)
+			"right":
+				current.position = target.position + Vector2(-200, 0)
 		current.current_end_point = target.position
 		current.draw()
 		current.visible = true	

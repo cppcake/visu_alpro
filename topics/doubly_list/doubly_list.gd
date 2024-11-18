@@ -31,7 +31,6 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 		if event.button_index == 1 and event.pressed:
 			while list_vertex_class.selected_vertex == null:
 				pass
-			make_current(list_vertex_class.selected_vertex)
 			current_decider.call(list_vertex_class.selected_vertex)
 			init_algo()
 			for child in self.get_children():
@@ -130,10 +129,11 @@ func _on_button_insert_front_pressed():
 	init_algo()
 
 func insert_after_case_decider(pred: list_vertex_class):
+	make_current(pred)
 	if pred == tail.target:
-		set_up(8, insert_after_tail, insert_after_tail_b, true)
+		set_up(8, insert_after_tail, insert_after_tail_b)
 	else:
-		set_up(8, insert_after, insert_after_b, true)
+		set_up(8, insert_after, insert_after_b)
 func insert_after(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
@@ -235,49 +235,173 @@ func _on_button_insert_after_pressed():
 	current.label_start.text = "pred"
 	set_up_decisive(insert_after_case_decider)
 
-func remove_after(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
+func remove_case_decider(remove_ptr: list_vertex_class):
+	if size == 1:
+		make_current(remove_ptr, "right")
+		set_up(5, remove_one, remove_one_b)
+		return
+	if head.target == remove_ptr:
+		make_current(remove_ptr, "right")
+		set_up(6, remove_head, remove_head_b)
+		return
+	if tail.target == remove_ptr:
+		make_current(remove_ptr, "left")
+		set_up(7, remove_tail, remove_tail_b)
+		return
+	make_current(remove_ptr)
+	set_up(8, remove, remove_b)
+func remove_one(step: int):
+	to_remove = list_vertex_class.selected_vertex
 	match step:
 		1:
-			side_panel.highlight_code([1])
-			if pred.p1.target == null:
-				crash()
-			else:
-				to_remove = pred.p1.target
-				if to_remove.p1.target != null:
-					to_remove.move_to_rel(Vector2(0, 150))
-				pred.p1.set_target(pred.p1.target.p1.target)
-		2:
-			side_panel.highlight_code([1])
-			pseudo_remove()
-		3:
-			side_panel.highlight_code([2])
 			size -= 1
-		4:
-			side_panel.highlight_code([3])
-			side_panel.override_code_return()
-func remove_after_b(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
-	match step:
-		4:
-			side_panel.highlight_code([2])
-		3:
-			side_panel.highlight_code([1])
-			size += 1
+			highlight_code([1])
 		2:
-			side_panel.highlight_code([1])
-			pseudo_remove_undo()
+			highlight_code([3])
+		3:
+			head.set_target(null)
+			highlight_code([4])
+		4:
+			tail.set_target(null)
+			highlight_code([5])
+		5:
+			side_panel.override_code_return()
+			highlight_code([6])
+func remove_one_b(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
 		1:
-			side_panel.highlight_code([])
-			if crashed:
-				uncrash()
-			else:
-				if pred.p1.target != null:
-					to_remove.move_to_rel(Vector2(0, -150))
-				pred.p1.set_target(to_remove)
+			size += 1
+			highlight_code_undo()
+		2:
+			pass
+		3:
+			head.set_target_undo()
+		4:
+			tail.set_target_undo()
+		5:
+			pass
+func remove_head(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size -= 1
+			highlight_code([1])
+		2:
+			highlight_code([3])
+		3:
+			highlight_code([10])
+		4:
+			head.set_target(head.target.p1.target)
+			highlight_code([11])
+		5:
+			head.target.p2.set_target(null)
+			highlight_code([12])
+		6:
+			side_panel.override_code_return()
+			highlight_code([13])
+func remove_head_b(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size += 1
+			highlight_code_undo()
+		2:
+			pass
+		3:
+			pass
+		4:
+			head.set_target_undo()
+		5:
+			head.target.p2.set_target_undo()
+		6:
+			pass
+func remove_tail(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size -= 1
+			highlight_code([1])
+		2:
+			highlight_code([3])
+		3:
+			highlight_code([10])
+		4:
+			highlight_code([17])
+		5:
+			tail.set_target(tail.target.p2.target)
+			highlight_code([18])
+		6:
+			tail.target.p1.set_target(null)
+			highlight_code([19])
+		7:
+			side_panel.override_code_return()
+			highlight_code([20])
+func remove_tail_b(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size += 1
+			highlight_code_undo()
+		2:
+			pass
+		3:
+			pass
+		4:
+			pass
+		5:
+			tail.set_target_undo()
+		6:
+			tail.target.p1.set_target_undo()
+		7:
+			pass
+func remove(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size -= 1
+			highlight_code([1])
+		2:
+			highlight_code([3])
+		3:
+			highlight_code([10])
+		4:
+			highlight_code([17])
+		5:
+			to_remove.move_to_rel(Vector2(0, -200))
+			current.move_to_rel(Vector2(0, -200))
+			to_remove.p1.target.p2.set_target(to_remove.p2.target)
+			highlight_code([24])
+		6:
+			current.dest_pos = null
+			to_remove.p2.target.p1.set_target(to_remove.p1.target)
+			highlight_code([25])
+		7:
+			side_panel.override_code_return()
+			highlight_code([26])
+func remove_b(step: int):
+	to_remove = list_vertex_class.selected_vertex
+	match step:
+		1:
+			size += 1
+			highlight_code_undo()
+		2:
+			pass
+		3:
+			pass
+		4:
+			pass
+		5:
+			to_remove.move_to_rel(Vector2(0, 200))
+			current.move_to_rel(Vector2(0, 200))
+			to_remove.p1.target.p2.set_target_undo()
+		6:
+			to_remove.p2.target.p1.set_target_undo()
+		7:
+			pass
 func _on_button_remove_after_pressed():
 	side_panel.override_code(tr("RM_DL"))
 	side_panel.override_code_call("DListNodeptr DoublyLinkedList::remove(const DListNodeptr& to_remove_ptr)")
 	side_panel.override_exp("Pick the Node to remove")
 	current.label_start.text = "to_remove_ptr"
-	set_up_decisive(insert_after_case_decider)
+	set_up_decisive(remove_case_decider)

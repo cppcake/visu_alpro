@@ -4,9 +4,6 @@ extends Control
 @export var pixel_per_line: int = 24
 @export var max_screen_height_cover: float = 0.4
 
-func _process(_delta):
-	adjust_min_size()
-
 func adjust_min_size():
 	# Get the line count
 	var line_count = rich_text_label.get_line_count()
