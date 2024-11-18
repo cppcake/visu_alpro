@@ -13,8 +13,10 @@ var line: Line2D
 var head: Polygon2D
 var distance_head_node: float = 85
 var distance_factor: float = 0.85
+var current_end_point: Vector2
+var rel_null_end_point = Vector2(0, 150)
 @export var displacement: Vector2 = Vector2(0, 0)
-@export var rel_null_end_point = Vector2(0, 150)
+@export_enum("down", "left_down", "right_down") var from: String = "down"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,8 +24,18 @@ func _ready():
 	line = get_node("./Line2D")
 	head = get_node("./Polygon2D")
 	label_start.text = label_start_text
+	
+	match from:
+		"down":
+			current_end_point = global_position + Vector2(0, 150)
+			rel_null_end_point = Vector2(0, 150)
+		"left_down":
+			current_end_point = global_position + Vector2(-110, 110)
+			rel_null_end_point = Vector2(-110, 110)
+		"right_down":
+			current_end_point = global_position + Vector2(110, 110)
+			rel_null_end_point = Vector2(110, 110)
 
-var current_end_point: Vector2 = global_position + Vector2(0, 150)
 var current_displacement: Vector2 = Vector2(0, 0)
 func _physics_process(delta):
 	super._physics_process(delta)

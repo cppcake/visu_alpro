@@ -8,4 +8,3 @@ func _ready():
 	p2.current_end_point = global_position + Vector2(0, 150)
 	p2.draw()
 	p2.visible = true
-	

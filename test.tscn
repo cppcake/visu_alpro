@@ -3,20 +3,24 @@
 [ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
 [ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="4_7ovg7"]
 [ext_resource type="PackedScene" uid="uid://sd8yr560vaj2" path="res://menus/options_menu/options_menu.tscn" id="4_b5c5h"]
-[ext_resource type="PackedScene" uid="uid://77au65feku51" path="res://structs/doubly_list/doubly_list_vertex.tscn" id="5_mu2sv"]
+[ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_gjx5e"]
 
-[node name="Test" type="Node" node_paths=PackedStringArray("v2", "v3", "cam")]
+[node name="Test" type="Node" node_paths=PackedStringArray("v1", "v2", "v3", "cam")]
 script = ExtResource("1_1g5mx")
-v2 = NodePath("doubly_list_vertex")
-v3 = NodePath("doubly_list_vertex2")
+v1 = NodePath("tree_vertex")
+v2 = NodePath("tree_vertex2")
+v3 = NodePath("tree_vertex3")
 cam = NodePath("Camera2D")
 
 [node name="Camera2D" parent="." instance=ExtResource("4_7ovg7")]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_b5c5h")]
 
-[node name="doubly_list_vertex" parent="." instance=ExtResource("5_mu2sv")]
-position = Vector2(-156, -395)
+[node name="tree_vertex" parent="." instance=ExtResource("4_gjx5e")]
+position = Vector2(426, 72)
 
-[node name="doubly_list_vertex2" parent="." instance=ExtResource("5_mu2sv")]
-position = Vector2(211, -397)
+[node name="tree_vertex2" parent="." instance=ExtResource("4_gjx5e")]
+position = Vector2(320, 248)
+
+[node name="tree_vertex3" parent="." instance=ExtResource("4_gjx5e")]
+position = Vector2(529, 239)

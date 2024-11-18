@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bthcdr4abtmxb"]
+[gd_scene load_steps=13 format=3 uid="uid://dcixclmukxhyp"]
 
-[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="4_3cjmx"]
-[ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="7_ygilh"]
-[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_0rtpr"]
-[ext_resource type="Script" path="res://topics/graph_traversal/scripts/navigate_algorithm.gd" id="33_22dmt"]
-[ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="34_ilx38"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_tisiv"]
+[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_40elq"]
+[ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_o0udn"]
+[ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_qc5lr"]
+[ext_resource type="Texture2D" uid="uid://b0odra2mn337m" path="res://misc/icons/arrow-small-left.png" id="7_78oqq"]
+[ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="8_y3k06"]
+[ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="9_0lupd"]
+[ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="10_vby7r"]
+[ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="11_7gy0y"]
+[ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="13_qan7o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
@@ -14,143 +19,132 @@
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="upper_gui" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="buttons" type="HBoxContainer" parent="CanvasLayer/upper_gui"]
-layout_mode = 1
+[node name="buttons" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 41.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_algorithm" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme = ExtResource("31_0rtpr")
+theme = ExtResource("3_tisiv")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_algorithm"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_algorithm"]
 layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
-[node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/upper_gui/buttons"]
+[node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/buttons"]
 layout_mode = 2
-theme = ExtResource("31_0rtpr")
+theme = ExtResource("3_tisiv")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/upper_gui/buttons/buttons_navigation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_navigation"]
 layout_mode = 2
 alignment = 1
 
-[node name="button_stop" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+[node name="button_cancel" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-tooltip_text = "STOP_TOOLTIP"
+tooltip_text = "CANCEL_TOOLTIP"
 focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
+theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "STOP"
+icon = ExtResource("5_o0udn")
+expand_icon = true
+script = ExtResource("4_40elq")
 
-[node name="button_backward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_finish" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-tooltip_text = "BACKWARD_TOOLTIP_3"
+tooltip_text = "FINISH_TOOLTIP"
 focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+theme = ExtResource("3_tisiv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxwd8")
 disabled = true
-text = "<<<-"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = -9999999
+icon = ExtResource("6_qc5lr")
+expand_icon = true
+script = ExtResource("4_40elq")
 
-[node name="button_backward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
-layout_mode = 2
-tooltip_text = "BACKWARD_TOOLTIP_2"
-focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
-disabled = true
-text = "<<--"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = -5
-
-[node name="button_backward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "BACKWARD_TOOLTIP"
 focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
+theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "<---"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = -1
+icon = ExtResource("7_78oqq")
+expand_icon = true
 
-[node name="state_counter" type="Label" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer"]
+[node name="state_counter" type="Label" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("31_0rtpr")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme = ExtResource("3_tisiv")
+script = ExtResource("8_y3k06")
 
-[node name="button_forward" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
+[node name="button_forward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
 focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
+theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-text = "--->"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = 1
+icon = ExtResource("9_0lupd")
+expand_icon = true
 
-[node name="button_forward_further" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
-layout_mode = 2
-tooltip_text = "FORWARD_TOOLTIP_2"
-focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
-disabled = true
-text = "-->>"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = 5
-
-[node name="button_forward_further2" type="Button" parent="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer" node_paths=PackedStringArray("controller") groups=["buttons_navigation"]]
-layout_mode = 2
-tooltip_text = "FORWARD_TOOLTIP_3"
-focus_mode = 1
-mouse_filter = 2
-theme = ExtResource("31_0rtpr")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
-disabled = true
-text = "->>>"
-script = ExtResource("33_22dmt")
-controller = NodePath("../../../../../..")
-jump = 9999999
-
-[node name="buttons_misc" parent="CanvasLayer/upper_gui/buttons" instance=ExtResource("34_ilx38")]
+[node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("10_vby7r")]
 layout_mode = 2
 
-[node name="side_panel" parent="CanvasLayer" instance=ExtResource("4_3cjmx")]
+[node name="stackframe" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 100)
+offset_left = 4.0
+offset_top = 43.0
+offset_right = 154.0
+offset_bottom = 143.0
+theme = ExtResource("3_tisiv")
 
-[node name="Camera2D" parent="." instance=ExtResource("7_ygilh")]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/stackframe"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_tisiv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/stackframe/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_tisiv")
+
+[node name="side_panel" parent="CanvasLayer" instance=ExtResource("11_7gy0y")]
+is_open = false
+
+[node name="legend" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -44.0
+offset_right = 45.0
+offset_bottom = -4.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(300, 100)
+script = ExtResource("13_qan7o")
+zoom_level = 2.0
 
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_stop" to="." method="stop_algorithm"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further2" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward_further" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_backward" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further2" to="CanvasLayer/upper_gui/buttons/buttons_navigation/HBoxContainer/button_forward_further2" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="." method="cancel"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
