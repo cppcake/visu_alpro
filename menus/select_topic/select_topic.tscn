@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4byyinbr8yl6"]
+[gd_scene load_steps=8 format=3 uid="uid://d4byyinbr8yl6"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_2ti2a"]
 [ext_resource type="Script" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
 [ext_resource type="PackedScene" uid="uid://4yxiit4yk24o" path="res://menus/select_topic/item_box.tscn" id="4_6ddwb"]
 [ext_resource type="Script" path="res://menus/select_topic/select_topic.gd" id="5_g53c3"]
+[ext_resource type="Texture2D" uid="uid://r1o683wbwiro" path="res://menus/select_topic/images/graph_traversal.png" id="5_xsani"]
+[ext_resource type="Texture2D" uid="uid://lgd5kicjyg27" path="res://menus/select_topic/images/simple_list.png" id="6_ytq5r"]
+[ext_resource type="Texture2D" uid="uid://wun0tbetskk1" path="res://menus/select_topic/images/doubly_list.png" id="7_5242d"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -55,17 +58,24 @@ size_flags_vertical = 3
 theme = ExtResource("1_2ti2a")
 script = ExtResource("5_g53c3")
 
-[node name="ItemBox" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+[node name="graph_traversal" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("5_xsani")
 scene_name = "graph_traversal"
 label_text = "Graph Traversal"
 
-[node name="ItemBox2" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+[node name="simple_list" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("6_ytq5r")
 scene_name = "simple_list"
 label_text = "Simple List"
 
-[node name="ItemBox3" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+[node name="doubly_list" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("7_5242d")
 scene_name = "doubly_list"
 label_text = "Doubly List"
+
+[node name="tree_traversal" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+label_text = "Tree Traversal"
