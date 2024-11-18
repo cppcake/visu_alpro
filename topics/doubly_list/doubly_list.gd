@@ -88,7 +88,7 @@ func insert_front(step: int):
 			size += 1
 			highlight_code([1])
 		2:
-			make_shared(head.position + Vector2(-75, 375))
+			make_shared(head.position + Vector2(-75, 300))
 			highlight_code([2])
 		3:
 			highlight_code([5])
@@ -232,6 +232,7 @@ func _on_button_insert_after_pressed():
 	side_panel.override_code(tr("INS_AFTER_DL"))
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")
+	current.label_start.text = "pred"
 	set_up_decisive(insert_after_case_decider)
 
 func remove_after(step: int):
@@ -276,6 +277,7 @@ func remove_after_b(step: int):
 				pred.p1.set_target(to_remove)
 func _on_button_remove_after_pressed():
 	side_panel.override_code(tr("RM_DL"))
-	side_panel.override_code_call("doubly_list.remove(ListNodeptr pred)")
+	side_panel.override_code_call("DListNodeptr DoublyLinkedList::remove(const DListNodeptr& to_remove_ptr)")
 	side_panel.override_exp("Pick the Node to remove")
-	set_up(4, remove_after, remove_after_b, true)
+	current.label_start.text = "to_remove_ptr"
+	set_up_decisive(insert_after_case_decider)
