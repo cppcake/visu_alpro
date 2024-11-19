@@ -1,7 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://d25mecoy5ka6l"]
+[gd_scene load_steps=5 format=3 uid="uid://d25mecoy5ka6l"]
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
 [ext_resource type="Script" path="res://topics/tree traversal/tree_traversal.gd" id="2_tjuep"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
+[ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 
-[node name="root" instance=ExtResource("1_38xve")]
+[node name="root" node_paths=PackedStringArray("root_ptr", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "cam") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
+root_ptr = NodePath("root")
+v1 = NodePath("tree_vertex")
+v2 = NodePath("tree_vertex2")
+v3 = NodePath("tree_vertex3")
+v4 = NodePath("tree_vertex4")
+v5 = NodePath("tree_vertex5")
+v6 = NodePath("tree_vertex6")
+v7 = NodePath("tree_vertex7")
+cam = NodePath("Camera2D")
+
+[node name="root" parent="." index="2" instance=ExtResource("3_cgglp")]
+position = Vector2(0, -200)
+label_start_text = "root"
+
+[node name="tree_vertex" parent="." index="3" instance=ExtResource("4_fggb2")]
+
+[node name="tree_vertex2" parent="." index="4" instance=ExtResource("4_fggb2")]
+position = Vector2(320, 248)
+
+[node name="tree_vertex3" parent="." index="5" instance=ExtResource("4_fggb2")]
+position = Vector2(529, 239)
+
+[node name="tree_vertex4" parent="." index="6" instance=ExtResource("4_fggb2")]
+
+[node name="tree_vertex5" parent="." index="7" instance=ExtResource("4_fggb2")]
+
+[node name="tree_vertex6" parent="." index="8" instance=ExtResource("4_fggb2")]
+
+[node name="tree_vertex7" parent="." index="9" instance=ExtResource("4_fggb2")]
