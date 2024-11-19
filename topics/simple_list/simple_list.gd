@@ -148,7 +148,7 @@ func prepare_signals_for_current() -> void:
 var new_vertex: list_vertex_class
 func make_shared(position_: Vector2, from: String = "left") -> list_vertex_class:
 	var new_v = list_v_scene.instantiate()
-	new_v.position = position_
+	new_v.global_position = position_
 	new_vertex = new_v
 	add_child(new_v)	
 	

@@ -20,6 +20,10 @@ config/icon="res://structs/sprites/vertex_default.png"
 
 OptionsMenu="*res://menus/options_menu/options_menu.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1920
