@@ -18,7 +18,8 @@ func reposition_list():
 	super.reposition_list()
 	if not empty():
 		tail.move_to(tail.target.dest_pos + Vector2(90, -175))
-
+	else:
+		tail.move_to(head.position + Vector2(180, 0))
 var current_decider = null
 func set_up_decisive(new_decider: Callable):
 	side_panel.open()
@@ -43,6 +44,11 @@ func prepare_signals_for_current() -> void:
 			if child is list_vertex_class:
 				if not child.is_connected("input_event", get_current_for_algo):
 					child.connect("input_event", get_current_for_algo)
+
+func clear():
+	tail.target = null
+	super.clear()
+	
 
 func insert_front_empty(step: int):
 	match step:

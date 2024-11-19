@@ -1,4 +1,4 @@
-class_name simple_list_class extends Node
+class_name tree_traversal_class extends Node
 
 @export var head: pointer_class
 var size: int = 0
@@ -52,13 +52,13 @@ func finish():
 	if to_remove != null:
 		to_remove.queue_free()
 	
-	reposition_list()
+	reposition()
 
 func cancel():
 	while current_step > 0:
 		backward()
 	clean_up()
-	reposition_list()
+	reposition()
 
 func clean_up():
 	side_panel.close()
@@ -82,6 +82,9 @@ func set_up(max_step_pre_: int, current_algo_: Callable, current_algo_b_, needs_
 	
 	if needs_current:
 		prepare_signals_for_current()
+
+func reposition():
+	pass
 
 @export var current: pointer_class
 func make_current(target, from: String = "above"):
@@ -171,18 +174,11 @@ func unshare() -> void:
 	new.set_target(null)
 	new_vertex.queue_free()
 
-var target_before
 var to_remove = null
 func pseudo_remove():
-	to_remove.visible = false
-	target_before = to_remove.p1.target
-	to_remove.p1.set_target(null)
+	pass
 func pseudo_remove_undo():
-	to_remove.p1.set_target(target_before)
-	if target_before != null:
-		to_remove.p1.current_end_point = target_before.global_position
-		to_remove.p1.draw()
-	to_remove.visible = true
+	pass
 
 var lines_history = []
 func highlight_code(lines):
@@ -202,184 +198,3 @@ func crash():
 func uncrash():
 	crashed = false
 	side_panel.override_code_return("")
-
-func empty() -> bool:
-	return head.target == null
-
-func reposition_list():
-	if head.target == null:
-		head.position = Vector2(0, 0)
-	else:
-		var current_ = head.target
-		var pos = head.position + Vector2(90, 175)
-		while current_ != null:
-			current_.move_to(pos)
-			pos += Vector2(250, 0)
-			current_ = current_.p1.target
-
-func clear():
-	size = 0
-	head.target = null
-	for child in get_children():
-		if child is list_vertex_class:
-			child.queue_free()
-	reposition_list()
-
-func insert_front(step: int):
-	match step:
-		0:
-			side_panel.override_exp(tr("INS_FRONT_0"))
-		1:
-			side_panel.override_exp(tr("INS_FRONT_1"))
-			if head.target == null:
-				make_shared(head.position + Vector2(0, 200))
-			else:
-				make_shared(head.position + Vector2(-50, 325))
-			highlight_code([1])
-		2:
-			new_vertex.p1.set_target(head.target)
-			highlight_code([2])
-		3:
-			head.set_target(new_vertex)
-			highlight_code([3])
-		4:
-			size += 1
-			highlight_code([4])
-		5:
-			highlight_code([5])
-			side_panel.override_code_return()
-func insert_front_b(step: int):
-	match step:
-		5:
-			pass
-		4:
-			size -= 1
-		3:
-			head.set_target(new_vertex.p1.target)
-		2:
-			new_vertex.p1.set_target(null)
-		1:
-			unshare()
-			side_panel.override_exp(tr("INS_FRONT_0"))
-func _on_button_insert_front_pressed():
-	side_panel.override_code_call("list.insert_front(data)")
-	side_panel.override_code(tr("INS_FRONT"))
-	set_up(5, insert_front, insert_front_b)
-	init_algo()
-
-func remove_front(step: int):
-	match step:
-		1:
-			highlight_code([1])
-			if head.target == null:
-				crash()
-			else:
-				to_remove = head.target
-				head.set_target(head.target.p1.target)
-		2:
-			pseudo_remove()
-			highlight_code([1])
-		3:
-			size -= 1
-			highlight_code([2])
-		4:
-			side_panel.override_code_return()
-			highlight_code([3])
-func remove_front_b(step: int):
-	match step:
-		1:
-			if crashed:
-				uncrash()
-			else:
-				head.set_target(to_remove)
-		2:
-			pseudo_remove_undo()
-		3:
-			size += 1
-		4:
-			pass
-func _on_button_remove_front_pressed():
-	side_panel.override_code_call("list.remove_front()")
-	side_panel.override_code(tr("RM_FRONT"))
-	set_up(4, remove_front, remove_front_b)
-	init_algo()
-
-func insert_after(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
-	match step:
-		1:
-			make_shared(pred.position + Vector2(125, -175), "above")
-			highlight_code([1])
-		2:
-			new_vertex.p1.set_target(pred.p1.target)
-			highlight_code([2])
-		3:
-			pred.p1.set_target(new_vertex)
-			highlight_code([3])
-		4:
-			size += 1
-			highlight_code([4])
-		5:
-			highlight_code([5])
-			side_panel.override_code_return()
-func insert_after_b(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
-	match step:
-		5:
-			pass
-		4:
-			size -= 1
-		3:
-			pred.p1.set_target(new_vertex.p1.target)
-		2:
-			new_vertex.p1.set_target(null)
-		1:
-			unshare()
-func _on_button_insert_after_pressed():
-	side_panel.override_code(tr("INS_AFTER"))
-	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
-	side_panel.override_exp("Pick a predecessor Node")
-	set_up(5, insert_after, insert_after_b, true)
-
-func remove_after(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
-	match step:
-		1:
-			highlight_code([1])
-			if pred.p1.target == null:
-				crash()
-			else:
-				to_remove = pred.p1.target
-				if to_remove.p1.target != null:
-					to_remove.move_to_rel(Vector2(0, 150))
-				pred.p1.set_target(pred.p1.target.p1.target)
-		2:
-			highlight_code([1])
-			pseudo_remove()
-		3:
-			highlight_code([2])
-			size -= 1
-		4:
-			highlight_code([3])
-			side_panel.override_code_return()
-func remove_after_b(step: int):
-	var pred: list_vertex_class = list_vertex_class.selected_vertex
-	match step:
-		4:
-			pass
-		3:
-			size += 1
-		2:
-			pseudo_remove_undo()
-		1:
-			if crashed:
-				uncrash()
-			else:
-				if pred.p1.target != null:
-					to_remove.move_to_rel(Vector2(0, -150))
-				pred.p1.set_target(to_remove)
-func _on_button_remove_after_pressed():
-	side_panel.override_code(tr("RM_AFTER"))
-	side_panel.override_code_call("list.remove_after(ListNodeptr pred)")
-	side_panel.override_exp("Pick a predecessor Node")
-	set_up(4, remove_after, remove_after_b, true)

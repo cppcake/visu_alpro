@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d25mecoy5ka6l"]
+
+[ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
+[ext_resource type="Script" path="res://topics/tree traversal/tree_traversal.gd" id="2_tjuep"]
+
+[node name="root" instance=ExtResource("1_38xve")]
+script = ExtResource("2_tjuep")
