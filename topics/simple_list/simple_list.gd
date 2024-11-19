@@ -7,7 +7,7 @@ var list_v_scene
 @export var side_panel: SidePanel
 func _ready():
 	list_v_scene = preload("res://structs/list/list_vertex.tscn")
-	clean_up()
+	reset()
 
 func _process(_delta):
 	update_stack_frame()
@@ -217,13 +217,19 @@ func reposition_list():
 			pos += Vector2(250, 0)
 			current_ = current_.p1.target
 
-func clear():
+func reset():
 	size = 0
 	head.target = null
 	for child in get_children():
 		if child is list_vertex_class:
 			child.queue_free()
-	reposition_list()
+	clean_up()
+	_on_button_insert_front_pressed()
+	finish()
+	_on_button_insert_front_pressed()
+	finish()
+	_on_button_insert_front_pressed()
+	finish()
 
 func insert_front(step: int):
 	match step:

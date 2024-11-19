@@ -45,9 +45,10 @@ func prepare_signals_for_current() -> void:
 				if not child.is_connected("input_event", get_current_for_algo):
 					child.connect("input_event", get_current_for_algo)
 
-func clear():
+func reset():
+	list_v_scene = preload("res://structs/doubly_list/doubly_list_vertex.tscn")
 	tail.target = null
-	super.clear()
+	super.reset()
 	
 
 func insert_front_empty(step: int):
