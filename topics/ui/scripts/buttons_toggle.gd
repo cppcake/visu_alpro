@@ -1,6 +1,5 @@
 extends Button
 
-
 func _on_pressed():
 	if is_in_group("buttons_active"):
 		# Block active buttons, unblock navigation buttons
