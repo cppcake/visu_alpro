@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcixclmukxhyp"]
+[gd_scene load_steps=16 format=3 uid="uid://dcixclmukxhyp"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_tisiv"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_40elq"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="9_0lupd"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="10_vby7r"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="11_7gy0y"]
+[ext_resource type="Script" path="res://topics/operator.gd" id="11_26jp6"]
+[ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://structs/list/list_vertex.tscn" id="12_056q2"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="13_4la8k"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="13_qan7o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
@@ -141,6 +144,15 @@ unique_name_in_owner = true
 position = Vector2(300, 100)
 script = ExtResource("13_qan7o")
 zoom_level = 2.0
+
+[node name="operator" type="Node" parent="." node_paths=PackedStringArray("new_ptr")]
+script = ExtResource("11_26jp6")
+vertex_scene = ExtResource("12_056q2")
+new_ptr = NodePath("new_ptr")
+
+[node name="new_ptr" parent="operator" instance=ExtResource("13_4la8k")]
+visible = false
+label_start_text = "new_ptr"
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="." method="cancel"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]

@@ -36,3 +36,10 @@ position = Vector2(529, 239)
 [node name="tree_vertex6" parent="." index="8" instance=ExtResource("4_fggb2")]
 
 [node name="tree_vertex7" parent="." index="9" instance=ExtResource("4_fggb2")]
+
+[node name="operator" parent="." index="10" node_paths=PackedStringArray("new_ptr")]
+new_ptr = NodePath("new_ptr")
+
+[node name="new_ptr" parent="operator" index="0" instance=ExtResource("3_cgglp")]
+visible = false
+label_start_text = "new_ptr"
