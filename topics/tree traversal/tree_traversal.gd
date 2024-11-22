@@ -2,13 +2,6 @@ class_name tree_traversal_class extends Node
 
 @export var operator: operator_class
 @export var root_ptr: pointer_class
-@export var v1: tree_vertex_class
-@export var v2: tree_vertex_class
-@export var v3: tree_vertex_class
-@export var v4: tree_vertex_class
-@export var v5: tree_vertex_class
-@export var v6: tree_vertex_class
-@export var v7: tree_vertex_class
 @export var cam: CameraManager
 
 var offset_y: int = 180
@@ -54,6 +47,24 @@ func calculate_height(root: pointer_class) -> int:
 	else:
 		return height + right_height
 
+var current_step
+func init_algo(algo: Callable, argv: Array):
+	operations.clear()
+	algo.call(argv)
+	current_step = operations.size()
+	while current_step > 0:
+		backward()
+
+func forward():
+	if current_step < operations.size():
+		operator_interface(operations[current_step])
+		current_step += 1
+
+func backward():
+	if current_step > 0:
+		current_step -= 1
+		operator_interface(operations[current_step], true)
+
 func finish():
 	while current_step < operations.size():
 		forward()
@@ -70,25 +81,8 @@ func clean_up():
 	operator.clean_up()
 	reposition()
 
-var current_step = 0
-func forward():
-	if current_step < operations.size():
-		operator_interface(operations[current_step])
-		current_step += 1
-
-func backward():
-	if current_step > 0:
-		current_step -= 1
-		operator_interface(operations[current_step], true)
-
-func init_algo(algo: Callable, argv: Array):
-	operations.clear()
-	algo.call(argv)
-	current_step = operations.size()
-	while current_step > 0:
-		backward()
-
 var operations: Array = []
+var new_vertex: tree_vertex_class
 func push_operation(operation_name: String, argv: Array):
 	operations.push_back([operation_name, argv])
 	operator_interface(operations.back())
@@ -116,7 +110,6 @@ func operator_interface(operation: Array, undo: bool = false):
 				argv[0].set_target(argv[1])
 			return
 
-var new_vertex: tree_vertex_class
 func insert(argv: Array):
 	var data = argv[0]
 	var ptr = argv[1]
@@ -133,18 +126,6 @@ func insert(argv: Array):
 		insert([data, root.p1])
 	else:
 		insert([data, root.p2])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var left_click = Input.is_action_just_pressed("M1")
-	var right_click = Input.is_action_just_pressed("M2")
-	var middle_click = Input.is_action_just_pressed("M3")
-	if right_click:
-		pass
-
-	if middle_click:
-		pass
-
 func _on_button_insert_pressed():
 	var randiii: int = randi() % 100
 	init_algo(insert, [randiii, root_ptr])

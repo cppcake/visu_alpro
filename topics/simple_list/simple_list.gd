@@ -50,6 +50,7 @@ func finish():
 	clean_up()
 	
 	if to_remove != null:
+		to_remove.p1.set_target(null)
 		to_remove.queue_free()
 	
 	reposition_list()
@@ -169,6 +170,7 @@ func unshare() -> void:
 	new.visible = false
 	new.position = Vector2(4200, 3900)
 	new.set_target(null)
+	new_vertex.p1.set_target(null)
 	new_vertex.queue_free()
 
 var target_before

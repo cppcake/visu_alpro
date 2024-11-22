@@ -29,21 +29,30 @@ position = Vector2(0, -200)
 label_start_text = "root"
 
 [node name="tree_vertex" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex2" parent="." instance=ExtResource("4_gjx5e")]
 position = Vector2(320, 248)
+sprite_accent = null
 
 [node name="tree_vertex3" parent="." instance=ExtResource("4_gjx5e")]
 position = Vector2(529, 239)
+sprite_accent = null
 
 [node name="tree_vertex4" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex5" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex6" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex7" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex8" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null
 
 [node name="tree_vertex9" parent="." instance=ExtResource("4_gjx5e")]
+sprite_accent = null

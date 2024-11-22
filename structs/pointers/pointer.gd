@@ -77,9 +77,9 @@ func draw(target_position: Vector2 = current_end_point):
 func set_target(new_target):
 	last_target = target
 	if target is list_vertex_class:
-		target.reference_counter -= 1
+		target.update_reference_counter(-1)
 	if new_target is list_vertex_class:
-		new_target.reference_counter += 1
+		new_target.update_reference_counter(1)
 	target = new_target
 	draw()
 

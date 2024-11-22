@@ -77,5 +77,6 @@ scene_name = "doubly_list"
 label_text = "Doubly List"
 
 [node name="tree_traversal" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+visible = false
 layout_mode = 2
 label_text = "Tree Traversal"
