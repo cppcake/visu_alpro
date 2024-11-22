@@ -55,6 +55,8 @@ func override_code_call(text_: String):
 
 func highlight_code(lines: Array):
 	cont_code.highlight_lines(lines)
+func highlight_code_undo():
+	cont_code.highlight_lines_undo()
 
 func create_variable() -> Label:
 	return cont_var.create_variable()

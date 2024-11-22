@@ -5,6 +5,7 @@ class_name CodeContainer extends MarginContainer
 @export var label_call: Label
 @export var label_return: Label
 func override(text_, update_init: bool):
+	code_display.lines_history = [[]]
 	code_display.text = text_
 	if update_init:
 		code_display.init_text = text_
@@ -25,3 +26,5 @@ func reset():
 
 func highlight_lines(lines: Array):
 	code_display.highlight_lines(lines)
+func highlight_lines_undo():
+	code_display.highlight_lines_undo()

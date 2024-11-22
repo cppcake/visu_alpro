@@ -50,6 +50,7 @@ func calculate_height(root: pointer_class) -> int:
 var current_step
 func init_algo(algo: Callable, argv: Array):
 	operations.clear()
+	decorations_array.clear()
 	algo.call(argv)
 	current_step = operations.size()
 	while current_step > 0:
@@ -58,11 +59,13 @@ func init_algo(algo: Callable, argv: Array):
 func forward():
 	if current_step < operations.size():
 		operator_interface(operations[current_step])
+		decorater_interface(decorations_array[current_step])
 		current_step += 1
 
 func backward():
 	if current_step > 0:
 		current_step -= 1
+		decorater_interface(decorations_array[current_step])
 		operator_interface(operations[current_step], true)
 
 func finish():
@@ -110,6 +113,35 @@ func operator_interface(operation: Array, undo: bool = false):
 				argv[0].set_target(argv[1])
 			return
 
+enum dects
+{
+	SET_SPRITE,
+	HIGHLIGHT_CODE
+}
+@export var side_panel: SidePanel
+var decorations_array: Array = []
+func push_decorations(decorations: Array):
+	decorations_array.push_back(decorations)
+	operator_interface(operations.back())
+func decorater_interface(decorations: Array, undo: bool = false):
+	for decoration in decorations:
+		var decoration_name = decoration[0]
+		var argv = decoration[1]
+		
+		match decoration_name:
+			dects.SET_SPRITE:
+				if undo:
+					argv[0].set_sprite_undo()
+				else:
+					argv[0].set_sprite(argv[1])
+				return
+			dects.HIGHLIGHT_CODE:
+				if undo:
+					side_panel.highlight_code_undo()
+				else:
+					side_panel.highlight_code(argv[0])
+				return
+
 func insert(argv: Array):
 	var data = argv[0]
 	var ptr = argv[1]
@@ -118,8 +150,12 @@ func insert(argv: Array):
 		new_vertex = operator.create_new_vertex(ptr.global_position + Vector2(0, 250), "right")
 		new_vertex.set_data(data)
 		push_operation("make_shared", [new_vertex])
+		var mark_new_vertex = [dects.SET_SPRITE, [new_vertex, list_vertex_class.sprites.ACCENT]]
+		push_decorations([mark_new_vertex])
 		
 		push_operation("point_at", [ptr, new_vertex])
+		mark_new_vertex = [dects.SET_SPRITE, [new_vertex, list_vertex_class.sprites.TO_REMOVE]]
+		push_decorations([mark_new_vertex])
 		return
 	
 	if root.data > data:

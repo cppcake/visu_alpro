@@ -28,14 +28,12 @@ func forward():
 	update_step_label()
 
 func backward():
-	highlight_code_undo()
 	if current_step == max_step:
 		side_panel.override_code_return("")
-	if current_step == 1:
-		highlight_code([])
 	if current_step == 0:
 		return
-	
+
+	highlight_code_undo()
 	current_algo_b.call(current_step)
 	current_step = current_step - 1
 	
@@ -75,7 +73,6 @@ func clean_up():
 	side_panel.select_containers(0, 0, 0, 1)
 
 func set_up(max_step_pre_: int, current_algo_: Callable, current_algo_b_, needs_current: bool = false):
-	lines_history = []
 	max_step_pre = max_step_pre_
 	current_algo = current_algo_
 	current_algo_b = current_algo_b_
@@ -186,17 +183,10 @@ func pseudo_remove_undo():
 		to_remove.p1.draw()
 	to_remove.visible = true
 
-var lines_history = []
 func highlight_code(lines):
 	side_panel.highlight_code(lines)
-	lines_history.append(lines)
 func highlight_code_undo():
-	lines_history.pop_back()
-
-	if lines_history.size() >= 1:
-		side_panel.highlight_code(lines_history.back())
-	else:
-		side_panel.highlight_code([])
+	side_panel.highlight_code_undo()
 
 func crash():
 	side_panel.override_code_return("Segmentation fault (core dumped)", Color.RED)

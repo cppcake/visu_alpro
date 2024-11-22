@@ -3,7 +3,10 @@ extends RichTextLabel
 var color = constants.color_1
 var init_text = ""
 
-func highlight_lines(lines_to_paint: Array) -> void:
+var lines_history = []
+func highlight_lines(lines_to_paint: Array, push: bool = true) -> void:
+	if push:
+		lines_history.append(lines_to_paint)
 	text = init_text
 	# Split the label's text by lines
 	var lines = text.split("\n")
@@ -17,3 +20,14 @@ func highlight_lines(lines_to_paint: Array) -> void:
 
 	# Join the lines back together and set the label's text
 	text = "\n".join(lines)
+func highlight_lines_undo() -> void:
+	if lines_history.size() > 1:
+		lines_history.pop_back()
+	else:
+		highlight_lines([], false)
+		return
+	
+	if lines_history.size() > 0:
+		highlight_lines(lines_history.back(), false)
+	else:
+		highlight_lines([], false)
