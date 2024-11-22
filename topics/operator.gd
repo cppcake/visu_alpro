@@ -55,6 +55,10 @@ func pseudo_remove_undo() -> void:
 func clean_up():
 	new_ptr.set_target(null)
 	new_ptr.visible = false
+	
+	if to_remove != null:
+		to_remove.queue_free()
+		to_remove = null
 
 func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class) -> void:
 	var buf: int = vertex_1.data

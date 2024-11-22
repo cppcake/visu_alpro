@@ -55,6 +55,18 @@ func calculate_height(root: pointer_class) -> int:
 		return height + right_height
 
 func finish():
+	while current_step < operations.size():
+		forward()
+	clean_up()
+
+func cancel():
+	while current_step > 0:
+		backward()
+	clean_up()
+
+func clean_up():
+	current_step = 0
+	operations.clear()
 	operator.clean_up()
 	reposition()
 
@@ -63,6 +75,18 @@ func forward():
 	if current_step < operations.size():
 		operator_interface(operations[current_step])
 		current_step += 1
+
+func backward():
+	if current_step > 0:
+		current_step -= 1
+		operator_interface(operations[current_step], true)
+
+func init_algo(algo: Callable, argv: Array):
+	operations.clear()
+	algo.call(argv)
+	current_step = operations.size()
+	while current_step > 0:
+		backward()
 
 var operations: Array = []
 func push_operation(operation_name: String, argv: Array):
@@ -93,7 +117,9 @@ func operator_interface(operation: Array, undo: bool = false):
 			return
 
 var new_vertex: tree_vertex_class
-func insert(data: int, ptr: pointer_class):
+func insert(argv: Array):
+	var data = argv[0]
+	var ptr = argv[1]
 	var root = ptr.target
 	if root == null:
 		new_vertex = operator.create_new_vertex(ptr.global_position + Vector2(0, 250), "right")
@@ -104,9 +130,9 @@ func insert(data: int, ptr: pointer_class):
 		return
 	
 	if root.data > data:
-		insert(data, root.p1)
+		insert([data, root.p1])
 	else:
-		insert(data, root.p2)
+		insert([data, root.p2])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -120,8 +146,5 @@ func _process(_delta):
 		pass
 
 func _on_button_insert_pressed():
-	operations.clear()
 	var randiii: int = randi() % 100
-	insert(randiii, root_ptr)
-	for i in range(operations.size()):
-		operator_interface(operations[operations.size() - i - 1], true)
+	init_algo(insert, [randiii, root_ptr])
