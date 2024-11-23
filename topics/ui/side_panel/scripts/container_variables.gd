@@ -1,13 +1,17 @@
 class_name VarContainer extends MarginContainer
 
-@export var variables: VBoxContainer
+@export var variables_holder: VBoxContainer
 func reset():
-	for child in variables.get_children():
+	for child in variables_holder.get_children():
 		child.queue_free()
 
+var variables: Array = []
 func create_variable() -> Label:
-	# Create a new Label instance
 	var label = Label.new()
-	# Add the label as a child of the current node
-	variables.add_child(label)
+	variables.append(label)
+	variables_holder.add_child(label)
 	return label
+	
+func create_variable_undo():
+	var youngest_label = variables.pop_back()
+	youngest_label.queue_free()

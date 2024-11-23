@@ -2,6 +2,25 @@ class_name tree_traversal_class extends operator_class
 
 @export var root_ptr: pointer_class
 
+func _ready():
+	init_algo(insert, [7, root_ptr])
+	finish()
+	init_algo(insert, [5, root_ptr])
+	finish()
+	init_algo(insert, [9, root_ptr])
+	finish()
+	init_algo(insert, [4, root_ptr])
+	finish()
+	init_algo(insert, [6, root_ptr])
+	finish()
+	init_algo(insert, [8, root_ptr])
+	finish()
+	init_algo(insert, [10, root_ptr])
+	finish()
+	print(array_std)
+	array_std = inorder([root_ptr])
+	print(array_std)
+
 var offset_y: int = 180
 var min_offset_x: int = 80
 func reposition():
@@ -44,6 +63,26 @@ func calculate_height(root: pointer_class) -> int:
 	else:
 		return height + right_height
 
+var array_std = []
+func inorder(argv: Array) -> Array:
+	var ptr: pointer_class = argv[0]
+	var root = ptr.target
+	
+	var array = []
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.CREATE_VARIABLE,\
+			[[]])\
+		])
+	if root == null:
+		return array
+	
+	array.append_array(inorder([root.p1]))
+	array.append(root.data)
+	array.append_array(inorder([root.p2]))
+	
+	return array
+
 func insert(argv: Array):
 	var data = argv[0]
 	var ptr = argv[1]
@@ -57,8 +96,8 @@ func insert(argv: Array):
 			[[1]])
 		,Operation.new(\
 			Operation.opcodes.SET_POINTER_COLOR,\
-			[ptr, pointer_class.colors.ACCENT_2])
-	])
+			[ptr, pointer_class.colors.ACCENT_2])\
+		])
 	
 	push_operations([\
 		Operation.new(\
@@ -131,3 +170,7 @@ func _on_button_insert_pressed():
 	var randiii: int = randi() % 100
 	side_panel.override_code_call("bst.insert(root_ptr, " + str(randiii) + ")")
 	init_algo(insert, [randiii, root_ptr])
+
+
+func _on_button_inorder_pressed():
+	init_algo(inorder, [root_ptr])

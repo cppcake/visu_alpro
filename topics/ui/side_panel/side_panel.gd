@@ -61,6 +61,9 @@ func highlight_code_undo():
 func create_variable() -> Label:
 	return cont_var.create_variable()
 
+func create_variable_undo():
+	cont_var.create_variable_undo()
+
 func push_call() -> Label:
 	return cont_call.push_call_()
 

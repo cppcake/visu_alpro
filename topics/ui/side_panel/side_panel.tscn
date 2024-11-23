@@ -112,12 +112,12 @@ text = "Tiefensuche (Aufruf x)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables")]
+[node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables_holder")]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("6_ul532")
-variables = NodePath("content/content/variables")
+variables_holder = NodePath("content/content/variables_holder")
 
 [node name="content" type="VBoxContainer" parent="content/container_variables"]
 layout_mode = 2
@@ -144,15 +144,15 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="variables" type="VBoxContainer" parent="content/container_variables/content/content"]
+[node name="variables_holder" type="VBoxContainer" parent="content/container_variables/content/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="label_sequence" type="Label" parent="content/container_variables/content/content/variables"]
+[node name="label_sequence" type="Label" parent="content/container_variables/content/content/variables_holder"]
 layout_mode = 2
 text = " F  =  [...]"
 
-[node name="label_queue" type="Label" parent="content/container_variables/content/content/variables"]
+[node name="label_queue" type="Label" parent="content/container_variables/content/content/variables_holder"]
 layout_mode = 2
 text = " F' =  [...] (von Aufruf y)"
 

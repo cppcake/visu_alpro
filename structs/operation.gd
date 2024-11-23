@@ -7,7 +7,8 @@ enum opcodes
 	POINT_AT,
 	SET_SPRITE,
 	SET_POINTER_COLOR,
-	HIGHLIGHT_CODE
+	HIGHLIGHT_CODE,
+	CREATE_VARIABLE
 }
 
 var opcode: opcodes

@@ -19,6 +19,11 @@ layout_mode = 2
 text = "insert"
 script = ExtResource("3_kwys6")
 
+[node name="button_inorder" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1" groups=["buttons_active"]]
+layout_mode = 2
+text = "inorder"
+script = ExtResource("3_kwys6")
+
 [node name="side_panel" parent="CanvasLayer" index="2"]
 is_open = true
 
@@ -28,3 +33,5 @@ label_start_text = "root"
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert" to="." method="_on_button_insert_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" to="." method="_on_button_inorder_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" method="_on_pressed"]
