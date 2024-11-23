@@ -135,7 +135,7 @@ F11={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation")
+locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation", "res://misc/locale/tree_traversal.de.translation", "res://misc/locale/tree_traversal.en.translation")
 
 [rendering]
 

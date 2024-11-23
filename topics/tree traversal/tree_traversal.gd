@@ -59,11 +59,13 @@ func forward():
 	if current_step < operations_array.size():
 		operator_interface(operations_array[current_step])
 		current_step += 1
+	update_step_label()
 
 func backward():
 	if current_step > 0:
 		current_step -= 1
 		operator_interface(operations_array[current_step], true)
+	update_step_label()
 
 func finish():
 	while current_step < operations_array.size():
@@ -80,6 +82,11 @@ func clean_up():
 	operations_array.clear()
 	operator.clean_up()
 	reposition()
+	get_tree().call_group("pointers", "reset_visuals")
+
+@export var label_progress: Label
+func update_step_label():
+	label_progress.update_step_label(current_step, operations_array.size())
 
 @export var side_panel: SidePanel
 var new_vertex: tree_vertex_class
@@ -116,6 +123,11 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					argv[0].set_sprite(argv[1])
 				continue
+			Operation.opcodes.SET_POINTER_COLOR:
+				if undo:
+					argv[0].set_color_undo()
+				else:
+					argv[0].set_color(argv[1])
 			Operation.opcodes.HIGHLIGHT_CODE:
 				if undo:
 					side_panel.highlight_code_undo()
@@ -127,33 +139,86 @@ func insert(argv: Array):
 	var data = argv[0]
 	var ptr = argv[1]
 	var root = ptr.target
+	
+	if argv.size() > 2:
+		var ptr_be = argv[1]
+		push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[1]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[ptr, pointer_class.colors.ACCENT_2])
+	])
+	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[1]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[ptr, pointer_class.colors.ACCENT_2])
+	])
 	if root == null:
-		new_vertex = operator.create_new_vertex(ptr.global_position + Vector2(0, 250), "right")
+		new_vertex = operator.create_new_vertex(ptr.current_end_point + Vector2(0, 100), "right")
 		new_vertex.set_data(data)
 		
 		push_operations([\
-							Operation.new(\
-								Operation.opcodes.MAKE_SHARED,\
-								[new_vertex]),
-							Operation.new(\
-								Operation.opcodes.SET_SPRITE,\
-								[new_vertex, list_vertex_class.sprites.ACCENT])\
-						])
+			Operation.new(\
+				Operation.opcodes.MAKE_SHARED,\
+				[new_vertex])\
+			,Operation.new(\
+				Operation.opcodes.POINT_AT,\
+				[ptr, new_vertex])\
+			,Operation.new(\
+				Operation.opcodes.SET_SPRITE,\
+				[new_vertex, list_vertex_class.sprites.ACCENT])\
+			,Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[2]])
+		])
 		
 		push_operations([\
-							Operation.new(\
-								Operation.opcodes.POINT_AT,\
-								[ptr, new_vertex]),
-							Operation.new(\
-								Operation.opcodes.SET_SPRITE,\
-								[new_vertex, list_vertex_class.sprites.TO_REMOVE])\
-						])
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[3]])
+		])
 		return
-	
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[6]])
+	])
 	if root.data > data:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[7]])
+			,Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT])
+		])
 		insert([data, root.p1])
 	else:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[8]])
+		])
+		
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[9]])
+			,Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT])
+		])
 		insert([data, root.p2])
 func _on_button_insert_pressed():
+	side_panel.override_code(tr("INS_BST"))
+	
 	var randiii: int = randi() % 100
+	side_panel.override_code_call("bst.insert(root_ptr, " + str(randiii) + ")")
 	init_algo(insert, [randiii, root_ptr])

@@ -1,0 +1,2 @@
+keys,en,de
+INS_BST,"if(root_ptr == nullptr){\n\troot_ptr = std::make_shared<TreeNode>(data);\n\treturn;\n}\n\nif(root_ptr->data > data){\n\tinsert(root_ptr->left_child_ptr, data);\n} else{\n\tinsert(root_ptr->right_child_ptr, data);\n}","if(root_ptr == nullptr){\n\troot_ptr = std::make_shared<TreeNode>(data);\n\treturn;\n}\n\nif(root_ptr->data > data){\n\tinsert(root_ptr->left_child_ptr, data);\n} else{\n\tinsert(root_ptr->right_child_ptr, data);\n}"

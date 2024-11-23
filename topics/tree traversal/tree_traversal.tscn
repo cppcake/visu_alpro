@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 
-[node name="root" node_paths=PackedStringArray("operator", "root_ptr", "cam", "side_panel") instance=ExtResource("1_38xve")]
+[node name="root" node_paths=PackedStringArray("operator", "root_ptr", "cam", "label_progress", "side_panel") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
 operator = NodePath("operator")
-root_ptr = NodePath("root")
+root_ptr = NodePath("root_ptr")
 cam = NodePath("Camera2D")
+label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")
 side_panel = NodePath("CanvasLayer/side_panel")
 
 [node name="button_insert" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
@@ -18,7 +19,10 @@ layout_mode = 2
 text = "insert"
 script = ExtResource("3_kwys6")
 
-[node name="root" parent="." index="2" instance=ExtResource("3_cgglp")]
+[node name="side_panel" parent="CanvasLayer" index="2"]
+is_open = true
+
+[node name="root_ptr" parent="." index="2" groups=["pointers"] instance=ExtResource("3_cgglp")]
 position = Vector2(0, -200)
 label_start_text = "root"
 

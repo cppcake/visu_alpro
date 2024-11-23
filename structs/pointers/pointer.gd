@@ -86,3 +86,32 @@ func set_target(new_target):
 func set_target_undo():
 	set_target(last_target)
 	last_target = null
+
+enum colors
+{
+	DEFAULT,
+	ACCENT,
+	ACCENT_2
+}
+var color_history = [colors.DEFAULT]
+func set_color(selection: colors, save: bool = true):
+	if save:
+		color_history.push_back(selection)
+	
+	match selection:
+		colors.DEFAULT:
+			head.color = Color.WHITE
+			line.default_color = Color.WHITE
+		colors.ACCENT:
+			head.color = Color.YELLOW
+			line.default_color = Color.YELLOW
+		colors.ACCENT_2:
+			head.color = Color.AQUAMARINE
+			line.default_color = Color.AQUAMARINE
+func set_color_undo():
+	color_history.pop_back()
+	set_color(color_history.back(), false)
+
+func reset_visuals():
+	set_color(colors.DEFAULT, false)
+	color_history = [colors.DEFAULT]

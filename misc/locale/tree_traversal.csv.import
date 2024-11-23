@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://nekv5m0dc0hc"
+
+[deps]
+
+files=["res://misc/locale/tree_traversal.en.translation", "res://misc/locale/tree_traversal.de.translation"]
+
+source_file="res://misc/locale/tree_traversal.csv"
+dest_files=["res://misc/locale/tree_traversal.en.translation", "res://misc/locale/tree_traversal.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -9,12 +9,10 @@ label_start = NodePath("Label")
 label_target = NodePath("Polygon2D/Label")
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 antialiased = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
 antialiased = true
 polygon = PackedVector2Array(30, 0, 0, 20, 0, -20)
 
