@@ -49,27 +49,24 @@ func calculate_height(root: pointer_class) -> int:
 
 var current_step
 func init_algo(algo: Callable, argv: Array):
-	operations.clear()
-	decorations_array.clear()
+	operations_array.clear()
 	algo.call(argv)
-	current_step = operations.size()
+	current_step = operations_array.size()
 	while current_step > 0:
 		backward()
 
 func forward():
-	if current_step < operations.size():
-		operator_interface(operations[current_step])
-		decorater_interface(decorations_array[current_step])
+	if current_step < operations_array.size():
+		operator_interface(operations_array[current_step])
 		current_step += 1
 
 func backward():
 	if current_step > 0:
 		current_step -= 1
-		decorater_interface(decorations_array[current_step])
-		operator_interface(operations[current_step], true)
+		operator_interface(operations_array[current_step], true)
 
 func finish():
-	while current_step < operations.size():
+	while current_step < operations_array.size():
 		forward()
 	clean_up()
 
@@ -80,67 +77,51 @@ func cancel():
 
 func clean_up():
 	current_step = 0
-	operations.clear()
+	operations_array.clear()
 	operator.clean_up()
 	reposition()
 
-var operations: Array = []
-var new_vertex: tree_vertex_class
-func push_operation(operation_name: String, argv: Array):
-	operations.push_back([operation_name, argv])
-	operator_interface(operations.back())
-func operator_interface(operation: Array, undo: bool = false):
-	var operation_name = operation[0]
-	var argv = operation[1]
-	
-	match operation_name:
-		"create_new_vertex":
-			if undo:
-				operator.create_new_vertex_undo(new_vertex)
-			else:
-				new_vertex = operator.create_new_vertex(argv[0], argv[1])
-			return
-		"make_shared":
-			if undo:
-				operator.make_shared_undo(new_vertex)
-			else:
-				operator.make_shared(new_vertex)
-			return
-		"point_at":
-			if undo:
-				argv[0].set_target_undo()
-			else:
-				argv[0].set_target(argv[1])
-			return
-
-enum dects
-{
-	SET_SPRITE,
-	HIGHLIGHT_CODE
-}
 @export var side_panel: SidePanel
-var decorations_array: Array = []
-func push_decorations(decorations: Array):
-	decorations_array.push_back(decorations)
-	operator_interface(operations.back())
-func decorater_interface(decorations: Array, undo: bool = false):
-	for decoration in decorations:
-		var decoration_name = decoration[0]
-		var argv = decoration[1]
-		
-		match decoration_name:
-			dects.SET_SPRITE:
+var new_vertex: tree_vertex_class
+var operations_array: Array = []
+func push_operations(operations: Array):
+	operations_array.push_back(operations)
+	operator_interface(operations_array.back())
+func operator_interface(operations: Array, undo: bool = false):
+	for operation: Operation in operations:
+		var opcode = operation.opcode
+		var argv = operation.argv
+		match opcode:
+			Operation.opcodes.CREATE_NEW_VERTEX:
+				if undo:
+					operator.create_new_vertex_undo(new_vertex)
+				else:
+					new_vertex = operator.create_new_vertex(argv[0], argv[1])
+				continue
+			Operation.opcodes.MAKE_SHARED:
+				if undo:
+					operator.make_shared_undo(new_vertex)
+				else:
+					operator.make_shared(new_vertex)
+				continue
+			Operation.opcodes.POINT_AT:
+				if undo:
+					argv[0].set_target_undo()
+				else:
+					argv[0].set_target(argv[1])
+				continue
+			Operation.opcodes.SET_SPRITE:
 				if undo:
 					argv[0].set_sprite_undo()
 				else:
 					argv[0].set_sprite(argv[1])
-				return
-			dects.HIGHLIGHT_CODE:
+				continue
+			Operation.opcodes.HIGHLIGHT_CODE:
 				if undo:
 					side_panel.highlight_code_undo()
 				else:
 					side_panel.highlight_code(argv[0])
-				return
+				continue
 
 func insert(argv: Array):
 	var data = argv[0]
@@ -149,13 +130,24 @@ func insert(argv: Array):
 	if root == null:
 		new_vertex = operator.create_new_vertex(ptr.global_position + Vector2(0, 250), "right")
 		new_vertex.set_data(data)
-		push_operation("make_shared", [new_vertex])
-		var mark_new_vertex = [dects.SET_SPRITE, [new_vertex, list_vertex_class.sprites.ACCENT]]
-		push_decorations([mark_new_vertex])
 		
-		push_operation("point_at", [ptr, new_vertex])
-		mark_new_vertex = [dects.SET_SPRITE, [new_vertex, list_vertex_class.sprites.TO_REMOVE]]
-		push_decorations([mark_new_vertex])
+		push_operations([\
+							Operation.new(\
+								Operation.opcodes.MAKE_SHARED,\
+								[new_vertex]),
+							Operation.new(\
+								Operation.opcodes.SET_SPRITE,\
+								[new_vertex, list_vertex_class.sprites.ACCENT])\
+						])
+		
+		push_operations([\
+							Operation.new(\
+								Operation.opcodes.POINT_AT,\
+								[ptr, new_vertex]),
+							Operation.new(\
+								Operation.opcodes.SET_SPRITE,\
+								[new_vertex, list_vertex_class.sprites.TO_REMOVE])\
+						])
 		return
 	
 	if root.data > data:

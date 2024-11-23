@@ -1,7 +1,6 @@
 class_name operator_class extends Node
 
 @export var vertex_scene: PackedScene
-
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:
 	var new_vertex = vertex_scene.instantiate()
 	new_vertex.global_position = position_
