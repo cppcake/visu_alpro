@@ -1,8 +1,6 @@
-class_name tree_traversal_class extends Node
+class_name tree_traversal_class extends operator_class
 
-@export var operator: operator_class
 @export var root_ptr: pointer_class
-@export var cam: CameraManager
 
 var offset_y: int = 180
 var min_offset_x: int = 80
@@ -25,7 +23,6 @@ func reposition_(root: pointer_class, width: int):
 	if right_child != null:
 		right_child.move_to(root_vertex.dest_pos + Vector2(+width, offset_y))
 		reposition_(root_vertex.p2, width / 2)
-
 func calculate_height(root: pointer_class) -> int:
 	var root_vertex = root.target
 	if root_vertex == null:
@@ -46,94 +43,6 @@ func calculate_height(root: pointer_class) -> int:
 		return height + left_height
 	else:
 		return height + right_height
-
-var current_step
-func init_algo(algo: Callable, argv: Array):
-	operations_array.clear()
-	algo.call(argv)
-	current_step = operations_array.size()
-	while current_step > 0:
-		backward()
-
-func forward():
-	if current_step < operations_array.size():
-		operator_interface(operations_array[current_step])
-		current_step += 1
-	update_step_label()
-
-func backward():
-	if current_step > 0:
-		current_step -= 1
-		operator_interface(operations_array[current_step], true)
-	update_step_label()
-
-func finish():
-	while current_step < operations_array.size():
-		forward()
-	clean_up()
-
-func cancel():
-	while current_step > 0:
-		backward()
-	clean_up()
-
-func clean_up():
-	current_step = 0
-	operations_array.clear()
-	operator.clean_up()
-	reposition()
-	get_tree().call_group("pointers", "reset_visuals")
-
-@export var label_progress: Label
-func update_step_label():
-	label_progress.update_step_label(current_step, operations_array.size())
-
-@export var side_panel: SidePanel
-var new_vertex: tree_vertex_class
-var operations_array: Array = []
-func push_operations(operations: Array):
-	operations_array.push_back(operations)
-	operator_interface(operations_array.back())
-func operator_interface(operations: Array, undo: bool = false):
-	for operation: Operation in operations:
-		var opcode = operation.opcode
-		var argv = operation.argv
-		match opcode:
-			Operation.opcodes.CREATE_NEW_VERTEX:
-				if undo:
-					operator.create_new_vertex_undo(new_vertex)
-				else:
-					new_vertex = operator.create_new_vertex(argv[0], argv[1])
-				continue
-			Operation.opcodes.MAKE_SHARED:
-				if undo:
-					operator.make_shared_undo(new_vertex)
-				else:
-					operator.make_shared(new_vertex)
-				continue
-			Operation.opcodes.POINT_AT:
-				if undo:
-					argv[0].set_target_undo()
-				else:
-					argv[0].set_target(argv[1])
-				continue
-			Operation.opcodes.SET_SPRITE:
-				if undo:
-					argv[0].set_sprite_undo()
-				else:
-					argv[0].set_sprite(argv[1])
-				continue
-			Operation.opcodes.SET_POINTER_COLOR:
-				if undo:
-					argv[0].set_color_undo()
-				else:
-					argv[0].set_color(argv[1])
-			Operation.opcodes.HIGHLIGHT_CODE:
-				if undo:
-					side_panel.highlight_code_undo()
-				else:
-					side_panel.highlight_code(argv[0])
-				continue
 
 func insert(argv: Array):
 	var data = argv[0]
@@ -160,7 +69,7 @@ func insert(argv: Array):
 			[ptr, pointer_class.colors.ACCENT_2])
 	])
 	if root == null:
-		new_vertex = operator.create_new_vertex(ptr.current_end_point + Vector2(0, 100), "right")
+		new_vertex = create_new_vertex(ptr.current_end_point + Vector2(0, 100), "right")
 		new_vertex.set_data(data)
 		
 		push_operations([\
