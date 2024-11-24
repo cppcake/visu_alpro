@@ -17,9 +17,6 @@ func _ready():
 	finish()
 	init_algo(insert, [10, root_ptr])
 	finish()
-	print(array_std)
-	array_std = inorder([root_ptr])
-	print(array_std)
 
 var offset_y: int = 180
 var min_offset_x: int = 80
@@ -62,26 +59,6 @@ func calculate_height(root: pointer_class) -> int:
 		return height + left_height
 	else:
 		return height + right_height
-
-var array_std = []
-func inorder(argv: Array) -> Array:
-	var ptr: pointer_class = argv[0]
-	var root = ptr.target
-	
-	var array = []
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.CREATE_VARIABLE,\
-			[[]])\
-		])
-	if root == null:
-		return array
-	
-	array.append_array(inorder([root.p1]))
-	array.append(root.data)
-	array.append_array(inorder([root.p2]))
-	
-	return array
 
 func insert(argv: Array):
 	var data = argv[0]
@@ -171,6 +148,25 @@ func _on_button_insert_pressed():
 	side_panel.override_code_call("bst.insert(root_ptr, " + str(randiii) + ")")
 	init_algo(insert, [randiii, root_ptr])
 
-
+func inorder(argv: Array) -> Array:
+	var ptr: pointer_class = argv[0]
+	var root = ptr.target
+	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.MAKE_CALL,\
+			[[]])\
+		])
+	
+	var array = []
+	if root == null:
+		return array
+	
+	array.append_array(inorder([root.p1]))
+	array.append(root.data)
+	array.append_array(inorder([root.p2]))
+	
+	return array
 func _on_button_inorder_pressed():
+	side_panel.select_containers(0, 0, 1, 0)
 	init_algo(inorder, [root_ptr])
