@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
 
-[node name="list_vertex" type="Area2D"]
+[node name="list_vertex" type="Area2D" groups=["vertices"]]
 script = ExtResource("1_hry7q")
 sprite_default = ExtResource("2_k25f1")
 sprite_accent = ExtResource("3_ma7hq")

@@ -17,9 +17,6 @@ func _ready():
 	finish()
 	init_algo(insert, [10, root_ptr])
 	finish()
-	print(array_std)
-	array_std = inorder([root_ptr])
-	print(array_std)
 
 var offset_y: int = 180
 var min_offset_x: int = 80
@@ -62,26 +59,6 @@ func calculate_height(root: pointer_class) -> int:
 		return height + left_height
 	else:
 		return height + right_height
-
-var array_std = []
-func inorder(argv: Array) -> Array:
-	var ptr: pointer_class = argv[0]
-	var root = ptr.target
-	
-	var array = []
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.CREATE_VARIABLE,\
-			[[]])\
-		])
-	if root == null:
-		return array
-	
-	array.append_array(inorder([root.p1]))
-	array.append(root.data)
-	array.append_array(inorder([root.p2]))
-	
-	return array
 
 func insert(argv: Array):
 	var data = argv[0]
@@ -171,6 +148,103 @@ func _on_button_insert_pressed():
 	side_panel.override_code_call("bst.insert(root_ptr, " + str(randiii) + ")")
 	init_algo(insert, [randiii, root_ptr])
 
+func inorder(argv: Array) -> Array:
+	var ptr: pointer_class = argv[0]
+	var root = ptr.target
+
+	if root != null:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT_2])\
+				,Operation.new(\
+				Operation.opcodes.SET_SPRITE,\
+				[root, list_vertex_class.sprites.ACCENT])\
+				,Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[1]])
+			])
+	else:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[1]])
+			,Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT_2])\
+			])
+	var array = []
+	var left_array = []
+	var right_array = []
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[3]])
+		,
+		])
+	if root == null:
+		push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[4]])
+		,
+		])
+		return array
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[6]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[root.p1, pointer_class.colors.ACCENT_2])\
+		])
+	left_array = inorder([root.p1])
+	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[7]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[root.p2, pointer_class.colors.ACCENT_2])\
+		])
+	right_array = inorder([root.p2])
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[9]])
+		,
+		])
+	array.append_array(left_array)
+	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[10]])
+		,
+		])
+	array.append(root.data)
+	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[11]])
+		,
+		])
+	array.append_array(right_array)
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[13]])
+		,
+		])
+	return array
 
 func _on_button_inorder_pressed():
+	side_panel.override_code(tr("INORDER"))
+	side_panel.override_code_call("bst.inorder(current_tree_node)")
 	init_algo(inorder, [root_ptr])

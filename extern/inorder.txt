@@ -1,0 +1,13 @@
+Create empty sequence F, F_left, F_right
+
+if current_tree_node == null do
+	return F
+
+left_sequence = inorder(left_child)
+right_sequence = inorder(right_child)
+
+insert left_sequence behind sequence
+append current_tree_node.data to sequence
+insert right_sequence behind sequence
+
+return sequence
