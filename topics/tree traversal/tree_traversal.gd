@@ -151,22 +151,100 @@ func _on_button_insert_pressed():
 func inorder(argv: Array) -> Array:
 	var ptr: pointer_class = argv[0]
 	var root = ptr.target
+
+	if root != null:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT_2])\
+				,Operation.new(\
+				Operation.opcodes.SET_SPRITE,\
+				[root, list_vertex_class.sprites.ACCENT])\
+				,Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[1]])
+			])
+	else:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[1]])
+			,Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[ptr, pointer_class.colors.ACCENT_2])\
+			])
+	var array = []
+	var left_array = []
+	var right_array = []
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[3]])
+		,
+		])
+	if root == null:
+		push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[4]])
+		,
+		])
+		return array
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[6]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[root.p1, pointer_class.colors.ACCENT_2])\
+		])
+	left_array = inorder([root.p1])
 	
 	push_operations([\
 		Operation.new(\
-			Operation.opcodes.MAKE_CALL,\
-			[[]])\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[7]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[root.p2, pointer_class.colors.ACCENT_2])\
 		])
+	right_array = inorder([root.p2])
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[9]])
+		,
+		])
+	array.append_array(left_array)
 	
-	var array = []
-	if root == null:
-		return array
-	
-	array.append_array(inorder([root.p1]))
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[10]])
+		,
+		])
 	array.append(root.data)
-	array.append_array(inorder([root.p2]))
 	
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[11]])
+		,
+		])
+	array.append_array(right_array)
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[13]])
+		,
+		])
 	return array
+
 func _on_button_inorder_pressed():
-	side_panel.select_containers(0, 0, 1, 0)
+	side_panel.override_code(tr("INORDER"))
+	side_panel.override_code_call("bst.inorder(current_tree_node)")
 	init_algo(inorder, [root_ptr])

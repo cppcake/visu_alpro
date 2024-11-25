@@ -50,6 +50,9 @@ func set_sprite(selection: sprites):
 func set_sprite_undo():
 	sprite_history.pop_back()
 	set_sprite(sprite_history.back())
+func reset_visuals():
+	set_sprite(sprites.DEFAULT)
+	sprite_history = [sprites.DEFAULT]
 
 func _on_mouse_entered():
 	modulate = constants.hovered

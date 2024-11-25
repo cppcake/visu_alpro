@@ -42,6 +42,7 @@ func clean_up():
 	reposition()
 	update_step_label()
 	get_tree().call_group("pointers", "reset_visuals")
+	get_tree().call_group("vertices", "reset_visuals")
 
 func reposition():
 	pass
@@ -97,16 +98,11 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					side_panel.highlight_code(argv[0])
 				continue
-			Operation.opcodes.MAKE_CALL:
+			Operation.opcodes.CREATE_VARIABLE:
 				if undo:
-					side_panel.make_call_undo()
+					side_panel.create_variable_undo()
 				else:
-					side_panel.make_call()
-			Operation.opcodes.CREATE_CALL_VARIABLE:
-				if undo:
-					side_panel.make_call_variable_undo()
-				else:
-					side_panel.make_call_variable(argv[0])
+					side_panel.create_variable()
 				continue
 
 @export var vertex_scene: PackedScene
