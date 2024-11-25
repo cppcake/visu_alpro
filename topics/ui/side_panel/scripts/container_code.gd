@@ -1,6 +1,6 @@
 class_name CodeContainer extends MarginContainer
 
-@export var code_displayer_holder: MarginContainer
+@export var code_displayer_holder: Panel
 @export var code_display: RichTextLabel
 @export var label_call: Label
 @export var label_return: Label

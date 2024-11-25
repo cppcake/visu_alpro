@@ -2,23 +2,12 @@ class_name SidePanel extends Control
 
 @export var is_open: bool
 
-var button_toggle: Button
-var cont_code: CodeContainer
-var cont_var: VarContainer
-var cont_call: CallStackContainer
-var cont_exp: ExpContainer
+@export var button_toggle: Button
+@export var cont_code: CodeContainer
+@export var cont_var: VarContainer
+@export var cont_call: CallStackContainer
+@export var cont_exp: ExpContainer
 func _ready():
-	cont_code = get_child(0).get_child(0)
-	cont_var = get_child(0).get_child(1)
-	cont_call = get_child(0).get_child(2)
-	cont_exp = get_child(0).get_child(3)
-	button_toggle = get_child(1)
-	
-	# Workaround because i cant edit @export variables once
-	# i make a node out of the scene... So sad
-	#if custom_minimum_size.x == 1:
-	#	is_open = 0
-		
 	button_toggle.open = is_open
 	if is_open:
 		button_toggle.force_open()

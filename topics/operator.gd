@@ -42,6 +42,7 @@ func clean_up():
 	reposition()
 	update_step_label()
 	get_tree().call_group("pointers", "reset_visuals")
+	get_tree().call_group("vertices", "reset_visuals")
 
 func reposition():
 	pass

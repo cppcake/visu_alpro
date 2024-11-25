@@ -1,0 +1,1 @@
+Create empty sequence F, F_left, F_right\n\nif current_tree_node == null do\n\treturn F\n\nleft_sequence = inorder(left_child)\nright_sequence = inorder(right_child)\n\ninsert left_sequence behind sequence\nappend current_tree_node.data to sequence\ninsert right_sequence behind sequence\n\nreturn sequence\n
