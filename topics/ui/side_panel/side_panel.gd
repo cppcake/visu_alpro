@@ -65,3 +65,12 @@ func reset(c: bool = 1, v: bool = 1, cs: bool = 1, i: bool = 1):
 		cont_call.reset()
 	if i:
 		cont_exp.reset()
+
+func make_call():
+	cont_call.make_call()
+func make_call_undo():
+	cont_call.make_call_undo()
+func make_call_variable(variable_name: String):
+	cont_call.create_variable(variable_name)
+func make_call_variable_undo():
+	cont_call.create_variable_undo()
