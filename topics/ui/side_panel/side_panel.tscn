@@ -16,7 +16,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="side_panel" type="Panel"]
+[node name="side_panel" type="Panel" node_paths=PackedStringArray("button_toggle", "cont_code", "cont_var", "cont_call", "cont_exp")]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -29,6 +29,11 @@ grow_vertical = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("1_hcmu3")
 is_open = true
+button_toggle = NodePath("button_toggle_side_panel")
+cont_code = NodePath("content/container_code")
+cont_var = NodePath("content/container_variables")
+cont_call = NodePath("content/container_callstack")
+cont_exp = NodePath("content/container_info")
 
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -41,10 +46,11 @@ theme = ExtResource("2_xsdfw")
 
 [node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_displayer_holder", "code_display", "label_call", "label_return")]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("2_xsdfw")
 script = ExtResource("3_6y0ia")
-code_displayer_holder = NodePath("content/title/MarginContainer")
-code_display = NodePath("content/title/MarginContainer/ScrollContainer/code_display")
+code_displayer_holder = NodePath("content/MarginContainer")
+code_display = NodePath("content/MarginContainer/ScrollContainer/code_display")
 label_call = NodePath("content/title/label_call")
 label_return = NodePath("content/Panel/MarginContainer/label_return")
 
@@ -53,7 +59,7 @@ layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
 [node name="title" type="VBoxContainer" parent="content/container_code/content"]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_xsdfw")
@@ -72,16 +78,17 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/title" node_paths=PackedStringArray("rich_text_label")]
+[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content" node_paths=PackedStringArray("rich_text_label")]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("2_xsdfw")
 script = ExtResource("4_8mx63")
 rich_text_label = NodePath("ScrollContainer/code_display")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="content/container_code/content/title/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_code/content/MarginContainer"]
 layout_mode = 2
 
-[node name="code_display" type="RichTextLabel" parent="content/container_code/content/title/MarginContainer/ScrollContainer"]
+[node name="code_display" type="RichTextLabel" parent="content/container_code/content/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -117,7 +124,7 @@ custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 script = ExtResource("6_ul532")
-variables_holder = NodePath("content/content/variables_holder")
+variables_holder = NodePath("content/ScrollContainer/variables_holder")
 
 [node name="content" type="VBoxContainer" parent="content/container_variables"]
 layout_mode = 2
@@ -139,22 +146,14 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="content" type="ScrollContainer" parent="content/container_variables/content"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_variables/content"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="variables_holder" type="VBoxContainer" parent="content/container_variables/content/content"]
+[node name="variables_holder" type="VBoxContainer" parent="content/container_variables/content/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="label_sequence" type="Label" parent="content/container_variables/content/content/variables_holder"]
-layout_mode = 2
-text = " F  =  [...]"
-
-[node name="label_queue" type="Label" parent="content/container_variables/content/content/variables_holder"]
-layout_mode = 2
-text = " F' =  [...] (von Aufruf y)"
 
 [node name="container_callstack" type="MarginContainer" parent="content" node_paths=PackedStringArray("call_stack")]
 custom_minimum_size = Vector2(300, 0)
@@ -212,20 +211,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="container_info" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
-custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("2_xsdfw")
 script = ExtResource("7_sbto6")
-exp_display = NodePath("content/rich_text")
+exp_display = NodePath("content/ScrollContainer/rich_text")
 
 [node name="content" type="VBoxContainer" parent="content/container_info"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="content/container_info/content"]
+[node name="title" type="VBoxContainer" parent="content/container_info/content"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="content/container_info/content/title"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="TextureRect" type="TextureRect" parent="content/container_info/content"]
+[node name="TextureRect" type="TextureRect" parent="content/container_info/content/title"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -234,12 +237,18 @@ texture = ExtResource("9_mct2w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="HSeparator2" type="HSeparator" parent="content/container_info/content"]
+[node name="HSeparator2" type="HSeparator" parent="content/container_info/content/title"]
 layout_mode = 2
 theme = ExtResource("2_xsdfw")
 
-[node name="rich_text" type="RichTextLabel" parent="content/container_info/content"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_info/content"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="rich_text" type="RichTextLabel" parent="content/container_info/content/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 bbcode_enabled = true
 text = "explanation..."
 fit_content = true
