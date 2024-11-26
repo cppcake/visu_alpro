@@ -143,10 +143,11 @@ func insert(argv: Array):
 		insert([data, root.p2])
 func _on_button_insert_pressed():
 	side_panel.override_code(tr("INS_BST"))
-	
+	side_panel.select_containers(1, 0, 0, 0)
 	var randiii: int = randi() % 100
 	side_panel.override_code_call("bst.insert(root_ptr, " + str(randiii) + ")")
 	init_algo(insert, [randiii, root_ptr])
+	side_panel.open()
 
 func inorder(argv: Array) -> Array:
 	var ptr: pointer_class = argv[0]
@@ -168,13 +169,13 @@ func inorder(argv: Array) -> Array:
 				["inorder"])
 			,Operation.new(\
 				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[0, "F  = []"])
+				[0, "F = []"])
 			,Operation.new(\
 				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[1, "F_left  = []"])
+				[1, "F_left = []"])
 			,Operation.new(\
 				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[2, "F_right  = []"])
+				[2, "F_right = []"])
 			])
 	else:
 		push_operations([\
@@ -187,6 +188,15 @@ func inorder(argv: Array) -> Array:
 			,Operation.new(\
 				Operation.opcodes.CALL,\
 				["inorder"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[0, "F = []"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[1, "F_left = []"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[2, "F_right = []"])
 			])
 	var array = []
 	var left_array = []
@@ -219,7 +229,7 @@ func inorder(argv: Array) -> Array:
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[7]])
+			[[6]])
 		,Operation.new(\
 			Operation.opcodes.RETURN,\
 			[])
@@ -240,7 +250,7 @@ func inorder(argv: Array) -> Array:
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[9]])
+			[[7]])
 		,Operation.new(\
 			Operation.opcodes.RETURN,\
 			[])
@@ -257,7 +267,7 @@ func inorder(argv: Array) -> Array:
 			[[9]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F  = " + str(array)])
+			[0, "F = " + str(array)])
 		])
 	
 	array.append(root.data)
@@ -267,16 +277,7 @@ func inorder(argv: Array) -> Array:
 			[[10]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F  = " + str(array)])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(left_array)])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(right_array)])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F  = " + str(array)])
+			[0, "F = " + str(array)])
 		])
 	
 	array.append_array(right_array)
@@ -286,7 +287,7 @@ func inorder(argv: Array) -> Array:
 			[[11]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F  = " + str(array)])
+			[0, "F = " + str(array)])
 		])
 
 	if ptr == root_ptr:
@@ -312,7 +313,6 @@ func _on_button_inorder_pressed():
 	side_panel.create_variable()
 	side_panel.select_containers(1, 1, 1, 0)
 	side_panel.override_code(tr("INORDER"))
-	side_panel.override_code_call("inorder(tree_node)")
-	side_panel.open()
-
+	side_panel.override_code_call("inorder(current)")
 	init_algo(inorder, [root_ptr])
+	side_panel.open()

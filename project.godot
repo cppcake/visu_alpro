@@ -141,6 +141,6 @@ locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translati
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.211765, 0.223529, 0.243137, 1)
+environment/defaults/default_clear_color=Color(0.192157, 0.2, 0.215686, 1)
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/screen_space_aa=1
