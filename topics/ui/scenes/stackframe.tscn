@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cln1agegyr2f4"]
+
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_wek52"]
+
+[node name="stackframe" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 33)
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_wek52")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Tiefensuche (Aufruf 1)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme = ExtResource("1_wek52")

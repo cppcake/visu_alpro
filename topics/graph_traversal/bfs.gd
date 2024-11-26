@@ -3,7 +3,7 @@ extends Node
 # TRASH CODE. GANZ VIELE PFLASTER DIE DAS ALTE SYSTEM INS NEUE ÜBERBRINGEN
 
 # Needed scenes
-@onready var stack_frame_scene = preload("res://topics/ui/scenes/stack_frame.tscn")
+@onready var stackframe_scene = preload("res://topics/ui/scenes/stackframe.tscn")
 
 # Everything needed to save the states
 var states: Array = []

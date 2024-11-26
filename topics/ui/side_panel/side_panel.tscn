@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://7oq8rdksswhi"]
+[gd_scene load_steps=16 format=3 uid="uid://7oq8rdksswhi"]
 
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_fddfu"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/side_panel.gd" id="1_hcmu3"]
-[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_xsdfw"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_code.gd" id="3_6y0ia"]
 [ext_resource type="FontFile" uid="uid://ce6y5gjob4a57" path="res://misc/fonts/ProggyVector-Regular.otf" id="3_k2xbj"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/minimum_size_to_fit_text.gd" id="4_8mx63"]
@@ -12,6 +12,22 @@
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/button_toggle_side_panel.gd" id="7_puxd5"]
 [ext_resource type="Script" path="res://topics/ui/side_panel/scripts/container_explanation.gd" id="7_sbto6"]
 [ext_resource type="Texture2D" uid="uid://cd1kgsf44p4d6" path="res://misc/icons/info.png" id="9_mct2w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck6f2"]
+bg_color = Color(0.117647, 0.129412, 0.141176, 0.921569)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usy2v"]
+bg_color = Color(0.156863, 0.168627, 0.188235, 0.784314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rw0g"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,7 +42,8 @@ offset_top = 58.0
 offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ck6f2")
 script = ExtResource("1_hcmu3")
 is_open = true
 button_toggle = NodePath("button_toggle_side_panel")
@@ -42,77 +59,86 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="container_code" type="MarginContainer" parent="content" node_paths=PackedStringArray("code_displayer_holder", "code_display", "label_call", "label_return")]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 script = ExtResource("3_6y0ia")
-code_displayer_holder = NodePath("content/Panel")
-code_display = NodePath("content/Panel/MarginContainer/ScrollContainer/code_display")
+code_displayer_holder = NodePath("content/code")
+code_display = NodePath("content/code/Panel/MarginContainer/ScrollContainer/code_display")
 label_call = NodePath("content/title/label_call")
-label_return = NodePath("content/Panel2/MarginContainer/label_return")
+label_return = NodePath("content/return/Panel2/MarginContainer/label_return")
 
 [node name="content" type="VBoxContainer" parent="content/container_code"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="title" type="VBoxContainer" parent="content/container_code/content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="HSeparator" type="HSeparator" parent="content/container_code/content/title"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="label_call" type="Label" parent="content/container_code/content/title"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 text = "CALL NAME"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="content/container_code/content/title"]
+visible = false
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
-[node name="Panel" type="Panel" parent="content/container_code/content" node_paths=PackedStringArray("rich_text_label")]
+[node name="code" type="MarginContainer" parent="content/container_code/content" node_paths=PackedStringArray("rich_text_label")]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
 script = ExtResource("4_8mx63")
-rich_text_label = NodePath("MarginContainer/ScrollContainer/code_display")
+rich_text_label = NodePath("Panel/MarginContainer/ScrollContainer/code_display")
 pixel_per_line = 25
 
-[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/Panel"]
+[node name="Panel" type="Panel" parent="content/container_code/content/code"]
+layout_mode = 2
+theme = ExtResource("1_fddfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_usy2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/code/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="content/container_code/content/Panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_code/content/code/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="code_display" type="RichTextLabel" parent="content/container_code/content/Panel/MarginContainer/ScrollContainer"]
+[node name="code_display" type="RichTextLabel" parent="content/container_code/content/code/Panel/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 theme_override_fonts/bold_font = ExtResource("3_k2xbj")
 bbcode_enabled = true
 fit_content = true
 script = ExtResource("4_jkr46")
 
-[node name="Panel2" type="Panel" parent="content/container_code/content"]
-custom_minimum_size = Vector2(0, 40)
+[node name="return" type="MarginContainer" parent="content/container_code/content"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/Panel2"]
+[node name="Panel2" type="Panel" parent="content/container_code/content/return"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_usy2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="content/container_code/content/return/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,108 +146,138 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label_return" type="Label" parent="content/container_code/content/Panel2/MarginContainer"]
+[node name="label_return" type="Label" parent="content/container_code/content/return/Panel2/MarginContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 text = "RETURN"
 vertical_alignment = 1
 
 [node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables_holder")]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 script = ExtResource("6_ul532")
-variables_holder = NodePath("content/MarginContainer/ScrollContainer/variables_holder")
+variables_holder = NodePath("content/MarginContainer2/Panel/MarginContainer/ScrollContainer/variables_holder")
 
 [node name="content" type="VBoxContainer" parent="content/container_variables"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="title" type="VBoxContainer" parent="content/container_variables/content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="HSeparator" type="HSeparator" parent="content/container_variables/content/title"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="Variables" type="Label" parent="content/container_variables/content/title"]
 layout_mode = 2
 text = "VARIABLES"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="content/container_variables/content/title"]
+visible = false
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
-[node name="MarginContainer" type="MarginContainer" parent="content/container_variables/content"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="content/container_variables/content/MarginContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="content/container_variables/content"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("1_fddfu")
 
-[node name="variables_holder" type="VBoxContainer" parent="content/container_variables/content/MarginContainer/ScrollContainer"]
+[node name="Panel" type="Panel" parent="content/container_variables/content/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("1_fddfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_usy2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="content/container_variables/content/MarginContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_fddfu")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_variables/content/MarginContainer2/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_fddfu")
+
+[node name="variables_holder" type="VBoxContainer" parent="content/container_variables/content/MarginContainer2/Panel/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="container_callstack" type="MarginContainer" parent="content" node_paths=PackedStringArray("call_stack")]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 script = ExtResource("7_kg1yt")
-call_stack = NodePath("content/MarginContainer/content/ScrollContainer/call_stack")
+call_stack = NodePath("content/MarginContainer/content/MarginContainer/ScrollContainer/call_stack")
 
 [node name="content" type="VBoxContainer" parent="content/container_callstack"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.66
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="title" type="VBoxContainer" parent="content/container_callstack/content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="HSeparator" type="HSeparator" parent="content/container_callstack/content/title"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="stack" type="Label" parent="content/container_callstack/content/title"]
 layout_mode = 2
 text = "STACK"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="content/container_callstack/content/title"]
+visible = false
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="MarginContainer" type="MarginContainer" parent="content/container_callstack/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="content" type="Panel" parent="content/container_callstack/content/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_usy2v")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="content/container_callstack/content/MarginContainer/content"]
+[node name="MarginContainer" type="MarginContainer" parent="content/container_callstack/content/MarginContainer/content"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_callstack/content/MarginContainer/content/MarginContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="call_stack" type="VBoxContainer" parent="content/container_callstack/content/MarginContainer/content/ScrollContainer"]
+[node name="call_stack" type="VBoxContainer" parent="content/container_callstack/content/MarginContainer/content/MarginContainer/ScrollContainer"]
 light_mask = 17
 layout_mode = 2
 size_flags_horizontal = 3
@@ -230,22 +286,22 @@ size_flags_vertical = 3
 [node name="container_info" type="MarginContainer" parent="content" node_paths=PackedStringArray("exp_display")]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 script = ExtResource("7_sbto6")
-exp_display = NodePath("content/MarginContainer/ScrollContainer/rich_text")
+exp_display = NodePath("content/MarginContainer/Panel/MarginContainer/ScrollContainer/rich_text")
 
 [node name="content" type="VBoxContainer" parent="content/container_info"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="title" type="VBoxContainer" parent="content/container_info/content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="HSeparator" type="HSeparator" parent="content/container_info/content/title"]
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="TextureRect" type="TextureRect" parent="content/container_info/content/title"]
 custom_minimum_size = Vector2(25, 25)
@@ -257,20 +313,36 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="HSeparator2" type="HSeparator" parent="content/container_info/content/title"]
+visible = false
 layout_mode = 2
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
 [node name="MarginContainer" type="MarginContainer" parent="content/container_info/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="content/container_info/content/MarginContainer"]
+[node name="Panel" type="Panel" parent="content/container_info/content/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_fddfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_usy2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="content/container_info/content/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_fddfu")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_info/content/MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 
-[node name="rich_text" type="RichTextLabel" parent="content/container_info/content/MarginContainer/ScrollContainer"]
+[node name="rich_text" type="RichTextLabel" parent="content/container_info/content/MarginContainer/Panel/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -289,7 +361,7 @@ offset_top = -22.5
 offset_bottom = 22.5
 grow_vertical = 2
 pivot_offset = Vector2(10.5, 22.5)
-theme = ExtResource("2_xsdfw")
+theme = ExtResource("1_fddfu")
 theme_override_styles/focus = SubResource("StyleBoxFlat_7rw0g")
 flat = true
 script = ExtResource("7_puxd5")

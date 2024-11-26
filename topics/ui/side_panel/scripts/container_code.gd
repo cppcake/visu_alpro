@@ -1,14 +1,14 @@
 class_name CodeContainer extends MarginContainer
 
-@export var code_displayer_holder: Panel
+@export var code_displayer_holder: MarginContainer
 @export var code_display: RichTextLabel
 @export var label_call: Label
 @export var label_return: Label
 func override(text_, update_init: bool):
 	code_display.lines_history = [[]]
-	code_display.text = text_
+	code_display.text = highlight_syntax(text_)
 	if update_init:
-		code_display.init_text = text_
+		code_display.init_text = highlight_syntax(text_)
 	code_displayer_holder.adjust_min_size()
 
 func set_call(text_):
@@ -28,3 +28,15 @@ func highlight_lines(lines: Array):
 	code_display.highlight_lines(lines)
 func highlight_lines_undo():
 	code_display.highlight_lines_undo()
+
+func highlight_syntax(text_: String) -> String:
+	var dict = {\
+				["if", "else", "for", "return"] : "[b]"\
+				,["(", ")"] : "[b]"\
+				,["{", "}"] : "[b]"}
+
+	for keyword_list: Array in dict:
+		for keyword: String in keyword_list:
+			text_ = text_.replace(keyword, dict[keyword_list] + keyword + "[/b]")
+
+	return text_

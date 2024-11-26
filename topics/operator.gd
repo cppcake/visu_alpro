@@ -2,7 +2,6 @@ class_name operator_class extends Node
 
 var current_step
 func init_algo(algo: Callable, argv: Array):
-	operations_array.clear()
 	algo.call(argv)
 	current_step = operations_array.size()
 	while current_step > 0:
@@ -33,6 +32,7 @@ func cancel():
 func clean_up():
 	current_step = 0
 	operations_array.clear()
+	side_panel.select_containers(0, 0, 0, 1)
 	new_ptr.set_target(null)
 	new_ptr.visible = false
 	
@@ -43,6 +43,7 @@ func clean_up():
 	update_step_label()
 	get_tree().call_group("pointers", "reset_visuals")
 	get_tree().call_group("vertices", "reset_visuals")
+	side_panel.reset()
 
 func reposition():
 	pass
@@ -92,6 +93,7 @@ func operator_interface(operations: Array, undo: bool = false):
 					argv[0].set_color_undo()
 				else:
 					argv[0].set_color(argv[1])
+				continue
 			Operation.opcodes.HIGHLIGHT_CODE:
 				if undo:
 					side_panel.highlight_code_undo()
@@ -103,6 +105,24 @@ func operator_interface(operations: Array, undo: bool = false):
 					side_panel.create_variable_undo()
 				else:
 					side_panel.create_variable()
+				continue
+			Operation.opcodes.OVERWRITE_VARIABLE:
+				if undo:
+					side_panel.overwrite_variable_undo(argv[0])
+				else:
+					side_panel.overwrite_variable(argv[0], argv[1])
+				continue
+			Operation.opcodes.CALL:
+				if undo:
+					side_panel.create_stackframe_undo()
+				else:
+					side_panel.create_stackframe(argv[0])
+				continue
+			Operation.opcodes.RETURN:
+				if undo:
+					side_panel.remove_stackframe_undo()
+				else:
+					side_panel.remove_stackframe()
 				continue
 
 @export var vertex_scene: PackedScene

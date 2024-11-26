@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d11gni3ipfxyo"]
+
+[ext_resource type="Script" path="res://topics/ui/scripts/variable.gd" id="1_wru8b"]
+
+[node name="Variable" type="Label"]
+custom_minimum_size = Vector2(0, 30)
+text = "xD"
+script = ExtResource("1_wru8b")

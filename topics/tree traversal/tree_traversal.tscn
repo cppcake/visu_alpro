@@ -24,9 +24,6 @@ layout_mode = 2
 text = "inorder"
 script = ExtResource("3_kwys6")
 
-[node name="side_panel" parent="CanvasLayer" index="2"]
-is_open = true
-
 [node name="root_ptr" parent="." index="3" groups=["pointers"] instance=ExtResource("3_cgglp")]
 position = Vector2(0, -200)
 label_start_text = "root"

@@ -11,12 +11,12 @@ func _ready():
 	finish()
 	init_algo(insert, [4, root_ptr])
 	finish()
-	init_algo(insert, [6, root_ptr])
-	finish()
-	init_algo(insert, [8, root_ptr])
-	finish()
-	init_algo(insert, [10, root_ptr])
-	finish()
+	#init_algo(insert, [6, root_ptr])
+	#finish()
+	#init_algo(insert, [8, root_ptr])
+	#finish()
+	#init_algo(insert, [10, root_ptr])
+	#finish()
 
 var offset_y: int = 180
 var min_offset_x: int = 80
@@ -157,12 +157,24 @@ func inorder(argv: Array) -> Array:
 			Operation.new(\
 				Operation.opcodes.SET_POINTER_COLOR,\
 				[ptr, pointer_class.colors.ACCENT_2])\
-				,Operation.new(\
+			,Operation.new(\
 				Operation.opcodes.SET_SPRITE,\
 				[root, list_vertex_class.sprites.ACCENT])\
-				,Operation.new(\
+			,Operation.new(\
 				Operation.opcodes.HIGHLIGHT_CODE,\
 				[[1]])
+			,Operation.new(\
+				Operation.opcodes.CALL,\
+				["inorder"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[0, "F  = []"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[1, "F_left  = []"])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[2, "F_right  = []"])
 			])
 	else:
 		push_operations([\
@@ -172,6 +184,9 @@ func inorder(argv: Array) -> Array:
 			,Operation.new(\
 				Operation.opcodes.SET_POINTER_COLOR,\
 				[ptr, pointer_class.colors.ACCENT_2])\
+			,Operation.new(\
+				Operation.opcodes.CALL,\
+				["inorder"])
 			])
 	var array = []
 	var left_array = []
@@ -201,6 +216,17 @@ func inorder(argv: Array) -> Array:
 			[root.p1, pointer_class.colors.ACCENT_2])\
 		])
 	left_array = inorder([root.p1])
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[7]])
+		,Operation.new(\
+			Operation.opcodes.RETURN,\
+			[])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(left_array)])
+		])
 	
 	push_operations([\
 		Operation.new(\
@@ -211,40 +237,82 @@ func inorder(argv: Array) -> Array:
 			[root.p2, pointer_class.colors.ACCENT_2])\
 		])
 	right_array = inorder([root.p2])
-
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[9]])
-		,
+		,Operation.new(\
+			Operation.opcodes.RETURN,\
+			[])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(right_array)])
 		])
+
+
 	array.append_array(left_array)
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[9]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F  = " + str(array)])
+		])
 	
+	array.append(root.data)
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[10]])
-		,
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F  = " + str(array)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(left_array)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(right_array)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F  = " + str(array)])
 		])
-	array.append(root.data)
 	
+	array.append_array(right_array)
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[11]])
-		,
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F  = " + str(array)])
 		])
-	array.append_array(right_array)
 
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[13]])
-		,
-		])
+	if ptr == root_ptr:
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[13]])
+			,Operation.new(\
+				Operation.opcodes.RETURN,\
+				[])
+			])
+	else:
+			push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[13]])
+			,
+			])
 	return array
-
 func _on_button_inorder_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.select_containers(1, 1, 1, 0)
 	side_panel.override_code(tr("INORDER"))
-	side_panel.override_code_call("bst.inorder(current_tree_node)")
+	side_panel.override_code_call("inorder(tree_node)")
+	side_panel.open()
+
 	init_algo(inorder, [root_ptr])
