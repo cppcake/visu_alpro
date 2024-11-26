@@ -16,4 +16,4 @@ func adjust_min_size():
 		required_height = screen_height * max_screen_height_cover
 	
 	# Adjust the minimum size
-	custom_minimum_size.y = required_height
+	return required_height

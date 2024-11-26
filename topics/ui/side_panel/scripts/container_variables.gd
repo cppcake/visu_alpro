@@ -14,12 +14,12 @@ func create_variable() -> Label:
 	var label = variable_scene.instantiate()
 	variables.append(label)
 	variables_holder.add_child(label)
-	custom_minimum_size += Vector2(0, 60)
+	custom_minimum_size += Vector2(0, 70)
 	return label
 func create_variable_undo():
 	var youngest_label = variables.pop_back()
 	youngest_label.queue_free()
-	custom_minimum_size -= Vector2(0, 60)
+	custom_minimum_size -= Vector2(0, 70)
 
 func overwrite_variable(index: int, text_: String):
 	variables[index].overwrite(text_)

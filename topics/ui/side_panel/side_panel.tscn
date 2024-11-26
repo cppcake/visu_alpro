@@ -98,9 +98,9 @@ theme = ExtResource("1_fddfu")
 
 [node name="code" type="MarginContainer" parent="content/container_code/content" node_paths=PackedStringArray("rich_text_label")]
 layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("4_8mx63")
 rich_text_label = NodePath("Panel/MarginContainer/ScrollContainer/code_display")
-pixel_per_line = 25
 
 [node name="Panel" type="Panel" parent="content/container_code/content/code"]
 layout_mode = 2
@@ -131,6 +131,7 @@ fit_content = true
 script = ExtResource("4_jkr46")
 
 [node name="return" type="MarginContainer" parent="content/container_code/content"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="Panel2" type="Panel" parent="content/container_code/content/return"]
@@ -154,6 +155,7 @@ text = "RETURN"
 vertical_alignment = 1
 
 [node name="container_variables" type="MarginContainer" parent="content" node_paths=PackedStringArray("variables_holder")]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme = ExtResource("1_fddfu")
 script = ExtResource("6_ul532")
@@ -199,7 +201,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3

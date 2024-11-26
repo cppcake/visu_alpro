@@ -9,7 +9,7 @@ func override(text_, update_init: bool):
 	code_display.text = highlight_syntax(text_)
 	if update_init:
 		code_display.init_text = highlight_syntax(text_)
-	code_displayer_holder.adjust_min_size()
+	custom_minimum_size.y = code_displayer_holder.adjust_min_size() + 140
 
 func set_call(text_):
 	label_call.text = text_
