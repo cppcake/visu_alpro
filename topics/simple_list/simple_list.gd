@@ -117,7 +117,7 @@ func init_algo():
 	max_step = max_step_pre
 	
 	update_step_label()
-	side_panel.select_containers(1, 0, 0, 1)
+	side_panel.select_containers(1, 0, 0, 0)
 	side_panel.override_code_return("")
 	current_algo.call(current_step)
 
@@ -260,6 +260,7 @@ func insert_front_b(step: int):
 			unshare()
 			side_panel.override_exp(tr("INS_FRONT_0"))
 func _on_button_insert_front_pressed():
+	to_remove = null
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT"))
 	set_up(5, insert_front, insert_front_b)
@@ -334,6 +335,7 @@ func insert_after_b(step: int):
 		1:
 			unshare()
 func _on_button_insert_after_pressed():
+	to_remove = null
 	side_panel.override_code(tr("INS_AFTER"))
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")

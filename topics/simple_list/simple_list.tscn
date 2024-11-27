@@ -281,7 +281,7 @@ text = " - List node"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(300, 100)
+position = Vector2(556, 100)
 script = ExtResource("7_7vu2n")
 zoom_level = 2.0
 

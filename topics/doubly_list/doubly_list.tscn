@@ -33,6 +33,9 @@ text = "tail = null"
 [node name="side_panel" parent="CanvasLayer" index="2"]
 offset_left = -630.0
 
+[node name="code" parent="CanvasLayer/side_panel/content/container_code/content" index="1"]
+max_screen_height_cover = 0.8
+
 [node name="weak_pointer" type="Node2D" parent="CanvasLayer/legend" index="0"]
 position = Vector2(74, -144)
 scale = Vector2(0.75, 0.75)
@@ -64,3 +67,8 @@ offset_bottom = -106.0
 grow_horizontal = 0
 grow_vertical = 2
 text = " - Weak Pointer"
+
+[node name="Camera2D" parent="." index="5"]
+position = Vector2(568, 100)
+
+[editable path="CanvasLayer/side_panel"]

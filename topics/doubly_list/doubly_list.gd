@@ -127,6 +127,7 @@ func insert_front_b(step: int):
 		7:
 			pass
 func _on_button_insert_front_pressed():
+	to_remove = null
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(tr("INS_FRONT_DL"))
 	if empty():
@@ -236,6 +237,7 @@ func insert_after_tail_b(step: int):
 		8:
 			pass
 func _on_button_insert_after_pressed():
+	to_remove = null
 	side_panel.override_code(tr("INS_AFTER_DL"))
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")
