@@ -56,3 +56,8 @@ sprite_accent = null
 
 [node name="tree_vertex9" parent="." instance=ExtResource("4_gjx5e")]
 sprite_accent = null
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.486275, 0.8, 0.486275, 1)

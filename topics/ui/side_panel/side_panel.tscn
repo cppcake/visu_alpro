@@ -67,7 +67,7 @@ theme = ExtResource("1_fddfu")
 script = ExtResource("3_6y0ia")
 code_displayer_holder = NodePath("content/code")
 code_display = NodePath("content/code/Panel/MarginContainer/ScrollContainer/code_display")
-label_call = NodePath("content/title/label_call")
+label_call = NodePath("content/title/ScrollContainer/label_call")
 label_return = NodePath("content/return/Panel2/MarginContainer/label_return")
 
 [node name="content" type="VBoxContainer" parent="content/container_code"]
@@ -84,8 +84,14 @@ theme = ExtResource("1_fddfu")
 layout_mode = 2
 theme = ExtResource("1_fddfu")
 
-[node name="label_call" type="Label" parent="content/container_code/content/title"]
+[node name="ScrollContainer" type="ScrollContainer" parent="content/container_code/content/title"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label_call" type="Label" parent="content/container_code/content/title/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_fddfu")
 text = "CALL NAME"
 horizontal_alignment = 1

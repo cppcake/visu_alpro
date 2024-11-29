@@ -7,10 +7,10 @@ func _ready():
 	finish()
 	init_algo(insert, [5, root_ptr])
 	finish()
-	init_algo(insert, [9, root_ptr])
-	finish()
-	init_algo(insert, [4, root_ptr])
-	finish()
+	#init_algo(insert, [9, root_ptr])
+	#finish()
+	#init_algo(insert, [4, root_ptr])
+	#finish()
 	#init_algo(insert, [6, root_ptr])
 	#finish()
 	#init_algo(insert, [8, root_ptr])
@@ -63,19 +63,8 @@ func calculate_height(root: pointer_class) -> int:
 func insert(argv: Array):
 	var data = argv[0]
 	var ptr = argv[1]
-	var root = ptr.target
-	
-	if argv.size() > 2:
-		var ptr_be = argv[1]
-		push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[1]])
-		,Operation.new(\
-			Operation.opcodes.SET_POINTER_COLOR,\
-			[ptr, pointer_class.colors.ACCENT_2])\
-		])
-	
+	var ptr_target = ptr.target
+
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
@@ -84,7 +73,7 @@ func insert(argv: Array):
 			Operation.opcodes.SET_POINTER_COLOR,\
 			[ptr, pointer_class.colors.ACCENT_2])
 	])
-	if root == null:
+	if ptr_target == null:
 		new_vertex = create_new_vertex(ptr.current_end_point + Vector2(0, 100), "right")
 		new_vertex.set_data(data)
 		
@@ -110,12 +99,13 @@ func insert(argv: Array):
 		])
 		return
 
+	# Highlight first recursiv call
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[6]])
 	])
-	if root.data > data:
+	if ptr_target.data > data:
 		push_operations([\
 			Operation.new(\
 				Operation.opcodes.HIGHLIGHT_CODE,\
@@ -124,7 +114,7 @@ func insert(argv: Array):
 				Operation.opcodes.SET_POINTER_COLOR,\
 				[ptr, pointer_class.colors.ACCENT])
 		])
-		insert([data, root.p1])
+		insert([data, ptr_target.p1])
 	else:
 		push_operations([\
 			Operation.new(\
@@ -140,7 +130,7 @@ func insert(argv: Array):
 				Operation.opcodes.SET_POINTER_COLOR,\
 				[ptr, pointer_class.colors.ACCENT])
 		])
-		insert([data, root.p2])
+		insert([data, ptr_target.p2])
 func _on_button_insert_pressed():
 	side_panel.override_code(tr("INS_BST"))
 	side_panel.select_containers(1, 0, 0, 0)
@@ -151,168 +141,206 @@ func _on_button_insert_pressed():
 
 func inorder(argv: Array) -> Array:
 	var ptr: pointer_class = argv[0]
-	var root = ptr.target
-
-	if root != null:
-		push_operations([\
-			Operation.new(\
-				Operation.opcodes.SET_POINTER_COLOR,\
-				[ptr, pointer_class.colors.ACCENT_2])\
-			,Operation.new(\
-				Operation.opcodes.SET_SPRITE,\
-				[root, list_vertex_class.sprites.ACCENT])\
-			,Operation.new(\
-				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[1]])
-			,Operation.new(\
-				Operation.opcodes.CALL,\
-				["inorder"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[0, "F = []"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[1, "F_left = []"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[2, "F_right = []"])
-			])
-	else:
-		push_operations([\
-			Operation.new(\
-				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[1]])
-			,Operation.new(\
-				Operation.opcodes.SET_POINTER_COLOR,\
-				[ptr, pointer_class.colors.ACCENT_2])\
-			,Operation.new(\
-				Operation.opcodes.CALL,\
-				["inorder"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[0, "F = []"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[1, "F_left = []"])
-			,Operation.new(\
-				Operation.opcodes.OVERWRITE_VARIABLE,\
-				[2, "F_right = []"])
-			])
-	var array = []
-	var left_array = []
-	var right_array = []
-
+	var ptr_target = ptr.target
+	var ptr_name = argv[1]
+	
+	# Push stackframe of call
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[3]])
-		,
+			[[]])
+		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[ptr, pointer_class.colors.ACCENT])\
+		,Operation.new(\
+			Operation.opcodes.SET_TAG,\
+			[ptr_target, "In Bearbeitung"])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_CALL,\
+			["inorder(current = " + ptr_name + ")"])\
+		,Operation.new(\
+			Operation.opcodes.CALL,\
+			["CALL"])\
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, ""])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, ""])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, ""])
 		])
-	if root == null:
+	
+	# Abbruchbedingung check. Markiere current_ptr und if_statement
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[1]])
+		])
+	if ptr_target == null:
+		# Abdruchbedingung greift. Return empty Array.
 		push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[2]])
+		,Operation.new(\
+			Operation.opcodes.RETURN,\
+			[[]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[[]])
+		])
+		return []
+	
+	# Create sequences
+	var F = []
+	var F_left = []
+	var F_right = []
+	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[4]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
+		])
+
+	# First recursiv call into the left subtree
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[6]])
+		])
+	F_left = inorder([ptr_target.p1, ptr_name + "->left"])
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[39])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_CALL,\
+			["inorder(current = " + ptr_name + ")"])\
+		,Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[6]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
+		])
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[7]])
 		,
 		])
-		return array
-
+	F_right = inorder([ptr_target.p2, ptr_name + "->right"])
 	push_operations([\
 		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[6]])
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[39])
 		,Operation.new(\
-			Operation.opcodes.SET_POINTER_COLOR,\
-			[root.p1, pointer_class.colors.ACCENT_2])\
-		])
-	left_array = inorder([root.p1])
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[6]])
+			Operation.opcodes.OVERWRITE_CALL,\
+			["inorder(current = " + ptr_name + ")"])\
 		,Operation.new(\
-			Operation.opcodes.RETURN,\
-			[])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(left_array)])
-		])
-	
-	push_operations([\
-		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[7]])
 		,Operation.new(\
-			Operation.opcodes.SET_POINTER_COLOR,\
-			[root.p2, pointer_class.colors.ACCENT_2])\
-		])
-	right_array = inorder([root.p2])
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[7]])
-		,Operation.new(\
-			Operation.opcodes.RETURN,\
-			[])
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(right_array)])
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
 		])
 
-
-	array.append_array(left_array)
+	F.append_array(F_left)
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[9]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F = " + str(array)])
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
 		])
 	
-	array.append(root.data)
+	F.append(ptr_target.data)
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[10]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F = " + str(array)])
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
 		])
 	
-	array.append_array(right_array)
+	F.append_array(F_right)
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[11]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[0, "F = " + str(array)])
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "F_left = " + str(F_left)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, "F_right = " + str(F_right)])
 		])
 
-	if ptr == root_ptr:
-		push_operations([\
-			Operation.new(\
-				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[13]])
-			,Operation.new(\
-				Operation.opcodes.RETURN,\
-				[])
-			])
-	else:
-			push_operations([\
-			Operation.new(\
-				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[13]])
-			,
-			])
-	return array
+	# Return F
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[13]])
+		,Operation.new(\
+			Operation.opcodes.RETURN,\
+			[])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[F])
+		,Operation.new(\
+			Operation.opcodes.SET_SPRITE,\
+			[ptr_target, list_vertex_class.sprites.ACCENT])\
+		,Operation.new(\
+			Operation.opcodes.SET_TAG,\
+			[ptr_target, "Fertig"])\
+		])
+	return F
 func _on_button_inorder_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()
 	side_panel.create_variable()
-	side_panel.select_containers(1, 1, 1, 0)
 	side_panel.override_code(tr("INORDER"))
 	side_panel.override_code_call("inorder(current)")
-	init_algo(inorder, [root_ptr])
+	init_algo(inorder, [root_ptr, "root"])
+	side_panel.select_containers(1, 1, 1, 0)
 	side_panel.open()

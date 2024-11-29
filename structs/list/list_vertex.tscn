@@ -1,19 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://def3gbilknoxq"]
+[gd_scene load_steps=8 format=3 uid="uid://def3gbilknoxq"]
 
 [ext_resource type="Script" path="res://structs/list/list_vertex.gd" id="1_hry7q"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_k25f1"]
 [ext_resource type="Texture2D" uid="uid://dy03cdb2sf711" path="res://structs/sprites/vertex_red.png" id="3_5a373"]
 [ext_resource type="Texture2D" uid="uid://byei0vq0s15pl" path="res://structs/sprites/vertex_accent.png" id="3_ma7hq"]
+[ext_resource type="Texture2D" uid="uid://dd2yuk7lost6m" path="res://structs/sprites/vertex_2.png" id="4_27euc"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="4_g1k1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
 
-[node name="list_vertex" type="Area2D" groups=["vertices"]]
+[node name="list_vertex" type="Area2D" node_paths=PackedStringArray("sprite", "label_tag", "label_data", "label_ref_count", "p1") groups=["vertices"]]
 script = ExtResource("1_hry7q")
+sprite = NodePath("Sprite2D")
 sprite_default = ExtResource("2_k25f1")
 sprite_accent = ExtResource("3_ma7hq")
+sprite_accent_2 = ExtResource("4_27euc")
 sprite_to_remove = ExtResource("3_5a373")
+label_tag = NodePath("label_tag")
+label_data = NodePath("label_data")
+label_ref_count = NodePath("label_ref_count")
+p1 = NodePath("pointer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lky5f")
@@ -21,6 +28,24 @@ shape = SubResource("CircleShape2D_lky5f")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.32, 0.32)
 texture = ExtResource("2_k25f1")
+
+[node name="label_tag" type="Label" parent="."]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -34.5
+offset_right = 21.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="label_data" type="Label" parent="."]
 z_index = 1

@@ -84,9 +84,19 @@ func operator_interface(operations: Array, undo: bool = false):
 				continue
 			Operation.opcodes.SET_SPRITE:
 				if undo:
-					argv[0].set_sprite_undo()
+					if not argv[0] == null:
+						argv[0].set_sprite_undo()
 				else:
-					argv[0].set_sprite(argv[1])
+					if not argv[0] == null:
+						argv[0].set_sprite(argv[1])
+				continue
+			Operation.opcodes.SET_TAG:
+				if undo:
+					if not argv[0] == null:
+						argv[0].set_tag_undo()
+				else:
+					if not argv[0] == null:
+						argv[0].set_tag(argv[1])
 				continue
 			Operation.opcodes.SET_POINTER_COLOR:
 				if undo:
@@ -111,6 +121,18 @@ func operator_interface(operations: Array, undo: bool = false):
 					side_panel.overwrite_variable_undo(argv[0])
 				else:
 					side_panel.overwrite_variable(argv[0], argv[1])
+				continue
+			Operation.opcodes.OVERWRITE_CALL:
+				if undo:
+					side_panel.override_code_call_undo()
+				else:
+					side_panel.override_code_call(argv[0])
+				continue
+			Operation.opcodes.OVERWRITE_RETURN:
+				if undo:
+					side_panel.override_code_return_v2_undo()
+				else:
+					side_panel.override_code_return_v2(argv[0])
 				continue
 			Operation.opcodes.CALL:
 				if undo:

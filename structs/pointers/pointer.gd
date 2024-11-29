@@ -90,6 +90,7 @@ func set_target_undo():
 enum colors
 {
 	DEFAULT,
+	WEAK,
 	ACCENT,
 	ACCENT_2
 }
@@ -97,17 +98,19 @@ var color_history = [colors.DEFAULT]
 func set_color(selection: colors, save: bool = true):
 	if save:
 		color_history.push_back(selection)
-	
 	match selection:
 		colors.DEFAULT:
 			head.color = Color.WHITE
 			line.default_color = Color.WHITE
+		colors.WEAK:
+			head.color = constants.weak_pointer_color_c
+			line.default_color = constants.weak_pointer_color_c
 		colors.ACCENT:
-			head.color = Color.YELLOW
-			line.default_color = Color.YELLOW
+			head.color = constants.color_accent_c
+			line.default_color = constants.color_accent_c
 		colors.ACCENT_2:
-			head.color = Color.AQUAMARINE
-			line.default_color = Color.AQUAMARINE
+			head.color = constants.color_accent_2_c
+			line.default_color = constants.color_accent_2_c
 func set_color_undo():
 	color_history.pop_back()
 	set_color(color_history.back(), false)

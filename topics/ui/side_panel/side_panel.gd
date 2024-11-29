@@ -49,9 +49,16 @@ func override_code(text_: String, update_init: bool = true):
 	cont_code.override(text_, update_init)
 func override_code_return(text_: String = "Algorithm returned", color: Color = constants.color_1_c):
 	cont_code.set_return(text_, color)
+func override_code_return_v2(return_value, color: Color = constants.color_1_c):
+	cont_code.set_return_v2(return_value, color)
+func override_code_return_v2_undo():
+	cont_code.set_return_v2_undo()
 
 func override_code_call(text_: String):
 	cont_code.set_call(text_)
+func override_code_call_undo():
+	cont_code.set_call_undo()
+
 func highlight_code(lines: Array):
 	cont_code.highlight_lines(lines)
 func highlight_code_undo():
