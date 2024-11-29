@@ -72,6 +72,6 @@ func reset():
 	code_displayer_holder.adjust_min_size()
 
 # Legacy stuff
-func set_return(text_, color: Color = constants.color_1_c):
+func set_return(text_, color: Color = constants.color_main):
 	label_return.modulate = color
 	label_return.text = text_

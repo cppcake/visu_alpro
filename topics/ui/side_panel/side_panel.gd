@@ -83,6 +83,8 @@ func remove_stackframe():
 	cont_call.remove_stackframe()
 func remove_stackframe_undo():
 	cont_call.remove_stackframe_undo()
+func get_last_pop() -> int:
+	return cont_call.last_pop
 # Needed for legacy reasons
 func push_call() -> Label:
 	return cont_call.push_call_()

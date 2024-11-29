@@ -9,12 +9,12 @@ func _process(_delta):
 		child.get_child(1).modulate = Color.WHITE
 	
 	if not stackframes.is_empty():
-		stackframes.back().get_child(1).modulate = constants.color_1_c
+		stackframes.back()[0].get_child(1).modulate = constants.color_main
 	
 	# Required for legacacy reasons
 	var last_index: int = call_stack.get_child_count() - 1
 	if last_index >= 0:
-		call_stack.get_child(last_index).get_child(1).modulate = constants.color_1_c
+		call_stack.get_child(last_index).get_child(1).modulate = constants.color_main
 
 var call_counter = 0
 var stackframes = []
@@ -25,22 +25,25 @@ func reset():
 	removed_stackframes = []
 	for child in call_stack.get_children():
 		child.queue_free()
+
 func create_stackframe(stackframe_name: String):
 	call_counter += 1
 	var stackframe_instance = stackframe_scene.instantiate()
 	stackframe_instance.get_child(1).get_child(0).text = stackframe_name + " (" + tr("CALL") + " " + str(call_counter) + ")"
-	stackframes.append(stackframe_instance)
+	stackframes.append([stackframe_instance, call_counter])
 	call_stack.add_child(stackframe_instance)
 func create_stackframe_undo():
 	call_counter -= 1
 	if not stackframes.is_empty():
-		stackframes.pop_back().queue_free()
+		stackframes.pop_back()[0].queue_free()
 
+var last_pop
 func remove_stackframe():
+	last_pop = stackframes.back()[1]
 	removed_stackframes.append(stackframes.pop_back())
-	removed_stackframes.back().visible = false
+	removed_stackframes.back()[0].visible = false
 func remove_stackframe_undo():
-	removed_stackframes.back().visible = true
+	removed_stackframes.back()[0].visible = true
 	stackframes.append(removed_stackframes.pop_back())
 # For legacy reasons this method is needed
 func push_call_() -> Label:

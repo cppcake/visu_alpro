@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var color = constants.color_1
+var color = constants.color_main
 var init_text = ""
 
 var lines_history = []

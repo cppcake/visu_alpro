@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcixclmukxhyp"]
+[gd_scene load_steps=15 format=3 uid="uid://dcixclmukxhyp"]
 
+[ext_resource type="Script" path="res://topics/operator.gd" id="1_naxwn"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_tisiv"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_40elq"]
 [ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_o0udn"]
@@ -17,6 +18,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
 [node name="root" type="Node"]
+script = ExtResource("1_naxwn")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -69,6 +71,17 @@ icon = ExtResource("6_qc5lr")
 expand_icon = true
 script = ExtResource("4_40elq")
 
+[node name="button_to_start" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("3_tisiv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+icon = ExtResource("7_78oqq")
+expand_icon = true
+
 [node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -86,6 +99,17 @@ theme = ExtResource("3_tisiv")
 script = ExtResource("8_y3k06")
 
 [node name="button_forward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+tooltip_text = "FORWARD_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("3_tisiv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+icon = ExtResource("9_0lupd")
+expand_icon = true
+
+[node name="button_to_end" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "FORWARD_TOOLTIP"
@@ -151,5 +175,7 @@ label_start_text = "new_ptr"
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_to_start" to="." method="_on_button_to_start_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_to_end" to="." method="_on_button_to_end_pressed"]

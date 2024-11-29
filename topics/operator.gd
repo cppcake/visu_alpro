@@ -202,3 +202,12 @@ func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class) -> void:
 	var buf: int = vertex_1.data
 	vertex_1.set_data(vertex_2.data)
 	vertex_2.set_data(buf)
+
+
+func _on_button_to_start_pressed():
+	while current_step > 0:
+		backward()
+
+func _on_button_to_end_pressed():
+	while current_step < operations_array.size():
+		forward()

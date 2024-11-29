@@ -7,16 +7,16 @@ func _ready():
 	finish()
 	init_algo(insert, [5, root_ptr])
 	finish()
-	#init_algo(insert, [9, root_ptr])
-	#finish()
-	#init_algo(insert, [4, root_ptr])
-	#finish()
-	#init_algo(insert, [6, root_ptr])
-	#finish()
-	#init_algo(insert, [8, root_ptr])
-	#finish()
-	#init_algo(insert, [10, root_ptr])
-	#finish()
+	init_algo(insert, [9, root_ptr])
+	finish()
+	init_algo(insert, [4, root_ptr])
+	finish()
+	init_algo(insert, [6, root_ptr])
+	finish()
+	init_algo(insert, [8, root_ptr])
+	finish()
+	init_algo(insert, [10, root_ptr])
+	finish()
 
 var offset_y: int = 180
 var min_offset_x: int = 80
@@ -153,8 +153,8 @@ func inorder(argv: Array) -> Array:
 			Operation.opcodes.SET_POINTER_COLOR,\
 			[ptr, pointer_class.colors.ACCENT])\
 		,Operation.new(\
-			Operation.opcodes.SET_TAG,\
-			[ptr_target, "In Bearbeitung"])
+			Operation.opcodes.SET_SPRITE,\
+			[ptr_target, list_vertex_class.sprites.ACCENT])\
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_CALL,\
 			["inorder(current = " + ptr_name + ")"])\
@@ -219,6 +219,7 @@ func inorder(argv: Array) -> Array:
 			[[6]])
 		])
 	F_left = inorder([ptr_target.p1, ptr_name + "->left"])
+	var last_pop_left = side_panel.get_last_pop()
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.OVERWRITE_RETURN,\
@@ -234,7 +235,7 @@ func inorder(argv: Array) -> Array:
 			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(F_left)])
+			[1, "F_left = " + str(F_left) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_left) + ")"])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
 			[2, "F_right = " + str(F_right)])
@@ -247,6 +248,7 @@ func inorder(argv: Array) -> Array:
 		,
 		])
 	F_right = inorder([ptr_target.p2, ptr_name + "->right"])
+	var last_pop_right = side_panel.get_last_pop()
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.OVERWRITE_RETURN,\
@@ -262,10 +264,10 @@ func inorder(argv: Array) -> Array:
 			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(F_left)])
+			[1, "F_left = " + str(F_left) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_left) + ")"])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(F_right)])
+			[2, "F_right = " + str(F_right) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_right) + ")"])
 		])
 
 	F.append_array(F_left)
@@ -278,10 +280,10 @@ func inorder(argv: Array) -> Array:
 			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(F_left)])
+			[1, "F_left = " + str(F_left) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_left) + ")"])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(F_right)])
+			[2, "F_right = " + str(F_right) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_right) + ")"])
 		])
 	
 	F.append(ptr_target.data)
@@ -294,10 +296,10 @@ func inorder(argv: Array) -> Array:
 			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(F_left)])
+			[1, "F_left = " + str(F_left) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_left) + ")"])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(F_right)])
+			[2, "F_right = " + str(F_right) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_right) + ")"])
 		])
 	
 	F.append_array(F_right)
@@ -310,10 +312,10 @@ func inorder(argv: Array) -> Array:
 			[0, "F = " + str(F)])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[1, "F_left = " + str(F_left)])
+			[1, "F_left = " + str(F_left) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_left) + ")"])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
-			[2, "F_right = " + str(F_right)])
+			[2, "F_right = " + str(F_right) + " (" + tr("RETURN_VALUE_OF") + " " + tr("CALL") + " " + str(last_pop_right) + ")"])
 		])
 
 	# Return F
@@ -328,11 +330,8 @@ func inorder(argv: Array) -> Array:
 			Operation.opcodes.OVERWRITE_RETURN,\
 			[F])
 		,Operation.new(\
-			Operation.opcodes.SET_SPRITE,\
-			[ptr_target, list_vertex_class.sprites.ACCENT])\
-		,Operation.new(\
 			Operation.opcodes.SET_TAG,\
-			[ptr_target, "Fertig"])\
+			[ptr_target, str(F)])\
 		])
 	return F
 func _on_button_inorder_pressed():
