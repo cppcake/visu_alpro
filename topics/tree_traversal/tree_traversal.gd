@@ -72,8 +72,60 @@ func calculate_pointer_names_(root: pointer_class, root_name: String):
 		calculate_pointer_names_(root.target.p1, root_name + "->left")
 		calculate_pointer_names_(root.target.p2, root_name + "->right")
 
+var pre_algorithm: Callable
+var pre_argv: Array
+func get_current_for_algo(_viewport, event, _shape_idx):
+	# Check if the event is an InputEventMouseButton
+	if event is InputEventMouseButton:
+		# Check if it's a left-click (left mouse button has index 1)
+		if event.button_index == 1 and event.pressed:
+			var selected_vertex = null
+			while selected_vertex == null:
+				selected_vertex = list_vertex_class.selected_vertex
+			
+			for child in self.get_children():
+				if type_string(typeof(child)) == "Object":
+					if child is list_vertex_class:
+						child.disconnect("input_event", get_current_for_algo)
+			
+			if selected_vertex == root_ptr.target:
+				pre_argv.push_front(root_ptr)
+			else:
+				make_selected(selected_vertex)
+				pre_argv.push_front(selected_ptr)
+			
+			side_panel.select_containers(1, 1, 1, 0)
+			init_algo(pre_algorithm, pre_argv)
+func prepare_signals_for_current() -> void:
+	side_panel.select_containers(0, 0, 0, 1)
+	side_panel.override_exp("Pick the node to start the algorithm from")
+	side_panel.open()
+	for child in self.get_children():
+		if type_string(typeof(child)) == "Object":
+			if child is list_vertex_class:
+				if not child.is_connected("input_event", get_current_for_algo):
+					child.connect("input_event", get_current_for_algo)
+@export var selected_ptr: pointer_class
+func make_selected(target, from: String = "above"):
+	selected_ptr.set_target(target)
+	if target == null:
+		selected_ptr.visible = false
+		selected_ptr.position = Vector2(9000, 9000)
+	else:
+		match from:
+			"above":
+				selected_ptr.position = target.position + Vector2(0, -200)
+			"left":
+				selected_ptr.position = target.position + Vector2(200, 0)
+			"right":
+				selected_ptr.position = target.position + Vector2(-200, 0)
+		selected_ptr.current_end_point = target.position
+		selected_ptr.draw()
+		selected_ptr.visible = true
+
 func clean_up():
 	super.clean_up()
+	make_selected(null)
 	calculate_pointer_names()
 
 func insert(argv: Array):
@@ -356,8 +408,12 @@ func _on_button_inorder_pressed():
 	side_panel.create_variable()
 	side_panel.override_code(tr("INORDER"))
 	side_panel.override_code_call("inorder(start_ptr)")
-	init_algo(inorder, [root_ptr])
-	side_panel.select_containers(1, 1, 1, 0)
+	
+	pre_algorithm = inorder
+	pre_argv = []
+	prepare_signals_for_current()
+	#init_algo(inorder, [root_ptr])
+	#side_panel.select_containers(1, 1, 1, 0)
 
 func levelorder(argv: Array) -> Array:
 	var ptr = argv[0]
@@ -492,5 +548,10 @@ func _on_button_levelorder_pressed():
 	side_panel.create_variable()
 	side_panel.override_code(tr("LEVELORDER"))
 	side_panel.override_code_call("levelorder(start_ptr)")
-	init_algo(levelorder, [root_ptr, "root"])
-	side_panel.select_containers(1, 1, 1, 0)
+	
+	pre_algorithm = levelorder
+	pre_argv = []
+	prepare_signals_for_current()
+	#side_panel.select_containers(1, 1, 1, 0)
+	#init_algo(levelorder, [root_ptr])
+	#side_panel.open()

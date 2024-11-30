@@ -35,7 +35,6 @@ func clean_up():
 	operations_array.clear()
 	new_ptr.set_target(null)
 	new_ptr.visible = false
-	
 	if to_remove != null:
 		to_remove.queue_free()
 		to_remove = null
@@ -204,7 +203,6 @@ func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class) -> void:
 	var buf: int = vertex_1.data
 	vertex_1.set_data(vertex_2.data)
 	vertex_2.set_data(buf)
-
 
 func _on_button_to_start_pressed():
 	while current_step > 0:

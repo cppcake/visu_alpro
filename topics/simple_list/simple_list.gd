@@ -97,7 +97,7 @@ func make_current(target, from: String = "above"):
 				current.position = target.position + Vector2(-200, 0)
 		current.current_end_point = target.position
 		current.draw()
-		current.visible = true	
+		current.visible = true
 
 @export var label_progress: Label
 func update_step_label():
