@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcixclmukxhyp"]
+[gd_scene load_steps=17 format=3 uid="uid://dcixclmukxhyp"]
 
 [ext_resource type="Script" path="res://topics/operator.gd" id="1_naxwn"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_tisiv"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_40elq"]
 [ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_o0udn"]
+[ext_resource type="Texture2D" uid="uid://bgyi6osf1tyog" path="res://misc/icons/angle-double-small-left.png" id="6_53tj5"]
 [ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_qc5lr"]
-[ext_resource type="Texture2D" uid="uid://b0odra2mn337m" path="res://misc/icons/arrow-small-left.png" id="7_78oqq"]
+[ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="7_l8al4"]
 [ext_resource type="Script" path="res://topics/ui/scripts/step_counter.gd" id="8_y3k06"]
-[ext_resource type="Texture2D" uid="uid://udbm1v8eey0e" path="res://misc/icons/arrow-small-right.png" id="9_0lupd"]
+[ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="9_t0onb"]
+[ext_resource type="Texture2D" uid="uid://cb8v53pmmdiyt" path="res://misc/icons/angle-double-small-right.png" id="10_44x6n"]
 [ext_resource type="PackedScene" uid="uid://djgl5ao260xr4" path="res://topics/ui/scenes/buttons_misc.tscn" id="10_vby7r"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="11_7gy0y"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="13_4la8k"]
@@ -79,7 +81,7 @@ focus_mode = 1
 theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("7_78oqq")
+icon = ExtResource("6_53tj5")
 expand_icon = true
 
 [node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
@@ -90,7 +92,7 @@ focus_mode = 1
 theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("7_78oqq")
+icon = ExtResource("7_l8al4")
 expand_icon = true
 
 [node name="state_counter" type="Label" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer"]
@@ -106,7 +108,7 @@ focus_mode = 1
 theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("9_0lupd")
+icon = ExtResource("9_t0onb")
 expand_icon = true
 
 [node name="button_to_end" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
@@ -117,7 +119,7 @@ focus_mode = 1
 theme = ExtResource("3_tisiv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
-icon = ExtResource("9_0lupd")
+icon = ExtResource("10_44x6n")
 expand_icon = true
 
 [node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("10_vby7r")]

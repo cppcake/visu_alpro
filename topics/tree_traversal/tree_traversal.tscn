@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://d25mecoy5ka6l"]
+[gd_scene load_steps=10 format=3 uid="uid://d25mecoy5ka6l"]
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
 [ext_resource type="Script" path="res://topics/tree_traversal/tree_traversal.gd" id="2_tjuep"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
+[ext_resource type="Texture2D" uid="uid://bgyi6osf1tyog" path="res://misc/icons/angle-double-small-left.png" id="5_4se3l"]
+[ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="6_mginy"]
+[ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="7_6nsi3"]
+[ext_resource type="Texture2D" uid="uid://cb8v53pmmdiyt" path="res://misc/icons/angle-double-small-right.png" id="8_u6w75"]
 
 [node name="root" node_paths=PackedStringArray("root_ptr", "selected_ptr", "label_progress", "side_panel", "new_ptr") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
@@ -30,6 +34,18 @@ script = ExtResource("3_kwys6")
 layout_mode = 2
 text = "levelorder"
 script = ExtResource("3_kwys6")
+
+[node name="button_to_start" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" index="2"]
+icon = ExtResource("5_4se3l")
+
+[node name="button_backward" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" index="3"]
+icon = ExtResource("6_mginy")
+
+[node name="button_forward" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" index="5"]
+icon = ExtResource("7_6nsi3")
+
+[node name="button_to_end" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" index="6"]
+icon = ExtResource("8_u6w75")
 
 [node name="root_ptr" parent="." index="3" groups=["pointers"] instance=ExtResource("3_cgglp")]
 position = Vector2(0, -200)

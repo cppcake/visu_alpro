@@ -1,14 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://bomrfiqo5sk4q"]
+[gd_scene load_steps=20 format=3 uid="uid://bomrfiqo5sk4q"]
 
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/controller.gd" id="1_1864d"]
 [ext_resource type="Script" path="res://structs/graph/graph_manager.gd" id="2_2m2fs"]
 [ext_resource type="Script" path="res://topics/graph_traversal/bfs.gd" id="3_87483"]
 [ext_resource type="Script" path="res://topics/graph_traversal/dfs.gd" id="5_2xtpe"]
 [ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="18_iepr2"]
-[ext_resource type="Texture2D" uid="uid://cpxmrsqaqkxu1" path="res://misc/easteregg/sprites/T_Handheld_Portal_Device.png" id="26_wv8hi"]
-[ext_resource type="Texture2D" uid="uid://dyhnwx0u1d4q2" path="res://misc/easteregg/sprites/T_No_Cake.png" id="27_vxkff"]
-[ext_resource type="Texture2D" uid="uid://scgh683jvfi3" path="res://misc/easteregg/sprites/T_Cake.png" id="28_5friv"]
-[ext_resource type="AudioStream" uid="uid://gqljk4rbeoym" path="res://misc/easteregg/sounds/sound_weapons_portalgun_portal_open2.wav" id="29_0n7ow"]
 [ext_resource type="Script" path="res://topics/graph_traversal/scripts/mode_select.gd" id="30_d3yqm"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="31_phvch"]
 [ext_resource type="Script" path="res://structs/graph/reset.gd" id="32_ojub5"]
@@ -62,37 +58,6 @@ side_panel = NodePath("../../CanvasLayer/side_panel")
 [node name="dfs" type="Node" parent="algorithms" node_paths=PackedStringArray("side_panel")]
 script = ExtResource("5_2xtpe")
 side_panel = NodePath("../../CanvasLayer/side_panel")
-
-[node name="easteregg" type="Node" parent="algorithms"]
-
-[node name="portal_gun" type="Sprite2D" parent="algorithms/easteregg"]
-visible = false
-z_index = 1
-position = Vector2(1564, 162)
-rotation = -0.261799
-texture = ExtResource("26_wv8hi")
-flip_h = true
-
-[node name="no_cake" type="Sprite2D" parent="algorithms/easteregg"]
-visible = false
-z_index = 1
-position = Vector2(1452, 670)
-scale = Vector2(3, 3)
-texture = ExtResource("27_vxkff")
-
-[node name="cake" type="Sprite2D" parent="algorithms/easteregg"]
-visible = false
-z_index = 1
-position = Vector2(1452, 670)
-scale = Vector2(3, 3)
-texture = ExtResource("28_5friv")
-
-[node name="dj2" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
-visible = false
-stream = ExtResource("29_0n7ow")
-
-[node name="dj" type="AudioStreamPlayer2D" parent="algorithms/easteregg"]
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
