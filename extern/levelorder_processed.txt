@@ -1,0 +1,1 @@
+Create empty sequence F and empty queue Q\nQ.push(start_ptr)\n\nwhile Q is not empty do\n\tLet current_ptr = Q.pop()\n\tif current_ptr != nullptr then\n\t\tF.push(current_ptr->data)\n\t\tQ.push_back(current_ptr->left)\n\t\tQ.push_back(current_ptr->right)\n\nreturn F\n

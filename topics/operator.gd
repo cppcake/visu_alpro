@@ -6,6 +6,7 @@ func init_algo(algo: Callable, argv: Array):
 	current_step = operations_array.size()
 	while current_step > 0:
 		backward()
+	side_panel.open()
 
 func forward():
 	if current_step < operations_array.size():
@@ -32,7 +33,6 @@ func cancel():
 func clean_up():
 	current_step = 0
 	operations_array.clear()
-	side_panel.select_containers(0, 0, 0, 1)
 	new_ptr.set_target(null)
 	new_ptr.visible = false
 	
@@ -44,6 +44,8 @@ func clean_up():
 	get_tree().call_group("pointers", "reset_visuals")
 	get_tree().call_group("vertices", "reset_visuals")
 	side_panel.reset()
+	side_panel.select_containers(0, 0, 0, 1)
+	side_panel.close()
 
 func reposition():
 	pass

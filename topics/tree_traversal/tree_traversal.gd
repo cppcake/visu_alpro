@@ -59,6 +59,21 @@ func calculate_height(root: pointer_class) -> int:
 		return height + left_height
 	else:
 		return height + right_height
+func calculate_pointer_names():
+	root_ptr.pointer_name = "root"
+	
+	if root_ptr.target != null:
+		calculate_pointer_names_(root_ptr.target.p1, "root->left")
+		calculate_pointer_names_(root_ptr.target.p2, "root->right")
+func calculate_pointer_names_(root: pointer_class, root_name: String):
+	root.pointer_name = root_name
+	
+	if root.target != null:
+		calculate_pointer_names_(root.target.p1, root_name + "->left")
+		calculate_pointer_names_(root.target.p2, root_name + "->right")
+func clean_up():
+	super.clean_up()
+	calculate_pointer_names()
 
 func insert(argv: Array):
 	var data = argv[0]
@@ -142,7 +157,7 @@ func _on_button_insert_pressed():
 func inorder(argv: Array) -> Array:
 	var ptr: pointer_class = argv[0]
 	var ptr_target = ptr.target
-	var ptr_name = argv[1]
+	var ptr_name = ptr.pointer_name
 	
 	# Push stackframe of call
 	push_operations([\
@@ -157,7 +172,7 @@ func inorder(argv: Array) -> Array:
 			[ptr_target, list_vertex_class.sprites.ACCENT])\
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_CALL,\
-			["inorder(current = " + ptr_name + ")"])\
+			["inorder(start_ptr = " + ptr_name + ")"])\
 		,Operation.new(\
 			Operation.opcodes.CALL,\
 			["CALL"])\
@@ -218,7 +233,7 @@ func inorder(argv: Array) -> Array:
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[6]])
 		])
-	F_left = inorder([ptr_target.p1, ptr_name + "->left"])
+	F_left = inorder([ptr_target.p1])
 	var last_pop_left = side_panel.get_last_pop()
 	push_operations([\
 		Operation.new(\
@@ -226,7 +241,7 @@ func inorder(argv: Array) -> Array:
 			[39])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_CALL,\
-			["inorder(current = " + ptr_name + ")"])\
+			["inorder(start_ptr = " + ptr_name + ")"])\
 		,Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[6]])
@@ -247,7 +262,7 @@ func inorder(argv: Array) -> Array:
 			[[7]])
 		,
 		])
-	F_right = inorder([ptr_target.p2, ptr_name + "->right"])
+	F_right = inorder([ptr_target.p2])
 	var last_pop_right = side_panel.get_last_pop()
 	push_operations([\
 		Operation.new(\
@@ -255,7 +270,7 @@ func inorder(argv: Array) -> Array:
 			[39])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_CALL,\
-			["inorder(current = " + ptr_name + ")"])\
+			["inorder(start_ptr = " + ptr_name + ")"])\
 		,Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[7]])
@@ -339,7 +354,142 @@ func _on_button_inorder_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()
 	side_panel.override_code(tr("INORDER"))
-	side_panel.override_code_call("inorder(current)")
-	init_algo(inorder, [root_ptr, "root"])
+	side_panel.override_code_call("inorder(start_ptr)")
+	init_algo(inorder, [root_ptr])
 	side_panel.select_containers(1, 1, 1, 0)
-	side_panel.open()
+
+func levelorder(argv: Array) -> Array:
+	var ptr = argv[0]
+	
+	# Push call
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_CALL,\
+			["levelorder(start_ptr = " + ptr.pointer_name + ")"])\
+		,Operation.new(\
+			Operation.opcodes.CALL,\
+			["CALL"])\
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, ""])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, ""])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, ""])
+		])
+	
+	# Create variables
+	var Q: Array = []
+	var Q_strings: Array = []
+	var F: Array = []
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[1]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "Q = " + str(Q_strings).replace("\"", "")])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, ""])
+		])
+
+	# Update variables
+	Q.push_back(argv[0])
+	Q_strings.push_back(argv[0].pointer_name)
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[2]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[0, "F = " + str(F)])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[1, "Q = " + str(Q_strings).replace("\"", "")])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_VARIABLE,\
+			[2, ""])
+		])
+
+	while not Q.is_empty():
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[4]])
+		])
+		
+		var current_ptr = Q.pop_front()
+		Q_strings.pop_front()
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[5]])
+			,Operation.new(\
+				Operation.opcodes.SET_POINTER_COLOR,\
+				[current_ptr, pointer_class.colors.ACCENT])\
+			,Operation.new(\
+				Operation.opcodes.SET_SPRITE,\
+				[current_ptr.target, list_vertex_class.sprites.ACCENT])\
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[0, "F = " + str(F)])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[1, "Q = " + str(Q_strings).replace("\"", "")])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[2, "current_ptr = " + current_ptr.pointer_name])
+		])
+		
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[6]])
+		])
+		if current_ptr.target != null:
+			F.push_back(current_ptr.target.data)
+			Q.push_back(current_ptr.target.p1)
+			Q_strings.push_back(current_ptr.target.p1.pointer_name)
+			Q.push_back(current_ptr.target.p2)
+			Q_strings.push_back(current_ptr.target.p1.pointer_name)
+			push_operations([\
+				Operation.new(\
+					Operation.opcodes.HIGHLIGHT_CODE,\
+					[[7, 8, 9]])
+				,Operation.new(\
+					Operation.opcodes.OVERWRITE_VARIABLE,\
+					[0, "F = " + str(F)])
+				,Operation.new(\
+					Operation.opcodes.OVERWRITE_VARIABLE,\
+					[1, "Q = " + str(Q_strings).replace("\"", "")])
+				])
+
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[11]])
+		,Operation.new(\
+			Operation.opcodes.RETURN,\
+			[])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[F])
+		])
+	return F
+func _on_button_levelorder_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.override_code(tr("LEVELORDER"))
+	#side_panel.override_code_call("levelorder(current_ptr = root)")
+	init_algo(levelorder, [root_ptr, "root"])
+	side_panel.select_containers(1, 1, 1, 0)

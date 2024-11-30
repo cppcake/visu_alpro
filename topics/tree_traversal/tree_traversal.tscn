@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d25mecoy5ka6l"]
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
-[ext_resource type="Script" path="res://topics/tree traversal/tree_traversal.gd" id="2_tjuep"]
+[ext_resource type="Script" path="res://topics/tree_traversal/tree_traversal.gd" id="2_tjuep"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
@@ -25,6 +25,11 @@ layout_mode = 2
 text = "inorder"
 script = ExtResource("3_kwys6")
 
+[node name="button_levelorder" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2" groups=["buttons_active"]]
+layout_mode = 2
+text = "levelorder"
+script = ExtResource("3_kwys6")
+
 [node name="root_ptr" parent="." index="3" groups=["pointers"] instance=ExtResource("3_cgglp")]
 position = Vector2(0, -200)
 label_start_text = "root"
@@ -33,3 +38,5 @@ label_start_text = "root"
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" to="." method="_on_button_inorder_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_inorder" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_levelorder" to="." method="_on_button_levelorder_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_levelorder" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_levelorder" method="_on_pressed"]

@@ -1,13 +1,13 @@
+if start_ptr == nullptr do
+	return
+
 Create empty sequence F, F_left, F_right
 
-if current_tree_node == null do
-	return F
+F_left = inorder(start_ptr->left)
+F_right = inorder(start_ptr->right)
 
-left_sequence = inorder(left_child)
-right_sequence = inorder(right_child)
+insert F_left behind F
+append start_ptr->data to sequence
+insert F_right behind F
 
-insert left_sequence behind sequence
-append current_tree_node.data to sequence
-insert right_sequence behind sequence
-
-return sequence
+return F

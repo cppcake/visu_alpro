@@ -18,6 +18,8 @@ var rel_null_end_point = Vector2(0, 150)
 @export var displacement: Vector2 = Vector2(0, 0)
 @export_enum("down", "left_down", "right_down") var from: String = "down"
 
+var pointer_name = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	distance_head_node *= distance_factor
