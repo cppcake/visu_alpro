@@ -92,6 +92,7 @@ func get_current_for_algo(_viewport, event, _shape_idx):
 				pre_argv.push_front(root_ptr)
 			else:
 				make_selected(selected_vertex)
+				calculate_pointer_names_(selected_ptr, "subtree_ptr")
 				pre_argv.push_front(selected_ptr)
 			
 			side_panel.select_containers(1, 1, 1, 0)
@@ -517,7 +518,7 @@ func levelorder(argv: Array) -> Array:
 			Q.push_back(current_ptr.target.p1)
 			Q_strings.push_back(current_ptr.target.p1.pointer_name)
 			Q.push_back(current_ptr.target.p2)
-			Q_strings.push_back(current_ptr.target.p1.pointer_name)
+			Q_strings.push_back(current_ptr.target.p2.pointer_name)
 			push_operations([\
 				Operation.new(\
 					Operation.opcodes.HIGHLIGHT_CODE,\
