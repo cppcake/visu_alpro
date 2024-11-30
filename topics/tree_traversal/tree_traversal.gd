@@ -71,6 +71,7 @@ func calculate_pointer_names_(root: pointer_class, root_name: String):
 	if root.target != null:
 		calculate_pointer_names_(root.target.p1, root_name + "->left")
 		calculate_pointer_names_(root.target.p2, root_name + "->right")
+
 func clean_up():
 	super.clean_up()
 	calculate_pointer_names()
@@ -360,7 +361,7 @@ func _on_button_inorder_pressed():
 
 func levelorder(argv: Array) -> Array:
 	var ptr = argv[0]
-	
+
 	# Push call
 	push_operations([\
 		Operation.new(\
@@ -382,7 +383,7 @@ func levelorder(argv: Array) -> Array:
 			Operation.opcodes.OVERWRITE_VARIABLE,\
 			[2, ""])
 		])
-	
+
 	# Create variables
 	var Q: Array = []
 	var Q_strings: Array = []
@@ -490,6 +491,6 @@ func _on_button_levelorder_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()
 	side_panel.override_code(tr("LEVELORDER"))
-	#side_panel.override_code_call("levelorder(current_ptr = root)")
+	side_panel.override_code_call("levelorder(start_ptr)")
 	init_algo(levelorder, [root_ptr, "root"])
 	side_panel.select_containers(1, 1, 1, 0)
