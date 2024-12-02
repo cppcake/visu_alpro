@@ -46,6 +46,14 @@ func clean_up():
 	side_panel.select_containers(0, 0, 0, 1)
 	side_panel.close()
 
+@export var size_label: Label
+func _physics_process(delta):
+	update_stack_frame()
+
+var size = 0
+func update_stack_frame():
+	size_label.text = "size = " + str(size)
+
 func reposition():
 	pass
 

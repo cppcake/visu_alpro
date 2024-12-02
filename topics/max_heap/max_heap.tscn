@@ -20,6 +20,9 @@ visible = false
 layout_mode = 2
 theme = ExtResource("3_srtbk")
 
+[node name="stackframe" parent="CanvasLayer" index="1"]
+custom_minimum_size = Vector2(150, 0)
+
 [node name="VisuArray" parent="CanvasLayer" index="4" instance=ExtResource("4_bxmcl")]
 anchors_preset = 7
 anchor_left = 0.5

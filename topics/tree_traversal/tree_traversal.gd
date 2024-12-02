@@ -18,13 +18,9 @@ func _ready():
 	init_algo(insert, [10, root_ptr])
 	finish()
 
-@export var size_label: Label
 @export var root_label: Label
-func _physics_process(delta):
-	update_stack_frame()
-
 func update_stack_frame():
-	size_label.text = "size = " + str(7)
+	super.update_stack_frame()
 	if root_ptr.target == null:
 		root_label.text = "root = null"
 	else:

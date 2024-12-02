@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcixclmukxhyp"]
+[gd_scene load_steps=18 format=3 uid="uid://dcixclmukxhyp"]
 
 [ext_resource type="Script" path="res://topics/operator.gd" id="1_naxwn"]
+[ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://structs/list/list_vertex.tscn" id="2_xkxk7"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_tisiv"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="4_40elq"]
 [ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_o0udn"]
@@ -19,8 +20,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl4ta"]
 
-[node name="root" type="Node"]
+[node name="root" type="Node" node_paths=PackedStringArray("size_label", "label_progress", "side_panel", "new_ptr")]
 script = ExtResource("1_naxwn")
+size_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/size_label")
+label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")
+side_panel = NodePath("CanvasLayer/side_panel")
+vertex_scene = ExtResource("2_xkxk7")
+new_ptr = NodePath("new_ptr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -126,11 +132,10 @@ expand_icon = true
 layout_mode = 2
 
 [node name="stackframe" type="Panel" parent="CanvasLayer"]
-custom_minimum_size = Vector2(150, 100)
 offset_left = 4.0
 offset_top = 43.0
 offset_right = 154.0
-offset_bottom = 143.0
+offset_bottom = 76.0
 theme = ExtResource("3_tisiv")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/stackframe"]
@@ -145,6 +150,9 @@ theme = ExtResource("3_tisiv")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/stackframe/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("3_tisiv")
+
+[node name="size_label" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("11_7gy0y")]
 is_open = false
