@@ -6,9 +6,11 @@
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 
-[node name="root" node_paths=PackedStringArray("root_ptr", "selected_ptr", "label_progress", "side_panel", "new_ptr") instance=ExtResource("1_38xve")]
+[node name="root" node_paths=PackedStringArray("root_ptr", "size_label", "root_label", "selected_ptr", "label_progress", "side_panel", "new_ptr") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
 root_ptr = NodePath("root_ptr")
+size_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/Label")
+root_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/Label2")
 selected_ptr = NodePath("subtree_ptr")
 label_progress = NodePath("CanvasLayer/buttons/buttons_navigation/HBoxContainer/state_counter")
 side_panel = NodePath("CanvasLayer/side_panel")
@@ -30,6 +32,12 @@ script = ExtResource("3_kwys6")
 layout_mode = 2
 text = "levelorder"
 script = ExtResource("3_kwys6")
+
+[node name="Label" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
 
 [node name="root_ptr" parent="." index="3" groups=["pointers"] instance=ExtResource("3_cgglp")]
 position = Vector2(0, -200)

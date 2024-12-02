@@ -18,6 +18,18 @@ func _ready():
 	init_algo(insert, [10, root_ptr])
 	finish()
 
+@export var size_label: Label
+@export var root_label: Label
+func _physics_process(delta):
+	update_stack_frame()
+
+func update_stack_frame():
+	size_label.text = "size = " + str(7)
+	if root_ptr.target == null:
+		root_label.text = "root = null"
+	else:
+		root_label.text = "root = 0x..."
+
 var offset_y: int = 180
 var min_offset_x: int = 80
 func reposition():
@@ -468,6 +480,9 @@ func levelorder(argv: Array) -> Array:
 			Operation.opcodes.HIGHLIGHT_CODE,\
 			[[2]])
 		,Operation.new(\
+			Operation.opcodes.SET_POINTER_COLOR,\
+			[argv[0], pointer_class.colors.ACCENT_2])\
+		,Operation.new(\
 			Operation.opcodes.OVERWRITE_VARIABLE,\
 			[0, "F = " + str(F)])
 		,Operation.new(\
@@ -495,9 +510,6 @@ func levelorder(argv: Array) -> Array:
 				Operation.opcodes.SET_POINTER_COLOR,\
 				[current_ptr, pointer_class.colors.ACCENT])\
 			,Operation.new(\
-				Operation.opcodes.SET_SPRITE,\
-				[current_ptr.target, list_vertex_class.sprites.ACCENT])\
-			,Operation.new(\
 				Operation.opcodes.OVERWRITE_VARIABLE,\
 				[0, "F = " + str(F)])
 			,Operation.new(\
@@ -515,6 +527,18 @@ func levelorder(argv: Array) -> Array:
 		])
 		if current_ptr.target != null:
 			F.push_back(current_ptr.target.data)
+			push_operations([\
+				Operation.new(\
+					Operation.opcodes.HIGHLIGHT_CODE,\
+					[[7]])
+				,Operation.new(\
+					Operation.opcodes.OVERWRITE_VARIABLE,\
+					[0, "F = " + str(F)])
+				,Operation.new(\
+					Operation.opcodes.SET_SPRITE,\
+					[current_ptr.target, list_vertex_class.sprites.ACCENT])\
+				])
+			
 			Q.push_back(current_ptr.target.p1)
 			Q_strings.push_back(current_ptr.target.p1.pointer_name)
 			Q.push_back(current_ptr.target.p2)
@@ -522,13 +546,16 @@ func levelorder(argv: Array) -> Array:
 			push_operations([\
 				Operation.new(\
 					Operation.opcodes.HIGHLIGHT_CODE,\
-					[[7, 8, 9]])
-				,Operation.new(\
-					Operation.opcodes.OVERWRITE_VARIABLE,\
-					[0, "F = " + str(F)])
+					[[8, 9]])
 				,Operation.new(\
 					Operation.opcodes.OVERWRITE_VARIABLE,\
 					[1, "Q = " + str(Q_strings).replace("\"", "")])
+				,Operation.new(\
+					Operation.opcodes.SET_POINTER_COLOR,\
+					[current_ptr.target.p1, pointer_class.colors.ACCENT_2])\
+				,Operation.new(\
+					Operation.opcodes.SET_POINTER_COLOR,\
+					[current_ptr.target.p2, pointer_class.colors.ACCENT_2])\
 				])
 
 	push_operations([\

@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv1b12m1qqxbo"]
+[gd_scene load_steps=7 format=3 uid="uid://bv1b12m1qqxbo"]
 
 [ext_resource type="Script" path="res://test.gd" id="1_1g5mx"]
+[ext_resource type="PackedScene" uid="uid://bwuylmsasrk2m" path="res://structs/array/visu_array.tscn" id="4_1onxa"]
 [ext_resource type="PackedScene" uid="uid://clygp0jsmsfgs" path="res://misc/camera/camera_2d.tscn" id="4_7ovg7"]
 [ext_resource type="PackedScene" uid="uid://sd8yr560vaj2" path="res://menus/options_menu/options_menu.tscn" id="4_b5c5h"]
+[ext_resource type="Script" path="res://structs/array/visu_array.gd" id="5_x28y2"]
+[ext_resource type="PackedScene" uid="uid://dbx4lyhet7n5m" path="res://structs/array/array_entry.tscn" id="6_cgl7u"]
 
 [node name="Test" type="Node" node_paths=PackedStringArray("cam")]
 script = ExtResource("1_1g5mx")
@@ -11,3 +14,17 @@ cam = NodePath("Camera2D")
 [node name="Camera2D" parent="." instance=ExtResource("4_7ovg7")]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_b5c5h")]
+
+[node name="Array" parent="CanvasLayer" instance=ExtResource("4_1onxa")]
+script = ExtResource("5_x28y2")
+
+[node name="ArrayEntry" parent="CanvasLayer/Array/ScrollContainer/ArrayEntriesHolder" index="0" instance=ExtResource("6_cgl7u")]
+layout_mode = 2
+
+[node name="ArrayEntry2" parent="CanvasLayer/Array/ScrollContainer/ArrayEntriesHolder" index="1" instance=ExtResource("6_cgl7u")]
+layout_mode = 2
+
+[node name="ArrayEntry3" parent="CanvasLayer/Array/ScrollContainer/ArrayEntriesHolder" index="2" instance=ExtResource("6_cgl7u")]
+layout_mode = 2
+
+[editable path="CanvasLayer/Array"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://1tu6baghoprd"]
+
+[ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_rp2dr"]
+[ext_resource type="Script" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_srtbk"]
+
+[node name="root" node_paths=PackedStringArray("input_field") instance=ExtResource("1_rp2dr")]
+script = ExtResource("2_in3j6")
+input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/LineEdit")
+
+[node name="button_insert" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0"]
+visible = true
+
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
+visible = false
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+layout_mode = 2
+theme = ExtResource("3_srtbk")

@@ -62,6 +62,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_yh2hm")
 GridContainer/constants/h_separation = 6
 GridContainer/constants/v_separation = 6
 HSeparator/styles/separator = SubResource("StyleBoxFlat_o75dd")
+Label/colors/font_color = Color(1, 1, 1, 1)
 MarginContainer/constants/margin_bottom = 6
 MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
