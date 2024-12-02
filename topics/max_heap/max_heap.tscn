@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://1tu6baghoprd"]
+[gd_scene load_steps=5 format=3 uid="uid://1tu6baghoprd"]
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_rp2dr"]
 [ext_resource type="Script" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_srtbk"]
+[ext_resource type="PackedScene" uid="uid://bwuylmsasrk2m" path="res://structs/array/visu_array.tscn" id="4_bxmcl"]
 
-[node name="root" node_paths=PackedStringArray("input_field") instance=ExtResource("1_rp2dr")]
+[node name="root" node_paths=PackedStringArray("visu_array", "input_field") instance=ExtResource("1_rp2dr")]
 script = ExtResource("2_in3j6")
+visu_array = NodePath("CanvasLayer/VisuArray")
 input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/LineEdit")
 
 [node name="button_insert" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0"]
@@ -17,3 +19,17 @@ visible = false
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
 layout_mode = 2
 theme = ExtResource("3_srtbk")
+
+[node name="VisuArray" parent="CanvasLayer" index="4" instance=ExtResource("4_bxmcl")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -362.0
+offset_top = -70.0
+offset_right = 362.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+array_name = "tree_array"

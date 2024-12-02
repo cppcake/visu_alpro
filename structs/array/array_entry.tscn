@@ -1,12 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbx4lyhet7n5m"]
+[gd_scene load_steps=3 format=3 uid="uid://dbx4lyhet7n5m"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_0a6t8"]
+[ext_resource type="Script" path="res://structs/array/array_entry.gd" id="1_87jhs"]
 
-[node name="ArrayEntry" type="Panel"]
+[node name="ArrayEntry" type="VBoxContainer" node_paths=PackedStringArray("label_data", "label_index")]
+custom_minimum_size = Vector2(50, 65)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+script = ExtResource("1_87jhs")
+label_data = NodePath("ArrayEntry/Label")
+label_index = NodePath("ArrayEntry2/Label")
+
+[node name="ArrayEntry" type="Panel" parent="."]
 custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 theme = ExtResource("1_0a6t8")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="ArrayEntry"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -21,5 +32,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0a6t8")
 text = "XD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrayEntry2" type="Panel" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("1_0a6t8")
+
+[node name="Label" type="Label" parent="ArrayEntry2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0a6t8")
+theme_override_font_sizes/font_size = 12
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

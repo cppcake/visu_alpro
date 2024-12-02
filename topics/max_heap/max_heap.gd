@@ -7,6 +7,8 @@ var tree_array: Array = []
 func parent(index):
 	return int((index - 1) / 2)
 
+var data_array: Array = []
+@export var visu_array: VisuArray
 func insert(argv: Array):
 	# Insert it!
 	new_vertex = create_new_vertex(root_ptr.current_end_point + Vector2(0, 100), "right")
@@ -28,7 +30,11 @@ func insert(argv: Array):
 	while current_index > 0 and tree_array[current_index].data > tree_array[parent(current_index)].data:
 		swap(tree_array[current_index], tree_array[parent(current_index)])
 		current_index = parent(current_index)
-
+	
+	data_array.clear()
+	for vertex in tree_array:
+		data_array.push_back(vertex.data)
+	visu_array.visu_array(data_array.duplicate())
 
 @export var input_field: LineEdit
 func _on_button_insert_pressed():

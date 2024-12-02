@@ -1,17 +1,26 @@
-[gd_scene format=3 uid="uid://bwuylmsasrk2m"]
+[gd_scene load_steps=3 format=3 uid="uid://bwuylmsasrk2m"]
 
-[node name="VisuArray" type="HBoxContainer"]
+[ext_resource type="PackedScene" uid="uid://dbx4lyhet7n5m" path="res://structs/array/array_entry.tscn" id="1_oac67"]
+[ext_resource type="Script" path="res://structs/array/visu_array.gd" id="1_q40kb"]
+
+[node name="VisuArray" type="HBoxContainer" node_paths=PackedStringArray("label_name", "ArrayEntriesHolder")]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_q40kb")
+label_name = NodePath("Label")
+array_entry_scene = ExtResource("1_oac67")
+ArrayEntriesHolder = NodePath("ScrollContainer/ArrayEntriesHolder")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "ARRRAY_NAME:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(600, 50)
+custom_minimum_size = Vector2(600, 70)
 layout_mode = 2
 
 [node name="ArrayEntriesHolder" type="HBoxContainer" parent="ScrollContainer"]
