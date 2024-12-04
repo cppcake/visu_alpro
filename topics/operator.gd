@@ -6,7 +6,7 @@ func init_algo(algo: Callable, argv: Array):
 	current_step = operations_array.size()
 	while current_step > 0:
 		backward()
-	side_panel.open()
+	#side_panel.open()
 
 func forward():
 	if current_step < operations_array.size():
@@ -178,18 +178,23 @@ func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex
 	new_vertex.global_position = position_
 	add_child(new_vertex)
 	
-	new_ptr.set_target(new_vertex)
-	match from:
-		"left":
-			new_ptr.position = new_vertex.position + Vector2(-200, 0)
-		"right":
-			new_ptr.position = new_vertex.position + Vector2(200, 0)
-		"above":
-			new_ptr.position = new_vertex.position + Vector2(0, -200)
-	
-	new_ptr.current_end_point = new_vertex.position
-	new_ptr.draw()
-	new_ptr.visible = true
+	if from == "none":
+		new_ptr.set_target(null)
+		new_ptr.visible = false
+	else:
+		new_ptr.set_target(new_vertex)
+		
+		match from:
+			"left":
+				new_ptr.position = new_vertex.position + Vector2(-200, 0)
+			"right":
+				new_ptr.position = new_vertex.position + Vector2(200, 0)
+			"above":
+				new_ptr.position = new_vertex.position + Vector2(0, -200)
+		
+		new_ptr.current_end_point = new_vertex.position
+		new_ptr.draw()
+		new_ptr.visible = true
 	
 	return new_vertex
 func create_new_vertex_undo():

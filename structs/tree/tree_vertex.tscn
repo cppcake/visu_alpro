@@ -9,9 +9,9 @@
 script = ExtResource("2_5q34q")
 sprite_visited = ExtResource("3_s68sv")
 
-[node name="pointer" parent="." index="4" groups=["pointers"]]
-from = "left_down"
-
 [node name="pointer2" parent="." index="5" groups=["pointers"] instance=ExtResource("2_6wyau")]
 visible = false
 from = "right_down"
+
+[node name="pointer" parent="." index="6" groups=["pointers"]]
+from = "left_down"

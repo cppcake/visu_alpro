@@ -27,10 +27,11 @@ func insert(argv: Array):
 		else:
 			current_ptr = parent_vertex.p2
 
-	new_vertex = create_new_vertex(current_ptr.current_end_point + Vector2(0, 100), "right")
+	new_vertex = create_new_vertex(current_ptr.current_end_point + Vector2(0, 100), "none")
 	new_vertex.set_data(argv[0])
 	tree_array.append(new_vertex)
-	
+	new_vertex.label_ref_count.visible = false
+
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
@@ -61,6 +62,12 @@ func insert(argv: Array):
 			,Operation.new(\
 				Operation.opcodes.SET_SPRITE,\
 				[tree_array[parent(current_index)], list_vertex_class.sprites.ACCENT])\
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[0, "index = " + str(current_index)])
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[1, "parent(index) = " + str(parent(current_index))])
 		])
 		push_operations([\
 			Operation.new(\
@@ -72,6 +79,9 @@ func insert(argv: Array):
 			,Operation.new(\
 				Operation.opcodes.VISU_ARRAY,\
 				[visu_array, tree_array])\
+			,Operation.new(\
+				Operation.opcodes.OVERWRITE_VARIABLE,\
+				[0, "index = " + str(parent(current_index))])
 		])
 		current_index = parent(current_index)
 	
@@ -87,16 +97,63 @@ func insert(argv: Array):
 	return
 @export var input_field: LineEdit
 func _on_button_insert_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
 	side_panel.override_code(tr("MAX_HEAP"))
-	side_panel.select_containers(1, 0, 0, 0)
+	side_panel.select_containers(1, 1, 0, 0)
 	var input = int(input_field.text)
 	side_panel.override_code_call("maxheap.insert(" + str(input) + ")")
 	init_algo(insert, [input])
-	side_panel.open()
+	#side_panel.open()
 	input_field.clear()
 
-
 func remove_max():
-	pass#swap(tree_array[0], tree_array[tree_array.size() - 1]) 
+	pass
 func _on_button_remove_max_pressed():
-	pass # Replace with function body.
+	pass
+
+func _on_bbutton_reset_pressed():
+	reset()
+var data_array: Array = []
+func _on_button_reset_tut_pressed():
+	reset()
+	reposition()
+	root_ptr.current_end_point = root_ptr.global_position + Vector2(0, 150)
+	
+	var to_insert = [68, 61, 30, 43, 20, 19, 23, 5, 21, 19, 13]
+	size = to_insert.size()
+	for number in to_insert:
+		insert_no_visuals([number])
+
+	data_array.clear()
+	for vertex in tree_array:
+		data_array.push_back(vertex.data)
+	visu_array.visu_array(data_array.duplicate())
+	clean_up()
+func reset():
+	size = 0
+	visu_array.reset()
+	tree_array.clear()
+	root_ptr.set_target(null)
+	get_tree().call_group("vertices", "queue_free")
+func insert_no_visuals(argv: Array):
+	# Insert it!
+	new_vertex = create_new_vertex(root_ptr.current_end_point + Vector2(0, 100), "right")
+	new_vertex.set_data(argv[0])
+	tree_array.append(new_vertex)
+	
+	# Do some tree operations for the visuals
+	var current_index = tree_array.size() - 1
+	if current_index == 0:
+		root_ptr.set_target(new_vertex)
+	else:
+		var parent_vertex = tree_array[parent(current_index)]
+		if tree_array.size() % 2 == 0:
+			parent_vertex.p1.set_target(new_vertex)
+		else:
+			parent_vertex.p2.set_target(new_vertex)
+	
+	# Move it up! (if needed)
+	while current_index > 0 and tree_array[current_index].data > tree_array[parent(current_index)].data:
+		swap(tree_array[current_index], tree_array[parent(current_index)])
+		current_index = parent(current_index)

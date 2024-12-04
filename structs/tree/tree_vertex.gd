@@ -10,7 +10,14 @@ func _ready():
 	p2.current_end_point = global_position + Vector2(0, 150)
 	p2.draw()
 	p2.visible = true
+	data_history.push_back(data)
 
-func set_data(data_: int):
+var data_history: Array = []
+func set_data(data_: int, save: bool = true):
+	if save:
+		data_history.push_back(data_history)
 	data = data_
 	label_data.text = str(data)
+func set_data_undo():
+	data_history.pop_back()
+	set_data(data_history.back(), false)

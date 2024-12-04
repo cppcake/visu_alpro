@@ -4,5 +4,4 @@
 
 [node name="Variable" type="Label"]
 custom_minimum_size = Vector2(0, 30)
-text = "xD"
 script = ExtResource("1_wru8b")

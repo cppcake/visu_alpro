@@ -15,10 +15,10 @@ input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/Lin
 visible = true
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1"]
-custom_minimum_size = Vector2(197, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = ExtResource("3_srtbk")
-placeholder_text = "Enter integer(s) to insert"
+placeholder_text = "Enter integer to insert"
 max_length = 4
 
 [node name="button_remove_max" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
@@ -26,10 +26,23 @@ layout_mode = 2
 text = "remove_max"
 script = ExtResource("3_rdo05")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+[node name="bbutton_reset" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+layout_mode = 2
+text = "reset"
+script = ExtResource("3_rdo05")
+
+[node name="button_reset_tut" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+layout_mode = 2
+tooltip_text = "resetet den heap und fügt anschließend die elemente gemäß aufgabe 1 ein
+
+reelix hat immer sehr gute ideen :) <3"
+text = "reset_for_aufgabe_1 (tut version! :))"
+script = ExtResource("3_rdo05")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
@@ -45,15 +58,27 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -362.0
-offset_top = -70.0
+offset_top = -114.0
 offset_right = 362.0
-offset_bottom = 0.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
 array_name = "tree_array"
 
+[node name="Camera2D" parent="." index="1"]
+position = Vector2(-56, 380)
+zoom = Vector2(0.825, 0.825)
+
 [node name="new_ptr" parent="." index="2"]
 modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="root_ptr" parent="." index="3"]
+visible = false
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="." method="_on_button_remove_max_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/bbutton_reset" to="." method="_on_bbutton_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/bbutton_reset" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/bbutton_reset" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="." method="_on_button_reset_tut_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" method="_on_pressed"]
