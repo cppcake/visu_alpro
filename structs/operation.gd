@@ -14,7 +14,10 @@ enum opcodes
 	OVERWRITE_CALL,
 	OVERWRITE_RETURN,
 	CALL,
-	RETURN
+	RETURN,
+	SWAP,
+	VISU_ARRAY,
+	INC_SIZE
 }
 
 var opcode: opcodes

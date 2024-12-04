@@ -1,0 +1,17 @@
+# Insert it!
+tree_array.push_back(data)
+size += 1
+
+# Move it up! (if needed)
+index = tree_array.size()
+while index > 0 and tree_array[index].data > tree_array[parent(index)].data do
+	swap(tree_array[index], tree_array[parent(index)])
+	index = parent(index)
+
+return
+
+
+
+# Helpermethod to calculate the index of the parent
+func parent(index) -> int:
+	return floor((index - 1) / 2)

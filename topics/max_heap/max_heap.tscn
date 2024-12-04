@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://1tu6baghoprd"]
+[gd_scene load_steps=6 format=3 uid="uid://1tu6baghoprd"]
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_rp2dr"]
 [ext_resource type="Script" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
+[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_rdo05"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_srtbk"]
 [ext_resource type="PackedScene" uid="uid://bwuylmsasrk2m" path="res://structs/array/visu_array.tscn" id="4_bxmcl"]
 
@@ -13,15 +14,29 @@ input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/Lin
 [node name="button_insert" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0"]
 visible = true
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
-visible = false
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1"]
+custom_minimum_size = Vector2(197, 0)
 layout_mode = 2
 theme = ExtResource("3_srtbk")
+placeholder_text = "Enter integer(s) to insert"
+max_length = 4
+
+[node name="button_remove_max" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
+layout_mode = 2
+text = "remove_max"
+script = ExtResource("3_rdo05")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+visible = false
+
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
 custom_minimum_size = Vector2(150, 0)
+
+[node name="side_panel" parent="CanvasLayer" index="2"]
+offset_left = -641.0
 
 [node name="VisuArray" parent="CanvasLayer" index="4" instance=ExtResource("4_bxmcl")]
 anchors_preset = 7
@@ -36,3 +51,9 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 array_name = "tree_array"
+
+[node name="new_ptr" parent="." index="2"]
+modulate = Color(1, 1, 1, 0)
+
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="." method="_on_button_remove_max_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" method="_on_pressed"]

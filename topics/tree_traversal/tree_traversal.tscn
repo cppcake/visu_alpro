@@ -6,13 +6,12 @@
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 
-[node name="root" node_paths=PackedStringArray("size_label", "root_ptr", "root_label", "selected_ptr") instance=ExtResource("1_38xve")]
+[node name="root" node_paths=PackedStringArray("root_ptr", "root_label", "selected_ptr") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
-size_label = NodePath("")
-vertex_scene = ExtResource("4_fggb2")
 root_ptr = NodePath("root_ptr")
 root_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/Label2")
 selected_ptr = NodePath("subtree_ptr")
+vertex_scene = ExtResource("4_fggb2")
 
 [node name="button_insert" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
 visible = false

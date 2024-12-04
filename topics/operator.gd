@@ -155,6 +155,22 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					side_panel.remove_stackframe()
 				continue
+			Operation.opcodes.SWAP:
+				if undo:
+					swap_undo()
+				else:
+					swap(argv[0], argv[1])
+				continue
+			Operation.opcodes.VISU_ARRAY:
+				if undo:
+					argv[0].visu_array_undo()
+				else:
+					argv[0].visu_array(to_data_array(argv[1]))
+			Operation.opcodes.INC_SIZE:
+				if undo:
+					size -= 1
+				else:
+					size += 1
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:
@@ -207,15 +223,30 @@ func pseudo_remove_undo() -> void:
 		to_remove.p1.draw()
 	to_remove.visible = true
 
-func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class) -> void:
+var swap_history: Array = []
+func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class, save: bool = true) -> void:
+	if save:
+		swap_history.push_back([vertex_1, vertex_2])
 	var buf: int = vertex_1.data
 	vertex_1.set_data(vertex_2.data)
 	vertex_2.set_data(buf)
+	
+	var buf_2 = vertex_1.sprite.texture
+	vertex_1.sprite.texture = vertex_2.sprite.texture
+	vertex_2.sprite.texture = buf_2
+func swap_undo():
+	var last_swap = swap_history.pop_back()
+	swap(last_swap[0], last_swap[1], false)
+
+func to_data_array(tree_array):
+	var data_array: Array = []
+	for vertex in tree_array:
+		data_array.push_back(vertex.data)
+	return data_array
 
 func _on_button_to_start_pressed():
 	while current_step > 0:
 		backward()
-
 func _on_button_to_end_pressed():
 	while current_step < operations_array.size():
 		forward()
