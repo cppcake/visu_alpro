@@ -12,6 +12,9 @@ func forward():
 	if current_step < operations_array.size():
 		operator_interface(operations_array[current_step])
 		current_step += 1
+	if to_remove != null:
+		to_remove.queue_free()
+		to_remove = null
 	update_step_label()
 
 func backward():
@@ -35,9 +38,6 @@ func clean_up():
 	operations_array.clear()
 	new_ptr.set_target(null)
 	new_ptr.visible = false
-	if to_remove != null:
-		to_remove.queue_free()
-		to_remove = null
 	reposition()
 	update_step_label()
 	get_tree().call_group("pointers", "reset_visuals")

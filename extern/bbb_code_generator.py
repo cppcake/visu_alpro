@@ -15,7 +15,7 @@ def replace_special_characters_in_file(input_file, output_file):
             content = infile.read()
         
         # Process the content
-        processed_content = content.replace('\n', '\\n').replace('\t', '\\t')
+        processed_content = content.replace('\n', '\\n').replace('\t', '\\t').replace('[', '[lb]')
         
         # Write the processed content to the output file
         with open(output_file, 'w') as outfile:

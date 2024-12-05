@@ -1,1 +1,0 @@
-if start_ptr == nullptr do\n\treturn\n\nCreate empty sequence F, F_left, F_right\n\nF_left = inorder(start_ptr->left)\nF_right = inorder(start_ptr->right)\n\ninsert F_left behind F\nappend start_ptr->data to sequence\ninsert F_right behind F\n\nreturn F\n

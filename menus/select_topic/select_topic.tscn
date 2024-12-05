@@ -77,13 +77,11 @@ scene_name = "doubly_list"
 label_text = "Doubly List"
 
 [node name="tree_traversal" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
-visible = false
 layout_mode = 2
 scene_name = "tree_traversal"
 label_text = "Tree Traversal"
 
 [node name="max_heap" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
-visible = false
 layout_mode = 2
 scene_name = "max_heap"
 label_text = "Maxheap"

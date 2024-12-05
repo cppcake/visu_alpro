@@ -1,0 +1,15 @@
+// Add the new data to the end of the array
+tree_array.push_back(data);
+
+// Move it up (if needed)
+int index = tree_array.size() - 1;
+while (index > 0 && tree_array[index] > tree_array[parent(index)]) {
+	std::swap(tree_array[index], tree_array[parent(index)]);
+	index = parent(index);
+}
+
+
+
+# Helpermethod to calculate the index of the parent
+func parent(index) -> int:
+	return floor((index - 1) / 2)

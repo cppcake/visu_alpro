@@ -3,17 +3,25 @@ class_name max_heap_class extends tree_traversal_class
 func _ready():
 	pass
 
+func cancel():
+	tree_array = init_array
+	super.cancel()
+
+var init_array: Array = []
+func init_algo(algo: Callable, argv: Array = []):
+	init_array = tree_array.duplicate()
+	super.init_algo(algo, argv)
 func clean_up():
 	super.clean_up()
 	for vertex in tree_array:
 		vertex.visible = true
+
 
 var tree_array: Array = []
 func parent(index):
 	return int((index - 1) / 2)
 
 func update_stack_frame():
-	super.update_stack_frame()
 	root_label.text = "tree_array = 0x..."
 
 @export var visu_array: VisuArray = null
@@ -39,7 +47,7 @@ func insert(argv: Array):
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[2, 3]])
+			[[2]])
 		,Operation.new(\
 			Operation.opcodes.MAKE_SHARED,\
 			[new_vertex])\
@@ -52,9 +60,6 @@ func insert(argv: Array):
 		,Operation.new(\
 			Operation.opcodes.VISU_ARRAY,\
 			[visu_array, tree_array])\
-		,Operation.new(\
-			Operation.opcodes.INC_SIZE,\
-			[])\
 	])
 	
 	# Move it up! (if needed)
@@ -62,7 +67,7 @@ func insert(argv: Array):
 		push_operations([\
 			Operation.new(\
 				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[7]])\
+				[[6]])\
 			,Operation.new(\
 				Operation.opcodes.SET_SPRITE,\
 				[tree_array[parent(current_index)], list_vertex_class.sprites.ACCENT])\
@@ -76,7 +81,7 @@ func insert(argv: Array):
 		push_operations([\
 			Operation.new(\
 				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[8, 9]])
+				[[7, 8]])
 			,Operation.new(\
 				Operation.opcodes.SWAP,\
 				[tree_array[current_index], tree_array[parent(current_index)]])\
@@ -93,7 +98,7 @@ func insert(argv: Array):
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[11]])
+			[[10]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_RETURN,\
 			[null])
@@ -103,7 +108,7 @@ func insert(argv: Array):
 func _on_button_insert_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()
-	side_panel.override_code(tr("MAX_HEAP"))
+	side_panel.override_code(tr("MAX_HEAP_INS"))
 	side_panel.select_containers(1, 1, 0, 0)
 	var input = int(input_field.text)
 	side_panel.override_code_call("maxheap.insert(" + str(input) + ")")
@@ -112,51 +117,58 @@ func _on_button_insert_pressed():
 	input_field.clear()
 
 func remove_max(argv: Array):
-	return
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[2, 3]])
-		,Operation.new(\
-			Operation.opcodes.SET_SPRITE,\
-			[tree_array[0], list_vertex_class.sprites.ACCENT])\
-		,Operation.new(\
-			Operation.opcodes.SET_SPRITE,\
-			[tree_array[tree_array.size() - 1], list_vertex_class.sprites.ACCENT_2])\
-		,Operation.new(\
-			Operation.opcodes.VISU_ARRAY,\
-			[visu_array, tree_array])\
-	])
+	#push_operations([\
+		#Operation.new(\
+		#	Operation.opcodes.HIGHLIGHT_CODE,\
+		#	[[2, 3]])
+		#,Operation.new(\
+		#	Operation.opcodes.SET_SPRITE,\
+		#	[tree_array[0], list_vertex_class.sprites.ACCENT])\
+		#,Operation.new(\
+		#	Operation.opcodes.SET_SPRITE,\
+		#	[tree_array[tree_array.size() - 1], list_vertex_class.sprites.ACCENT_2])\
+		#,Operation.new(\
+		#	Operation.opcodes.VISU_ARRAY,\
+		#	[visu_array, tree_array])\
+	#])
 	
 	push_operations([\
+		#Operation.new(\
+		#	Operation.opcodes.HIGHLIGHT_CODE,\
+		#	[[2, 3]])
 		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[2, 3]])
-		,Operation.new(\
 			Operation.opcodes.SWAP,\
 			[tree_array[tree_array.size() - 1], tree_array[0]])\
 		,Operation.new(\
 			Operation.opcodes.VISU_ARRAY,\
-			[visu_array, tree_array])\
+			[visu_array, tree_array.duplicate()])\
 	])
-	#swap(tree_array[0], tree_array[tree_array.size() - 1])
 	
-	
-	#to_remove = tree_array.pop_back()
-	#to_remove.queue_free()
-	
+	to_remove = tree_array.pop_back()
 	push_operations([\
+		#Operation.new(\
+		#	Operation.opcodes.HIGHLIGHT_CODE,\
+		#	[[2, 3]])
 		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[2, 3]])
+			Operation.opcodes.TOGGLE_VISIBLE,\
+			[to_remove])\
 		,Operation.new(\
 			Operation.opcodes.VISU_ARRAY,\
 			[visu_array, tree_array])\
-		,Operation.new(\
-			Operation.opcodes.DEC_SIZE,\
-			[])\
 	])
-	#size -= 1
+	
+	#push_operations([\
+		#Operation.new(\
+		#	Operation.opcodes.HIGHLIGHT_CODE,\
+		#	[[2, 3]])
+		#,Operation.new(\
+		#	Operation.opcodes.VISU_ARRAY,\
+		#	[visu_array, tree_array])\
+	#	Operation.new(\
+	#		Operation.opcodes.DEC_SIZE,\
+	#		[])\
+	#])
+	size -= 1
 	
 	var i = 0
 	while i < size:
@@ -174,20 +186,24 @@ func remove_max(argv: Array):
 			break
 		
 		push_operations([\
+			#Operation.new(\
+			#	Operation.opcodes.HIGHLIGHT_CODE,\
+			#	[[2, 3]])
 			Operation.new(\
-				Operation.opcodes.HIGHLIGHT_CODE,\
-				[[2, 3]])
+				Operation.opcodes.SWAP,\
+				[tree_array[biggest], tree_array[i]])\
 			,Operation.new(\
 				Operation.opcodes.VISU_ARRAY,\
 				[visu_array, tree_array])\
-			,Operation.new(\
-				Operation.opcodes.SWAP,\
-				[tree_array[biggest], tree_array[i]])\
 		])
 		#swap(tree_array[biggest], tree_array[i])
 		i = biggest
-
 func _on_button_remove_max_pressed():
+	#side_panel.create_variable()
+	#side_panel.create_variable()
+	side_panel.override_code(tr("MAX_HEAP_RM"))
+	side_panel.select_containers(1, 1, 0, 0)
+	side_panel.override_code_call("maxheap.remove_max()")
 	init_algo(remove_max)
 
 func _on_bbutton_reset_pressed():

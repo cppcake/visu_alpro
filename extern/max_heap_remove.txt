@@ -1,0 +1,34 @@
+// Swap the root with the last element
+std::swap(tree_array[0], tree_array[tree_array.size() - 1]);
+
+// Remove the last element
+tree_array.pop_back();
+
+int size = tree_array.size();
+int i = 0;
+
+while (i < size) {
+    int left = i * 2 + 1;
+    int right = left + 1;
+    int largest = i;
+
+    // Check if left child is larger
+    if (left < size && tree_array[left].data > tree_array[largest].data) {
+        largest = left;
+    }
+
+    // Check if right child is larger
+    if (right < size && tree_array[right].data > tree_array[largest].data) {
+        largest = right;
+    }
+
+    // If the current node is the largest, break the loop
+    if (largest == i) {
+        break;
+    }
+
+    // Swap the largest child with the current node
+    std::swap(tree_array[largest], tree_array[i]);
+
+    // Move to the largest child
+    i = largest;

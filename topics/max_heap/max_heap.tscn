@@ -13,9 +13,6 @@ visu_array = NodePath("CanvasLayer/VisuArray")
 input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/LineEdit")
 vertex_scene = ExtResource("3_j0ker")
 
-[node name="button_insert" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0"]
-visible = true
-
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -50,8 +47,14 @@ visible = false
 [node name="stackframe" parent="CanvasLayer" index="1"]
 custom_minimum_size = Vector2(150, 0)
 
+[node name="size_label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+visible = false
+
 [node name="side_panel" parent="CanvasLayer" index="2"]
 offset_left = -641.0
+
+[node name="code" parent="CanvasLayer/side_panel/content/container_code/content" index="1"]
+max_screen_height_cover = 0.6
 
 [node name="VisuArray" parent="CanvasLayer" index="4" instance=ExtResource("4_bxmcl")]
 anchors_preset = 7
@@ -83,3 +86,5 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/bbutton_reset" to="." method="_on_bbutton_reset_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="." method="_on_button_reset_tut_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" method="_on_pressed"]
+
+[editable path="CanvasLayer/side_panel"]
