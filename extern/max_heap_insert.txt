@@ -8,8 +8,9 @@ while (index > 0 && tree_array[index] > tree_array[parent(index)]) {
 	index = parent(index);
 }
 
+return
 
-
+--------------------------------------------------------------------------------------------------------------
 # Helpermethod to calculate the index of the parent
 func parent(index) -> int:
 	return floor((index - 1) / 2)

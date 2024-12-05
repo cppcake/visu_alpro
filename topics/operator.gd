@@ -12,9 +12,6 @@ func forward():
 	if current_step < operations_array.size():
 		operator_interface(operations_array[current_step])
 		current_step += 1
-	if to_remove != null:
-		to_remove.queue_free()
-		to_remove = null
 	update_step_label()
 
 func backward():

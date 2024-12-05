@@ -4,9 +4,8 @@ func _ready():
 	pass
 
 func cancel():
-	tree_array = init_array
 	super.cancel()
-
+	tree_array = init_array
 var init_array: Array = []
 func init_algo(algo: Callable, argv: Array = []):
 	init_array = tree_array.duplicate()
@@ -15,7 +14,6 @@ func clean_up():
 	super.clean_up()
 	for vertex in tree_array:
 		vertex.visible = true
-
 
 var tree_array: Array = []
 func parent(index):
@@ -98,7 +96,7 @@ func insert(argv: Array):
 	push_operations([\
 		Operation.new(\
 			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[10]])
+			[[11]])
 		,Operation.new(\
 			Operation.opcodes.OVERWRITE_RETURN,\
 			[null])
@@ -168,18 +166,17 @@ func remove_max(argv: Array):
 	#		Operation.opcodes.DEC_SIZE,\
 	#		[])\
 	#])
-	size -= 1
 	
 	var i = 0
-	while i < size:
+	while i < tree_array.size():
 		var left = i * 2 + 1
 		var right = left + 1
 		var biggest = i
 		
-		if left < size and tree_array[left].data > tree_array[biggest].data:
+		if left < tree_array.size() and tree_array[left].data > tree_array[biggest].data:
 			biggest = left
 		
-		if right < size and tree_array[right].data > tree_array[biggest].data:
+		if right < tree_array.size() and tree_array[right].data > tree_array[biggest].data:
 			biggest = right
 		
 		if biggest == i:
@@ -196,7 +193,6 @@ func remove_max(argv: Array):
 				Operation.opcodes.VISU_ARRAY,\
 				[visu_array, tree_array])\
 		])
-		#swap(tree_array[biggest], tree_array[i])
 		i = biggest
 func _on_button_remove_max_pressed():
 	#side_panel.create_variable()
@@ -227,7 +223,6 @@ func _on_button_reset_tut_pressed():
 	root_ptr.current_end_point = root_ptr.global_position + Vector2(0, 150)
 	
 	var to_insert = [68, 61, 30, 43, 20, 19, 23, 5, 21, 19, 13]
-	size = to_insert.size()
 	for number in to_insert:
 		insert_no_visuals([number])
 
@@ -240,7 +235,6 @@ func _on_button_reset_tut_pressed():
 	
 	init_algo(reveal)
 func reset():
-	size = 0
 	visu_array.reset()
 	tree_array.clear()
 	root_ptr.set_target(null)
