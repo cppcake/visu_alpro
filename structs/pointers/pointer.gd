@@ -43,6 +43,9 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	var target_position: Vector2 = global_position + rel_null_end_point
 	
+	if not is_instance_valid(target):
+		target = null
+	
 	match type_string(typeof(target)):
 		"Nil":
 			label_target.text = "null"

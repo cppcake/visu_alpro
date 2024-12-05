@@ -17,9 +17,6 @@ var init_drag_mouse_pos: Vector2
 func _process(delta):
 	world_pos = get_global_mouse_position()
 	viewport_pos = get_viewport().get_mouse_position()
-	print(zoom)
-	print(position)
-	print("--")
 	drag_camera()
 	zoom_camera(delta)
 		

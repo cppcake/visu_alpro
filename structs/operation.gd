@@ -17,7 +17,9 @@ enum opcodes
 	RETURN,
 	SWAP,
 	VISU_ARRAY,
-	INC_SIZE
+	INC_SIZE,
+	DEC_SIZE,
+	TOGGLE_VISIBLE
 }
 
 var opcode: opcodes

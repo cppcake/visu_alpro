@@ -1,7 +1,7 @@
 class_name operator_class extends Node
 
 var current_step
-func init_algo(algo: Callable, argv: Array):
+func init_algo(algo: Callable, argv: Array = []):
 	algo.call(argv)
 	current_step = operations_array.size()
 	while current_step > 0:
@@ -166,11 +166,22 @@ func operator_interface(operations: Array, undo: bool = false):
 					argv[0].visu_array_undo()
 				else:
 					argv[0].visu_array(to_data_array(argv[1]))
+				continue
 			Operation.opcodes.INC_SIZE:
 				if undo:
 					size -= 1
 				else:
 					size += 1
+				continue
+			Operation.opcodes.INC_SIZE:
+				if undo:
+					size += 1
+				else:
+					size -= 1
+				continue
+			Operation.opcodes.TOGGLE_VISIBLE:
+				argv[0].visible = !argv[0].visible
+				continue
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:
