@@ -257,3 +257,26 @@ func insert_no_visuals(argv: Array):
 	while current_index > 0 and tree_array[current_index].data > tree_array[parent(current_index)].data:
 		swap(tree_array[current_index], tree_array[parent(current_index)])
 		current_index = parent(current_index)
+
+
+func _on_button_insert_20_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.override_code(tr("MAX_HEAP_INS"))
+	side_panel.select_containers(1, 1, 0, 0)
+	side_panel.override_code_call("maxheap.insert(" + str(20) + ")")
+	init_algo(insert, [20])
+	#side_panel.open()
+	input_field.clear()
+
+
+func _on_button_insert_40_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.override_code(tr("MAX_HEAP_INS"))
+	side_panel.select_containers(1, 1, 0, 0)
+	var input = 40
+	side_panel.override_code_call("maxheap.insert(" + str(input) + ")")
+	init_algo(insert, [input])
+	#side_panel.open()
+	input_field.clear()

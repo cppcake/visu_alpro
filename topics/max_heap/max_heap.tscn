@@ -30,18 +30,31 @@ layout_mode = 2
 text = "reset"
 script = ExtResource("3_rdo05")
 
-[node name="button_reset_tut" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4" groups=["buttons_active"]]
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+layout_mode = 2
+
+[node name="button_reset_tut" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "resetet den heap und fügt anschließend die elemente gemäß aufgabe 1 ein
 
 reelix hat immer sehr gute ideen :) <3"
-text = "reset (tut version! :))"
+text = "reset_tut"
 script = ExtResource("3_rdo05")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
+[node name="button_insert_20" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6" groups=["buttons_active"]]
+layout_mode = 2
+text = "insert 20"
+script = ExtResource("3_rdo05")
+
+[node name="button_insert_40" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="7" groups=["buttons_active"]]
+layout_mode = 2
+text = "insert 40"
+script = ExtResource("3_rdo05")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="8"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6"]
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="9"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
@@ -62,10 +75,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -362.0
-offset_top = -114.0
-offset_right = 362.0
-offset_bottom = -44.0
+offset_left = -956.0
+offset_top = -883.0
+offset_right = -106.0
+offset_bottom = -813.0
 grow_horizontal = 2
 grow_vertical = 0
 array_name = "tree_array"
@@ -86,5 +99,9 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/bbutton_reset" to="." method="_on_bbutton_reset_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="." method="_on_button_reset_tut_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_reset_tut" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_20" to="." method="_on_button_insert_20_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_20" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_20" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" to="." method="_on_button_insert_40_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" method="_on_pressed"]
 
 [editable path="CanvasLayer/side_panel"]
