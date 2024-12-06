@@ -32,3 +32,5 @@ while (i < size) {
 
     // Move to the largest child
     i = largest;
+
+return

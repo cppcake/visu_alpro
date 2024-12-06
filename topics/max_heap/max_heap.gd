@@ -155,18 +155,6 @@ func remove_max(argv: Array):
 			[visu_array, tree_array])\
 	])
 	
-	#push_operations([\
-		#Operation.new(\
-		#	Operation.opcodes.HIGHLIGHT_CODE,\
-		#	[[2, 3]])
-		#,Operation.new(\
-		#	Operation.opcodes.VISU_ARRAY,\
-		#	[visu_array, tree_array])\
-	#	Operation.new(\
-	#		Operation.opcodes.DEC_SIZE,\
-	#		[])\
-	#])
-	
 	var i = 0
 	while i < tree_array.size():
 		var left = i * 2 + 1
@@ -194,6 +182,15 @@ func remove_max(argv: Array):
 				[visu_array, tree_array])\
 		])
 		i = biggest
+		
+	push_operations([\
+		Operation.new(\
+			Operation.opcodes.HIGHLIGHT_CODE,\
+			[[36]])
+		,Operation.new(\
+			Operation.opcodes.OVERWRITE_RETURN,\
+			[null])
+		])
 func _on_button_remove_max_pressed():
 	#side_panel.create_variable()
 	#side_panel.create_variable()
