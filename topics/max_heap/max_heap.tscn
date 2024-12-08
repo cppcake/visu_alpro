@@ -58,6 +58,7 @@ visible = false
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
+visible = false
 custom_minimum_size = Vector2(150, 0)
 
 [node name="size_label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
@@ -70,17 +71,10 @@ offset_left = -641.0
 max_screen_height_cover = 0.6
 
 [node name="VisuArray" parent="CanvasLayer" index="4" instance=ExtResource("4_bxmcl")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -956.0
-offset_top = -883.0
-offset_right = -106.0
-offset_bottom = -813.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 5.0
+offset_top = 50.0
+offset_right = 855.0
+offset_bottom = 120.0
 array_name = "tree_array"
 
 [node name="Camera2D" parent="." index="1"]

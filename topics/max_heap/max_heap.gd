@@ -201,8 +201,14 @@ func _on_button_remove_max_pressed():
 
 func _on_bbutton_reset_pressed():
 	reset()
-var data_array: Array = []
+func reset():
+	visu_array.reset()
+	tree_array.clear()
+	root_ptr.set_target(null)
+	get_tree().call_group("vertices", "queue_free")
 
+# Stuff for Tutorium
+var data_array: Array = []
 func reveal(argv: Array):
 	# Hide em!
 	for vertex in tree_array:
@@ -213,7 +219,6 @@ func reveal(argv: Array):
 				Operation.opcodes.TOGGLE_VISIBLE,\
 				[vertex])
 		])
-
 func _on_button_reset_tut_pressed():
 	reset()
 	reposition()
@@ -231,11 +236,6 @@ func _on_button_reset_tut_pressed():
 	clean_up()
 	
 	init_algo(reveal)
-func reset():
-	visu_array.reset()
-	tree_array.clear()
-	root_ptr.set_target(null)
-	get_tree().call_group("vertices", "queue_free")
 func insert_no_visuals(argv: Array):
 	# Insert it!
 	new_vertex = create_new_vertex(root_ptr.current_end_point + Vector2(0, 100), "right")
@@ -257,8 +257,6 @@ func insert_no_visuals(argv: Array):
 	while current_index > 0 and tree_array[current_index].data > tree_array[parent(current_index)].data:
 		swap(tree_array[current_index], tree_array[parent(current_index)])
 		current_index = parent(current_index)
-
-
 func _on_button_insert_20_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()
@@ -268,8 +266,6 @@ func _on_button_insert_20_pressed():
 	init_algo(insert, [20])
 	#side_panel.open()
 	input_field.clear()
-
-
 func _on_button_insert_40_pressed():
 	side_panel.create_variable()
 	side_panel.create_variable()

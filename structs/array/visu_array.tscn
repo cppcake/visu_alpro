@@ -12,6 +12,7 @@ array_entry_scene = ExtResource("1_oac67")
 ArrayEntriesHolder = NodePath("ScrollContainer/ArrayEntriesHolder")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
