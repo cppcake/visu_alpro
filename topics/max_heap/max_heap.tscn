@@ -51,10 +51,15 @@ layout_mode = 2
 text = "insert 40"
 script = ExtResource("3_rdo05")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="8"]
+[node name="button_remove_max2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="8" groups=["buttons_active"]]
+layout_mode = 2
+text = "remove_max"
+script = ExtResource("3_rdo05")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="9"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="9"]
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="10"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
@@ -97,5 +102,7 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_20" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_20" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" to="." method="_on_button_insert_40_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_insert_40" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max2" to="." method="_on_button_remove_max_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max2" method="_on_pressed"]
 
 [editable path="CanvasLayer/side_panel"]

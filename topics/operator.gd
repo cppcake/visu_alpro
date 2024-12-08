@@ -138,7 +138,10 @@ func operator_interface(operations: Array, undo: bool = false):
 				if undo:
 					side_panel.override_code_return_v2_undo()
 				else:
-					side_panel.override_code_return_v2(argv[0])
+					if argv.size() == 1:
+						side_panel.override_code_return_v2(argv[0])
+					else:
+						side_panel.override_code_return_v2(argv[0], argv[1])
 				continue
 			Operation.opcodes.CALL:
 				if undo:
@@ -178,6 +181,12 @@ func operator_interface(operations: Array, undo: bool = false):
 				continue
 			Operation.opcodes.TOGGLE_VISIBLE:
 				argv[0].visible = !argv[0].visible
+				continue
+			Operation.opcodes.CRASH:
+				if undo:
+					side_panel.crash_undo()
+				else:
+					side_panel.crash()
 				continue
 
 @export var vertex_scene: PackedScene
@@ -244,12 +253,21 @@ func swap(vertex_1: tree_vertex_class, vertex_2: tree_vertex_class, save: bool =
 	vertex_1.set_data(vertex_2.data)
 	vertex_2.set_data(buf)
 	
-	var buf_2 = vertex_1.sprite.texture
-	vertex_1.sprite.texture = vertex_2.sprite.texture
-	vertex_2.sprite.texture = buf_2
+	var buf_1 = vertex_1.sprite_history.back()
+	var buf_2 = vertex_2.sprite_history.back()
+	vertex_1.set_sprite(buf_2)
+	vertex_2.set_sprite(buf_1)
 func swap_undo():
 	var last_swap = swap_history.pop_back()
-	swap(last_swap[0], last_swap[1], false)
+	var vertex_1 = last_swap[0]
+	var vertex_2 = last_swap[1]
+	
+	vertex_1.set_sprite_undo()
+	vertex_2.set_sprite_undo()
+	
+	var buf: int = vertex_1.data
+	vertex_1.set_data(vertex_2.data)
+	vertex_2.set_data(buf)
 
 func to_data_array(tree_array):
 	var data_array: Array = []

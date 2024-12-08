@@ -53,6 +53,10 @@ func override_code_return_v2(return_value, color: Color = constants.color_1_c):
 	cont_code.set_return_v2(return_value, color)
 func override_code_return_v2_undo():
 	cont_code.set_return_v2_undo()
+func crash():
+	cont_code.crash()
+func crash_undo():
+	cont_code.crash_undo()
 
 func override_code_call(text_: String):
 	cont_code.set_call(text_)

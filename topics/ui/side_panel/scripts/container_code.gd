@@ -44,6 +44,11 @@ func set_return_v2_undo():
 	
 	color_history.pop_back()
 	label_return.modulate = color_history.back()
+func crash():
+	label_return.text = "Segmentation fault (core dumped)"
+	label_return.modulate = Color.RED
+func crash_undo():
+	label_return.text = ""
 
 func highlight_lines(lines: Array):
 	code_display.highlight_lines(lines)

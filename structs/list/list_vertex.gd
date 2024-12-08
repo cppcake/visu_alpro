@@ -33,6 +33,7 @@ func update_reference_counter(addend: int):
 		set_sprite(sprites.TO_REMOVE)
 	label_ref_count.text = str(reference_counter)
 
+
 var sprite_history: Array = [sprites.DEFAULT]
 func set_sprite(selection: sprites, save: bool = true):
 	if save:

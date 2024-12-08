@@ -8,7 +8,6 @@ func _ready():
 @export var array_entry_scene: PackedScene
 @export var ArrayEntriesHolder: HBoxContainer
 var array_history: Array = [[]]
-
 func visu_array(array: Array, save: bool = true):
 	if save:
 		array_history.push_back(array.duplicate())
@@ -24,6 +23,7 @@ func visu_array(array: Array, save: bool = true):
 		entry.set_label_index(index)
 		index += 1
 		ArrayEntriesHolder.add_child(entry)
+
 func visu_array_undo():
 	array_history.pop_back()
 	visu_array(array_history.back(), false)
@@ -31,3 +31,4 @@ func visu_array_undo():
 func reset():
 	visu_array([], false)
 	array_history = [[]]
+

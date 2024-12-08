@@ -15,7 +15,7 @@ func clean_up():
 	for vertex in tree_array:
 		vertex.visible = true
 
-var tree_array: Array = []
+static var tree_array: Array = []
 func parent(index):
 	return int((index - 1) / 2)
 
@@ -93,14 +93,14 @@ func insert(argv: Array):
 		current_index = parent(current_index)
 	
 	# Return
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[11]])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_RETURN,\
-			[null])
-		])
+	#push_operations([\
+	#	Operation.new(\
+	#		Operation.opcodes.HIGHLIGHT_CODE,\
+	#		[[11]])
+	#	,Operation.new(\
+	#		Operation.opcodes.OVERWRITE_RETURN,\
+	#		[null])
+	#	])
 	return
 @export var input_field: LineEdit
 func _on_button_insert_pressed():
@@ -115,20 +115,31 @@ func _on_button_insert_pressed():
 	input_field.clear()
 
 func remove_max(argv: Array):
-	#push_operations([\
-		#Operation.new(\
+	if tree_array.is_empty():
+		push_operations([\
+			Operation.new(\
+				Operation.opcodes.HIGHLIGHT_CODE,\
+				[[2]])
+			,Operation.new(\
+				Operation.opcodes.CRASH,\
+				[])
+		])
+		return
+		
+	push_operations([\
+		Operation.new(\
 		#	Operation.opcodes.HIGHLIGHT_CODE,\
 		#	[[2, 3]])
 		#,Operation.new(\
-		#	Operation.opcodes.SET_SPRITE,\
-		#	[tree_array[0], list_vertex_class.sprites.ACCENT])\
-		#,Operation.new(\
-		#	Operation.opcodes.SET_SPRITE,\
-		#	[tree_array[tree_array.size() - 1], list_vertex_class.sprites.ACCENT_2])\
-		#,Operation.new(\
-		#	Operation.opcodes.VISU_ARRAY,\
-		#	[visu_array, tree_array])\
-	#])
+			Operation.opcodes.SET_SPRITE,\
+			[tree_array[tree_array.size() - 1], list_vertex_class.sprites.ACCENT_2])\
+		,Operation.new(\
+			Operation.opcodes.SET_SPRITE,\
+			[tree_array[0], list_vertex_class.sprites.TO_REMOVE])\
+		,Operation.new(\
+			Operation.opcodes.VISU_ARRAY,\
+			[visu_array, tree_array.duplicate()])\
+	])
 	
 	push_operations([\
 		#Operation.new(\
@@ -152,7 +163,7 @@ func remove_max(argv: Array):
 			[to_remove])\
 		,Operation.new(\
 			Operation.opcodes.VISU_ARRAY,\
-			[visu_array, tree_array])\
+			[visu_array, tree_array.duplicate()])\
 	])
 	
 	var i = 0
@@ -171,26 +182,32 @@ func remove_max(argv: Array):
 			break
 		
 		push_operations([\
+			Operation.new(\
+				Operation.opcodes.SET_SPRITE,\
+				[tree_array[biggest], list_vertex_class.sprites.ACCENT])\
+		])
+		
+		push_operations([\
 			#Operation.new(\
 			#	Operation.opcodes.HIGHLIGHT_CODE,\
 			#	[[2, 3]])
 			Operation.new(\
 				Operation.opcodes.SWAP,\
-				[tree_array[biggest], tree_array[i]])\
+				[tree_array[i], tree_array[biggest]])\
 			,Operation.new(\
 				Operation.opcodes.VISU_ARRAY,\
-				[visu_array, tree_array])\
+				[visu_array, tree_array.duplicate()])\
 		])
 		i = biggest
 		
-	push_operations([\
-		Operation.new(\
-			Operation.opcodes.HIGHLIGHT_CODE,\
-			[[36]])
-		,Operation.new(\
-			Operation.opcodes.OVERWRITE_RETURN,\
-			[null])
-		])
+	#push_operations([\
+	#	Operation.new(\
+	#		Operation.opcodes.HIGHLIGHT_CODE,\
+	#		[[36]])
+	#	,Operation.new(\
+	#		Operation.opcodes.OVERWRITE_RETURN,\
+	#		[null])
+	#	])
 func _on_button_remove_max_pressed():
 	#side_panel.create_variable()
 	#side_panel.create_variable()

@@ -19,6 +19,7 @@ enum opcodes
 	VISU_ARRAY,
 	INC_SIZE,
 	DEC_SIZE,
+	CRASH,
 	TOGGLE_VISIBLE
 }
 
