@@ -20,7 +20,9 @@ enum opcodes
 	INC_SIZE,
 	DEC_SIZE,
 	CRASH,
-	TOGGLE_VISIBLE
+	TOGGLE_VISIBLE,
+	MOVE_REL,
+	MOVE,
 }
 
 var opcode: opcodes

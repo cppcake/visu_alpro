@@ -20,5 +20,8 @@ visible = false
 [node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
 visible = false
 
+[node name="stackframe" parent="CanvasLayer" index="1"]
+visible = false
+
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" to="." method="_on_buton_aufgabe_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" method="_on_pressed"]

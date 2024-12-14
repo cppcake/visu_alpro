@@ -190,6 +190,18 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					side_panel.crash()
 				continue
+			Operation.opcodes.MOVE_REL:
+				if undo:
+					argv[0].move_to_undo()
+				else:
+					argv[0].move_to_rel(argv[1])
+				continue
+			Operation.opcodes.MOVE:
+				if undo:
+					argv[0].move_to_undo()
+				else:
+					argv[0].move_to(argv[1])
+				continue
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:
