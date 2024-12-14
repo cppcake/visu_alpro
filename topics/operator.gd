@@ -65,7 +65,9 @@ func push_operations(operations: Array):
 	operations_array.push_back(operations)
 	operator_interface(operations_array.back())
 
-func operator_interface(operations: Array, undo: bool = false):
+func operator_interface(operations: Array, undo: bool = false): 
+	
+	
 	for operation: Operation in operations:
 		var opcode = operation.opcode
 		var argv = operation.argv

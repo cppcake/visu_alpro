@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjpcgw7ujcmp0"]
+[gd_scene load_steps=2 format=3 uid="uid://1ke1200s0p42"]
 
-[ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="1_lh66e"]
-[ext_resource type="Script" path="res://structs/avl/avl_vertex.gd" id="2_y0xua"]
+[ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="1_v3qhv"]
 
-[node name="tree_vertex" instance=ExtResource("1_lh66e")]
-script = ExtResource("2_y0xua")
-sprite_visited = null
+[node name="tree_vertex" instance=ExtResource("1_v3qhv")]
+
+[node name="label_tag" parent="." index="2"]
+theme_override_font_sizes/font_size = 16

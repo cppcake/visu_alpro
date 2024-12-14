@@ -17,6 +17,7 @@ func _ready():
 	finish()
 	init_algo(insert, [10, root_ptr])
 	finish()
+	size = 7
 
 @export var root_label: Label
 func update_stack_frame():
