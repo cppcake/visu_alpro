@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjpcgw7ujcmp0"]
+
+[ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="1_lh66e"]
+[ext_resource type="Script" path="res://structs/avl/avl_vertex.gd" id="2_y0xua"]
+
+[node name="tree_vertex" instance=ExtResource("1_lh66e")]
+script = ExtResource("2_y0xua")
+sprite_visited = null

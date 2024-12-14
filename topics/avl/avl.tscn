@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3727dmyp5ime"]
+
+[ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_pe8m0"]
+[ext_resource type="Script" path="res://topics/avl/avl.gd" id="2_n7br5"]
+[ext_resource type="PackedScene" uid="uid://cjpcgw7ujcmp0" path="res://structs/avl/avl_vertex.tscn" id="3_k5fof"]
+
+[node name="root" instance=ExtResource("1_pe8m0")]
+script = ExtResource("2_n7br5")
+vertex_scene = ExtResource("3_k5fof")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1"]
+visible = false
+
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2"]
+visible = false
