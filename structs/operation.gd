@@ -22,7 +22,9 @@ enum opcodes
 	CRASH,
 	TOGGLE_VISIBLE,
 	MOVE_REL,
+	MOVE_ALL_REL,
 	MOVE,
+	REPOS,
 }
 
 var opcode: opcodes

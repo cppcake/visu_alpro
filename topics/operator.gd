@@ -196,12 +196,27 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					argv[0].move_to_rel(argv[1])
 				continue
+			Operation.opcodes.MOVE_ALL_REL:
+				if undo:
+					get_tree().call_group("vertices", "move_to_undo")
+				else:
+					#for vertex in argv[0]:
+					#	vertex.move_to_rel(argv[1])
+					get_tree().call_group("vertices", "move_to_rel", argv[0])
+				continue
 			Operation.opcodes.MOVE:
 				if undo:
 					argv[0].move_to_undo()
 				else:
 					argv[0].move_to(argv[1])
 				continue
+			Operation.opcodes.REPOS:
+				if undo:
+					get_tree().call_group("vertices", "move_to_undo")
+				else:
+					reposition()
+					for vertex in argv[0]:
+						vertex.move_to_rel(Vector2(0, 0))
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:

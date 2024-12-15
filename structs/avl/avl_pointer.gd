@@ -1,7 +1,9 @@
 extends pointer_class
 
+var always_hidden = false
+
 func draw(target_position: Vector2 = current_end_point):
-	if target == null:
+	if target == null or always_hidden:
 		visible = false
 		return
 	

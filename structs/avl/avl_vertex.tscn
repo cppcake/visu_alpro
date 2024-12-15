@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://structs/avl/avl_vertex.gd" id="2_a5n7u"]
 [ext_resource type="PackedScene" uid="uid://wm2e3mavitia" path="res://structs/avl/avl_pointer.tscn" id="3_bymfl"]
 
-[node name="avl_vertex" node_paths=PackedStringArray("p1") instance=ExtResource("1_v3qhv")]
+[node name="avl_vertex" node_paths=PackedStringArray("p3", "p1") instance=ExtResource("1_v3qhv")]
 script = ExtResource("2_a5n7u")
+p3 = NodePath("avl_pointer3")
 p1 = NodePath("avl_pointer")
 
 [node name="label_tag" parent="." index="2"]
@@ -14,3 +15,5 @@ theme_override_font_sizes/font_size = 16
 [node name="avl_pointer2" parent="." index="5" groups=["pointers"] instance=ExtResource("3_bymfl")]
 
 [node name="avl_pointer" parent="." index="8" groups=["pointers"] instance=ExtResource("3_bymfl")]
+
+[node name="avl_pointer3" parent="." index="9" instance=ExtResource("3_bymfl")]

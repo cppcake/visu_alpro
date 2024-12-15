@@ -31,6 +31,9 @@ var offset_y: int = 180
 var min_offset_x: int = 80
 func reposition():
 	var width: int = int(pow(2, calculate_height(root_ptr))) * min_offset_x
+	var root_vertex = root_ptr.target
+	if root_vertex != null:
+		root_vertex.move_to(root_ptr.global_position + Vector2(0, 200))
 	reposition_(root_ptr, width)
 func reposition_(root: pointer_class, width: int):
 	var root_vertex = root.target

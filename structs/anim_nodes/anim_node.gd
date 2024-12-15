@@ -10,14 +10,17 @@ func _physics_process(delta):
 
 var dest_pos_history: Array = []
 func move_to(dest_pos_: Vector2, save: bool = true):
-	if save:
-		dest_pos_history.push_back(position)
+	if save and dest_pos != null:
+		dest_pos_history.push_back(dest_pos)
 	
 	if dest_pos != null:
 		global_position = dest_pos
 	dest_pos = dest_pos_
 func move_to_undo():
+	if dest_pos_history.size() == 0:
+		return
 	move_to(dest_pos_history.pop_back(), false)
 
 func move_to_rel(offset: Vector2):
+	print(offset)
 	move_to(position + offset)
