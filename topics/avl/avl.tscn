@@ -19,10 +19,15 @@ layout_mode = 2
 text = "Aufgabe 2"
 script = ExtResource("3_a1ike")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+[node name="buton_aufgabe_03" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2" groups=["buttons_active"]]
+layout_mode = 2
+text = "Aufgabe 3"
+script = ExtResource("3_a1ike")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
@@ -32,3 +37,5 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_02" to="." method="_on_buton_aufgabe_02_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_02" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_02" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" to="." method="_on_buton_aufgabe_03_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" method="_on_pressed"]

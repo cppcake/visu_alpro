@@ -5,11 +5,7 @@ func _ready():
 
 var vertices: Array = []
 func create_tree(data_array: Array, edge_array: Array):
-	if is_instance_valid(new_vertex):
-		new_vertex.queue_free()
-	
-	for vertex in vertices:
-		vertex.queue_free()
+	get_tree().call_group("vertices", "queue_free")
 	vertices.clear()
 	
 	for data in data_array:
@@ -33,6 +29,10 @@ func parent(index):
 	return int((index - 1) / 2)
 
 func aufgabe_01(argv: Array):
+	vertices[3].p1.always_hidden = true
+	vertices[6].p2.always_hidden = true
+	vertices[3].p3.set_target(vertices[6])
+	
 	new_vertex = vertex_scene.instantiate()
 	new_vertex.visible = false
 	new_vertex.set_data(4)
@@ -44,6 +44,9 @@ func aufgabe_01(argv: Array):
 			Operation.new(
 					Operation.opcodes.POINT_AT,
 					[vertices[6].p2, new_vertex]),
+			Operation.new(
+					Operation.opcodes.POINT_AT,
+					[new_vertex.p3, vertices[6]]),
 			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
 					[new_vertex]),
@@ -75,13 +78,7 @@ func aufgabe_01(argv: Array):
 					Operation.opcodes.POINT_AT,
 					[vertices[1].p1, new_vertex]),
 			Operation.new(
-					Operation.opcodes.MOVE,
-					[vertices[3],  Vector2(vertices[3].dest_pos.x, vertices[3].global_position.y + 300)]),
-	])
-	
-	push_operations([
-			Operation.new(
-					Operation.opcodes.REPOS,
+				Operation.opcodes.REPOS,
 					[[]]),
 	])
 func _on_buton_aufgabe_01_pressed():
@@ -154,3 +151,33 @@ func _on_buton_aufgabe_02_pressed():
 		[3, 6, 1]])
 	
 	init_algo(aufgabe_02)
+
+
+func aufgabe_03(argv: Array):
+	pass
+func _on_buton_aufgabe_03_pressed():
+	create_tree(
+		[9, 3, 15, 2, 5, 13, 20, 1, 4, 7, 11, 14, 18, 21, 6, 8, 10, 12, 17, 19, 22, 16],
+		[[0, 1, 0],
+		[0, 2, 1],
+		[1, 3, 0],
+		[1, 4, 1],
+		[2, 5, 0],
+		[2, 6, 1],
+		[3, 7, 0],
+		[4, 8, 0],
+		[4, 9, 1],
+		[5, 10, 0],
+		[5, 11, 1],
+		[6, 12, 0],
+		[6, 13, 1],
+		[9, 14, 0],
+		[9, 15, 1],
+		[10, 16, 0],
+		[10, 17, 1],
+		[12, 18, 0],
+		[12, 19, 1],
+		[13, 20, 1],
+		[18, 21, 0]])
+	
+	init_algo(aufgabe_03)
