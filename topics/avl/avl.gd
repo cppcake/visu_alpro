@@ -29,10 +29,6 @@ func parent(index):
 	return int((index - 1) / 2)
 
 func aufgabe_01(argv: Array):
-	vertices[3].p1.always_hidden = true
-	vertices[6].p2.always_hidden = true
-	vertices[3].p3.set_target(vertices[6])
-	
 	new_vertex = vertex_scene.instantiate()
 	new_vertex.visible = false
 	new_vertex.set_data(4)
@@ -44,9 +40,6 @@ func aufgabe_01(argv: Array):
 			Operation.new(
 					Operation.opcodes.POINT_AT,
 					[vertices[6].p2, new_vertex]),
-			Operation.new(
-					Operation.opcodes.POINT_AT,
-					[new_vertex.p3, vertices[6]]),
 			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
 					[new_vertex]),
