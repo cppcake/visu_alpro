@@ -85,3 +85,8 @@ label_text = "Tree Traversal"
 layout_mode = 2
 scene_name = "max_heap"
 label_text = "Maxheap"
+
+[node name="ItemBox" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+scene_name = "avl"
+label_text = "AVL ☠️"

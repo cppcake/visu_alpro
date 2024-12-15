@@ -60,6 +60,15 @@ func aufgabe_01(argv: Array):
 	
 	push_operations([
 			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[3], list_vertex_class.sprites.TO_REMOVE]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[6], list_vertex_class.sprites.ACCENT]),
+	])
+	
+	push_operations([
+			Operation.new(
 					Operation.opcodes.POINT_AT,
 					[vertices[3].p1, null]),
 			Operation.new(
@@ -101,6 +110,15 @@ func aufgabe_01(argv: Array):
 			Operation.new(
 					Operation.opcodes.COEFS,
 					[[new_vertex], [0]]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[3], list_vertex_class.sprites.DEFAULT]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[6], list_vertex_class.sprites.DEFAULT]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[new_vertex, list_vertex_class.sprites.DEFAULT]),
 	])
 func _on_buton_aufgabe_01_pressed():
 	offset_y= 150
@@ -126,6 +144,9 @@ func aufgabe_02(argv: Array):
 			Operation.new(
 					Operation.opcodes.SET_SPRITE,
 					[vertices[2], list_vertex_class.sprites.TO_REMOVE]),
+	])
+	
+	push_operations([
 			Operation.new(
 					Operation.opcodes.SET_SPRITE,
 					[vertices[5], list_vertex_class.sprites.ACCENT]),
@@ -147,6 +168,18 @@ func aufgabe_02(argv: Array):
 			Operation.new(
 					Operation.opcodes.COEFS,
 					[[vertices[0], vertices[2]], [-2, 0]]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[2], list_vertex_class.sprites.DEFAULT]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[0], list_vertex_class.sprites.TO_REMOVE]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[1], list_vertex_class.sprites.ACCENT]),
 	])
 
 	
@@ -174,6 +207,12 @@ func aufgabe_02(argv: Array):
 			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
 					[kalm]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[0], list_vertex_class.sprites.DEFAULT]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[1], list_vertex_class.sprites.DEFAULT]),
 	])
 func _on_buton_aufgabe_02_pressed():
 	offset_y= 150
@@ -195,7 +234,44 @@ func _on_buton_aufgabe_02_pressed():
 	init_algo(aufgabe_02)
 
 func aufgabe_03(argv: Array):
-	pass
+	push_operations([
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[4], list_vertex_class.sprites.TO_REMOVE]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[14], list_vertex_class.sprites.ACCENT]),
+	])
+
+	push_operations([
+			Operation.new(
+					Operation.opcodes.SWAP,
+					[vertices[4], vertices[14]]),
+	])
+	
+	push_operations([
+		Operation.new(
+					Operation.opcodes.POINT_AT,
+					[vertices[9].p1, null]),
+			Operation.new(
+					Operation.opcodes.TOGGLE_VISIBLE,
+					[vertices[14]]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[[vertices[9]], [1]]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.TOGGLE_VISIBLE,
+					[kalm]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[vertices[4], list_vertex_class.sprites.DEFAULT]),
+	])
 func _on_buton_aufgabe_03_pressed():
 	offset_y= 100
 	min_offset_x = 15
@@ -223,5 +299,10 @@ func _on_buton_aufgabe_03_pressed():
 		[12, 19, 1],
 		[13, 20, 1],
 		[18, 21, 0]])
+	
+	for vertex in vertices:
+		var left = calculate_height(vertex.p1)
+		var right = calculate_height(vertex.p2)
+		vertex.set_coef(right - left)
 	
 	init_algo(aufgabe_03)

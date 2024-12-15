@@ -23,3 +23,5 @@ func change_scene(scene: String):
 			get_tree().call_deferred("change_scene_to_file", "res://topics/tree_traversal/tree_traversal.tscn")
 		"max_heap":
 			get_tree().call_deferred("change_scene_to_file", "res://topics/max_heap/max_heap.tscn")
+		"avl":
+			get_tree().call_deferred("change_scene_to_file", "res://topics/avl/avl.tscn")

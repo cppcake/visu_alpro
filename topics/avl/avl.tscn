@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3727dmyp5ime"]
+[gd_scene load_steps=7 format=3 uid="uid://d3727dmyp5ime"]
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_pe8m0"]
 [ext_resource type="Script" path="res://topics/avl/avl.gd" id="2_n7br5"]
@@ -6,9 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://1ke1200s0p42" path="res://structs/avl/avl_vertex.tscn" id="3_dhwt2"]
 [ext_resource type="Texture2D" uid="uid://brqqgo5s5vgve" path="res://topics/avl/kalm.png" id="5_omhts"]
 
+[sub_resource type="GDScript" id="GDScript_dux00"]
+script/source = "extends CheckButton
+
+
+
+func _on_pressed():
+	get_tree().call_group(\"vertices\", \"_on_mouse_exited\")
+	avl_vertex.always_show = !avl_vertex.always_show
+"
+
 [node name="root" node_paths=PackedStringArray("kalm") instance=ExtResource("1_pe8m0")]
 script = ExtResource("2_n7br5")
-kalm = NodePath("CanvasLayer/kalm")
+kalm = NodePath("root_ptr/kalm")
 vertex_scene = ExtResource("3_dhwt2")
 
 [node name="buton_aufgabe_01" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
@@ -26,23 +36,28 @@ layout_mode = 2
 text = "Aufgabe 3"
 script = ExtResource("3_a1ike")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4"]
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
+layout_mode = 2
+text = "Zeige immer Balancekoeffizienten"
+script = SubResource("GDScript_dux00")
+
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
 visible = false
 
-[node name="kalm" type="Sprite2D" parent="CanvasLayer" index="4"]
-visible = false
-position = Vector2(81, 116)
-scale = Vector2(0.18943, 0.18943)
-texture = ExtResource("5_omhts")
-
 [node name="Camera2D" parent="." index="1"]
 position = Vector2(0, 200)
+
+[node name="kalm" type="Sprite2D" parent="root_ptr" index="3"]
+visible = false
+position = Vector2(93, 51)
+scale = Vector2(0.18943, 0.18943)
+texture = ExtResource("5_omhts")
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" to="." method="_on_buton_aufgabe_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_01" method="_on_pressed"]
@@ -50,3 +65,4 @@ position = Vector2(0, 200)
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_02" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_02" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" to="." method="_on_buton_aufgabe_03_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/buton_aufgabe_03" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/CheckButton" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/CheckButton" method="_on_pressed"]

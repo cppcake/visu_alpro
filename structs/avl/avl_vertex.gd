@@ -1,4 +1,6 @@
-extends tree_vertex_class
+class_name avl_vertex extends tree_vertex_class
+
+static var always_show = false
 
 @export var panik: Sprite2D
 
@@ -6,7 +8,12 @@ extends tree_vertex_class
 var coef: int = 2
 
 func _process(delta):
-	pass#print(global_position)
+	if always_show:
+		if coef > 1 or coef < -1:
+			label_coef.modulate = Color.RED
+		else:
+			label_coef.modulate = Color.WHITE
+		label_coef.text = str(coef)
 
 func update_reference_counter(addend: int):
 	pass
