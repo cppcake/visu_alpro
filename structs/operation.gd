@@ -25,6 +25,7 @@ enum opcodes
 	MOVE_ALL_REL,
 	MOVE,
 	REPOS,
+	COEFS
 }
 
 var opcode: opcodes

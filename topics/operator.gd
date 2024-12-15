@@ -215,8 +215,18 @@ func operator_interface(operations: Array, undo: bool = false):
 					get_tree().call_group("vertices", "move_to_undo")
 				else:
 					reposition()
+					if argv.size() > 0:
+						for vertex in argv[0]:
+							vertex.move_to_rel(Vector2(0, 0))
+				continue
+			Operation.opcodes.COEFS:
+				if undo:
 					for vertex in argv[0]:
-						vertex.move_to_rel(Vector2(0, 0))
+						vertex.set_coef_undo()
+				else:
+					for i in range(argv[0].size()):
+						argv[0][i].set_coef(argv[1][i])
+				continue
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:

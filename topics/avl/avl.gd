@@ -1,7 +1,13 @@
 extends tree_traversal_class
 
+@export var kalm: Sprite2D
+
 func _ready():
 	pass
+
+func clean_up():
+	super.clean_up()
+	kalm.visible = false
 
 var vertices: Array = []
 func create_tree(data_array: Array, edge_array: Array):
@@ -34,6 +40,7 @@ func aufgabe_01(argv: Array):
 	new_vertex.set_data(4)
 	new_vertex.global_position = vertices[6].dest_pos + Vector2(100, 100)
 	new_vertex.move_to(new_vertex.global_position)
+	new_vertex.set_coef(0)
 	add_child(new_vertex)
 	
 	push_operations([
@@ -41,8 +48,14 @@ func aufgabe_01(argv: Array):
 					Operation.opcodes.POINT_AT,
 					[vertices[6].p2, new_vertex]),
 			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[new_vertex, list_vertex_class.sprites.ACCENT_2]),
+			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
 					[new_vertex]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[vertices, [-2, -2, -1 , -2, 0, 0, 1]]),
 	])
 	
 	push_operations([
@@ -64,6 +77,12 @@ func aufgabe_01(argv: Array):
 			Operation.new(
 					Operation.opcodes.MOVE,
 					[vertices[6], vertices[3].dest_pos + Vector2(-300, 300)]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[[new_vertex], [-1]]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[[vertices[6]], [0]]),
 	])
 	
 	push_operations([
@@ -71,10 +90,22 @@ func aufgabe_01(argv: Array):
 					Operation.opcodes.POINT_AT,
 					[vertices[1].p1, new_vertex]),
 			Operation.new(
-				Operation.opcodes.REPOS,
-					[[]]),
+					Operation.opcodes.REPOS,
+						[[]]),
+			Operation.new(
+					Operation.opcodes.TOGGLE_VISIBLE,
+					[kalm]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[vertices, [-1, -1, -1 , 0, 0, 0, 0]]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[[new_vertex], [0]]),
 	])
 func _on_buton_aufgabe_01_pressed():
+	offset_y= 150
+	min_offset_x = 50
+	mult = 2
 	create_tree(
 		[16, 10, 25, 5, 12, 20, 3],
 		[[0, 1, 0],
@@ -84,32 +115,40 @@ func _on_buton_aufgabe_01_pressed():
 		[2, 5, 0],
 		[3, 6, 0]])
 	
+	var coefs = [-1, -1, -1, -1, 0, 0, 0]
+	for i in range(vertices.size()):
+		vertices[i].set_coef(coefs[i])
+	
 	init_algo(aufgabe_01)
 
 func aufgabe_02(argv: Array):
 	push_operations([
 			Operation.new(
-					Operation.opcodes.POINT_AT,
-					[vertices[0].p2, vertices[5]]),
+					Operation.opcodes.SET_SPRITE,
+					[vertices[2], list_vertex_class.sprites.TO_REMOVE]),
 			Operation.new(
-					Operation.opcodes.MOVE_REL,
-					[vertices[2], Vector2(0, 150)]),
+					Operation.opcodes.SET_SPRITE,
+					[vertices[5], list_vertex_class.sprites.ACCENT]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.SWAP,
+					[vertices[2], vertices[5]]),
 	])
 
 	push_operations([
+		Operation.new(
+					Operation.opcodes.POINT_AT,
+					[vertices[2].p2, null]),
 			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
-					[vertices[2]]),
+					[vertices[5]]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[[vertices[0], vertices[2]], [-2, 0]]),
 	])
 
-	push_operations([
-			Operation.new(
-					Operation.opcodes.MOVE_REL,
-					[vertices[2], Vector2(0, 0)]),
-			Operation.new(
-					Operation.opcodes.REPOS,
-					[[vertices[2]]]),
-	])
 	
 	## SECOND PHASE
 	
@@ -120,20 +159,26 @@ func aufgabe_02(argv: Array):
 			Operation.new(
 					Operation.opcodes.POINT_AT,
 					[vertices[0].p1, vertices[4]]),
+			Operation.new(
+					Operation.opcodes.COEFS,
+					[vertices, [0, 0, 0, 1, 0, 0, 0]]),
 	])
-	
+
 	push_operations([
 			Operation.new(
 					Operation.opcodes.POINT_AT,
 					[root_ptr, vertices[1]]),
-	])
-	
-	push_operations([
 			Operation.new(
 					Operation.opcodes.REPOS,
-					[[vertices[2]]]),
+					[]),
+			Operation.new(
+					Operation.opcodes.TOGGLE_VISIBLE,
+					[kalm]),
 	])
 func _on_buton_aufgabe_02_pressed():
+	offset_y= 150
+	min_offset_x = 50
+	mult = 2
 	create_tree(
 		[16, 10, 25, 5, 12, 30, 6],
 		[[0, 1, 0],
@@ -143,12 +188,18 @@ func _on_buton_aufgabe_02_pressed():
 		[2, 5, 1],
 		[3, 6, 1]])
 	
+	var coefs = [-1, -1, 1, 1, 0, 0, 0]
+	for i in range(vertices.size()):
+		vertices[i].set_coef(coefs[i])
+	
 	init_algo(aufgabe_02)
-
 
 func aufgabe_03(argv: Array):
 	pass
 func _on_buton_aufgabe_03_pressed():
+	offset_y= 100
+	min_offset_x = 15
+	mult = 2
 	create_tree(
 		[9, 3, 15, 2, 5, 13, 20, 1, 4, 7, 11, 14, 18, 21, 6, 8, 10, 12, 17, 19, 22, 16],
 		[[0, 1, 0],

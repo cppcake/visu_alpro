@@ -19,9 +19,9 @@ func _process(delta):
 	viewport_pos = get_viewport().get_mouse_position()
 	drag_camera()
 	zoom_camera(delta)
-	
+	return
 	if Input.is_action_just_pressed("M1"):
-		print(world_pos)
+		print(global_position)
 
 func drag_camera():
 	if Input.is_action_just_pressed("M3") or Input.is_action_just_pressed("M1 Shift"):

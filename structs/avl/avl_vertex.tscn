@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://1ke1200s0p42"]
+[gd_scene load_steps=5 format=3 uid="uid://1ke1200s0p42"]
 
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="1_v3qhv"]
 [ext_resource type="Script" path="res://structs/avl/avl_vertex.gd" id="2_a5n7u"]
 [ext_resource type="PackedScene" uid="uid://wm2e3mavitia" path="res://structs/avl/avl_pointer.tscn" id="3_bymfl"]
+[ext_resource type="Texture2D" uid="uid://bkbcr6e65fh4o" path="res://topics/avl/panik.png" id="3_g5q7k"]
 
-[node name="avl_vertex" node_paths=PackedStringArray("p3", "p1") instance=ExtResource("1_v3qhv")]
+[node name="avl_vertex" node_paths=PackedStringArray("panik", "label_coef", "p1") instance=ExtResource("1_v3qhv")]
 script = ExtResource("2_a5n7u")
-p3 = NodePath("avl_pointer3")
+panik = NodePath("panik")
+label_coef = NodePath("label_coef")
 p1 = NodePath("avl_pointer")
 
 [node name="label_tag" parent="." index="2"]
@@ -16,4 +18,25 @@ theme_override_font_sizes/font_size = 16
 
 [node name="avl_pointer" parent="." index="8" groups=["pointers"] instance=ExtResource("3_bymfl")]
 
-[node name="avl_pointer3" parent="." index="9" instance=ExtResource("3_bymfl")]
+[node name="label_coef" type="Label" parent="." index="9"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -40.1667
+offset_right = 20.0
+offset_bottom = -17.8333
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="panik" type="Sprite2D" parent="." index="10"]
+visible = false
+position = Vector2(-96, 2)
+scale = Vector2(0.399821, 0.399821)
+texture = ExtResource("3_g5q7k")

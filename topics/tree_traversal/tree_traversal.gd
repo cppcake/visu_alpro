@@ -29,6 +29,7 @@ func update_stack_frame():
 
 var offset_y: int = 180
 var min_offset_x: int = 80
+var mult: int = 2
 func reposition():
 	var width: int = int(pow(2, calculate_height(root_ptr))) * min_offset_x
 	var root_vertex = root_ptr.target
@@ -45,12 +46,12 @@ func reposition_(root: pointer_class, width: int):
 	var left_child = root_vertex.p1.target
 	if left_child != null:
 		left_child.move_to(root_vertex.dest_pos + Vector2(-width, offset_y))
-		reposition_(root_vertex.p1, width / 2)
+		reposition_(root_vertex.p1, width / mult)
 	
 	var right_child = root_vertex.p2.target
 	if right_child != null:
 		right_child.move_to(root_vertex.dest_pos + Vector2(+width, offset_y))
-		reposition_(root_vertex.p2, width / 2)
+		reposition_(root_vertex.p2, width / mult)
 func calculate_height(root: pointer_class) -> int:
 	var root_vertex = root.target
 	if root_vertex == null:
