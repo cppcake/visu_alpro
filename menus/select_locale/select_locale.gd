@@ -13,6 +13,11 @@ func _ready():
 	# Locale already choosen, go to main
 	if config.has_section("locale"):
 		if config.get_value("locale", "has_choosen") == true:
+			match config.get_value("locale", "locale"):
+				"en":
+					pick_en()
+				"de":
+					pick_de()
 			scene_man.change_scene("select_topic")
 			return
 	

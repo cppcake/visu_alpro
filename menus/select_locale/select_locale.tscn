@@ -43,9 +43,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="ColorRect/CenterContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
-text = "
-visu_alpro
-
+text = "visu_alpro
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -53,7 +51,9 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="ColorRect/CenterContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Pick a language to proceed"
+text = "
+Pick a language /
+Wähle eine Sprache"
 horizontal_alignment = 1
 vertical_alignment = 1
 

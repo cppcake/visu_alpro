@@ -208,7 +208,6 @@ func reposition_list():
 			current_.move_to(pos)
 			pos += Vector2(250, 0)
 			current_ = current_.p1.target
-
 func reset():
 	size = 0
 	head.target = null
@@ -261,8 +260,12 @@ func insert_front_b(step: int):
 			side_panel.override_exp(tr("INS_FRONT_0"))
 func _on_button_insert_front_pressed():
 	to_remove = null
+	
+	var file = FileAccess.open("res://extern/simply_linked_list/INS_FRONT.txt", FileAccess.READ)
+	var content = str(file.get_as_text())
+	
 	side_panel.override_code_call("list.insert_front(data)")
-	side_panel.override_code(tr("INS_FRONT"))
+	side_panel.override_code(content)
 	set_up(5, insert_front, insert_front_b)
 	init_algo()
 
@@ -298,8 +301,11 @@ func remove_front_b(step: int):
 		4:
 			pass
 func _on_button_remove_front_pressed():
+	var file = FileAccess.open("res://extern/simply_linked_list/RM_FRONT.txt", FileAccess.READ)
+	var content = str(file.get_as_text())
+	
 	side_panel.override_code_call("list.remove_front()")
-	side_panel.override_code(tr("RM_FRONT"))
+	side_panel.override_code(content)
 	set_up(4, remove_front, remove_front_b)
 	init_algo()
 
@@ -336,9 +342,13 @@ func insert_after_b(step: int):
 			unshare()
 func _on_button_insert_after_pressed():
 	to_remove = null
-	side_panel.override_code(tr("INS_AFTER"))
+	
+	var file = FileAccess.open("res://extern/simply_linked_list/INS_AFTER.txt", FileAccess.READ)
+	var content = str(file.get_as_text())
+	
+	side_panel.override_code(content)
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
-	side_panel.override_exp("Pick a predecessor Node")
+	side_panel.override_exp(tr("PICK_PRE"))
 	set_up(5, insert_after, insert_after_b, true)
 
 func remove_after(step: int):
@@ -379,7 +389,10 @@ func remove_after_b(step: int):
 					to_remove.move_to_rel(Vector2(0, -150))
 				pred.p1.set_target(to_remove)
 func _on_button_remove_after_pressed():
-	side_panel.override_code(tr("RM_AFTER"))
+	var file = FileAccess.open("res://extern/simply_linked_list/RM_AFTER.txt", FileAccess.READ)
+	var content = str(file.get_as_text())
+	
+	side_panel.override_code(content)
 	side_panel.override_code_call("list.remove_after(ListNodeptr pred)")
-	side_panel.override_exp("Pick a predecessor Node")
+	side_panel.override_exp(tr("PICK_PRE"))
 	set_up(4, remove_after, remove_after_b, true)
