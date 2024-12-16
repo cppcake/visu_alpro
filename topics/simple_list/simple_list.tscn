@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://d1pl687gg2wyl" path="res://topics/ui/scripts/step_counter.gd" id="5_jpi4x"]
 [ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_ob6lh"]
 [ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_stef8"]
-[ext_resource type="Script" uid="uid://blel6dwanvhy3" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="7_ld1tq"]
 [ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="7_rsg7l"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="9_083mb"]

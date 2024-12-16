@@ -261,8 +261,7 @@ func insert_front_b(step: int):
 func _on_button_insert_front_pressed():
 	to_remove = null
 	
-	var file = FileAccess.open("res://extern/simply_linked_list/INS_FRONT.txt", FileAccess.READ)
-	var content = str(file.get_as_text())
+	var content = str("ListNodeptr new_node_ptr = std::make_shared<ListNode>(data);\nnew_node_ptr->next = head;\nhead = new_node_ptr;\nsize += 1;\nreturn;\n")
 	
 	side_panel.override_code_call("list.insert_front(data)")
 	side_panel.override_code(content)
@@ -301,8 +300,7 @@ func remove_front_b(step: int):
 		4:
 			pass
 func _on_button_remove_front_pressed():
-	var file = FileAccess.open("res://extern/simply_linked_list/RM_FRONT.txt", FileAccess.READ)
-	var content = str(file.get_as_text())
+	var content = str("head = head->next;\nsize -= 1;\nreturn;\n")
 	
 	side_panel.override_code_call("list.remove_front()")
 	side_panel.override_code(content)
@@ -343,8 +341,7 @@ func insert_after_b(step: int):
 func _on_button_insert_after_pressed():
 	to_remove = null
 	
-	var file = FileAccess.open("res://extern/simply_linked_list/INS_AFTER.txt", FileAccess.READ)
-	var content = str(file.get_as_text())
+	var content = "ListNodeptr new_node_ptr = std::make_shared<ListNode>(data);\nnew_node_ptr->next = pred→next;\npred->next = new_node_ptr;\nsize += 1;\nreturn;\n"
 	
 	side_panel.override_code(content)
 	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
@@ -389,8 +386,7 @@ func remove_after_b(step: int):
 					to_remove.move_to_rel(Vector2(0, -150))
 				pred.p1.set_target(to_remove)
 func _on_button_remove_after_pressed():
-	var file = FileAccess.open("res://extern/simply_linked_list/RM_AFTER.txt", FileAccess.READ)
-	var content = str(file.get_as_text())
+	var content = "pred->next = pred->next->next;\nsize -= 1;\nreturn;\n"
 	
 	side_panel.override_code(content)
 	side_panel.override_code_call("list.remove_after(ListNodeptr pred)")
