@@ -1,0 +1,14 @@
+keys,en,de
+PICK,Pick a topic to visualize,Wähle ein Thema zur Visualisierung aus
+GT,Graph Traversal,Breiten- und Tiefensuche
+SLL,Simple Linked List,Einfach verkettete Liste
+DLL,Doubly Linked List,Doppelt verkettete Liste
+TT,Tree Traversal,Baumdurchlaufstrategien
+AVL,AVL Tree,AVL Baum
+HT,Hashtable,Hashtabelle
+,,
+,,
+FULLSCREEN,Fullscreen,Vollbildmodus
+EXIT_DS,Exit to desktop,Zum Desktop beenden
+,,
+PICK_PRE,Pick a predecessor Node,Wähle Vorgängerknoten aus

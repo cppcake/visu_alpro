@@ -1,7 +1,7 @@
 extends tree_vertex_class
 
 # EFFICIENZY
-# STUPID WORK AROUNDS BECAUSE I DONT HAVE ANY FUCKING TIME
+# STUPID WORK AROUNDS BECAUSE I DONT HAVE ANY TIME :sob:
 func _process(delta):
 	if reference_counter == 0:
 		visible = false

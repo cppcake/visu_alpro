@@ -65,7 +65,9 @@ func push_operations(operations: Array):
 	operations_array.push_back(operations)
 	operator_interface(operations_array.back())
 
-func operator_interface(operations: Array, undo: bool = false):
+func operator_interface(operations: Array, undo: bool = false): 
+	
+	
 	for operation: Operation in operations:
 		var opcode = operation.opcode
 		var argv = operation.argv
@@ -187,6 +189,43 @@ func operator_interface(operations: Array, undo: bool = false):
 					side_panel.crash_undo()
 				else:
 					side_panel.crash()
+				continue
+			Operation.opcodes.MOVE_REL:
+				if undo:
+					argv[0].move_to_undo()
+				else:
+					argv[0].move_to_rel(argv[1])
+				continue
+			Operation.opcodes.MOVE_ALL_REL:
+				if undo:
+					get_tree().call_group("vertices", "move_to_undo")
+				else:
+					#for vertex in argv[0]:
+					#	vertex.move_to_rel(argv[1])
+					get_tree().call_group("vertices", "move_to_rel", argv[0])
+				continue
+			Operation.opcodes.MOVE:
+				if undo:
+					argv[0].move_to_undo()
+				else:
+					argv[0].move_to(argv[1])
+				continue
+			Operation.opcodes.REPOS:
+				if undo:
+					get_tree().call_group("vertices", "move_to_undo")
+				else:
+					reposition()
+					if argv.size() > 0:
+						for vertex in argv[0]:
+							vertex.move_to_rel(Vector2(0, 0))
+				continue
+			Operation.opcodes.COEFS:
+				if undo:
+					for vertex in argv[0]:
+						vertex.set_coef_undo()
+				else:
+					for i in range(argv[0].size()):
+						argv[0][i].set_coef(argv[1][i])
 				continue
 
 @export var vertex_scene: PackedScene

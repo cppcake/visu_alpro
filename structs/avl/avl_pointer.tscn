@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wm2e3mavitia"]
+
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="1_oyqhb"]
+[ext_resource type="Script" path="res://structs/avl/avl_pointer.gd" id="2_hqnf8"]
+
+[node name="avl_pointer" instance=ExtResource("1_oyqhb")]
+script = ExtResource("2_hqnf8")
+
+[node name="Polygon2D" parent="." index="1"]
+visible = false

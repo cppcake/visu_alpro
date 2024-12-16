@@ -25,6 +25,7 @@ OptionsMenu="*res://menus/options_menu/options_menu.tscn"
 
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_parameter=0
+gdscript/warnings/unreachable_code=0
 gdscript/warnings/integer_division=0
 
 [display]
@@ -136,7 +137,7 @@ F11={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation", "res://misc/locale/tree_traversal.de.translation", "res://misc/locale/tree_traversal.en.translation")
+locale/translations=PackedStringArray("res://misc/locale/algorithms.de.translation", "res://misc/locale/algorithms.en.translation", "res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation", "res://misc/locale/tree_traversal.de.translation", "res://misc/locale/tree_traversal.en.translation", "res://misc/locale/misc.de.translation", "res://misc/locale/misc.en.translation")
 
 [rendering]
 

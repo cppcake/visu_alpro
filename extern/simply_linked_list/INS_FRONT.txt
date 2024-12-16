@@ -1,0 +1,5 @@
+ListNodeptr new_node_ptr = std::make_shared<ListNode>(data);
+new_node_ptr->next = head;
+head = new_node_ptr;
+size += 1;
+return;
