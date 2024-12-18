@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3727dmyp5ime"]
+[gd_scene load_steps=9 format=3 uid="uid://d3727dmyp5ime"]
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_pe8m0"]
 [ext_resource type="Script" path="res://topics/avl/avl.gd" id="2_n7br5"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_a1ike"]
 [ext_resource type="PackedScene" uid="uid://1ke1200s0p42" path="res://structs/avl/avl_vertex.tscn" id="3_dhwt2"]
+[ext_resource type="Texture2D" uid="uid://by5wqtpq7yivg" path="res://topics/avl/wait_its_balanced.png" id="5_7x1xb"]
 [ext_resource type="Texture2D" uid="uid://brqqgo5s5vgve" path="res://topics/avl/kalm.png" id="5_omhts"]
+[ext_resource type="Texture2D" uid="uid://cn58ck0u4go3c" path="res://topics/avl/always_been.png" id="6_qq2vx"]
 
 [sub_resource type="GDScript" id="GDScript_dux00"]
 script/source = "extends CheckButton
@@ -16,9 +18,11 @@ func _on_pressed():
 	avl_vertex.always_show = !avl_vertex.always_show
 "
 
-[node name="root" node_paths=PackedStringArray("kalm") instance=ExtResource("1_pe8m0")]
+[node name="root" node_paths=PackedStringArray("kalm", "wait", "always") instance=ExtResource("1_pe8m0")]
 script = ExtResource("2_n7br5")
 kalm = NodePath("root_ptr/kalm")
+wait = NodePath("root_ptr/wait")
+always = NodePath("root_ptr/always")
 vertex_scene = ExtResource("3_dhwt2")
 
 [node name="buton_aufgabe_01" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
@@ -53,7 +57,21 @@ visible = false
 [node name="Camera2D" parent="." index="1"]
 position = Vector2(0, 200)
 
-[node name="kalm" type="Sprite2D" parent="root_ptr" index="3"]
+[node name="wait" type="Sprite2D" parent="root_ptr" index="0"]
+visible = false
+position = Vector2(50, -50)
+scale = Vector2(0.481037, 0.481037)
+texture = ExtResource("5_7x1xb")
+centered = false
+
+[node name="always" type="Sprite2D" parent="root_ptr" index="1"]
+visible = false
+position = Vector2(50, -50)
+scale = Vector2(0.481037, 0.481037)
+texture = ExtResource("6_qq2vx")
+centered = false
+
+[node name="kalm" type="Sprite2D" parent="root_ptr" index="5"]
 visible = false
 position = Vector2(93, 51)
 scale = Vector2(0.18943, 0.18943)

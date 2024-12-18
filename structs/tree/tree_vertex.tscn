@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://513mtdd2h16y"]
 
 [ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://structs/list/list_vertex.tscn" id="1_52jua"]
-[ext_resource type="Script" uid="uid://3k6obvnd1ut5" path="res://structs/tree/tree_vertex.gd" id="2_5q34q"]
+[ext_resource type="Script" path="res://structs/tree/tree_vertex.gd" id="2_5q34q"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="2_6wyau"]
 [ext_resource type="Texture2D" uid="uid://byei0vq0s15pl" path="res://structs/sprites/vertex_accent.png" id="3_s68sv"]
 

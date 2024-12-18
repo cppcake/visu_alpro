@@ -1,6 +1,8 @@
 extends tree_traversal_class
 
 @export var kalm: Sprite2D
+@export var wait: Sprite2D
+@export var always: Sprite2D
 
 func _ready():
 	pass
@@ -8,6 +10,8 @@ func _ready():
 func clean_up():
 	super.clean_up()
 	kalm.visible = false
+	wait.visible = false
+	always.visible = false
 
 var vertices: Array = []
 func create_tree(data_array: Array, edge_array: Array):
@@ -233,6 +237,7 @@ func _on_buton_aufgabe_02_pressed():
 	
 	init_algo(aufgabe_02)
 
+
 func aufgabe_03(argv: Array):
 	push_operations([
 			Operation.new(
@@ -267,10 +272,16 @@ func aufgabe_03(argv: Array):
 	push_operations([
 			Operation.new(
 					Operation.opcodes.TOGGLE_VISIBLE,
-					[kalm]),
+					[wait]),
 			Operation.new(
 					Operation.opcodes.SET_SPRITE,
 					[vertices[4], list_vertex_class.sprites.DEFAULT]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.TOGGLE_VISIBLE,
+					[always]),
 	])
 func _on_buton_aufgabe_03_pressed():
 	offset_y= 100
