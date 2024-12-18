@@ -7,8 +7,16 @@ TT,Tree Traversal,Baumdurchlaufstrategien
 AVL,AVL Tree,AVL Baum
 HT,Hashtable,Hashtabelle
 ,,
-,,
 FULLSCREEN,Fullscreen,Vollbildmodus
 EXIT_DS,Exit to desktop,Zum Desktop beenden
 ,,
 PICK_PRE,Pick a predecessor Node,Wähle Vorgängerknoten aus
+VERTEX,vertex,knoten
+VISITED, explored,erkundet
+CALL,Call,Aufruf
+RETURN_VALUE_OF,Return value of,Rückgabewert von
+TERMINATE,Algorithm terminated and returned: ,Algorithmus terminierte und gab zurück: 
+TERMINATE_2,Algorithm returned,Algorithmus terminierte
+STACK,Call stack,Aufrufstapel
+VARIABLES,Variables,Variablen
+FINISHED,Finished,Fertig

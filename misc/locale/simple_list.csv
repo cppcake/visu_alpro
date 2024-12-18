@@ -1,2 +1,1 @@
 keys,en,de
-INS_FRONT_0,The member function insert_front(data) adds a new node holding data to the beginning of the list.,Die Memberfunktion insert_front(data) fügt einen neuen Knoten mit den Daten am Anfang der Liste hinzu.

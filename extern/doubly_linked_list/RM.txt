@@ -1,0 +1,27 @@
+size -= 1;
+
+// Case 1: Only one element in List
+if(head == tail && !empty()){
+    head.reset();
+    tail.reset();
+    return;
+    }
+
+// Case 2: Removing first element
+if(to_remove_ptr == head){
+    head = head->next;
+    head->prev.reset();
+    return;
+    }
+
+// Case 3: Removing last element
+if(to_remove_ptr == tail){
+    tail = tail->prev.lock();
+    tail->next.reset();
+    return;
+    }
+
+// Case 4: Removing element between head and tail
+to_remove_ptr->next->prev = to_remove_ptr->prev;
+to_remove_ptr->prev.lock()->next = to_remove_ptr->next;
+return;

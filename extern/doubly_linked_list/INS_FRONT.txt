@@ -1,0 +1,15 @@
+size += 1;
+DListNodeptr new_node_ptr = std::make_shared<DoublyLinkedListNode>(x);
+
+// Case 1: List is empty
+if(empty()) {
+    head = new_node_ptr;
+    tail = new_node_ptr;
+    return;
+    }
+
+// Case 2: List is not empty
+new_node_ptr->next = head;
+head->prev = new_node_ptr;
+head = new_node_ptr;
+return;
