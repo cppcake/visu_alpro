@@ -124,14 +124,9 @@ func set_color(selection: colors, save: bool = true):
 			line.default_color = constants.color_accent_2_c
 func set_color_undo():
 	color_history.pop_back()
-	set_color(color_history.back(), false)
+	if not color_history.is_empty():
+		set_color(color_history.back(), false)
 
 func reset_visuals():
 	set_color(colors.DEFAULT, false)
 	color_history = [colors.DEFAULT]
-	
-static var marked_history: Array
-static func set_marked(marked: Array):
-	pass
-static func set_marked_undo():
-	pass

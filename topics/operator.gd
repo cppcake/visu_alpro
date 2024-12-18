@@ -42,6 +42,7 @@ func clean_up():
 	side_panel.reset()
 	side_panel.select_containers(0, 0, 0, 1)
 	side_panel.close()
+	marked_pointers_history = [[]]
 
 @export var size_label: Label
 func _physics_process(delta):
@@ -66,8 +67,6 @@ func push_operations(operations: Array):
 	operator_interface(operations_array.back())
 
 func operator_interface(operations: Array, undo: bool = false): 
-	
-	
 	for operation: Operation in operations:
 		var opcode = operation.opcode
 		var argv = operation.argv
@@ -227,6 +226,12 @@ func operator_interface(operations: Array, undo: bool = false):
 					for i in range(argv[0].size()):
 						argv[0][i].set_coef(argv[1][i])
 				continue
+			Operation.opcodes.MARK_POINTERS:
+				if undo:
+					set_marked_pointers_undo()
+				else:
+					pass#set_marked_pointers(argv[0])
+				continue
 
 @export var vertex_scene: PackedScene
 func create_new_vertex(position_: Vector2, from: String = "left") -> list_vertex_class:
@@ -307,6 +312,19 @@ func swap_undo():
 	var buf: int = vertex_1.data
 	vertex_1.set_data(vertex_2.data)
 	vertex_2.set_data(buf)
+
+var marked_pointers_history: Array = [[]]
+func set_marked_pointers(to_mark: Array, save: bool = true):
+	if save:
+		marked_pointers_history.push_back(to_mark)
+		
+	get_tree().call_group("pointers", "reset_visuals")
+	
+	for pointer: pointer_class in to_mark:
+		pointer.set_color(pointer_class.colors.ACCENT, false)
+func set_marked_pointers_undo():
+	marked_pointers_history.pop_back()
+	#set_marked_pointers(marked_pointers_history.back(), false)
 
 func to_data_array(tree_array):
 	var data_array: Array = []

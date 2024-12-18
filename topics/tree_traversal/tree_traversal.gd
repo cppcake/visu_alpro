@@ -153,9 +153,6 @@ func insert(argv: Array):
 		Operation.new(
 			Operation.opcodes.HIGHLIGHT_CODE,
 			[[1]])
-		,Operation.new(
-			Operation.opcodes.SET_POINTER_COLOR,
-			[ptr, pointer_class.colors.ACCENT_2])
 	])
 	if ptr_target == null:
 		new_vertex = create_new_vertex(ptr.current_end_point + Vector2(0, 100), "right")
@@ -234,9 +231,6 @@ func inorder(argv: Array) -> Array:
 					Operation.opcodes.HIGHLIGHT_CODE,
 					[[]]),
 			Operation.new(
-					Operation.opcodes.SET_POINTER_COLOR,
-					[ptr, pointer_class.colors.ACCENT]),
-			Operation.new(
 					Operation.opcodes.SET_SPRITE,
 					[ptr_target, list_vertex_class.sprites.ACCENT]),
 			Operation.new(
@@ -248,6 +242,9 @@ func inorder(argv: Array) -> Array:
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[0, ""]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
 	])
 	
 	# Abbruchbedingung check. Markiere current_ptr und if_statement
@@ -262,9 +259,6 @@ func inorder(argv: Array) -> Array:
 				Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
 						[[2]]),
-				Operation.new(
-					Operation.opcodes.SET_POINTER_COLOR,
-					[ptr, pointer_class.colors.DEFAULT]),
 				Operation.new(
 						Operation.opcodes.RETURN,
 						[[]]),
@@ -282,10 +276,10 @@ func inorder(argv: Array) -> Array:
 					[[4]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = [ ]"]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, "[ ]"]),
 	])
 
 	# First recursiv call into the left subtree
@@ -312,6 +306,9 @@ func inorder(argv: Array) -> Array:
 			Operation.new(
 					Operation.opcodes.SET_TAG,
 					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
 	])
 
 	F.append(ptr_target.data)
@@ -350,6 +347,9 @@ func inorder(argv: Array) -> Array:
 			Operation.new(
 					Operation.opcodes.SET_TAG,
 					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
 	])
 
 	# Return F
@@ -400,6 +400,9 @@ func levelorder(argv: Array) -> Array:
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[2, ""]),
+			Operation.new(
+					Operation.opcodes.SET_POINTER_COLOR,
+					[ptr, pointer_class.colors.ACCENT_2]),
 	])
 
 	# Create variables
@@ -428,9 +431,6 @@ func levelorder(argv: Array) -> Array:
 			Operation.new(
 					Operation.opcodes.HIGHLIGHT_CODE,
 					[[2]]),
-			Operation.new(
-					Operation.opcodes.SET_POINTER_COLOR,
-					[argv[0], pointer_class.colors.ACCENT_2]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[0, "F = " + str(F)]),
@@ -467,6 +467,9 @@ func levelorder(argv: Array) -> Array:
 				Operation.new(
 						Operation.opcodes.OVERWRITE_VARIABLE,
 						[2, "current_ptr = " + current_ptr.pointer_name]),
+				Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[current_ptr]]),
 		])
 		
 		push_operations([
@@ -499,12 +502,6 @@ func levelorder(argv: Array) -> Array:
 					Operation.new(
 							Operation.opcodes.OVERWRITE_VARIABLE,
 							[1, "Q = " + str(Q_strings).replace("\"", "")]),
-					Operation.new(
-							Operation.opcodes.SET_POINTER_COLOR,
-							[current_ptr.target.p1, pointer_class.colors.ACCENT_2]),
-					Operation.new(
-							Operation.opcodes.SET_POINTER_COLOR,
-							[current_ptr.target.p2, pointer_class.colors.ACCENT_2]),
 			])
 
 	push_operations([

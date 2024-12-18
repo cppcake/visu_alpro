@@ -13,8 +13,9 @@ func _process(_delta):
 	visible = get_parent().get_child(1).visible
 "
 
-[node name="options_layer" type="CanvasLayer"]
-layer = 5
+[node name="tutorial_layer" type="CanvasLayer"]
+layer = 4
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
