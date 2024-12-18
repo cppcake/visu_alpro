@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
 [ext_resource type="Script" path="res://topics/tree_traversal/tree_traversal.gd" id="2_tjuep"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
-[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
+[ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 
 [node name="root" node_paths=PackedStringArray("root_ptr", "root_label", "selected_ptr") instance=ExtResource("1_38xve")]

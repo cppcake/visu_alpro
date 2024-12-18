@@ -10,9 +10,9 @@ var coef: int = 2
 func _process(delta):
 	if always_show:
 		if coef > 1 or coef < -1:
-			label_coef.modulate = Color.RED
+			label_coef.set("theme_override_colors/font_color", Color.RED)
 		else:
-			label_coef.modulate = Color.WHITE
+			label_coef.set("theme_override_colors/font_color", Color.BLACK)
 		label_coef.text = str(coef)
 
 func update_reference_counter(addend: int):
@@ -20,14 +20,14 @@ func update_reference_counter(addend: int):
 
 func _on_mouse_entered():
 	if coef > 1 or coef < -1:
-		label_coef.modulate = Color.RED
+		label_coef.set("theme_override_colors/font_color", Color.RED)
 		panik.visible = true
 	label_coef.text = str(coef)
 	super._on_mouse_entered()
 func _on_mouse_exited():
 	super._on_mouse_exited()
 	panik.visible = false
-	label_coef.modulate = Color.WHITE
+	label_coef.set("theme_override_colors/font_color", Color.BLACK)
 	label_coef.text = ""
 
 var coef_history: Array = []

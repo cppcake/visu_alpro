@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://def3gbilknoxq"]
+[gd_scene load_steps=10 format=3 uid="uid://def3gbilknoxq"]
 
 [ext_resource type="Script" path="res://structs/list/list_vertex.gd" id="1_hry7q"]
 [ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_k25f1"]
@@ -9,6 +9,33 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
 radius = 50.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdtas"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="GDScript" id="GDScript_edl7p"]
+script/source = "extends Label
+
+func _process(delta):
+	if text.is_empty():
+		visible = false
+	else:
+		visible = true
+"
 
 [node name="list_vertex" type="Area2D" node_paths=PackedStringArray("sprite", "label_tag", "label_data", "label_ref_count", "p1") groups=["vertices"]]
 script = ExtResource("1_hry7q")
@@ -30,24 +57,24 @@ scale = Vector2(0.32, 0.32)
 texture = ExtResource("2_k25f1")
 
 [node name="label_tag" type="Label" parent="."]
-z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -34.5
-offset_right = 21.0
-offset_bottom = -11.5
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -16.4583
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_hdtas")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = SubResource("GDScript_edl7p")
 
 [node name="label_data" type="Label" parent="."]
 z_index = 1

@@ -20,6 +20,7 @@ config/icon="res://structs/sprites/vertex_default.png"
 [autoload]
 
 OptionsMenu="*res://menus/options_menu/options_menu.tscn"
+TutorialMenu="*res://menus/tutorial_menu/tutorial_menu.tscn"
 
 [debug]
 

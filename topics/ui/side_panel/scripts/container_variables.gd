@@ -6,7 +6,7 @@ class_name VarContainer extends MarginContainer
 func reset():
 	for child in variables_holder.get_children():
 		child.queue_free()
-	custom_minimum_size = Vector2(0, 0)
+	custom_minimum_size = Vector2(0, 70)
 	variables.clear()
 
 var variables: Array = []
@@ -14,12 +14,12 @@ func create_variable() -> Label:
 	var label = variable_scene.instantiate()
 	variables.append(label)
 	variables_holder.add_child(label)
-	custom_minimum_size += Vector2(0, 70)
+	custom_minimum_size += Vector2(0, 35)
 	return label
 func create_variable_undo():
 	var youngest_label = variables.pop_back()
 	youngest_label.queue_free()
-	custom_minimum_size -= Vector2(0, 70)
+	custom_minimum_size -= Vector2(0, 35)
 
 func overwrite_variable(index: int, text_: String):
 	variables[index].overwrite(text_)

@@ -129,3 +129,9 @@ func set_color_undo():
 func reset_visuals():
 	set_color(colors.DEFAULT, false)
 	color_history = [colors.DEFAULT]
+	
+static var marked_history: Array
+static func set_marked(marked: Array):
+	pass
+static func set_marked_undo():
+	pass
