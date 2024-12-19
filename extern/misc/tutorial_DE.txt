@@ -1,7 +1,9 @@
- - Sie können sich bewegen, indem Sie die Umschalttaste + Linksklick gedrückt halten oder die mittlere Maustaste verwenden.
+ - Du kannst dich umher bewegen, indem du die Umschalttaste + Linksklick gedrückt hälst oder die mittlere Maustaste verwendest.
 
- - In der oberen linken Ecke können Sie einen Algorithmus auswählen, der auf der gegebenen Datenstruktur ausgeführt wird.
+ - Außerdem kannst du mit dem Mausrad in beide Richtungen zoomen
 
- - Während der Ausführung der meisten Algorithmen enthält dieses Fenster weitere Informationen wie Pseudo- oder C++-Code, Variablen und den Aufrufstapel.
+ - In der oberen linken Ecke kannst du einen Algorithmus auswählen, der auf der gegebenen Datenstruktur ausgeführt wird.
 
- - Sie können dieses Fenster schließen oder öffnen, indem Sie auf das weiße Dreieck klicken. Das Fenster wird jedoch automatisch geöffnet, falls es für die Visualisierung relevant ist.
+ - Während der Ausführung der meisten Algorithmen enthält dieses Fenster weitere Informationen wie Pseudo- oder C++-Code, Variablen und/oder den Aufrufstapel.
+
+ - Du kannst dieses Fenster schließen oder öffnen, indem du auf das weiße Dreieck klickst. Das Fenster wird automatisch geöffnet, falls es für die Visualisierung relevant ist.

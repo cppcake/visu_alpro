@@ -57,7 +57,7 @@ func highlight_lines_undo():
 
 func highlight_syntax(text_: String) -> String:
 	var dict = {\
-				["if", "else", "for", "return", "func", "do", "while", "and", "int"] : "[b]"\
+				["if", "else", "for", "return", "func", "do", "while", "and", "int", "break"] : "[b]"\
 				,["(", ")"] : "[b]"\
 				,["{", "}"] : "[b]"}
 

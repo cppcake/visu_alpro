@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://sd8yr560vaj2"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_rjeik"]
-[ext_resource type="Script" path="res://menus/options_menu/options_menu.gd" id="2_bi6j5"]
-[ext_resource type="Script" path="res://menus/options_menu/scripts/select_locale.gd" id="3_x3ps0"]
-[ext_resource type="Script" path="res://menus/options_menu/scripts/toggle_fullscreen.gd" id="4_gxgy8"]
-[ext_resource type="Script" path="res://menus/options_menu/scripts/exit.gd" id="5_ajr2c"]
+[ext_resource type="Script" uid="uid://bkldy2xrge62k" path="res://menus/options_menu/options_menu.gd" id="2_bi6j5"]
+[ext_resource type="Script" uid="uid://dowsetcb8fsbp" path="res://menus/options_menu/scripts/select_locale.gd" id="3_x3ps0"]
+[ext_resource type="Script" uid="uid://yak8v1vu7sfl" path="res://menus/options_menu/scripts/toggle_fullscreen.gd" id="4_gxgy8"]
+[ext_resource type="Script" uid="uid://ln0q001nt33" path="res://menus/options_menu/scripts/exit.gd" id="5_ajr2c"]
 
 [sub_resource type="GDScript" id="GDScript_agek1"]
 script/source = "extends ColorRect

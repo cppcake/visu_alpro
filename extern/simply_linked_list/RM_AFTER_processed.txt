@@ -1,1 +1,0 @@
-pred->next = pred->next->next;\nsize -= 1;\nreturn;\n

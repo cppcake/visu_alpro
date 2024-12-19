@@ -1,1 +1,0 @@
-head = head->next;\nsize -= 1;\nreturn;\n

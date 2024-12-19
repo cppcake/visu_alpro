@@ -1,1 +1,0 @@
-if start_ptr == nullptr do\n\treturn\n\nErstelle leere Folge F\n\nFüge start_ptr->data am Ende von F ein\nFüge inorder(start_ptr->left) hinter F ein\nFüge inorder(start_ptr->right) hinter F ein\n\nreturn F\n

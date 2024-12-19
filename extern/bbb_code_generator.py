@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
             if os.path.isfile(input_file_path):
                 # Generate an output file path
-                output_file_path = os.path.splitext(input_file_path)[0] + "_processed.txt"
+                output_file_path = filename + "_processed.txt"
 
                 # Process the file
                 replace_special_characters_in_file(input_file_path, output_file_path)
