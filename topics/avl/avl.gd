@@ -5,13 +5,18 @@ extends tree_traversal_class
 @export var always: Sprite2D
 
 func _ready():
-	pass
+	tutorial()
 
 func clean_up():
 	super.clean_up()
 	kalm.visible = false
 	wait.visible = false
 	always.visible = false
+	side_panel.close()
+
+func init_algo(algo: Callable, argv: Array = []):
+	super.init_algo(algo, argv)
+	side_panel.close()
 
 var vertices: Array = []
 func create_tree(data_array: Array, edge_array: Array):
@@ -236,7 +241,6 @@ func _on_buton_aufgabe_02_pressed():
 		vertices[i].set_coef(coefs[i])
 	
 	init_algo(aufgabe_02)
-
 
 func aufgabe_03(argv: Array):
 	push_operations([

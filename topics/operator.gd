@@ -1,5 +1,8 @@
 class_name operator_class extends Node
 
+func _ready():
+	pass
+
 var current_step
 func init_algo(algo: Callable, argv: Array = []):
 	algo.call(argv)
@@ -37,12 +40,16 @@ func clean_up():
 	new_ptr.visible = false
 	reposition()
 	update_step_label()
+	marked_pointers_history = [[]]
 	get_tree().call_group("pointers", "reset_visuals")
 	get_tree().call_group("vertices", "reset_visuals")
+	tutorial()
+	side_panel.close()
+
+func tutorial():
 	side_panel.reset()
 	side_panel.select_containers(0, 0, 0, 1)
-	side_panel.close()
-	marked_pointers_history = [[]]
+	side_panel.override_exp(tr("TUTORIAL"))
 
 @export var size_label: Label
 func _physics_process(delta):

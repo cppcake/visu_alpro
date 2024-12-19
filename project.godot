@@ -20,7 +20,7 @@ config/icon="res://structs/sprites/vertex_default.png"
 [autoload]
 
 OptionsMenu="*res://menus/options_menu/options_menu.tscn"
-TutorialMenu="*res://menus/tutorial_menu/tutorial_menu.tscn"
+TutorialMenu="res://menus/tutorial_menu/tutorial_menu.tscn"
 
 [debug]
 
@@ -138,7 +138,7 @@ F11={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation", "res://misc/locale/tree_traversal.de.translation", "res://misc/locale/tree_traversal.en.translation", "res://misc/locale/misc.de.translation", "res://misc/locale/misc.en.translation")
+locale/translations=PackedStringArray("res://misc/locale/upper_ui.de.translation", "res://misc/locale/upper_ui.en.translation", "res://misc/locale/simple_list.de.translation", "res://misc/locale/simple_list.en.translation", "res://misc/locale/graph_traversal.de.translation", "res://misc/locale/graph_traversal.en.translation", "res://misc/locale/doubly_list.de.translation", "res://misc/locale/doubly_list.en.translation", "res://misc/locale/tree_traversal.de.translation", "res://misc/locale/tree_traversal.en.translation", "res://misc/locale/misc.de.translation", "res://misc/locale/misc.en.translation", "res://misc/locale/max_heap.de.translation", "res://misc/locale/max_heap.en.translation")
 
 [rendering]
 

@@ -1,7 +1,7 @@
 class_name max_heap_class extends tree_traversal_class
 
 func _ready():
-	pass
+	tutorial()
 
 func cancel():
 	super.cancel()
@@ -113,6 +113,7 @@ func _on_button_insert_pressed():
 	init_algo(insert, [input])
 	#side_panel.open()
 	input_field.clear()
+	side_panel.open()
 
 func remove_max(argv: Array):
 	if tree_array.is_empty():
@@ -215,6 +216,7 @@ func _on_button_remove_max_pressed():
 	side_panel.select_containers(1, 1, 0, 0)
 	side_panel.override_code_call("maxheap.remove_max()")
 	init_algo(remove_max)
+	side_panel.open()
 
 func _on_bbutton_reset_pressed():
 	reset()

@@ -8,6 +8,10 @@ var list_v_scene
 func _ready():
 	list_v_scene = preload("res://structs/list/list_vertex.tscn")
 	reset()
+	side_panel.reset()
+	side_panel.select_containers(0, 0, 0, 1)
+	side_panel.override_exp(tr("TUTORIAL"))
+	side_panel.open()
 
 func _process(_delta):
 	update_stack_frame()
@@ -60,8 +64,6 @@ func cancel():
 	reposition_list()
 
 func clean_up():
-	side_panel.close()
-	
 	current_step = 0
 	max_step = 0
 	new.set_target(null)
@@ -71,6 +73,8 @@ func clean_up():
 	
 	side_panel.reset()
 	side_panel.select_containers(0, 0, 0, 1)
+	side_panel.override_exp(tr("TUTORIAL"))
+	side_panel.close()
 
 func set_up(max_step_pre_: int, current_algo_: Callable, current_algo_b_, needs_current: bool = false):
 	max_step_pre = max_step_pre_

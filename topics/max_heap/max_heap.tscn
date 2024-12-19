@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://1tu6baghoprd"]
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_rp2dr"]
-[ext_resource type="Script" uid="uid://bgi8tnpfhwk1t" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
+[ext_resource type="Script" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
 [ext_resource type="PackedScene" uid="uid://cgn142w7si83j" path="res://structs/heap/heap_vertex.tscn" id="3_j0ker"]
 [ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_rdo05"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_srtbk"]
@@ -20,7 +20,7 @@ visible = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = ExtResource("3_srtbk")
-placeholder_text = "Enter integer to insert"
+placeholder_text = "ENTER_INTEGER_INS"
 max_length = 4
 
 [node name="button_remove_max" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2" groups=["buttons_active"]]
@@ -59,10 +59,16 @@ layout_mode = 2
 text = "remove_max"
 script = ExtResource("3_rdo05")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="9"]
+[node name="button_preorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="9"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="10"]
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="10"]
+visible = false
+
+[node name="button_postorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="11"]
+visible = false
+
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="12"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]

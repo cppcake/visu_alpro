@@ -3,6 +3,7 @@ class_name tree_traversal_class extends operator_class
 @export var root_ptr: pointer_class
 
 func _ready():
+	tutorial()
 	init_algo(insert, [7, root_ptr])
 	finish()
 	init_algo(insert, [5, root_ptr])
@@ -20,6 +21,7 @@ func _ready():
 	size = 7
 	reposition()
 	reposition()
+	side_panel.open()
 
 @export var root_label: Label
 func update_stack_frame():
@@ -165,52 +167,52 @@ func insert(argv: Array):
 			,Operation.new(
 				Operation.opcodes.POINT_AT,
 				[ptr, new_vertex])
-			,Operation.new(
-				Operation.opcodes.SET_SPRITE,
-				[new_vertex, list_vertex_class.sprites.ACCENT])
-			,Operation.new(
-				Operation.opcodes.HIGHLIGHT_CODE,
-				[[2]])
+			#,Operation.new(
+			#	Operation.opcodes.SET_SPRITE,
+			#	[new_vertex, list_vertex_class.sprites.ACCENT])
+			#,Operation.new(
+			#	Operation.opcodes.HIGHLIGHT_CODE,
+			#	[[2]])
 		])
 		
-		push_operations([
-			Operation.new(
-				Operation.opcodes.HIGHLIGHT_CODE,
-				[[3]])
-		])
+		#push_operations([
+		#	Operation.new(
+		#		Operation.opcodes.HIGHLIGHT_CODE,
+		#		[[3]])
+		#])
 		return
 
 	# Highlight first recursiv call
-	push_operations([
-		Operation.new(
-			Operation.opcodes.HIGHLIGHT_CODE,
-			[[6]])
-	])
+	#push_operations([
+	#	Operation.new(
+	#		Operation.opcodes.HIGHLIGHT_CODE,
+	#		[[6]])
+	#])
 	if ptr_target.data > data:
-		push_operations([
-			Operation.new(
-				Operation.opcodes.HIGHLIGHT_CODE,
-				[[7]])
-			,Operation.new(
-				Operation.opcodes.SET_POINTER_COLOR,
-				[ptr, pointer_class.colors.ACCENT])
-		])
+		#push_operations([
+		#	Operation.new(
+		#		Operation.opcodes.HIGHLIGHT_CODE,
+		#		[[7]])
+		#	,Operation.new(
+		#		Operation.opcodes.SET_POINTER_COLOR,
+		#		[ptr, pointer_class.colors.ACCENT])
+		#])
 		insert([data, ptr_target.p1])
 	else:
-		push_operations([
-			Operation.new(
-				Operation.opcodes.HIGHLIGHT_CODE,
-				[[8]])
-		])
+		#push_operations([
+		#	Operation.new(
+		#		Operation.opcodes.HIGHLIGHT_CODE,
+		#		[[8]])
+		#])
 		
-		push_operations([
-			Operation.new(
-				Operation.opcodes.HIGHLIGHT_CODE,
-				[[9]])
-			,Operation.new(
-				Operation.opcodes.SET_POINTER_COLOR,
-				[ptr, pointer_class.colors.ACCENT])
-		])
+		#push_operations([
+		#	Operation.new(
+		#		Operation.opcodes.HIGHLIGHT_CODE,
+		#		[[9]])
+		#	,Operation.new(
+		#		Operation.opcodes.SET_POINTER_COLOR,
+		#		[ptr, pointer_class.colors.ACCENT])
+		#])
 		insert([data, ptr_target.p2])
 func _on_button_insert_pressed():
 	side_panel.override_code(tr("INS_BST"))
@@ -769,9 +771,6 @@ func levelorder(argv: Array) -> Array:
 				Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
 						[[5]]),
-				Operation.new(
-						Operation.opcodes.OVERWRITE_VARIABLE,
-						[0, "F = " + str(F)]),
 				Operation.new(
 						Operation.opcodes.OVERWRITE_VARIABLE,
 						[1, "Q = " + str(Q_strings).replace("\"", "")]),

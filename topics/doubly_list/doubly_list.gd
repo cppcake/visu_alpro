@@ -49,7 +49,6 @@ func reset():
 	list_v_scene = preload("res://structs/doubly_list/doubly_list_vertex.tscn")
 	tail.target = null
 	super.reset()
-	
 
 func insert_front_empty(step: int):
 	match step:

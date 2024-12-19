@@ -4,12 +4,13 @@ GT,Graph Traversal,Breiten- und Tiefensuche
 SLL,Simple Linked List,Einfach verkettete Liste
 DLL,Doubly Linked List,Doppelt verkettete Liste
 TT,Tree Traversal,Baumdurchlaufstrategien
-AVL,AVL Tree (Zettel 10),AVL Baum (Zettel 10)
+AVL,AVL Tree (Restricted to Zettel 10),AVL Baum (Eingeschränkt auf Zettel 10)
 HT,Hashtable,Hashtabelle
 ,,
 FULLSCREEN,Fullscreen,Vollbildmodus
 EXIT_DS,Exit to desktop,Zum Desktop beenden
 ,,
+PICK_NODE,Pick Node to start Algorithm from,Wähle Startknoten aus
 PICK_PRE,Pick a predecessor Node,Wähle Vorgängerknoten aus
 VERTEX,vertex,knoten
 VISITED, explored,erkundet
@@ -21,3 +22,5 @@ STACK,Call stack,Aufrufstapel
 VARIABLES,Variables,Variablen
 FINISHED,Finished,Fertig
 RESET_SMALL,reset,zurücksetzen
+ENTER_INTEGER_INS,Enter integer to insert,Ganzzahl eingeben
+TUTORIAL," - You can move around by holding Shift + Leftclick or by holding the middle mouse button\n\n - In the top-left corner you can pick an algorithm to perform on the given data structure\n\n - During the operation of most algorithms this window will include more information such as Pseudo- or C++-Code, Variables and the Callstack.\n\n - You can close or open this window by clicking on the white triangle. However it will open itself if it contains information of importance for the algorithm.\n"," - Sie können sich bewegen, indem Sie die Umschalttaste + Linksklick gedrückt halten oder die mittlere Maustaste verwenden.\n\n - In der oberen linken Ecke können Sie einen Algorithmus auswählen, der auf der gegebenen Datenstruktur ausgeführt wird.\n\n - Während der Ausführung der meisten Algorithmen enthält dieses Fenster weitere Informationen wie Pseudo- oder C++-Code, Variablen und den Aufrufstapel.\n\n - Sie können dieses Fenster schließen oder öffnen, indem Sie auf das weiße Dreieck klicken. Das Fenster wird jedoch automatisch geöffnet, falls es für die Visualisierung relevant ist.\n"

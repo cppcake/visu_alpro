@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_pe8m0"]
 [ext_resource type="Script" path="res://topics/avl/avl.gd" id="2_n7br5"]
-[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_a1ike"]
+[ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_a1ike"]
 [ext_resource type="PackedScene" uid="uid://1ke1200s0p42" path="res://structs/avl/avl_vertex.tscn" id="3_dhwt2"]
 [ext_resource type="Texture2D" uid="uid://by5wqtpq7yivg" path="res://topics/avl/wait_its_balanced.png" id="5_7x1xb"]
 [ext_resource type="Texture2D" uid="uid://brqqgo5s5vgve" path="res://topics/avl/kalm.png" id="5_omhts"]
@@ -45,10 +45,16 @@ layout_mode = 2
 text = "Balancekoeffizienten immer zeigen"
 script = SubResource("GDScript_dux00")
 
-[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
+[node name="button_preorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
 visible = false
 
-[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6"]
+[node name="button_inorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6"]
+visible = false
+
+[node name="button_postorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="7"]
+visible = false
+
+[node name="button_levelorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="8"]
 visible = false
 
 [node name="stackframe" parent="CanvasLayer" index="1"]

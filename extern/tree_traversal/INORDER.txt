@@ -4,7 +4,7 @@ if start_ptr == nullptr do
 Create empty sequence F
 
 insert inorder(start_ptr->left) behind F
-append start_ptr->data to sequence
+append start_ptr->data to F
 insert inorder(start_ptr->right) behind F
 
 return F

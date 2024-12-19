@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dj3fhf7st870s"
+
+[deps]
+
+files=["res://misc/locale/max_heap.en.translation", "res://misc/locale/max_heap.de.translation"]
+
+source_file="res://misc/locale/max_heap.csv"
+dest_files=["res://misc/locale/max_heap.en.translation", "res://misc/locale/max_heap.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0

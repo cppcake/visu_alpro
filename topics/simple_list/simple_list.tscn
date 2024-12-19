@@ -198,7 +198,6 @@ layout_mode = 2
 text = "head = null"
 
 [node name="side_panel" parent="CanvasLayer" instance=ExtResource("7_ld1tq")]
-is_open = false
 
 [node name="legend" type="Control" parent="CanvasLayer"]
 layout_mode = 3

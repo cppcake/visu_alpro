@@ -1,0 +1,36 @@
+// Tausche die Wurzel mit dem letzten Element
+std::swap(tree_array[0], tree_array[tree_array.size() - 1]);
+
+// Entferne das letzte Element (die ehemalige Wurzel also)
+tree_array.pop_back();
+
+int size = tree_array.size();
+int i = 0;
+
+while (i < size) {
+    int left = i * 2 + 1;
+    int right = left + 1;
+    int largest = i;
+
+    // Überprüfe ob linkes Kind größer
+    if (left < size && tree_array[left].data > tree_array[largest].data) {
+        largest = left;
+    }
+
+    // Überprüfe ob rechtes Kind noch größer
+    if (right < size && tree_array[right].data > tree_array[largest].data) {
+        largest = right;
+    }
+
+    // Abbrechen, falls Knoten bereits größer als beide Kinder ist
+    if (largest == i) {
+        break;
+    }
+
+    // Tausche ansonsten mit dem größten Kind
+    std::swap(tree_array[largest], tree_array[i]);
+
+    // Aktualisiere Index auf der neuen Position des Knoten
+    i = largest;
+
+return

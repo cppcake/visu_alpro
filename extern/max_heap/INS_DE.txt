@@ -1,0 +1,16 @@
+// Füge das neue Datum am Ende des Array hinzu
+tree_array.push_back(data);
+
+// Tausche mit Elternknoten (falls notwendig)
+int index = tree_array.size() - 1;
+while (index > 0 && tree_array[index] > tree_array[parent(index)]) {
+	std::swap(tree_array[index], tree_array[parent(index)]);
+	index = parent(index);
+}
+
+return
+
+--------------------------------------------------------------------------------------------------------------
+# Hilfsfunktion um den Index des Elternknotens auszurechnen
+func parent(index) -> int:
+	return floor((index - 1) / 2)

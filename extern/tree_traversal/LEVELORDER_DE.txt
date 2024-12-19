@@ -1,0 +1,11 @@
+Erstelle leere Folge F und leere Warteschlange Q
+Q.push(start_ptr)
+
+while Q nicht leer do
+	Let current_ptr = Q.pop()
+	if current_ptr != nullptr then
+		F.push(current_ptr->data)
+		Q.push_back(current_ptr->left)
+		Q.push_back(current_ptr->right)
+
+return F
