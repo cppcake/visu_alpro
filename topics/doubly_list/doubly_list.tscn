@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://k4bv3a3sjqxv"]
 
 [ext_resource type="PackedScene" uid="uid://dwnnxeub60gee" path="res://topics/simple_list/simple_list.tscn" id="1_6c0hh"]
-[ext_resource type="Script" path="res://topics/doubly_list/doubly_list.gd" id="2_qnl5b"]
+[ext_resource type="Script" uid="uid://b0sqkk1ian7rx" path="res://topics/doubly_list/doubly_list.gd" id="2_qnl5b"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_uf7jp"]
 
 [node name="root" node_paths=PackedStringArray("tail", "tail_label") instance=ExtResource("1_6c0hh")]

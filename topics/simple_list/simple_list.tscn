@@ -87,7 +87,7 @@ script = ExtResource("4_kusec")
 [node name="button_reset" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-text = "reset"
+text = "RESET_SMALL"
 script = ExtResource("4_kusec")
 
 [node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/buttons"]

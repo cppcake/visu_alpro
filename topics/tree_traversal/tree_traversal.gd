@@ -220,6 +220,163 @@ func _on_button_insert_pressed():
 	init_algo(insert, [randiii, root_ptr])
 	side_panel.open()
 
+func preorder(argv: Array) -> Array:
+	var ptr: pointer_class = argv[0]
+	var ptr_target = ptr.target
+	var ptr_name = ptr.pointer_name
+	
+	# Push stackframe of call
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[]]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[ptr_target, list_vertex_class.sprites.ACCENT]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["preorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.CALL,
+					["CALL"]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, ""]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+	
+	# Abbruchbedingung check. Markiere current_ptr und if_statement
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[1]])
+	])
+	if ptr_target == null:
+		# Abdruchbedingung greift. Return empty Array.
+		push_operations([
+				Operation.new(
+						Operation.opcodes.HIGHLIGHT_CODE,
+						[[2]]),
+				Operation.new(
+						Operation.opcodes.RETURN,
+						[[]]),
+				Operation.new(
+						Operation.opcodes.OVERWRITE_RETURN,
+						[[]]),
+		])
+		return []
+	
+	# Create sequences
+	var F = []
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[4]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = [ ]"]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, "[ ]"]),
+	])
+
+	F.append(ptr_target.data)
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[6]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+	])
+
+	# First recursiv call into the left subtree
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[7]]),
+	])
+	F.append_array(preorder([ptr_target.p1]))
+	var last_pop_left = side_panel.get_last_pop()
+	push_operations([
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[39]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["preorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[7]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[8]]),
+	])
+	F.append_array(preorder([ptr_target.p2]))
+	var last_pop_right = side_panel.get_last_pop()
+	push_operations([
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[39]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["preorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[8]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+
+	# Return F
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[10]]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[ptr_target, list_vertex_class.sprites.ACCENT_2]),
+			Operation.new(
+					Operation.opcodes.RETURN,
+					[]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[F]),
+	])
+	return F
+func _on_button_preorder_pressed():
+	side_panel.create_variable()
+	side_panel.override_code(tr("PREORDER"))
+	side_panel.override_code_call("preorder(start_ptr)")
+	
+	pre_algorithm = preorder
+	pre_argv = []
+	prepare_signals_for_current()
+
 func inorder(argv: Array) -> Array:
 	var ptr: pointer_class = argv[0]
 	var ptr_target = ptr.target
@@ -377,6 +534,163 @@ func _on_button_inorder_pressed():
 	pre_argv = []
 	prepare_signals_for_current()
 
+func postorder(argv: Array) -> Array:
+	var ptr: pointer_class = argv[0]
+	var ptr_target = ptr.target
+	var ptr_name = ptr.pointer_name
+	
+	# Push stackframe of call
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[]]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[ptr_target, list_vertex_class.sprites.ACCENT]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["postorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.CALL,
+					["CALL"]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, ""]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+	
+	# Abbruchbedingung check. Markiere current_ptr und if_statement
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[1]])
+	])
+	if ptr_target == null:
+		# Abdruchbedingung greift. Return empty Array.
+		push_operations([
+				Operation.new(
+						Operation.opcodes.HIGHLIGHT_CODE,
+						[[2]]),
+				Operation.new(
+						Operation.opcodes.RETURN,
+						[[]]),
+				Operation.new(
+						Operation.opcodes.OVERWRITE_RETURN,
+						[[]]),
+		])
+		return []
+	
+	# Create sequences
+	var F = []
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[4]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = [ ]"]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, "[ ]"]),
+	])
+
+	# First recursiv call into the left subtree
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[6]]),
+	])
+	F.append_array(postorder([ptr_target.p1]))
+	var last_pop_left = side_panel.get_last_pop()
+	push_operations([
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[39]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["postorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[6]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[7]]),
+	])
+	F.append_array(postorder([ptr_target.p2]))
+	var last_pop_right = side_panel.get_last_pop()
+	push_operations([
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[39]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_CALL,
+					["postorder(start_ptr = " + ptr_name + ")"]),
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[7]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+			Operation.new(
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
+	])
+
+	F.append(ptr_target.data)
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[8]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_VARIABLE,
+					[0, "F = " + str(F)]),
+			Operation.new(
+					Operation.opcodes.SET_TAG,
+					[ptr_target, str(F)]),
+	])
+
+	# Return F
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[10]]),
+			Operation.new(
+					Operation.opcodes.SET_SPRITE,
+					[ptr_target, list_vertex_class.sprites.ACCENT_2]),
+			Operation.new(
+					Operation.opcodes.RETURN,
+					[]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[F]),
+	])
+	return F
+func _on_button_postorder_pressed():
+	side_panel.create_variable()
+	side_panel.override_code(tr("POSTORDER"))
+	side_panel.override_code_call("postorder(start_ptr)")
+	
+	pre_algorithm = postorder
+	pre_argv = []
+	prepare_signals_for_current()
+
 func levelorder(argv: Array) -> Array:
 	var ptr = argv[0]
 
@@ -401,8 +715,8 @@ func levelorder(argv: Array) -> Array:
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[2, ""]),
 			Operation.new(
-					Operation.opcodes.SET_POINTER_COLOR,
-					[ptr, pointer_class.colors.ACCENT_2]),
+					Operation.opcodes.MARK_POINTERS,
+					[[ptr]]),
 	])
 
 	# Create variables
@@ -455,9 +769,6 @@ func levelorder(argv: Array) -> Array:
 				Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
 						[[5]]),
-				Operation.new(
-						Operation.opcodes.SET_POINTER_COLOR,
-						[current_ptr, pointer_class.colors.ACCENT]),
 				Operation.new(
 						Operation.opcodes.OVERWRITE_VARIABLE,
 						[0, "F = " + str(F)]),

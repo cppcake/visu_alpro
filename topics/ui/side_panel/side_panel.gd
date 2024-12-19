@@ -47,7 +47,7 @@ func override_exp(text_: String):
 # CODE CONTAINER STUFF
 func override_code(text_: String, update_init: bool = true):
 	cont_code.override(text_, update_init)
-func override_code_return(text_: String = "Algorithm returned", color: Color = constants.color_1_c):
+func override_code_return(text_: String = tr("TERMINATE_2"), color: Color = constants.color_1_c):
 	cont_code.set_return(text_, color)
 func override_code_return_v2(return_value, color: Color = constants.color_1_c):
 	cont_code.set_return_v2(return_value, color)

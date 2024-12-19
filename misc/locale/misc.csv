@@ -4,7 +4,7 @@ GT,Graph Traversal,Breiten- und Tiefensuche
 SLL,Simple Linked List,Einfach verkettete Liste
 DLL,Doubly Linked List,Doppelt verkettete Liste
 TT,Tree Traversal,Baumdurchlaufstrategien
-AVL,AVL Tree,AVL Baum
+AVL,AVL Tree (Zettel 10),AVL Baum (Zettel 10)
 HT,Hashtable,Hashtabelle
 ,,
 FULLSCREEN,Fullscreen,Vollbildmodus
@@ -20,3 +20,4 @@ TERMINATE_2,Algorithm returned,Algorithmus terminierte
 STACK,Call stack,Aufrufstapel
 VARIABLES,Variables,Variablen
 FINISHED,Finished,Fertig
+RESET_SMALL,reset,zurücksetzen

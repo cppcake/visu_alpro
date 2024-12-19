@@ -1,0 +1,10 @@
+if start_ptr == nullptr do
+	return
+
+Create empty sequence F
+
+insert inorder(start_ptr->left) behind F
+insert inorder(start_ptr->right) behind F
+append start_ptr->data to sequence
+
+return F

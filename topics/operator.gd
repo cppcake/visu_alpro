@@ -230,7 +230,7 @@ func operator_interface(operations: Array, undo: bool = false):
 				if undo:
 					set_marked_pointers_undo()
 				else:
-					pass#set_marked_pointers(argv[0])
+					set_marked_pointers(argv[0])
 				continue
 
 @export var vertex_scene: PackedScene
@@ -324,7 +324,7 @@ func set_marked_pointers(to_mark: Array, save: bool = true):
 		pointer.set_color(pointer_class.colors.ACCENT, false)
 func set_marked_pointers_undo():
 	marked_pointers_history.pop_back()
-	#set_marked_pointers(marked_pointers_history.back(), false)
+	set_marked_pointers(marked_pointers_history.back(), false)
 
 func to_data_array(tree_array):
 	var data_array: Array = []
