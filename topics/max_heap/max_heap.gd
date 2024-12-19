@@ -93,14 +93,14 @@ func insert(argv: Array):
 		current_index = parent(current_index)
 	
 	# Return
-	#push_operations([\
-	#	Operation.new(\
-	#		Operation.opcodes.HIGHLIGHT_CODE,\
-	#		[[11]])
-	#	,Operation.new(\
-	#		Operation.opcodes.OVERWRITE_RETURN,\
-	#		[null])
-	#	])
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[11]]),
+			Operation.new(
+					Operation.opcodes.OVERWRITE_RETURN,
+					[null]),
+			])
 	return
 @export var input_field: LineEdit
 func _on_button_insert_pressed():

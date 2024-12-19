@@ -1,6 +1,6 @@
 import os
 
-def replace_special_characters_in_file(input_file, output_file):
+def replace_special_characters_in_file(input_file, output_file, code_syntax):
     """
     Reads a file, replaces new lines with '\n', tabs with '\t', and '[' with '[lb]',
     and writes the processed content to a new file.
@@ -15,11 +15,21 @@ def replace_special_characters_in_file(input_file, output_file):
             content = infile.read()
 
         # Process the content
-        processed_content = content.replace('\n', '\\n').replace('\t', '\\t').replace('[', '[lb]')
+        content = content.\
+                    replace('\n', '\\n').\
+                    replace('\t', '\\t').\
+                    replace('[', '[lb]')
+
+        if code_syntax:
+            keywords = ["if", "else", "for", "return", "func", "do", "while", "and", "int", "break"\
+                            , "(", ")", "{", "}"]
+
+            for keyword in keywords:
+                content = content.replace(keyword, f"[b]{keyword}[/b]")
 
         # Write the processed content to the output file
         with open(output_file, 'w') as outfile:
-            outfile.write(processed_content)
+            outfile.write(content)
 
         print(f"Processed content written to {output_file}")
     except FileNotFoundError:
@@ -31,6 +41,9 @@ def replace_special_characters_in_file(input_file, output_file):
 if __name__ == "__main__":
     # Input directory path
     input_dir = input("Enter the path to the directory containing files: ").strip()
+
+    code_syntax: bool = True if input("Wanna do full code syntax change and stuff or nah? y/n").strip() == "y" else False
+
 
     if not os.path.isdir(input_dir):
         print("Error: The provided path is not a valid directory.")
@@ -44,4 +57,4 @@ if __name__ == "__main__":
                 output_file_path = filename + "_processed.txt"
 
                 # Process the file
-                replace_special_characters_in_file(input_file_path, output_file_path)
+                replace_special_characters_in_file(input_file_path, output_file_path, code_syntax)
