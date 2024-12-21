@@ -32,8 +32,8 @@ func update_stack_frame():
 		root_label.text = "root = 0x..."
 
 var offset_y: int = 180
-var min_offset_x: int = 80
-var mult: int = 2
+var min_offset_x: int = 70
+var mult: float = 1.8
 func reposition():
 	var width: int = int(pow(2, calculate_height(root_ptr))) * min_offset_x
 	var root_vertex = root_ptr.target

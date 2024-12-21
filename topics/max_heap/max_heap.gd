@@ -492,6 +492,8 @@ func remove_max_tut(argv: Array):
 		])
 		i = biggest
 func _on_button_remove_max_tut_pressed():
+	if tree_array.size() < 1:
+		return
 	side_panel.override_code(tr("MAX_HEAP_RM"))
 	side_panel.select_containers(1, 0, 0, 0)
 	side_panel.override_code_call("maxheap.remove_max()")

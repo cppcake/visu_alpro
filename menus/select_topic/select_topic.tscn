@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4byyinbr8yl6"]
+[gd_scene load_steps=11 format=3 uid="uid://d4byyinbr8yl6"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_2ti2a"]
-[ext_resource type="Script" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
+[ext_resource type="Script" uid="uid://dn4omggdastwm" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
 [ext_resource type="PackedScene" uid="uid://4yxiit4yk24o" path="res://menus/select_topic/item_box.tscn" id="4_6ddwb"]
-[ext_resource type="Script" path="res://menus/select_topic/select_topic.gd" id="5_g53c3"]
+[ext_resource type="Script" uid="uid://dg7jnjmekekc2" path="res://menus/select_topic/select_topic.gd" id="5_g53c3"]
 [ext_resource type="Texture2D" uid="uid://r1o683wbwiro" path="res://menus/select_topic/images/graph_traversal.png" id="5_xsani"]
 [ext_resource type="Texture2D" uid="uid://lgd5kicjyg27" path="res://menus/select_topic/images/simple_list.png" id="6_ytq5r"]
 [ext_resource type="Texture2D" uid="uid://wun0tbetskk1" path="res://menus/select_topic/images/doubly_list.png" id="7_5242d"]
+[ext_resource type="Texture2D" uid="uid://cvr4ej8wjjxkl" path="res://menus/select_topic/images/tree_traversal.png" id="8_ue5fj"]
+[ext_resource type="Texture2D" uid="uid://cbso5e0kkkiq3" path="res://menus/select_topic/images/max_heap.png" id="9_eg1vr"]
+[ext_resource type="Texture2D" uid="uid://4tdpkd507abq" path="res://menus/select_topic/images/avl.png" id="10_8yvo4"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -78,15 +81,18 @@ label_text = "DLL"
 
 [node name="tree_traversal" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("8_ue5fj")
 scene_name = "tree_traversal"
 label_text = "TT"
 
 [node name="max_heap" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("9_eg1vr")
 scene_name = "max_heap"
 label_text = "Maxheap"
 
-[node name="ItemBox" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+[node name="avl" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("10_8yvo4")
 scene_name = "avl"
 label_text = "AVL"

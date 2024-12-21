@@ -154,21 +154,21 @@ func insert_after(step: int):
 			highlight_code([2])
 		3:
 			new_vertex.p1.set_target(pred.p1.target)
-			highlight_code([3])
+			highlight_code([4])
 		4:
 			new_vertex.p2.set_target(pred)
-			highlight_code([4])
+			highlight_code([5])
 		5:
 			pred.p1.set_target(new_vertex)
-			highlight_code([5])
+			highlight_code([6])
 		6:
-			highlight_code([7])
+			highlight_code([8])
 		7:
 			new_vertex.p1.target.p2.set_target(new_vertex)
-			highlight_code([8])
+			highlight_code([9])
 		8:
 			side_panel.override_code_return()
-			highlight_code([9])
+			highlight_code([10])
 func insert_after_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
@@ -201,21 +201,21 @@ func insert_after_tail(step: int):
 			highlight_code([2])
 		3:
 			new_vertex.p1.set_target(pred.p1.target)
-			highlight_code([3])
+			highlight_code([4])
 		4:
 			new_vertex.p2.set_target(pred)
-			highlight_code([4])
+			highlight_code([5])
 		5:
 			pred.p1.set_target(new_vertex)
-			highlight_code([5])
+			highlight_code([6])
 		6:
-			highlight_code([7])
+			highlight_code([8])
 		7:
 			tail.set_target(new_vertex)
-			highlight_code([12])
+			highlight_code([13])
 		8:
 			side_panel.override_code_return()
-			highlight_code([13])
+			highlight_code([14])
 func insert_after_tail_b(step: int):
 	var pred: list_vertex_class = list_vertex_class.selected_vertex
 	match step:
@@ -265,16 +265,16 @@ func remove_one(step: int):
 			size -= 1
 			highlight_code([1])
 		2:
-			highlight_code([3])
+			highlight_code([4])
 		3:
 			head.set_target(null)
-			highlight_code([4])
+			highlight_code([5])
 		4:
 			tail.set_target(null)
-			highlight_code([5])
+			highlight_code([6])
 		5:
 			side_panel.override_code_return()
-			highlight_code([6])
+			highlight_code([7])
 func remove_one_b(step: int):
 	to_remove = list_vertex_class.selected_vertex
 	match step:
@@ -296,18 +296,18 @@ func remove_head(step: int):
 			size -= 1
 			highlight_code([1])
 		2:
-			highlight_code([3])
+			highlight_code([4])
 		3:
-			highlight_code([10])
+			highlight_code([11])
 		4:
 			head.set_target(head.target.p1.target)
-			highlight_code([11])
+			highlight_code([12])
 		5:
 			head.target.p2.set_target(null)
-			highlight_code([12])
+			highlight_code([13])
 		6:
 			side_panel.override_code_return()
-			highlight_code([13])
+			highlight_code([14])
 func remove_head_b(step: int):
 	to_remove = list_vertex_class.selected_vertex
 	match step:
@@ -331,20 +331,20 @@ func remove_tail(step: int):
 			size -= 1
 			highlight_code([1])
 		2:
-			highlight_code([3])
+			highlight_code([4])
 		3:
-			highlight_code([10])
+			highlight_code([11])
 		4:
-			highlight_code([17])
+			highlight_code([18])
 		5:
 			tail.set_target(tail.target.p2.target)
-			highlight_code([18])
+			highlight_code([19])
 		6:
 			tail.target.p1.set_target(null)
-			highlight_code([19])
+			highlight_code([20])
 		7:
 			side_panel.override_code_return()
-			highlight_code([20])
+			highlight_code([21])
 func remove_tail_b(step: int):
 	to_remove = list_vertex_class.selected_vertex
 	match step:
@@ -370,23 +370,23 @@ func remove(step: int):
 			size -= 1
 			highlight_code([1])
 		2:
-			highlight_code([3])
+			highlight_code([4])
 		3:
-			highlight_code([10])
+			highlight_code([11])
 		4:
-			highlight_code([17])
+			highlight_code([18])
 		5:
 			to_remove.move_to_rel(Vector2(0, -200))
 			current.move_to_rel(Vector2(0, -200))
 			to_remove.p1.target.p2.set_target(to_remove.p2.target)
-			highlight_code([24])
+			highlight_code([25])
 		6:
 			current.dest_pos = null
 			to_remove.p2.target.p1.set_target(to_remove.p1.target)
-			highlight_code([25])
+			highlight_code([26])
 		7:
 			side_panel.override_code_return()
-			highlight_code([26])
+			highlight_code([27])
 func remove_b(step: int):
 	to_remove = list_vertex_class.selected_vertex
 	match step:

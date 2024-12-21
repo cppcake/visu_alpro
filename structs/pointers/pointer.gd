@@ -12,7 +12,7 @@ var last_target = null
 var line: Line2D
 var head: Polygon2D
 var distance_head_node: float = 85
-var distance_factor: float = 0.85
+var distance_factor: float = 4
 var current_end_point: Vector2
 var rel_null_end_point = Vector2(0, 150)
 @export var displacement: Vector2 = Vector2(0, 0)
@@ -22,7 +22,7 @@ var rel_null_end_point = Vector2(0, 150)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	distance_head_node *= distance_factor
+	#distance_head_node *= distance_factor
 	line = get_node("./Line2D")
 	head = get_node("./Polygon2D")
 	label_start.text = label_start_text
@@ -69,7 +69,7 @@ func draw(target_position: Vector2 = current_end_point):
 
 	var distance: float = global_position.distance_to(target_position)
 	var direction: Vector2 = (target_position - global_position).normalized()
-	target_position = direction * (distance - distance_head_node) * distance_factor
+	target_position = direction * (distance - distance_head_node) - distance_factor * direction
 
 	line.set_point_position(0, Vector2(0, 0) + current_displacement)
 	line.set_point_position(1, target_position + current_displacement)
