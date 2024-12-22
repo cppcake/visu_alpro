@@ -33,7 +33,7 @@ func update_stack_frame():
 
 var offset_y: int = 180
 var min_offset_x: int = 70
-var mult: float = 1.8
+var mult: int = 2
 func reposition():
 	var width: int = int(pow(2, calculate_height(root_ptr))) * min_offset_x
 	var root_vertex = root_ptr.target
@@ -291,10 +291,10 @@ func preorder(argv: Array) -> Array:
 					[[6]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 	])
 
 	# First recursiv call into the left subtree
@@ -317,10 +317,10 @@ func preorder(argv: Array) -> Array:
 					[[7]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -345,10 +345,10 @@ func preorder(argv: Array) -> Array:
 					[[8]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -461,10 +461,10 @@ func inorder(argv: Array) -> Array:
 					[[6]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -477,10 +477,10 @@ func inorder(argv: Array) -> Array:
 					[[7]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 	])
 
 	push_operations([
@@ -502,10 +502,10 @@ func inorder(argv: Array) -> Array:
 					[[8]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -618,10 +618,10 @@ func postorder(argv: Array) -> Array:
 					[[6]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -646,10 +646,10 @@ func postorder(argv: Array) -> Array:
 					[[7]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 			Operation.new(
 					Operation.opcodes.MARK_POINTERS,
 					[[ptr]]),
@@ -662,10 +662,10 @@ func postorder(argv: Array) -> Array:
 					[[8]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.SET_TAG,
-					[ptr_target, str(F)]),
+					[ptr_target, str_F(F)]),
 	])
 
 	# Return F
@@ -731,7 +731,7 @@ func levelorder(argv: Array) -> Array:
 					[[1]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[1, "Q = " + str(Q_strings).replace("\"", "")]),
@@ -749,7 +749,7 @@ func levelorder(argv: Array) -> Array:
 					[[2]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
-					[0, "F = " + str(F)]),
+					[0, "F = " + str_F(F)]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_VARIABLE,
 					[1, "Q = " + str(Q_strings).replace("\"", "")]),
@@ -795,7 +795,7 @@ func levelorder(argv: Array) -> Array:
 							[[7]]),
 					Operation.new(
 							Operation.opcodes.OVERWRITE_VARIABLE,
-							[0, "F = " + str(F)]),
+							[0, "F = " + str_F(F)]),
 					Operation.new(
 							Operation.opcodes.SET_SPRITE,
 							[current_ptr.target, list_vertex_class.sprites.ACCENT]),
@@ -836,3 +836,9 @@ func _on_button_levelorder_pressed():
 	pre_algorithm = levelorder
 	pre_argv = []
 	prepare_signals_for_current()
+
+func str_F(F: Array):
+	if F.is_empty():
+		return "[ ]"
+	else:
+		return str(F)

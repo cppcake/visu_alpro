@@ -48,8 +48,11 @@ layout_mode = 2
 [node name="side_panel" parent="CanvasLayer" index="2"]
 is_open = true
 
+[node name="Camera2D" parent="." index="1"]
+zoom = Vector2(1.25, 1.25)
+
 [node name="root_ptr" parent="." index="3" groups=["pointers"] instance=ExtResource("3_cgglp")]
-position = Vector2(0, -200)
+position = Vector2(65, -200)
 label_start_text = "root"
 
 [node name="subtree_ptr" parent="." index="4" instance=ExtResource("3_cgglp")]

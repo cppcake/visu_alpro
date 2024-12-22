@@ -100,7 +100,7 @@ modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 
 [node name="root_ptr" parent="." index="3"]
-visible = false
+position = Vector2(-120, 33)
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="." method="_on_button_remove_max_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/button_remove_max" method="_on_pressed"]

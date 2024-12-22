@@ -62,6 +62,10 @@ visible = false
 
 [node name="Camera2D" parent="." index="1"]
 position = Vector2(0, 200)
+zoom = Vector2(1, 1)
+
+[node name="root_ptr" parent="." index="3"]
+position = Vector2(0, -120)
 
 [node name="wait" type="Sprite2D" parent="root_ptr" index="0"]
 visible = false
