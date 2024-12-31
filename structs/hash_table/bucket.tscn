@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://1in5jyqcwx50"]
+
+[ext_resource type="Script" path="res://structs/hash_table/bucket.gd" id="1_4fds5"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_qsq7e"]
+[ext_resource type="PackedScene" uid="uid://def3gbilknoxq" path="res://structs/list/list_vertex.tscn" id="2_vnuiw"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_1w2rm"]
+
+[node name="Bucket" type="Node2D" node_paths=PackedStringArray("head")]
+script = ExtResource("1_4fds5")
+head = NodePath("Head")
+vertex_scene = ExtResource("2_vnuiw")
+
+[node name="Head" parent="." instance=ExtResource("3_1w2rm")]
+
+[node name="ArrayEntry" type="Panel" parent="."]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_qsq7e")
+
+[node name="LabelIndex" type="Label" parent="ArrayEntry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_qsq7e")
+theme_override_font_sizes/font_size = 16
+text = "XD"
+horizontal_alignment = 1
+vertical_alignment = 1
