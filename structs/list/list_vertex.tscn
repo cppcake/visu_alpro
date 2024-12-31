@@ -57,6 +57,7 @@ scale = Vector2(0.32, 0.32)
 texture = ExtResource("2_k25f1")
 
 [node name="label_tag" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

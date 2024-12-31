@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d25mecoy5ka6l" path="res://topics/tree_traversal/tree_traversal.tscn" id="1_rp2dr"]
 [ext_resource type="Script" path="res://topics/max_heap/max_heap.gd" id="2_in3j6"]
 [ext_resource type="PackedScene" uid="uid://cgn142w7si83j" path="res://structs/heap/heap_vertex.tscn" id="3_j0ker"]
-[ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_rdo05"]
+[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_rdo05"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="3_srtbk"]
 [ext_resource type="PackedScene" uid="uid://bwuylmsasrk2m" path="res://structs/array/visu_array.tscn" id="4_bxmcl"]
 

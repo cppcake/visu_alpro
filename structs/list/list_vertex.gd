@@ -60,6 +60,11 @@ func reset_visuals():
 	set_tag("")
 	tag_history = [""]
 
+var data
+func set_data(data_):
+	data = data_
+	label_data.set_text(str(data))
+
 var tag_history: Array = [""]
 func set_tag(tag: String):
 	tag_history.push_back(tag)

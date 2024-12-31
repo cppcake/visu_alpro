@@ -1,7 +1,6 @@
 class_name tree_vertex_class extends list_vertex_class
 
 var p2: pointer_class
-var data: int
 @export var sprite_visited: CompressedTexture2D
 
 func _ready():
