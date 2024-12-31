@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bokar7fyhr48l"]
+[gd_scene load_steps=3 format=3 uid="uid://bokar7fyhr48l"]
 
 [ext_resource type="Script" path="res://structs/hash_table/bucket_array.gd" id="1_c0ueu"]
+[ext_resource type="PackedScene" uid="uid://1in5jyqcwx50" path="res://structs/bucket/bucket.tscn" id="2_hy5ko"]
 
 [node name="BucketArray" type="Node2D"]
+position = Vector2(350, 265)
 script = ExtResource("1_c0ueu")
+bucket_scene = ExtResource("2_hy5ko")

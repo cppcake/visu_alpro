@@ -1,5 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://8608fxfh6gga"]
+[gd_scene load_steps=6 format=3 uid="uid://8608fxfh6gga"]
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_btovm"]
+[ext_resource type="Script" path="res://topics/hash_table/hash_table.gd" id="2_l51hf"]
+[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_1c67l"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="4_7c8mo"]
+[ext_resource type="PackedScene" uid="uid://bokar7fyhr48l" path="res://structs/hash_table/bucket_array.tscn" id="5_op5y2"]
 
-[node name="root" instance=ExtResource("1_btovm")]
+[node name="root" node_paths=PackedStringArray("bucket_array", "input_field") instance=ExtResource("1_btovm")]
+script = ExtResource("2_l51hf")
+bucket_array = NodePath("BucketArray")
+input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/LineEdit")
+
+[node name="ButtonInsert" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
+layout_mode = 2
+theme = ExtResource("4_7c8mo")
+text = "insert"
+script = ExtResource("3_1c67l")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="1"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("4_7c8mo")
+placeholder_text = "ENTER_STRING_INS"
+max_length = 20
+
+[node name="BucketArray" parent="." index="3" instance=ExtResource("5_op5y2")]
+
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" to="." method="_on_button_insert_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" method="_on_pressed"]

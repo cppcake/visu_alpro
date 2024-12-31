@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0scl5uwvmmfx"]
+
+[ext_resource type="Script" path="res://structs/hash_table/hash_vertex.gd" id="1_te0kp"]
+[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_l44rj"]
+[ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="6_ys0r6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]
+radius = 50.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdtas"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[node name="hasht_vertex" type="Area2D" node_paths=PackedStringArray("label_hash", "label_key", "p1") groups=["vertices"]]
+script = ExtResource("1_te0kp")
+label_hash = NodePath("label_hash")
+label_key = NodePath("label_key")
+p1 = NodePath("pointer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lky5f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("2_l44rj")
+
+[node name="label_hash" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -44.0
+offset_right = 20.0
+offset_bottom = -16.4583
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hdtas")
+text = "0123456789ABCDEF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="label_key" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -12.0
+offset_right = 21.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pointer" parent="." instance=ExtResource("6_ys0r6")]
+visible = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

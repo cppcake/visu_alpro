@@ -1,9 +1,15 @@
-class_name Bucket extends Node2D
+class_name Bucket
+extends Node2D
 
 @export var head: pointer_class
 @export var vertex_scene: PackedScene
 @export var distance_vertices: int = 200
-@export var insert_offset := Vector2(75, -75)
+@export var insert_offset := Vector2(100, -25)
+
+@export var label_index: Label
+var bucket_index: int
+
+var remove_history = []
 
 func _process(_delta):
 	return
@@ -12,18 +18,27 @@ func _process(_delta):
 	var middle_click = Input.is_action_just_pressed("M3")
 
 	if left_click:
-		insert_front(3)
+		var first = HashKeyPair.new(hash("first"), "first")
+		var xD = HashKeyPair.new(hash("XD"), "XD")
+		insert_front(first)
+		insert_front(first)
+		insert_front(xD)
+		insert_front(first)
+		insert_front(first)
 
 	if right_click:
-		remove_front()
+		remove("XD")
 
 	if middle_click:
-		pass
+		remove_undo()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	head.rel_null_end_point = Vector2(distance_vertices, 0)
 
+func set_bucket_index(index_):
+	bucket_index = index_
+	label_index.set_text(str(bucket_index))
 func reposition():
 	if head.target != null:
 		var current = head.target
@@ -33,12 +48,12 @@ func reposition():
 			pos += Vector2(distance_vertices, 0)
 			current = current.p1.target
 
-func insert_front(data):
-	var new_vertex: list_vertex_class = vertex_scene.instantiate()
+func insert_front(pair: HashKeyPair):
+	var new_vertex: HashVertex = vertex_scene.instantiate()
 	new_vertex.move_to(global_position + insert_offset)
 	add_child(new_vertex)
 	
-	new_vertex.set_data(data)
+	new_vertex.set_hash_key_pair(pair)
 	
 	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices, 0)
 	new_vertex.p1.set_target(head.target)
@@ -52,37 +67,36 @@ func remove_front():
 	to_remove.queue_free()
 
 	reposition()
-
-func insert_at_index(data, index: int):
+func insert_at_index(pair, index: int):
 	var current = head
 	
 	while index > 0:
 		current = current.target.p1
 		index -= 1
 	
-	var new_vertex: list_vertex_class = vertex_scene.instantiate()
-	new_vertex.global_position = current.global_position + insert_offset
+	var new_vertex: HashVertex = vertex_scene.instantiate()
+	new_vertex.move_to(current.global_position + insert_offset)
 	add_child(new_vertex)
 	
-	new_vertex.set_data(data)
+	new_vertex.set_hash_key_pair(pair)
 	
 	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices, 0)
 	new_vertex.p1.set_target(current.target)
 	current.set_target(new_vertex)
 	reposition()
-
-var remove_history = []
-func remove(data):
+func remove(key: String):
 	var current = head
 	var index = 0
 	while current.target != null:
-		if current.target.data == data:
-			var to_remove = current.target
+		if current.target.hash_key_pair.key == key:
+			var to_remove: HashVertex = current.target
 			current.set_target(current.target.p1.target)
 			
+			remove_history.append(
+					[to_remove.hash_key_pair,
+					index])
 			to_remove.p1.set_target(null)
 			to_remove.queue_free()
-			remove_history.append([data, index])
 			
 			reposition()
 			return
