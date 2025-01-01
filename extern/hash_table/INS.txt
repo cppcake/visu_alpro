@@ -1,0 +1,13 @@
+// Check if resizing is needed based on occupancy factor
+float occupancy_factor = (float)size / (float)bucket_count;
+if (occupancy_factor > 0.75) {
+    resize(2); // Double the hashtable size
+}
+
+// Calculate hash and determine bucket index
+size_t hash = hashfkt(key);
+int bucket_index = hash % num_buckets;
+
+// Insert the hash-key pair into the appropriate bucket
+buckets[bucket_index].push_back(std::make_pair(hash, key));
+size++;

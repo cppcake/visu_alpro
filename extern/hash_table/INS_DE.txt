@@ -1,0 +1,13 @@
+// Überprüfe ob eine Vergrößerung der Hashtabelle notwendig ist
+float belegungsfaktor = (float)size / (float)bucket_anzahl;
+if (belegungsfaktor > 0.75) {
+    resize(2); // Verdopple die Größe der Hashtabelle
+}
+
+// Berechne den Hash und bestimme den Bucket-Index
+size_t hash = hashfkt(key);
+int bucket_index = hash % num_buckets;
+
+// Füge das Hash-Key-Paar in den entsprechenden Bucket ein
+buckets[bucket_index].push_back(std::make_pair(hash, key));
+size++;

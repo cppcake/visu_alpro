@@ -64,9 +64,18 @@ func reposition():
 			pos += Vector2(distance_vertices, 0)
 			current = current.p1.target
 func clean_up():
-	remove_history = []
-	remove_history_resize = []
+	remove_history.clear()
+	remove_history_resize.clear()
 	insert_counter = 0
+
+func search(pair: HashKeyPair)-> bool:
+	var current = head
+	while current.target != null:
+		if current.target.hash_key_pair.key == pair.key:
+			return true
+		current = current.target.p1
+			
+	return false
 
 # Operations
 func insert_front(pair: HashKeyPair):

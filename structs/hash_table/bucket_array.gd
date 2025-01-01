@@ -20,13 +20,22 @@ func _process(delta):
 
 var bucket_index_history := []
 func clean_up():
-	bucket_index_history = []
 	for child in get_children():
 		child.clean_up()
+	
+	for verstoßenes_kind in buckets_to_remove:
+		verstoßenes_kind.queue_free()
+	
+	bucket_index_history.clear()
+	buckets_to_remove.clear()
 
 func reposition():
 	for child in get_children():
 		child.reposition()
+
+func search(pair: HashKeyPair)-> bool:
+	var bucket: Bucket = get_bucket(pair.hash_value % bucket_count)
+	return bucket.search(pair)
 
 func insert(pair: HashKeyPair):
 	var bucket: Bucket = get_bucket(pair.hash_value % bucket_count)
@@ -82,6 +91,7 @@ func double_up_undo():
 	
 	bucket_count = bucket_count_before
 
+var buckets_to_remove: Array = []
 func half_down():
 	var bucket_count_after = bucket_count / 2
 	for i in range(bucket_count_after):
@@ -96,9 +106,12 @@ func half_down():
 			current = vertex.p1
 			
 		bucket.visible = false
-		
+		buckets_to_remove.append(bucket)
+
 	bucket_count = bucket_count_after
 func half_down_undo():
+	buckets_to_remove.clear()
+	
 	for i in range(bucket_count):
 		var bucket: Bucket = get_bucket(i, false)
 		bucket.insert_front_resize_undo()

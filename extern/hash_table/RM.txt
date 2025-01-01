@@ -1,0 +1,15 @@
+// Check if resizing is needed based on occupancy factor
+float occupancy_factor = (float)size / (float)bucket_count;
+if (occupancy_factor < 0.25) {
+    resize(0.5); // Slice hashtable in hallf (autsch)
+}
+
+// Berechne den Hash und bestimme den Bucket-Index
+size_t hash = hashfkt(x);
+int bucket_index = hash % num_buckets;
+
+// Remove the hash-key pair from the appropriate bucket if possible
+if (buckets[bucket_index].remove(std::make_pair(hash, x))) {
+    // Decrement size if removal was successful
+    size--;
+}

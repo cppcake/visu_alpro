@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bp58vosdhhrde"
+
+[deps]
+
+files=["res://misc/locale/hash_table.en.translation", "res://misc/locale/hash_table.de.translation"]
+
+source_file="res://misc/locale/hash_table.csv"
+dest_files=["res://misc/locale/hash_table.en.translation", "res://misc/locale/hash_table.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0
