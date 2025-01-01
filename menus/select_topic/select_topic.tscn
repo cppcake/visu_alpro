@@ -96,3 +96,8 @@ layout_mode = 2
 texture_ = ExtResource("10_8yvo4")
 scene_name = "avl"
 label_text = "AVL"
+
+[node name="hash_table" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
+layout_mode = 2
+scene_name = "hash_table"
+label_text = "HT"

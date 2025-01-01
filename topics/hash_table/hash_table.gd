@@ -6,20 +6,56 @@ extends operator_class
 @export var input_field: LineEdit
 
 var hash_method: Callable
-func hash_std(data):
-	return hash(data)
-func hash_weird(data):
-	return int(data)
+func hash_sha256(text: String):
+	return text.sha256_buffer().decode_u64(0)
+func hash_01(text: String):
+	return text.length()
+func hash_02(text: String):
+	if text.is_empty():
+		return 0
+	else:
+		return text.to_ascii_buffer().decode_u8(0)
+func hash_03(text: String):
+	var sum = 0
+	
+	for char_ in text:
+		sum += char_.to_ascii_buffer().decode_u8(0)
+	
+	return int(sum / text.length())
+func hash_04(text: String):
+	var sum = 0
+	
+	for char_ in text:
+		sum += char_.to_ascii_buffer().decode_u8(0)
+	
+	return int(sum % int(pow(2, 64)))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hash_method = Callable(self, "hash_std")
+	hash_method = Callable(self, "hash_sha256")
 	clean_up()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
+	return
 	bucket_count_label.text = "bucket_count = " + str(bucket_array.bucket_count)
+	
+	var left_click = Input.is_action_just_pressed("M1")
+	var right_click = Input.is_action_just_pressed("M2")
+	var middle_click = Input.is_action_just_pressed("M3")
 
+	if left_click:
+		var input_string = input_field.get_text()
+		input_field.clear()
+		print(input_string)
+		print(input_string.to_ascii_buffer().decode_u8(0))
+
+	if right_click:
+		pass
+
+	if middle_click:
+		pass
 #func reposition():
 #	return
 #	bucket_array.reposition()
@@ -27,7 +63,11 @@ func update_stack_frame():
 	super.update_stack_frame()
 	bucket_count_label.set_text("%s = %s" % [tr("BUCKET_COUNT"), str(bucket_array.bucket_count)])
 	occu_label.set_text("%s = %s" % [tr("OCCU_FACT"), str(bel_fakt())])
-
+func reset():
+	bucket_array.reset()
+	size = 0
+	update_stack_frame()
+	clean_up()
 func clean_up():
 	super.clean_up()
 	bucket_array.clean_up()
@@ -263,39 +303,28 @@ func _on_button_remove_pressed():
 					input_string)
 	init_algo(remove, [pair])
 
-var rng = RandomNumberGenerator.new()
 func _on_button_search_pressed():
-	var input_string = input_field.get_text()
-	input_field.clear()
+	pass
+
+func _on_button_reset_pressed():
+	reset()
+
+func _on_option_button_hash_item_selected(index):
+	reset()
 	
-	var paiwr = HashKeyPair.new(
-					hash_method.call(input_string),
-					input_string)
-	
-	if true:
-		for i in 30:
-			var rand_string = str(int(rng.randf_range(0, 100.0)))
-			
-			var pair = HashKeyPair.new(
-						hash_method.call(rand_string),
-						rand_string)
-						
-			bucket_array.insert(pair)
-	else:
-		var ar = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-		for i in range(ar.size()):
-			var rand_string = str(i)
-			
-			var pair = HashKeyPair.new(
-						hash_method.call(rand_string),
-						rand_string)
-						
-			bucket_array.insert(pair)
-func _on_button_temp_pressed():
-	bucket_array.double_up()
-func _on_button_temp_2_pressed():
-	bucket_array.double_up_undo()
-func _on_button_temp_3_pressed():
-	bucket_array.half_down()
-func _on_button_temp_4_pressed():
-	bucket_array.half_down_undo()
+	match index:
+		0:
+			hash_method = Callable(self, "hash_sha256")
+			return
+		1:
+			hash_method = Callable(self, "hash_01")
+			return
+		2:
+			hash_method = Callable(self, "hash_02")
+			return
+		3:
+			hash_method = Callable(self, "hash_03")
+			return
+		4:
+			hash_method = Callable(self, "hash_04")
+			return

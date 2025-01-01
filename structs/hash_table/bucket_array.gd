@@ -7,12 +7,7 @@ var bucket_count: int = 0
 var bucket_distance: int = 110
 
 func _ready():
-	for i: int in range(4):
-		var bucket = bucket_scene.instantiate()
-		bucket.global_position = Vector2(0, bucket_distance * bucket_count + 200)
-		add_child(bucket)
-		bucket.set_bucket_index(i)
-		bucket_count += 1
+	reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,7 +23,19 @@ func clean_up():
 	
 	bucket_index_history.clear()
 	buckets_to_remove.clear()
-
+func reset():
+	for child in get_children():
+		child.queue_free()
+		bucket_count -= 1
+	
+	for i: int in range(4):
+		var bucket = bucket_scene.instantiate()
+		bucket.global_position = Vector2(0, bucket_distance * bucket_count + 200)
+		add_child(bucket)
+		bucket.set_bucket_index(i)
+		bucket_count += 1
+	
+	clean_up()
 func reposition():
 	for child in get_children():
 		child.reposition()

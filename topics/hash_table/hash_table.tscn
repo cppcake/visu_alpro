@@ -33,39 +33,39 @@ text = "search"
 script = ExtResource("3_1c67l")
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(333, 0)
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
-placeholder_text = "ENTER_KEY_FOR_OPERATION"
+placeholder_text = "HT_ENTER_KEY"
 max_length = 20
 
-[node name="ButtonTemp" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4" groups=["buttons_active"]]
-visible = false
+[node name="ButtonReset" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4" groups=["buttons_active"]]
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
-text = "double up"
-script = ExtResource("3_1c67l")
+text = "reset"
 
-[node name="ButtonTemp2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5" groups=["buttons_active"]]
-visible = false
+[node name="LabelHash" type="Label" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]
 layout_mode = 2
-theme = ExtResource("4_7c8mo")
-text = "double up undo"
-script = ExtResource("3_1c67l")
+text = "HT_FT"
 
-[node name="ButtonTemp3" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6" groups=["buttons_active"]]
-visible = false
+[node name="OptionButtonHash" type="OptionButton" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6" groups=["buttons_active"]]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
-text = "down"
-script = ExtResource("3_1c67l")
-
-[node name="ButtonTemp4" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="7" groups=["buttons_active"]]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_7c8mo")
-text = "down_undo"
-script = ExtResource("3_1c67l")
+text_overrun_behavior = 3
+item_count = 5
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "SHA256 (first 64 bits)"
+popup/item_0/id = 0
+popup/item_1/text = "h_1(s): |s|"
+popup/item_1/id = 1
+popup/item_2/text = "HT_H2"
+popup/item_2/id = 2
+popup/item_3/text = "HT_H3"
+popup/item_3/id = 3
+popup/item_4/text = "HT_H4"
+popup/item_4/id = 0
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
 offset_right = 254.0
@@ -92,7 +92,11 @@ text = "BUK_CONT"
 layout_mode = 2
 text = "OCC_FACT"
 
+[node name="Camera2D" parent="." index="1"]
+position = Vector2(550, 550)
+
 [node name="BucketArray" parent="." index="3" instance=ExtResource("5_op5y2")]
+position = Vector2(0, 0)
 
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" to="." method="_on_button_insert_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonInsert" method="_on_pressed"]
@@ -100,7 +104,5 @@ text = "OCC_FACT"
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonRemove" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonRemove" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonSearch" to="." method="_on_button_search_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonSearch" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonSearch" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonTemp" to="." method="_on_button_temp_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonTemp2" to="." method="_on_button_temp_2_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonTemp3" to="." method="_on_button_temp_3_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonTemp4" to="." method="_on_button_temp_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/ButtonReset" to="." method="_on_button_reset_pressed"]
+[connection signal="item_selected" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/OptionButtonHash" to="." method="_on_option_button_hash_item_selected"]

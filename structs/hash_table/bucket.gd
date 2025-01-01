@@ -9,27 +9,6 @@ extends Node2D
 @export var label_index: Label
 var bucket_index: int
 
-func _process(_delta):
-	return
-	var left_click = Input.is_action_just_pressed("M1")
-	var right_click = Input.is_action_just_pressed("M2")
-	var middle_click = Input.is_action_just_pressed("M3")
-
-	if left_click:
-		var first = HashKeyPair.new(hash("first"), "first")
-		var xD = HashKeyPair.new(hash("XD"), "XD")
-		insert_front(first)
-		insert_front(first)
-		insert_front(xD)
-		insert_front(first)
-		insert_front(first)
-
-	if right_click:
-		remove("XD")
-
-	if middle_click:
-		remove_undo()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	head.rel_null_end_point = Vector2(distance_vertices, 0)
