@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://c0scl5uwvmmfx" path="res://structs/hash_table/hash_vertex.tscn" id="2_satqg"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_1w2rm"]
 
-[node name="Bucket" type="Node2D" node_paths=PackedStringArray("head", "label_index")]
+[node name="Bucket" type="Node2D" node_paths=PackedStringArray("head", "label_size", "label_index")]
 position = Vector2(370, 314)
 script = ExtResource("1_4fds5")
 head = NodePath("Head")
 vertex_scene = ExtResource("2_satqg")
+label_size = NodePath("ArrayEntry/LabelSize")
 label_index = NodePath("ArrayEntry/LabelIndex")
 
 [node name="Head" parent="." instance=ExtResource("3_1w2rm")]
@@ -47,3 +48,18 @@ theme_override_font_sizes/font_size = 22
 text = "IND"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelSize" type="Label" parent="ArrayEntry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.3333
+offset_right = 20.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "size = "

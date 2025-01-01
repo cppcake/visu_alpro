@@ -18,6 +18,9 @@ func hash_02(text: String):
 func hash_03(text: String):
 	var sum = 0
 	
+	if text.is_empty():
+		return 0
+	
 	for char_ in text:
 		sum += char_.to_ascii_buffer().decode_u8(0)
 	
@@ -61,7 +64,7 @@ func _process(delta):
 #	bucket_array.reposition()
 func update_stack_frame():
 	super.update_stack_frame()
-	bucket_count_label.set_text("%s = %s" % [tr("BUCKET_COUNT"), str(bucket_array.bucket_count)])
+	bucket_count_label.set_text("%s = %s" % [tr("BUK_CONT"), str(bucket_array.bucket_count)])
 	occu_label.set_text("%s = %s" % [tr("OCCU_FACT"), str(bel_fakt())])
 func reset():
 	bucket_array.reset()
@@ -315,6 +318,14 @@ func remove(argv: Array = []):
 					[null]),
 		])
 func remove_many(argv: Array = []):
+	var inputs: Array = []#input_string.split(",")
+	if inputs.size() > 1:
+		side_panel.override_code(tr("HT_RM"))
+		side_panel.override_code_call("hashtable.remove(" + str(inputs) + ")")
+		side_panel.select_containers(1, 0, 0, 0)
+		init_algo(remove_many, [inputs])
+		side_panel.close()
+		return
 	for input in argv[0]:
 		if bel_fakt() < 0.25 and bucket_array.bucket_count > 1:
 			push_operations([
@@ -322,10 +333,10 @@ func remove_many(argv: Array = []):
 							Operation.opcodes.HT_HALF_DOWN,
 							[]),
 			])
-
 		var pair = HashKeyPair.new(
 					hash_method.call(input),
 					input)
+
 		if bucket_array.search(pair):
 			push_operations([
 					Operation.new(
@@ -339,15 +350,6 @@ func _on_button_remove_pressed():
 	var input_string = input_field.get_text()
 	input_field.clear()
 	
-	var inputs: Array = input_string.split(",")
-	if inputs.size() > 1:
-		side_panel.override_code(tr("HT_RM"))
-		side_panel.override_code_call("hashtable.remove(" + str(inputs) + ")")
-		side_panel.select_containers(1, 0, 0, 0)
-		init_algo(remove_many, [inputs])
-		side_panel.close()
-		return
-		
 	side_panel.override_code(tr("HT_RM"))
 	side_panel.create_variable()
 	side_panel.create_variable()

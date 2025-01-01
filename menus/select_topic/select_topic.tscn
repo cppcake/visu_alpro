@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4byyinbr8yl6"]
+[gd_scene load_steps=12 format=3 uid="uid://d4byyinbr8yl6"]
 
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="1_2ti2a"]
 [ext_resource type="Script" path="res://menus/select_topic/resize_scroll_container.gd" id="2_5hq36"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cvr4ej8wjjxkl" path="res://menus/select_topic/images/tree_traversal.png" id="8_ue5fj"]
 [ext_resource type="Texture2D" uid="uid://cbso5e0kkkiq3" path="res://menus/select_topic/images/max_heap.png" id="9_eg1vr"]
 [ext_resource type="Texture2D" uid="uid://4tdpkd507abq" path="res://menus/select_topic/images/avl.png" id="10_8yvo4"]
+[ext_resource type="Texture2D" uid="uid://8ldwgwnewl4k" path="res://menus/select_topic/images/hash_table.png" id="11_iuy63"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -99,5 +100,6 @@ label_text = "AVL"
 
 [node name="hash_table" parent="CenterContainer/VBoxContainer/ScrollContainer/CenterContainer/grid" instance=ExtResource("4_6ddwb")]
 layout_mode = 2
+texture_ = ExtResource("11_iuy63")
 scene_name = "hash_table"
 label_text = "HT"

@@ -13,3 +13,5 @@ if (buckets[bucket_index].remove(std::make_pair(hash, x))) {
     // Dekrementiere size, falls das Entfernen erfolgreich war
     size--;
 }
+
+return;

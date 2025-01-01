@@ -11,3 +11,5 @@ int bucket_index = hash % num_buckets;
 // Insert the hash-key pair into the appropriate bucket
 buckets[bucket_index].push_back(std::make_pair(hash, key));
 size++;
+
+return;

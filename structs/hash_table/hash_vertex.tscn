@@ -43,10 +43,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -44.0
-offset_right = 20.0
-offset_bottom = -16.4583
+offset_left = -51.5
+offset_top = 9.0
+offset_right = 51.5
+offset_bottom = 36.5417
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -58,15 +58,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="label_key" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -21.0
-offset_top = -12.0
+offset_top = -19.0
 offset_right = 21.0
-offset_bottom = 11.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -74,6 +75,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "KEY"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
 [node name="pointer" parent="." instance=ExtResource("6_ys0r6")]
 visible = false

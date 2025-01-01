@@ -5,13 +5,15 @@ extends Node2D
 @export var vertex_scene: PackedScene
 @export var distance_vertices: int = 200
 @export var insert_offset := Vector2(100, 0)
-
+@export var label_size: Label
 @export var label_index: Label
 var bucket_index: int
+var size = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	head.rel_null_end_point = Vector2(distance_vertices, 0)
+	update_size_label()
 
 # Helper functions
 func set_bucket_index(index_):
@@ -33,6 +35,10 @@ func insert_at_index(pair, index: int):
 	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices, 0)
 	new_vertex.p1.set_target(current.target)
 	current.set_target(new_vertex)
+	
+	size += 1
+	update_size_label()
+	
 	reposition()
 func reposition():
 	if head.target != null:
@@ -46,7 +52,8 @@ func clean_up():
 	remove_history.clear()
 	remove_history_resize.clear()
 	insert_counter = 0
-
+func update_size_label():
+	label_size.set_text("size = %s" % str(size))
 func search(pair: HashKeyPair)-> bool:
 	var current = head
 	while current.target != null:
@@ -67,6 +74,10 @@ func insert_front(pair: HashKeyPair):
 	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices - 50, 0)
 	new_vertex.p1.set_target(head.target)
 	head.set_target(new_vertex)
+	
+	size += 1
+	update_size_label()
+	
 	reposition()
 func remove_front():
 	var to_remove = head.target
@@ -74,6 +85,9 @@ func remove_front():
 	
 	to_remove.p1.set_target(null)
 	to_remove.queue_free()
+
+	size -= 1
+	update_size_label()
 
 	reposition()
 	reposition()
@@ -92,7 +106,8 @@ func remove(key: String):
 					index])
 			to_remove.p1.set_target(null)
 			to_remove.queue_free()
-			
+			size -= 1
+			update_size_label()
 			reposition()
 			return
 		
@@ -127,7 +142,11 @@ func remove_resize(key: String):
 			to_remove.p1.set_target(null)
 			to_remove.queue_free()
 			
+			size -= 1
+			update_size_label()
+			
 			reposition()
+			
 			return
 		
 		current = current.target.p1
