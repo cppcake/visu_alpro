@@ -7,33 +7,33 @@ extends operator_class
 
 var hash_method: Callable
 func hash_sha256(text: String):
-	return text.sha256_buffer().decode_u64(0)
+	return abs(text.sha256_buffer().decode_u64(0))
 func hash_01(text: String):
-	return text.length()
+	return abs(text.length())
 func hash_02(text: String):
 	if text.is_empty():
 		return 0
 	else:
-		return text.to_ascii_buffer().decode_u8(0)
+		return abs(text.to_ascii_buffer().decode_u8(0))
 func hash_03(text: String):
 	var sum = 0
 	
 	for char_ in text:
 		sum += char_.to_ascii_buffer().decode_u8(0)
 	
-	return int(sum / text.length())
+	return abs(int(sum / text.length()))
 func hash_04(text: String):
 	var sum = 0
 	
 	for char_ in text:
 		sum += char_.to_ascii_buffer().decode_u8(0)
 	
-	return int(sum % int(pow(2, 64)))
+	return abs(int(sum % int(pow(2, 64))))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	tutorial()
 	hash_method = Callable(self, "hash_sha256")
-	clean_up()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -169,11 +169,17 @@ func insert(argv: Array = []):
 	
 	push_operations([
 			Operation.new(
-						Operation.opcodes.HIGHLIGHT_CODE,
-						[[12]]),
+					Operation.opcodes.HIGHLIGHT_CODE,
+					[[12]]),
 			Operation.new(
 					Operation.opcodes.HT_INSERT,
 					[pair]),
+		])
+	
+	push_operations([
+			Operation.new(
+						Operation.opcodes.HIGHLIGHT_CODE,
+						[[13]]),
 			Operation.new(
 					Operation.opcodes.HT_INC_SIZE,
 					[]),
@@ -182,20 +188,43 @@ func insert(argv: Array = []):
 	push_operations([
 			Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
-						[[13]]),
-		])
-	
-	push_operations([
-			Operation.new(
-						Operation.opcodes.HIGHLIGHT_CODE,
-						[[]]),
+						[[15]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_RETURN,
 					[null]),
 		])
+func insert_many(argv: Array = []):
+	for input: String in argv[0]:
+		if bel_fakt() > 0.75:
+			push_operations([
+					Operation.new(
+							Operation.opcodes.HT_DOUBLE_UP,
+							[]),
+			])
+			
+		var pair = HashKeyPair.new(
+					hash_method.call(input),
+					input)
+		push_operations([
+			Operation.new(
+					Operation.opcodes.HT_INSERT,
+					[pair]),
+			Operation.new(
+					Operation.opcodes.HT_INC_SIZE,
+					[]),
+		])
 func _on_button_insert_pressed():
 	var input_string = input_field.get_text()
 	input_field.clear()
+	
+	var inputs: Array = input_string.split(",")
+	if inputs.size() > 1:
+		side_panel.close()
+		side_panel.override_code(tr("HT_RM"))
+		side_panel.override_code_call("hashtable.insert(" + str(inputs) + ")")
+		side_panel.select_containers(1, 0, 0, 0)
+		init_algo(insert_many, [inputs])
+		return
 	
 	side_panel.create_variable()
 	side_panel.create_variable()
@@ -280,20 +309,49 @@ func remove(argv: Array = []):
 	push_operations([
 			Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
-						[[]]),
+						[[17]]),
 			Operation.new(
 					Operation.opcodes.OVERWRITE_RETURN,
 					[null]),
 		])
+func remove_many(argv: Array = []):
+	for input in argv[0]:
+		if bel_fakt() < 0.25 and bucket_array.bucket_count > 1:
+			push_operations([
+					Operation.new(
+							Operation.opcodes.HT_HALF_DOWN,
+							[]),
+			])
 
+		var pair = HashKeyPair.new(
+					hash_method.call(input),
+					input)
+		if bucket_array.search(pair):
+			push_operations([
+					Operation.new(
+							Operation.opcodes.HT_REMOVE,
+							[pair]),
+					Operation.new(
+							Operation.opcodes.HT_DEC_SIZE,
+							[]),
+				])
 func _on_button_remove_pressed():
 	var input_string = input_field.get_text()
 	input_field.clear()
 	
-	side_panel.create_variable()
-	side_panel.create_variable()
-	side_panel.create_variable()
+	var inputs: Array = input_string.split(",")
+	if inputs.size() > 1:
+		side_panel.override_code(tr("HT_RM"))
+		side_panel.override_code_call("hashtable.remove(" + str(inputs) + ")")
+		side_panel.select_containers(1, 0, 0, 0)
+		init_algo(remove_many, [inputs])
+		side_panel.close()
+		return
+		
 	side_panel.override_code(tr("HT_RM"))
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.create_variable()
 	side_panel.select_containers(1, 1, 0, 0)
 	side_panel.override_code_call("hashtable.remove(" + input_string + ")")
 	side_panel.open()

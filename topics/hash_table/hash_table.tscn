@@ -37,7 +37,6 @@ custom_minimum_size = Vector2(333, 0)
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 placeholder_text = "HT_ENTER_KEY"
-max_length = 20
 
 [node name="ButtonReset" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4" groups=["buttons_active"]]
 layout_mode = 2
@@ -91,6 +90,9 @@ text = "BUK_CONT"
 [node name="OccupancyLabel" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="2"]
 layout_mode = 2
 text = "OCC_FACT"
+
+[node name="side_panel" parent="CanvasLayer" index="2"]
+is_open = true
 
 [node name="Camera2D" parent="." index="1"]
 position = Vector2(550, 550)

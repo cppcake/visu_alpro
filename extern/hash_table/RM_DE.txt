@@ -1,6 +1,6 @@
 // Überprüfe, ob die Hashtabelle halbiert werden muss
 float belegungsfaktor = (float)size / (float)bucket_anzahl;
-if (belegungsfaktor < 0.25) {
+if (belegungsfaktor < 0.25 and bucket_count > 1) {
     resize(0.5); // Halbiere die Hashtabelle (autsch)
 }
 

@@ -18,8 +18,9 @@ func clean_up():
 	for child in get_children():
 		child.clean_up()
 	
-	for verstoßenes_kind in buckets_to_remove:
-		verstoßenes_kind.queue_free()
+	for verstoßene_kinder in buckets_to_remove:
+		for verstoßenes_kind in verstoßene_kinder:
+			verstoßenes_kind.queue_free()
 	
 	bucket_index_history.clear()
 	buckets_to_remove.clear()
@@ -100,24 +101,28 @@ func double_up_undo():
 
 var buckets_to_remove: Array = []
 func half_down():
+	var to_remove = []
 	var bucket_count_after = bucket_count / 2
 	for i in range(bucket_count_after):
 		var bucket: Bucket = get_bucket(i + bucket_count_after, false)
 		var current: pointer_class = bucket.head
 		
+		var to_reinsert = []
 		while current.target != null:
 			var vertex: HashVertex = current.target
 			var hash_value = vertex.hash_key_pair.hash_value
-			#print("The Hash %s, but the Mod is %s" % [hash_value, hash_value % bucket_count_after])
 			get_bucket(hash_value % bucket_count_after).insert_front_resize(vertex.hash_key_pair)
+			#to_reinsert.append(vertex.hash_key_pair)
 			current = vertex.p1
+		#get_bucket(hash_value % bucket_count_after).insert_front_resize(to_reinsert)
 			
 		bucket.visible = false
-		buckets_to_remove.append(bucket)
+		to_remove.append(bucket)
 
+	buckets_to_remove.append(to_remove)
 	bucket_count = bucket_count_after
 func half_down_undo():
-	buckets_to_remove.clear()
+	buckets_to_remove.pop_back()
 	
 	for i in range(bucket_count):
 		var bucket: Bucket = get_bucket(i, false)
