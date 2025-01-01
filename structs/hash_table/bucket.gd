@@ -4,7 +4,7 @@ extends Node2D
 @export var head: pointer_class
 @export var vertex_scene: PackedScene
 @export var distance_vertices: int = 200
-@export var insert_offset := Vector2(100, -25)
+@export var insert_offset := Vector2(100, 0)
 
 @export var label_index: Label
 var bucket_index: int
@@ -76,7 +76,7 @@ func insert_front(pair: HashKeyPair):
 	
 	new_vertex.set_hash_key_pair(pair)
 	
-	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices, 0)
+	new_vertex.p1.rel_null_end_point = Vector2(distance_vertices - 50, 0)
 	new_vertex.p1.set_target(head.target)
 	head.set_target(new_vertex)
 	reposition()
@@ -87,6 +87,7 @@ func remove_front():
 	to_remove.p1.set_target(null)
 	to_remove.queue_free()
 
+	reposition()
 	reposition()
 
 var remove_history = []

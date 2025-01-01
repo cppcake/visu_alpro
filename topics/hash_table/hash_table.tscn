@@ -6,10 +6,11 @@
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="4_7c8mo"]
 [ext_resource type="PackedScene" uid="uid://bokar7fyhr48l" path="res://structs/hash_table/bucket_array.tscn" id="5_op5y2"]
 
-[node name="root" node_paths=PackedStringArray("bucket_array", "bucket_count_label", "input_field") instance=ExtResource("1_btovm")]
+[node name="root" node_paths=PackedStringArray("bucket_array", "bucket_count_label", "occu_label", "input_field") instance=ExtResource("1_btovm")]
 script = ExtResource("2_l51hf")
 bucket_array = NodePath("BucketArray")
 bucket_count_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/BucketCountLabel")
+occu_label = NodePath("CanvasLayer/stackframe/MarginContainer/VBoxContainer/OccupancyLabel")
 input_field = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer2/LineEdit")
 
 [node name="ButtonInsert" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="0" groups=["buttons_active"]]
@@ -25,6 +26,7 @@ text = "remove"
 script = ExtResource("3_1c67l")
 
 [node name="ButtonSearch" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="2" groups=["buttons_active"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 text = "search"
@@ -38,38 +40,57 @@ placeholder_text = "ENTER_KEY_FOR_OPERATION"
 max_length = 20
 
 [node name="ButtonTemp" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="4" groups=["buttons_active"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 text = "double up"
 script = ExtResource("3_1c67l")
 
 [node name="ButtonTemp2" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5" groups=["buttons_active"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 text = "double up undo"
 script = ExtResource("3_1c67l")
 
 [node name="ButtonTemp3" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="6" groups=["buttons_active"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 text = "down"
 script = ExtResource("3_1c67l")
 
 [node name="ButtonTemp4" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="7" groups=["buttons_active"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 text = "down_undo"
 script = ExtResource("3_1c67l")
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
-offset_bottom = 109.0
+offset_right = 254.0
+offset_bottom = 133.0
 
 [node name="MarginContainer" parent="CanvasLayer/stackframe" index="0"]
-offset_top = -12.5
-offset_bottom = 12.5
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_top = -43.5
+offset_right = 92.0
+offset_bottom = 43.5
+grow_horizontal = 1
+
+[node name="size_label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+text = "SIZE"
 
 [node name="BucketCountLabel" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="1"]
 layout_mode = 2
+text = "BUK_CONT"
+
+[node name="OccupancyLabel" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+text = "OCC_FACT"
 
 [node name="BucketArray" parent="." index="3" instance=ExtResource("5_op5y2")]
 

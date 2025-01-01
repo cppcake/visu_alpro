@@ -24,6 +24,10 @@ func clean_up():
 	for child in get_children():
 		child.clean_up()
 
+func reposition():
+	for child in get_children():
+		child.reposition()
+
 func insert(pair: HashKeyPair):
 	var bucket: Bucket = get_bucket(pair.hash_value % bucket_count)
 	bucket.insert_front(pair)
@@ -87,7 +91,7 @@ func half_down():
 		while current.target != null:
 			var vertex: HashVertex = current.target
 			var hash_value = vertex.hash_key_pair.hash_value
-			print("The Hash %s, but the Mod is %s" % [hash_value, hash_value % bucket_count_after])
+			#print("The Hash %s, but the Mod is %s" % [hash_value, hash_value % bucket_count_after])
 			get_bucket(hash_value % bucket_count_after).insert_front_resize(vertex.hash_key_pair)
 			current = vertex.p1
 			

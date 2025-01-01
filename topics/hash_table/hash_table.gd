@@ -2,6 +2,7 @@ extends operator_class
 
 @export var bucket_array: BucketArray
 @export var bucket_count_label: Label
+@export var occu_label: Label
 @export var input_field: LineEdit
 
 var hash_method: Callable
@@ -13,7 +14,7 @@ func hash_weird(data):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hash_method = Callable(self, "hash_weird")
+	hash_method = Callable(self, "hash_std")
 	clean_up()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,27 +25,136 @@ func clean_up():
 	super.clean_up()
 	bucket_array.clean_up()
 
+func reposition():
+	return
+	bucket_array.reposition()
+
+func update_stack_frame():
+	super.update_stack_frame()
+	bucket_count_label.set_text("%s = %s" % [tr("BUCKET_COUNT"), str(bucket_array.bucket_count)])
+	occu_label.set_text("%s = %s" % [tr("OCCU_FACT"), str(float(size) / float(bucket_array.bucket_count))])
+func operator_interface(operations: Array, undo: bool = false): 
+	super.operator_interface(operations, undo)
+	for operation: Operation in operations:
+		var opcode = operation.opcode
+		var argv = operation.argv
+		match opcode:
+			Operation.opcodes.HT_INSERT:
+				if undo:
+					bucket_array.insert_undo()
+				else:
+					bucket_array.insert(argv[0])
+				continue
+			Operation.opcodes.HT_REMOVE:
+				if undo:
+					bucket_array.remove_undo()
+				else:
+					bucket_array.remove(argv[0])
+				continue
+			Operation.opcodes.HT_DOUBLE_UP:
+				if undo:
+					bucket_array.double_up_undo()
+				else:
+					bucket_array.double_up()
+				continue
+			Operation.opcodes.HT_HALF_DOWN:
+				if undo:
+					bucket_array.half_down_undo()
+				else:
+					bucket_array.half_down()
+				continue
+			Operation.opcodes.HT_INC_SIZE:
+				if undo:
+					size -= 1
+				else:
+					size += 1
+				update_stack_frame()
+				continue
+			Operation.opcodes.HT_DEC_SIZE:
+				if undo:
+					size += 1
+				else:
+					size -= 1
+				update_stack_frame()
+				continue
+			Operation.opcodes.HT_REPOS:
+				reposition()
+				reposition()
+				continue
+
+func insert(argv: Array = []):
+	if float(size) / float(bucket_array.bucket_count) > 0.75:
+		push_operations([
+				Operation.new(
+						Operation.opcodes.HT_DOUBLE_UP,
+						[]),
+		])
+	
+	var pair: HashKeyPair = argv[0]
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HT_INC_SIZE,
+					[]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HT_INSERT,
+					[pair]),
+	])
+
 func _on_button_insert_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.override_code(tr("MAX_HEAP_INS"))
+	side_panel.select_containers(1, 1, 0, 0)
 	var input_string = input_field.get_text()
-	input_field.clear()
+	side_panel.override_code_call("hashtable.insert(" + input_string + ")")
 	
 	var pair = HashKeyPair.new(
 					hash_method.call(input_string),
 					input_string)
-					
-	bucket_array.insert(pair)
+	init_algo(insert, [pair])
+	
+	input_field.clear()
+	side_panel.open()
 
-
+func remove(argv: Array = []):
+	var pair: HashKeyPair = argv[0]
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HT_DEC_SIZE,
+					[]),
+	])
+	
+	push_operations([
+			Operation.new(
+					Operation.opcodes.HT_REMOVE,
+					[pair]),
+	])
+	
+	if float(size) / float(bucket_array.bucket_count) < 0.25:
+		push_operations([
+				Operation.new(
+						Operation.opcodes.HT_HALF_DOWN,
+						[]),
+		])
+	reposition()
 func _on_button_remove_pressed():
+	side_panel.create_variable()
+	side_panel.create_variable()
+	side_panel.override_code(tr("MAX_HEAP_INS"))
+	side_panel.select_containers(1, 1, 0, 0)
 	var input_string = input_field.get_text()
-	input_field.clear()
+	side_panel.override_code_call("hashtable.remove(" + input_string + ")")
 	
 	var pair = HashKeyPair.new(
 					hash_method.call(input_string),
 					input_string)
-					
-	bucket_array.remove(pair)
-
+	init_algo(remove, [pair])
+	
+	input_field.clear()
+	side_panel.open()
 
 var rng = RandomNumberGenerator.new()
 func _on_button_search_pressed():

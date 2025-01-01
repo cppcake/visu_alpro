@@ -27,6 +27,13 @@ enum opcodes
 	REPOS,
 	COEFS,
 	MARK_POINTERS,
+	HT_INSERT,
+	HT_REMOVE,
+	HT_DOUBLE_UP,
+	HT_HALF_DOWN,
+	HT_INC_SIZE,
+	HT_DEC_SIZE,
+	HT_REPOS,
 }
 
 var opcode: opcodes
