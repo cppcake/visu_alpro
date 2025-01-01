@@ -7,10 +7,10 @@
 [node name="doubly_list_vertex" instance=ExtResource("1_xohuc")]
 script = ExtResource("2_lqhuq")
 
-[node name="pointer" parent="." index="4"]
-displacement = Vector2(0, -25)
-from = "right_down"
-
 [node name="weak_pointer" parent="." index="5" instance=ExtResource("3_dpfhx")]
 displacement = Vector2(0, 25)
 from = "left_down"
+
+[node name="pointer" parent="." index="6"]
+displacement = Vector2(0, -25)
+from = "right_down"

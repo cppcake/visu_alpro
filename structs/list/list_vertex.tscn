@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://def3gbilknoxq"]
 
 [ext_resource type="Script" path="res://structs/list/list_vertex.gd" id="1_hry7q"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_k25f1"]
-[ext_resource type="Texture2D" uid="uid://dy03cdb2sf711" path="res://structs/sprites/vertex_red.png" id="3_5a373"]
-[ext_resource type="Texture2D" uid="uid://byei0vq0s15pl" path="res://structs/sprites/vertex_accent.png" id="3_ma7hq"]
-[ext_resource type="Texture2D" uid="uid://dd2yuk7lost6m" path="res://structs/sprites/vertex_2.png" id="4_27euc"]
+[ext_resource type="Texture2D" uid="uid://dqtu2ei6dvi65" path="res://structs/sprites/vertex_default.png" id="2_k25f1"]
+[ext_resource type="Texture2D" uid="uid://dgf310cnxsfir" path="res://structs/sprites/vertex_red.png" id="3_5a373"]
+[ext_resource type="Texture2D" uid="uid://dyisu60bvvsuy" path="res://structs/sprites/vertex_accent.png" id="3_ma7hq"]
+[ext_resource type="Texture2D" uid="uid://blnibjliucle1" path="res://structs/sprites/vertex_2.png" id="4_27euc"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="4_g1k1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]

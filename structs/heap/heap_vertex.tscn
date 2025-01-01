@@ -6,6 +6,3 @@
 [node name="tree_vertex" instance=ExtResource("1_jw5pc")]
 script = ExtResource("2_hjggm")
 sprite_visited = null
-
-[node name="label_ref_count" parent="." index="4"]
-visible = false

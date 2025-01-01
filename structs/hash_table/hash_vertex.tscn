@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0scl5uwvmmfx"]
 
 [ext_resource type="Script" path="res://structs/hash_table/hash_vertex.gd" id="1_te0kp"]
-[ext_resource type="Texture2D" uid="uid://cvstya0mkgsf5" path="res://structs/sprites/vertex_default.png" id="2_l44rj"]
+[ext_resource type="Texture2D" uid="uid://dqtu2ei6dvi65" path="res://structs/sprites/vertex_default.png" id="2_l44rj"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="6_ys0r6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lky5f"]

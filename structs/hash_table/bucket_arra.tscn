@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://sxc3a5b63wtq"]
 
 [ext_resource type="Script" path="res://structs/hash_table/bucket_array.gd" id="1_qomrx"]
-[ext_resource type="PackedScene" uid="uid://1in5jyqcwx50" path="res://structs/bucket/bucket.tscn" id="2_p00j6"]
+[ext_resource type="PackedScene" uid="uid://1in5jyqcwx50" path="res://structs/hash_table/bucket.tscn" id="2_p00j6"]
 
 [node name="BucketArray" type="Node2D"]
 position = Vector2(350, 265)
