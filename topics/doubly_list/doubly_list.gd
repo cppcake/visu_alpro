@@ -238,7 +238,7 @@ func insert_after_tail_b(step: int):
 func _on_button_insert_after_pressed():
 	to_remove = null
 	side_panel.override_code(tr("INS_AFTER_DL"))
-	side_panel.override_code_call("list.insert_after(ListNodeptr pred, data)")
+	side_panel.override_code_call("list.insert_after(const DListNodeptr& pred, data)")
 	side_panel.override_exp("Pick a predecessor Node")
 	current.label_start.text = "pred"
 	set_up_decisive(insert_after_case_decider)
@@ -376,8 +376,7 @@ func remove(step: int):
 		4:
 			highlight_code([18])
 		5:
-			to_remove.move_to_rel(Vector2(0, -200))
-			current.move_to_rel(Vector2(0, -200))
+			to_remove.move_to_rel(Vector2(0, -90))
 			to_remove.p1.target.p2.set_target(to_remove.p2.target)
 			highlight_code([25])
 		6:
@@ -400,8 +399,7 @@ func remove_b(step: int):
 		4:
 			pass
 		5:
-			to_remove.move_to_rel(Vector2(0, 200))
-			current.move_to_rel(Vector2(0, 200))
+			to_remove.move_to_rel(Vector2(0, 90))
 			to_remove.p1.target.p2.set_target_undo()
 		6:
 			to_remove.p2.target.p1.set_target_undo()
@@ -409,7 +407,7 @@ func remove_b(step: int):
 			pass
 func _on_button_remove_after_pressed():
 	side_panel.override_code(tr("RM_DL"))
-	side_panel.override_code_call("DListNodeptr DoublyLinkedList::remove(const DListNodeptr& to_remove_ptr)")
+	side_panel.override_code_call("list.remove(const DListNodeptr& to_remove_ptr)")
 	side_panel.override_exp("Pick the Node to remove")
 	current.label_start.text = "to_remove_ptr"
 	set_up_decisive(remove_case_decider)

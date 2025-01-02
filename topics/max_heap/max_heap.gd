@@ -2,6 +2,7 @@ class_name max_heap_class extends tree_traversal_class
 
 func _ready():
 	tutorial()
+	reset()
 
 func cancel():
 	super.cancel()

@@ -80,6 +80,10 @@ layout_mode = 2
 size_flags_stretch_ratio = 1.5
 alignment = 1
 
+[node name="Label" type="Label" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2"]
+layout_mode = 2
+text = "MODE"
+
 [node name="button_vertices" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "VERTICES_TOOLTIP"
@@ -101,12 +105,15 @@ focus_mode = 1
 theme = ExtResource("31_phvch")
 text = "MOVE"
 
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2"]
+layout_mode = 2
+
 [node name="button_reset" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller", "camera") groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "RESET_TOOLTIP"
 focus_mode = 1
 theme = ExtResource("31_phvch")
-text = "RESET"
+text = "reset"
 script = ExtResource("32_ojub5")
 controller = NodePath("../../../../..")
 camera = NodePath("../../../../../Camera2D")

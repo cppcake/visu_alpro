@@ -75,7 +75,7 @@ visible = false
 visible = false
 custom_minimum_size = Vector2(150, 0)
 
-[node name="size_label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+[node name="size_label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="3"]
 visible = false
 
 [node name="side_panel" parent="CanvasLayer" index="2"]

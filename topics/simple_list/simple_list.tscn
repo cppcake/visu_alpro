@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwnnxeub60gee"]
+[gd_scene load_steps=18 format=3 uid="uid://dwnnxeub60gee"]
 
 [ext_resource type="Script" path="res://topics/simple_list/simple_list.gd" id="1_rx7lk"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="2_0ki28"]
@@ -9,10 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://cwj6w16csgohl" path="res://misc/icons/undo-alt.png" id="5_ob6lh"]
 [ext_resource type="Texture2D" uid="uid://c2byqaa5vyykq" path="res://misc/icons/check.png" id="6_stef8"]
 [ext_resource type="Script" path="res://misc/camera/mouse_pos_manager.gd" id="7_7vu2n"]
+[ext_resource type="Texture2D" uid="uid://bgyi6osf1tyog" path="res://misc/icons/angle-double-small-left.png" id="7_158n1"]
 [ext_resource type="PackedScene" uid="uid://7oq8rdksswhi" path="res://topics/ui/side_panel/side_panel.tscn" id="7_ld1tq"]
 [ext_resource type="Texture2D" uid="uid://b8wxhgxc4fdu7" path="res://misc/icons/angle-small-left.png" id="7_rsg7l"]
 [ext_resource type="Texture2D" uid="uid://dqtu2ei6dvi65" path="res://structs/sprites/vertex_default.png" id="9_083mb"]
 [ext_resource type="Texture2D" uid="uid://bdd5qn33uh33y" path="res://misc/icons/angle-small-right.png" id="9_eg78n"]
+[ext_resource type="Texture2D" uid="uid://cb8v53pmmdiyt" path="res://misc/icons/angle-double-small-right.png" id="11_fcuii"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxwd8"]
 
@@ -87,7 +89,7 @@ script = ExtResource("4_kusec")
 [node name="button_reset" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" groups=["buttons_active"]]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-text = "RESET_SMALL"
+text = "reset"
 script = ExtResource("4_kusec")
 
 [node name="buttons_navigation" type="MarginContainer" parent="CanvasLayer/buttons"]
@@ -122,6 +124,17 @@ icon = ExtResource("6_stef8")
 expand_icon = true
 script = ExtResource("4_kusec")
 
+[node name="button_to_start" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("2_0ki28")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+icon = ExtResource("7_158n1")
+expand_icon = true
+
 [node name="button_backward" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -147,6 +160,17 @@ theme = ExtResource("2_0ki28")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
 disabled = true
 icon = ExtResource("9_eg78n")
+expand_icon = true
+
+[node name="button_to_end" type="Button" parent="CanvasLayer/buttons/buttons_navigation/HBoxContainer" groups=["buttons_navigation"]]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+tooltip_text = "BACKWARD_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("2_0ki28")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cl4ta")
+disabled = true
+icon = ExtResource("11_fcuii")
 expand_icon = true
 
 [node name="buttons_misc" parent="CanvasLayer/buttons" instance=ExtResource("4_6cqoy")]
@@ -180,7 +204,8 @@ theme = ExtResource("2_0ki28")
 [node name="Label" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_0ki28")
-text = "list"
+text = "SimpleList
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -298,5 +323,7 @@ zoom_level = 2.0
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_cancel" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="." method="finish"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" to="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_finish" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_to_start" to="." method="_on_button_to_start_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_backward" to="." method="backward"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_forward" to="." method="forward"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_navigation/HBoxContainer/button_to_end" to="." method="_on_button_to_end_pressed"]

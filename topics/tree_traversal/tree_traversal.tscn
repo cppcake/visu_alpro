@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d25mecoy5ka6l"]
+[gd_scene load_steps=7 format=3 uid="uid://d25mecoy5ka6l"]
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
 [ext_resource type="Script" path="res://topics/tree_traversal/tree_traversal.gd" id="2_tjuep"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
 [ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
+[ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="5_gimt7"]
 
 [node name="root" node_paths=PackedStringArray("root_ptr", "root_label", "selected_ptr") instance=ExtResource("1_38xve")]
 script = ExtResource("2_tjuep")
@@ -40,9 +41,24 @@ text = "levelorder"
 script = ExtResource("3_kwys6")
 
 [node name="stackframe" parent="CanvasLayer" index="1"]
-offset_bottom = 109.0
+offset_bottom = 143.0
 
-[node name="Label2" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="1"]
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+theme = ExtResource("5_gimt7")
+
+[node name="Label" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+theme = ExtResource("5_gimt7")
+text = "BinarySearchTree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+theme = ExtResource("5_gimt7")
+
+[node name="Label2" type="Label" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="4"]
 layout_mode = 2
 
 [node name="side_panel" parent="CanvasLayer" index="2"]

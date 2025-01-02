@@ -42,7 +42,7 @@ script = ExtResource("3_a1ike")
 
 [node name="CheckButton" type="CheckButton" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="3"]
 layout_mode = 2
-text = "Balancekoeffizienten immer zeigen"
+text = "AVL_BK_SHOW"
 script = SubResource("GDScript_dux00")
 
 [node name="button_preorder" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer2" index="5"]

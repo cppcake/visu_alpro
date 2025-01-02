@@ -24,14 +24,15 @@ text = "remove"
 custom_minimum_size = Vector2(150, 120)
 
 [node name="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer" index="1"]
-text = "doubly list"
+text = "DoublyList"
 
 [node name="label_tail" type="Label" parent="CanvasLayer/stackframe_list/MarginContainer/VBoxContainer" index="5"]
 layout_mode = 2
 text = "tail = null"
 
 [node name="side_panel" parent="CanvasLayer" index="2"]
-offset_left = -630.0
+offset_left = -558.0
+offset_right = 4.0
 
 [node name="code" parent="CanvasLayer/side_panel/content/container_code/content" index="1"]
 max_screen_height_cover = 0.8

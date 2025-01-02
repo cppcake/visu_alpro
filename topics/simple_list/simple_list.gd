@@ -63,6 +63,13 @@ func cancel():
 	clean_up()
 	reposition_list()
 
+func _on_button_to_start_pressed():
+	while current_step > 0:
+		backward()
+func _on_button_to_end_pressed():
+	while current_step < max_step:
+		forward()
+		
 func clean_up():
 	current_step = 0
 	max_step = 0
