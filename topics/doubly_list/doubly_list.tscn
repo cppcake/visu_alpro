@@ -30,10 +30,6 @@ text = "DoublyList"
 layout_mode = 2
 text = "tail = null"
 
-[node name="side_panel" parent="CanvasLayer" index="2"]
-offset_left = -558.0
-offset_right = 4.0
-
 [node name="code" parent="CanvasLayer/side_panel/content/container_code/content" index="1"]
 max_screen_height_cover = 0.8
 
