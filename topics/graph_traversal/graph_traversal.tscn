@@ -32,8 +32,8 @@ state_counter = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/st
 button_knoten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices")
 button_kanten = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges")
 button_move = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_move")
-button_bfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_bfs")
-button_dfs = NodePath("CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs")
+button_bfs = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_bfs")
+button_dfs = NodePath("CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_dfs")
 side_panel = NodePath("CanvasLayer/side_panel")
 cam = NodePath("Camera2D")
 
@@ -108,6 +108,20 @@ text = "MOVE"
 [node name="VSeparator" type="VSeparator" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2"]
 layout_mode = 2
 
+[node name="button_bfs" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "BFS_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("31_phvch")
+text = "BFS"
+
+[node name="button_dfs" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" groups=["buttons_active"]]
+layout_mode = 2
+tooltip_text = "DFS_TOOLTIP"
+focus_mode = 1
+theme = ExtResource("31_phvch")
+text = "DFS"
+
 [node name="button_reset" type="Button" parent="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2" node_paths=PackedStringArray("controller", "camera") groups=["buttons_active"]]
 layout_mode = 2
 tooltip_text = "RESET_TOOLTIP"
@@ -125,23 +139,6 @@ theme = ExtResource("31_phvch")
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/buttons/buttons_algorithm"]
 layout_mode = 2
 alignment = 1
-
-[node name="button_bfs" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
-layout_mode = 2
-tooltip_text = "BFS_TOOLTIP"
-focus_mode = 1
-theme = ExtResource("31_phvch")
-text = "BFS"
-
-[node name="button_dfs" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_active"]]
-layout_mode = 2
-tooltip_text = "DFS_TOOLTIP"
-focus_mode = 1
-theme = ExtResource("31_phvch")
-text = "DFS"
-
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer"]
-layout_mode = 2
 
 [node name="button_stop" type="Button" parent="CanvasLayer/buttons/buttons_algorithm/HBoxContainer" groups=["buttons_navigation"]]
 custom_minimum_size = Vector2(30, 0)
@@ -233,9 +230,9 @@ right_ui_margin = 660
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_vertices" to="CanvasLayer/buttons" method="_on_button_vertices_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_edges" to="CanvasLayer/buttons" method="_on_button_edges_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_move" to="CanvasLayer/buttons" method="_on_button_move_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_bfs" to="CanvasLayer/buttons" method="_on_button_bfs_pressed"]
+[connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_dfs" to="CanvasLayer/buttons" method="_on_button_dfs_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_reset" to="CanvasLayer/buttons/buttons_graphmanager/HBoxContainer2/button_reset" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_bfs" to="CanvasLayer/buttons" method="_on_button_bfs_pressed"]
-[connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_dfs" to="CanvasLayer/buttons" method="_on_button_dfs_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_stop" to="." method="stop_algorithm"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward_further2" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" to="CanvasLayer/buttons/buttons_algorithm/HBoxContainer/button_backward" method="_on_pressed"]

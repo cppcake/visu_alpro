@@ -288,6 +288,23 @@ text = "DATA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="CanvasLayer/legend/list_vertex"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.5
+offset_top = -117.0
+offset_right = -138.5
+offset_bottom = -62.0005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 39
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="label_list_vertex" type="Label" parent="CanvasLayer/legend"]
 layout_mode = 1
 anchors_preset = 6
@@ -301,7 +318,20 @@ offset_right = 323.0
 offset_bottom = 28.0
 grow_horizontal = 0
 grow_vertical = 2
-text = " - List node"
+text = " - ListNode"
+
+[node name="label_list_vertex" type="Label" parent="CanvasLayer/legend/label_list_vertex"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -48.0
+offset_right = 277.0
+offset_bottom = 22.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 13
+text = "SL_NODE_DESC"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true

@@ -27,3 +27,4 @@ TUTORIAL," - You can move around by holding Shift + Leftclick or by holding the 
 ,,
 AVL_BK_SHOW,Always show balance coefficients,Balancekoeffizienten immer zeigen
 MODE,Mode: ,Modus: 
+SL_NODE_DESC,(with reference counter),(mit Referenzzähler)
