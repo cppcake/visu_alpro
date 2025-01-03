@@ -9,7 +9,6 @@ func init_algo(algo: Callable, argv: Array = []):
 	current_step = operations_array.size()
 	while current_step > 0:
 		backward()
-	#side_panel.open()
 
 func forward():
 	if current_step < operations_array.size():
@@ -206,8 +205,6 @@ func operator_interface(operations: Array, undo: bool = false):
 				if undo:
 					get_tree().call_group("vertices", "move_to_undo")
 				else:
-					#for vertex in argv[0]:
-					#	vertex.move_to_rel(argv[1])
 					get_tree().call_group("vertices", "move_to_rel", argv[0])
 				continue
 			Operation.opcodes.MOVE:
