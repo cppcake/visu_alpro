@@ -38,30 +38,6 @@ func _ready():
 	tutorial()
 	hash_method = Callable(self, "hash_sha256")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	return
-	bucket_count_label.text = "bucket_count = " + str(bucket_array.bucket_count)
-	
-	var left_click = Input.is_action_just_pressed("M1")
-	var right_click = Input.is_action_just_pressed("M2")
-	var middle_click = Input.is_action_just_pressed("M3")
-
-	if left_click:
-		var input_string = input_field.get_text()
-		input_field.clear()
-		print(input_string)
-		print(input_string.to_ascii_buffer().decode_u8(0))
-
-	if right_click:
-		pass
-
-	if middle_click:
-		pass
-#func reposition():
-#	return
-#	bucket_array.reposition()
 func update_stack_frame():
 	super.update_stack_frame()
 	bucket_count_label.set_text("%s = %s" % [tr("BUK_CONT"), str(bucket_array.bucket_count)])
