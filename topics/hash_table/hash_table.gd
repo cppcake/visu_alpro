@@ -197,6 +197,10 @@ func _on_button_insert_pressed():
 	input_field.clear()
 	
 	var inputs: Array = input_string.split(",")
+	for i in range(inputs.size()):
+		inputs[i] = inputs[i].lstrip(" ")
+		inputs[i] = inputs[i].rstrip(" ")
+	
 	if inputs.size() > 1:
 		side_panel.close()
 		side_panel.override_code(tr("HT_RM"))
@@ -210,12 +214,12 @@ func _on_button_insert_pressed():
 	side_panel.create_variable()
 	side_panel.override_code(tr("HT_INS"))
 	side_panel.select_containers(1, 1, 0, 0)
-	side_panel.override_code_call("hashtable.insert(" + input_string + ")")
+	side_panel.override_code_call("hashtable.insert(" + inputs[0] + ")")
 	side_panel.open()
 	
 	var pair = HashKeyPair.new(
-					hash_method.call(input_string),
-					input_string)
+					hash_method.call(inputs[0]),
+					inputs[0])
 	init_algo(insert, [pair])
 
 func remove(argv: Array = []):
