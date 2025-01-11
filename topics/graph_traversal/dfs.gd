@@ -211,7 +211,7 @@ func update_code_labels(s: vertex_class, call_id: int, F, F_2, from):
 		label_sequence.text = "F = " + helper_functions.vertex_array_to_string(F)
 		
 		label_sequence_2.visible = true
-		label_sequence_2.text = "Q = " +  helper_functions.vertex_array_to_string(F_2)
+		label_sequence_2.text = "F' = " +  helper_functions.vertex_array_to_string(F_2)
 	
 	# Display whose return value F' is if needed
 	if(from != null):
