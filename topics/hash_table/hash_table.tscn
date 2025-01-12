@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_btovm"]
 [ext_resource type="Script" path="res://topics/hash_table/hash_table.gd" id="2_l51hf"]
-[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_1c67l"]
+[ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_1c67l"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="4_7c8mo"]
 [ext_resource type="PackedScene" uid="uid://bokar7fyhr48l" path="res://structs/hash_table/bucket_array.tscn" id="5_op5y2"]
 
@@ -71,6 +71,7 @@ offset_right = 254.0
 offset_bottom = 168.0
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_7c8mo")
 

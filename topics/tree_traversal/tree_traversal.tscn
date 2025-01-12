@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dcixclmukxhyp" path="res://topics/template.tscn" id="1_38xve"]
 [ext_resource type="Script" path="res://topics/tree_traversal/tree_traversal.gd" id="2_tjuep"]
 [ext_resource type="PackedScene" uid="uid://bjwpe2viggrq0" path="res://structs/pointers/pointer.tscn" id="3_cgglp"]
-[ext_resource type="Script" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
+[ext_resource type="Script" uid="uid://ewsd7j2dedwe" path="res://topics/ui/scripts/buttons_toggle.gd" id="3_kwys6"]
 [ext_resource type="PackedScene" uid="uid://513mtdd2h16y" path="res://structs/tree/tree_vertex.tscn" id="4_fggb2"]
 [ext_resource type="Theme" uid="uid://ch47gokw4nkj3" path="res://misc/theme.tres" id="5_gimt7"]
 
@@ -44,6 +44,7 @@ script = ExtResource("3_kwys6")
 offset_bottom = 143.0
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/stackframe/MarginContainer/VBoxContainer" index="0"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_gimt7")
 
