@@ -1,6 +1,6 @@
 // Check if resizing is needed based on occupancy factor
 float occupancy_factor = (float)size / (float)bucket_count;
-if (occupancy_factor > 0.75) {
+if (occupancy_factor >= 0.75) {
     resize(2); // Double the hashtable size
 }
 

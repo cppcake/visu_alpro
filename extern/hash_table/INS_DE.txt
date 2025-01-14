@@ -1,6 +1,6 @@
 // Überprüfe ob eine Vergrößerung der Hashtabelle notwendig ist
 float belegungsfaktor = (float)size / (float)bucket_anzahl;
-if (belegungsfaktor > 0.75) {
+if (belegungsfaktor >= 0.75) {
     resize(2); // Verdopple die Größe der Hashtabelle
 }
 

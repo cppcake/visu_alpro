@@ -118,7 +118,7 @@ func insert(argv: Array = []):
 						Operation.opcodes.HIGHLIGHT_CODE,
 						[[3]]),
 		])
-	if bel_fakt() > 0.75:
+	if bel_fakt() >= 0.75:
 		push_operations([
 			Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
@@ -174,7 +174,7 @@ func insert(argv: Array = []):
 		])
 func insert_many(argv: Array = []):
 	for input: String in argv[0]:
-		if bel_fakt() > 0.75:
+		if bel_fakt() >= 0.75:
 			push_operations([
 					Operation.new(
 							Operation.opcodes.HT_DOUBLE_UP,
@@ -237,7 +237,7 @@ func remove(argv: Array = []):
 						Operation.opcodes.HIGHLIGHT_CODE,
 						[[3]]),
 		])
-	if bel_fakt() < 0.25 and bucket_array.bucket_count > 1:
+	if bel_fakt() <= 0.25 and bucket_array.bucket_count > 1:
 		push_operations([
 			Operation.new(
 						Operation.opcodes.HIGHLIGHT_CODE,
@@ -307,7 +307,7 @@ func remove_many(argv: Array = []):
 		side_panel.close()
 		return
 	for input in argv[0]:
-		if bel_fakt() < 0.25 and bucket_array.bucket_count > 1:
+		if bel_fakt() <= 0.25 and bucket_array.bucket_count > 1:
 			push_operations([
 					Operation.new(
 							Operation.opcodes.HT_HALF_DOWN,
