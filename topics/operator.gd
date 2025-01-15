@@ -66,7 +66,7 @@ func update_step_label():
 	label_progress.update_step_label(current_step, operations_array.size())
 
 @export var side_panel: SidePanel
-var new_vertex: tree_vertex_class
+var new_vertex: list_vertex_class
 var operations_array: Array = []
 func push_operations(operations: Array):
 	operations_array.push_back(operations)
@@ -81,7 +81,10 @@ func operator_interface(operations: Array, undo: bool = false):
 				if undo:
 					create_new_vertex_undo()
 				else:
-					new_vertex = create_new_vertex(argv[0], argv[1])
+					if argv.size() > 1:
+						new_vertex = create_new_vertex(argv[0], argv[1])
+					else:
+						new_vertex = create_new_vertex(argv[0])
 				continue
 			Operation.opcodes.MAKE_SHARED:
 				if undo:
@@ -147,8 +150,10 @@ func operator_interface(operations: Array, undo: bool = false):
 				else:
 					if argv.size() == 1:
 						side_panel.override_code_return_v2(argv[0])
-					else:
+						continue
+					if argv.size() == 2:
 						side_panel.override_code_return_v2(argv[0], argv[1])
+						continue
 				continue
 			Operation.opcodes.CALL:
 				if undo:
@@ -187,7 +192,8 @@ func operator_interface(operations: Array, undo: bool = false):
 					size -= 1
 				continue
 			Operation.opcodes.TOGGLE_VISIBLE:
-				argv[0].visible = !argv[0].visible
+				for object in argv:
+					object.visible = !object.visible
 				continue
 			Operation.opcodes.CRASH:
 				if undo:
