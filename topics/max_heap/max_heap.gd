@@ -326,7 +326,7 @@ func _on_button_reset_tut_pressed():
 	reposition()
 	root_ptr.current_end_point = root_ptr.global_position + Vector2(0, 150)
 	
-	var to_insert = [68, 61, 30, 43, 20, 19, 23, 5, 21, 19, 13]
+	var to_insert = [81, 75, 72, 50, 60, 62, 59, 39, 49, 55, 14, 7, 34]
 	for number in to_insert:
 		insert_no_visuals([number])
 
@@ -413,12 +413,12 @@ func _on_button_insert_20_pressed():
 	side_panel.override_code(tr("MAX_HEAP_INS"))
 	side_panel.select_containers(1, 0, 0, 0)
 	side_panel.override_code_call("maxheap.insert(" + str(20) + ")")
-	init_algo(insert_tut, [20])
+	init_algo(insert_tut, [83])
 	input_field.clear()
 func _on_button_insert_40_pressed():
 	side_panel.override_code(tr("MAX_HEAP_INS"))
 	side_panel.select_containers(1, 0, 0, 0)
-	var input = 40
+	var input = 63
 	side_panel.override_code_call("maxheap.insert(" + str(input) + ")")
 	init_algo(insert_tut, [input])
 	input_field.clear()

@@ -29,7 +29,7 @@ func reset():
 		child.queue_free()
 		bucket_count -= 1
 	
-	for i: int in range(4):
+	for i: int in range(2):
 		var bucket = bucket_scene.instantiate()
 		bucket.global_position = Vector2(0, bucket_distance * bucket_count + 200)
 		add_child(bucket)
