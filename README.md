@@ -1,5 +1,7 @@
 # VISU-ALPRO
 
+![](https://md.fachschaften.org/uploads/e035af62-fb26-4bd9-8bb7-6ec51feb4053.png)
+
 ## Description
 This is a demonstrator for the data structures and algorithms of the AlPro lecture at the University of Bonn made entirely in Godot 4.2 using GDScript. Please create an Issue if you have any Feedback.
 
