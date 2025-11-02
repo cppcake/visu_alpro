@@ -1,3 +1,0 @@
-head = head->next;
-size -= 1;
-return;
